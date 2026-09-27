@@ -22,7 +22,7 @@ theme:
     - navigation.instant
     - navigation.tabs
     - navigation.tabs.sticky
-    - navigation.sections
+    #- navigation.sections
     - navigation.top
     - content.code.copy
   font:
@@ -58,7 +58,7 @@ markdown_extensions:
 
 nav:
   - Documentation: documentation.md
-  - Journey: calendar-general.md
+  - Journey: journey.md
   - Milestones:
       - MS1 - Fase de Inception:
           - Descrição do projeto: milestones/ms1-inception/descricao-projeto.md
@@ -71,7 +71,8 @@ nav:
       - MS4 - Fase de Transition:
           - Em breve: milestones/ms4-transition/em-breve.md
       - Calendário geral: milestones/calendario-geral.md
-  # - Minutes
+  - Minutes:
+    - Minute 1: minutes\2026-09-23_Minute1_AdOmnia.md
   - Team: team.md
   # - Arquitetura: arquitetura.md
   # - Relatórios e apresentações: relatorios.md

@@ -505,7 +505,10 @@
     if (!state) return;
     var r = team.getBoundingClientRect();
     var vh = window.innerHeight;
-    var q = clamp((vh * 0.92 - r.top) / (vh * 0.5 + r.height * 0.55));
+    var room = document.documentElement.scrollHeight - vh - window.scrollY;
+    var from = Math.min(vh * 0.92, r.top + window.scrollY);
+    var to = Math.max(vh * 0.42 - r.height * 0.55, r.top - room);
+    var q = from - to < 1 ? 1 : clamp((from - r.top) / (from - to));
     showTeam(state, ease(q) * state.total);
   }
 
