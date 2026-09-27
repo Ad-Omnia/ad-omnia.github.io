@@ -24,7 +24,7 @@ The meeting took place on 23/09/2026 at 15:00.
 
 ### Tasks for First Presentation
 
-The team debated the tasks to-do for the first presentation and the respective assignments, ence:
+The team debated the tasks to-do for the first presentation and the respective assignments, hence:
 
 - Creating the GitHub Repository (Bernardo)
 - Setting up the project backlog, using GitHub Projects (Diogo)
