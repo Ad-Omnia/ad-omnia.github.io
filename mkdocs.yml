@@ -1,5 +1,5 @@
-site_name: Ad-Omnia
-site_description: Projeto em Engenharia Informática 2026/2027 - Universidade de Aveiro
+site_name: Ad Omnia
+site_description: Informatics Engineering Project 2026/2027 - University of Aveiro
 site_url: https://ad-omnia.github.io/micro-site/
 repo_url: https://github.com/Ad-Omnia/micro-site
 repo_name: Ad-Omnia/micro-site
@@ -7,12 +7,15 @@ repo_name: Ad-Omnia/micro-site
 extra_css:
   - stylesheets/extra.css
 
+extra_javascript:
+  - javascripts/home.js
+
 theme:
   name: material
-  language: pt
-  favicon: assets/logo-colour-black.png
+  language: en
+  favicon: assets/logo-colour-black.svg
   custom_dir: overrides
-  logo: assets/logo-colour-black.png
+  logo: assets/logo-colour-black.svg
   icon:
     repo: fontawesome/brands/github
   features:
@@ -23,21 +26,21 @@ theme:
     - navigation.top
     - content.code.copy
   font:
-    text: Calibri
+    text: Lato
     code: Roboto Mono
   palette:
     - scheme: default
-      primary: white
-      accent: green
+      primary: custom
+      accent: custom
       toggle:
         icon: material/weather-night
-        name: Modo escuro
+        name: Switch to dark mode
     - scheme: slate
-      primary: white
-      accent: green
+      primary: custom
+      accent: custom
       toggle:
         icon: material/weather-sunny
-        name: Modo claro
+        name: Switch to light mode
 
 markdown_extensions:
   - admonition
@@ -50,9 +53,9 @@ markdown_extensions:
       custom_fences:
         - name: mermaid
           class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
+          format:
+            !!python/name:pymdownx.superfences.fence_code_format # Ir descomentando/expandindo à medida que as páginas forem criadas
 
-# Ir descomentando/expandindo à medida que as páginas forem criadas
 nav:
   - Documentation: documentation.md
   - Journey: calendar-general.md
@@ -68,12 +71,12 @@ nav:
       - MS4 - Fase de Transition:
           - Em breve: milestones/ms4-transition/em-breve.md
       - Calendário geral: milestones/calendario-geral.md
-  - Minutes
+  # - Minutes
   - Team: team.md
   # - Arquitetura: arquitetura.md
   # - Relatórios e apresentações: relatorios.md
 
-copyright: "© 2027 Ad-Omnia · Universidade de Aveiro"
+copyright: "© 2026 Ad Omnia · University of Aveiro"
 
 extra:
   social:

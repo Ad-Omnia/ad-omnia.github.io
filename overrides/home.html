@@ -1,0 +1,181 @@
+{% extends "main.html" %}
+
+{% macro lens_row(people, variant="") %}
+  <div class="ad-team{{ ' ad-team--' ~ variant if variant }}">
+    {% for m in people %}
+    <div class="ad-member">
+      <span class="ad-avatar">
+        {%- if m.photo -%}
+          <img src="{{ m.photo | url }}" alt="">
+        {%- else -%}
+          {{ m.initials }}
+        {%- endif -%}
+      </span>
+      <p class="ad-member-name">{{ m.name }}</p>
+      <p class="ad-member-id">{{ m.note }}</p>
+    </div>
+    {% endfor %}
+  </div>
+{% endmacro %}
+
+{% block tabs %}
+  {{ super() }}
+
+  <section class="ad-hero" aria-label="Ad-Omnia">
+    <div class="ad-blobs" aria-hidden="true">
+      <span class="ad-blob ad-blob--blue"></span>
+      <span class="ad-blob ad-blob--violet"></span>
+      <span class="ad-blob ad-blob--teal"></span>
+    </div>
+
+    <div class="ad-hero-inner">
+      <picture class="ad-hero-logo">
+        <source srcset="{{ 'assets/logo-colour-white.svg' | url }}" media="(prefers-reduced-motion: reduce)">
+        <img src="{{ 'assets/logo-animated-white.svg' | url }}" alt="Ad Omnia logo" width="300" height="300">
+      </picture>
+
+      <h1 class="ad-motto">Ad Omnia <em>in perpetuum</em></h1>
+      <p class="ad-motto-translation">To everything, forever.</p>
+    </div>
+
+    <a class="ad-scroll-cue" href="#philosophy" aria-label="Scroll to the philosophy">
+      <span>Discover</span>
+      <span class="ad-scroll-line" aria-hidden="true"></span>
+    </a>
+  </section>
+
+  <section class="ad-story" id="philosophy" aria-label="Philosophy">
+    <div class="ad-story-stage">
+
+      <div class="ad-story-grid">
+        <div class="ad-chapters">
+          <article class="ad-chapter ad-c-teal" data-step="0">
+            <span class="ad-chapter-num">01</span>
+            <p class="ad-chapter-kicker">Converge</p>
+            <h2>See everything.</h2>
+            <p>A crisis never arrives through a single channel. Sensors, cameras, weather,
+              social media, reports from the field: each source is an isolated ray. The lens
+              takes them all in and brings them into one beam, a common operational picture.</p>
+          </article>
+
+          <article class="ad-chapter ad-c-blue" data-step="1">
+            <span class="ad-chapter-num">02</span>
+            <p class="ad-chapter-kicker">Reflect</p>
+            <h2>Anticipate.</h2>
+            <p>The beam touches the top of the lens and turns, leaving at the same angle it
+              arrived. This is the turning point: predictive AI reads what is happening as what
+              is about to happen, in time to change the outcome.</p>
+          </article>
+
+          <article class="ad-chapter ad-c-violet" data-step="2">
+            <span class="ad-chapter-num">03</span>
+            <p class="ad-chapter-kicker">Bend</p>
+            <h2>Act.</h2>
+            <p>Inside the lens the ray bends, like the crossbar of the A. Seeing and predicting
+              only matter if they lead to a decision: clear, justified recommendations on where
+              to send resources, aimed at the people on the ground.</p>
+          </article>
+
+          <article class="ad-chapter" data-step="3">
+            <span class="ad-chapter-num">04</span>
+            <p class="ad-chapter-kicker">Return</p>
+            <h2>To everything, forever.</h2>
+            <p>The beam enters the last lens and opens out again into many rays, each through its
+              own opening, past the edge of the page. One picture, handed back to everyone who
+              needs it, without stopping.</p>
+          </article>
+        </div>
+
+        <div class="ad-scene" aria-hidden="true"></div>
+      </div>
+
+      <div class="ad-story-progress" aria-hidden="true"><span></span></div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block content %}
+  <section class="ad-block ad-reveal" id="project">
+    <p class="ad-kicker ad-c-teal">The project</p>
+    <div class="ad-split">
+      <h2 class="ad-statement">A unified operational command and predictive intelligence platform for crisis and emergency management.</h2>
+      <div class="ad-split-body">
+        <p>Built for large events, public safety and crisis response. It fuses heterogeneous real-time
+          data into a single <em>Common Operational Picture</em> (COP) and uses predictive AI to anticipate
+          risk and recommend how to allocate resources.</p>
+        <p class="ad-status"></span>Current phase: Inception (MS1)</p>
+        <p class="ad-course">Informatics Engineering Project (43675)<br>University of Aveiro, 2026/2027</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ad-block ad-reveal" id="objectives">
+    <p class="ad-kicker ad-c-blue">Objectives</p>
+    <h2 class="ad-heading">What we are building.</h2>
+    <ol class="ad-goals">
+      <li class="ad-goal">
+        <span class="ad-goal-num">01</span>
+        <span class="ad-goal-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="24" cy="10" rx="16" ry="6"/><path d="M8 10v12c0 3.3 7.2 6 16 6s16-2.7 16-6V10"/><path d="M8 22v12c0 3.3 7.2 6 16 6s16-2.7 16-6V22"/></svg></span>
+        <h3>Unified data ecosystem</h3>
+        <p>Open data and real-time feeds fused into a single knowledge base.</p>
+      </li>
+      <li class="ad-goal">
+        <span class="ad-goal-num">02</span>
+        <span class="ad-goal-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="14" width="20" height="20" rx="3"/><path d="M14 20H6M14 28H6M42 20h-8M42 28h-8M20 14V6M28 14V6M20 42v-8M28 42v-8"/></svg></span>
+        <h3>Predictive AI engine</h3>
+        <p>Risk anticipation with models trained on synthetic data.</p>
+      </li>
+      <li class="ad-goal">
+        <span class="ad-goal-num">03</span>
+        <span class="ad-goal-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><circle cx="24" cy="24" r="11"/><circle cx="24" cy="24" r="4"/><path d="M24 6v6M24 36v6M6 24h6M36 24h6"/></svg></span>
+        <h3>Low-latency COP interface</h3>
+        <p>A common operational picture, always current, for the people deciding on the ground.</p>
+      </li>
+      <li class="ad-goal">
+        <span class="ad-goal-num">04</span>
+        <span class="ad-goal-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="28" r="14"/><circle cx="20" cy="28" r="7"/><path d="M20 28l16-16M30 8h8v8"/></svg></span>
+        <h3>Tactical resource recommendation</h3>
+        <p>Automatic suggestions for allocating resources against the identified risk.</p>
+      </li>
+      <li class="ad-goal">
+        <span class="ad-goal-num">05</span>
+        <span class="ad-goal-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="14" height="14" rx="2"/><rect x="28" y="6" width="14" height="14" rx="2"/><rect x="6" y="28" width="14" height="14" rx="2"/><rect x="28" y="28" width="14" height="14" rx="2"/></svg></span>
+        <h3>Modular <em>dual-use</em> architecture</h3>
+        <p>Independent components, reusable in both civil and defence contexts.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="ad-block ad-reveal" id="team">
+    <p class="ad-kicker ad-c-violet">Team</p>
+    <h2 class="ad-heading">Five people, one ray.</h2>
+    {{ lens_row([
+      {"initials": "FS", "name": "Fernando Santos",   "note": "124808"},
+      {"initials": "MN", "name": "Miguel Neto",       "note": "125200"},
+      {"initials": "DS", "name": "Diogo Silva",       "note": "125240"},
+      {"initials": "GM", "name": "Guilherme Martins", "note": "125260"},
+      {"initials": "BR", "name": "Bernado Reis",      "note": "126004"}
+    ]) }}
+  </section>
+
+  <section class="ad-block ad-reveal" id="supervision">
+    <p class="ad-kicker">Supervision</p>
+    <h2 class="ad-heading">Keeping the beam aligned.</h2>
+    {{ lens_row([
+      {"initials": "FC", "name": "Fábio Coutinho",            "note": "Supervisor"},
+      {"initials": "RF", "name": "Ricardo Figueiredo",        "note": "Supervisor"},
+      {"initials": "AO", "name": "Arnaldo Oliveira",          "note": "Advisor"},
+      {"initials": "NC", "name": "Nuno Borges de Carvalho",   "note": "Advisor"}
+    ], "mentors") }}
+  </section>
+
+  <section class="ad-closing ad-reveal">
+    <img class="ad-closing-mark" src="{{ 'assets/logo-colour-black.svg' | url }}" alt="" width="56" height="56">
+    <p class="ad-closing-motto">Ad Omnia <em>in perpetuum</em></p>
+    <nav class="ad-closing-links" aria-label="Continue">
+      <a href="{{ 'calendar-general/' | url }}"><span>Journey</span><span aria-hidden="true">&rarr;</span></a>
+      <a href="{{ 'milestones/ms1-inception/descricao-projeto/' | url }}"><span>Milestones</span><span aria-hidden="true">&rarr;</span></a>
+      <a href="https://github.com/Ad-Omnia"><span>GitHub</span><span aria-hidden="true">&rarr;</span></a>
+    </nav>
+  </section>
+{% endblock %}

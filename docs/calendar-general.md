@@ -4,48 +4,52 @@ hide:
   - toc
 ---
 
-# Calendário geral { #calendario-geral }
+# Journey { #journey }
 
 <div class="ad-timeline" markdown="1">
 
 <span class="ad-timeline-phase">Inception</span>
+
 <!--inicio de um card -->
 <div class="ad-timeline-item ad-timeline-right ad-timeline-item--active" markdown="1">
 <span class="ad-timeline-dot"></span>
 <div class="ad-timeline-card" markdown="1">
-<div class="ad-timeline-meta"><span class="ad-timeline-step">MS1 · Passo 1</span><span>2026-09-15</span></div>
+<div class="ad-timeline-meta"><span class="ad-timeline-step">MS1 · Step 1</span><span>2026-09-15</span></div>
 
-### Descrição do projeto
+### Project description
 
-Visão, âmbito e objetivos do Ad-Omnia.
+Vision, scope and objectives of Ad Omnia.
 
-[Ler documento →](milestones/ms1-inception/descricao-projeto.md/){ .ad-timeline-link }
+[Read document →](milestones/ms1-inception/descricao-projeto.md/){ .ad-timeline-link }
+
 </div>
 </div>
 <!--fim de um card -->
 <div class="ad-timeline-item ad-timeline-left" markdown="1">
 <span class="ad-timeline-dot"></span>
 <div class="ad-timeline-card" markdown="1">
-<div class="ad-timeline-meta"><span class="ad-timeline-step">MS1 · Passo 2</span><span>2026-09-22</span></div>
+<div class="ad-timeline-meta"><span class="ad-timeline-step">MS1 · Step 2</span><span>2026-09-22</span></div>
 
-### Calendário do projeto
+### Project calendar
 
-Planeamento temporal das fases e entregas.
+Timeline of phases and deliverables.
 
-[Ler documento →](milestones/ms1-inception/calendario.md/){ .ad-timeline-link }
+[Read document →](milestones/ms1-inception/calendario.md/){ .ad-timeline-link }
+
 </div>
 </div>
 
 <div class="ad-timeline-item ad-timeline-right" markdown="1">
 <span class="ad-timeline-dot"></span>
 <div class="ad-timeline-card" markdown="1">
-<div class="ad-timeline-meta"><span class="ad-timeline-step">MS1 · Passo 3</span><span>2026-09-29</span></div>
+<div class="ad-timeline-meta"><span class="ad-timeline-step">MS1 · Step 3</span><span>2026-09-29</span></div>
 
-### Plano de comunicação
+### Communication plan
 
-Canais e cadência de comunicação da equipa.
+The team's communication channels and cadence.
 
-[Ler documento →](milestones/ms1-inception/plano-comunicacao.md/){ .ad-timeline-link }
+[Read document →](milestones/ms1-inception/plano-comunicacao.md/){ .ad-timeline-link }
+
 </div>
 </div>
 
@@ -54,13 +58,14 @@ Canais e cadência de comunicação da equipa.
 <div class="ad-timeline-item ad-timeline-left" markdown="1">
 <span class="ad-timeline-dot"></span>
 <div class="ad-timeline-card" markdown="1">
-<div class="ad-timeline-meta"><span class="ad-timeline-step">MS2</span><span>Em breve</span></div>
+<div class="ad-timeline-meta"><span class="ad-timeline-step">MS2</span><span>Coming soon</span></div>
 
-### Fase de Elaboration
+### Elaboration phase
 
-Arquitetura, requisitos detalhados e protótipos.
+Architecture, detailed requirements and prototypes.
 
-[Ler documento →](milestones/ms2-elaboration/em-breve.md/){ .ad-timeline-link }
+[Read document →](milestones/ms2-elaboration/em-breve.md/){ .ad-timeline-link }
+
 </div>
 </div>
 
@@ -69,13 +74,14 @@ Arquitetura, requisitos detalhados e protótipos.
 <div class="ad-timeline-item ad-timeline-right" markdown="1">
 <span class="ad-timeline-dot"></span>
 <div class="ad-timeline-card" markdown="1">
-<div class="ad-timeline-meta"><span class="ad-timeline-step">MS3</span><span>Em breve</span></div>
+<div class="ad-timeline-meta"><span class="ad-timeline-step">MS3</span><span>Coming soon</span></div>
 
-### Fase de Construction
+### Construction phase
 
-Implementação das funcionalidades do sistema.
+Implementation of the system's features.
 
-[Ler documento →](milestones/ms3-construction/em-breve.md/){ .ad-timeline-link }
+[Read document →](milestones/ms3-construction/em-breve.md/){ .ad-timeline-link }
+
 </div>
 </div>
 
@@ -84,13 +90,14 @@ Implementação das funcionalidades do sistema.
 <div class="ad-timeline-item ad-timeline-left" markdown="1">
 <span class="ad-timeline-dot"></span>
 <div class="ad-timeline-card" markdown="1">
-<div class="ad-timeline-meta"><span class="ad-timeline-step">MS4</span><span>Em breve</span></div>
+<div class="ad-timeline-meta"><span class="ad-timeline-step">MS4</span><span>Coming soon</span></div>
 
-### Fase de Transition
+### Transition phase
 
-Validação, entrega e encerramento do projeto.
+Validation, delivery and project close.
 
-[Ler documento →](milestones/ms4-transition/em-breve.md/){ .ad-timeline-link }
+[Read document →](milestones/ms4-transition/em-breve.md/){ .ad-timeline-link }
+
 </div>
 </div>
 
