@@ -1,33 +1,31 @@
 # Plano de Comunicação
 
 !!! note "Estado"
-    :construction: Rascunho — por preencher.
+    :construction: Parcialmente preenchido — falta definir o canal 2 e o link do plano de projeto (ver TODOs abaixo).
 
 ## Website e repositório do projeto
 
-- **Website:** este microsite (publicado via GitHub Pages)
-- **Repositório de código:** [GitHub](https://github.com/ORG/REPO-DO-CODIGO)
-
-## Plano do projeto
-
-<!-- Onde vive o plano de projeto detalhado (ex: link para documento partilhado). -->
+- **Website:** [https://ad-omnia.github.io/micro-site/](https://ad-omnia.github.io/micro-site/) (publicado via GitHub Pages)
+- **Repositório de código:** [GitHub](https://github.com/Ad-Omnia)
+- **Email de contacto:** adomnia.inperpetuum@gmail.com
 
 ## Relatórios e apresentações
 
-<!-- Onde e como são partilhados os relatórios/apresentações de cada milestone. -->
+Segundo o slide "Communication Plan", os relatórios/apresentações do projeto são partilhados através de 4 canais:
+
+1. **Website** — inclui uma visão geral do projeto, documentação e links para os repositórios.
+2. **??? (por definir)** — "apresentação do projeto". No PowerPoint este canal aparece literalmente como "?????", ou seja, ainda não foi decidido. Diz-me o que é (ex: apresentação aos orientadores, LinkedIn, newsletter interna, etc.) que eu preencho.
+3. **Students@DETI** — apresentação com demonstração do projeto.
+4. **Outro** — reuniões com agências de emergência e segurança.
 
 ## Papéis e atividades por membro da equipa
 
 | Nome | Papel | Contacto |
 |---|---|---|
-| Nome Apelido | Módulo X | email@ua.pt |
+| Bernardo Reis | ML Engineer |  |
+| Diogo Silva | SCRUM Master |  |
+| Fernando Santos | Architect |  |
+| Guilherme Martins | DevOps |  |
+| Miguel Neto | Backend | miguelsneto@ua.pt |
 
-## Repositório (Git)
-
-<!-- Convenções de branches, commits, revisão de PRs, etc. -->
-
-## Informação privada da equipa
-
-<!-- Nota: não colocar aqui informação sensível; apenas indicar onde está guardada (ex: pasta partilhada) e quem tem acesso. -->
-
-- Acesso dado aos orientadores e ao docente da UC.
+<!-- TODO: a apresentação não indica emails individuais, só o email de contacto geral (adomnia.inperpetuum@gmail.com). Preciso dos emails de cada um para completar a coluna "Contacto". -->
