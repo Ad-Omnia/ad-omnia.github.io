@@ -149,7 +149,7 @@
 }
 
 .md-container {
-  overflow-x: clip;
+  overflow: clip;
 }
 
 .ad-full-bleed {
@@ -591,6 +591,15 @@
   --s: var(--ad-violet);
   top: 20%;
   right: -22rem;
+}
+
+.md-content__inner > .ad-block:last-child {
+  padding-bottom: 6rem;
+}
+
+.md-footer {
+  position: relative;
+  z-index: 1;
 }
 
 #supervision::before {
