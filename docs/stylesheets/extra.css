@@ -915,6 +915,32 @@
   font-variant-numeric: tabular-nums;
 }
 
+.md-typeset .ad-member-links {
+  display: flex;
+  justify-content: center;
+  gap: 0.7rem;
+  margin: 0.55rem 0 0;
+}
+
+.md-typeset .ad-member-links a {
+  display: inline-flex;
+  width: 1rem;
+  height: 1rem;
+  color: var(--ad-ink-faint);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.md-typeset .ad-member-links a:hover,
+.md-typeset .ad-member-links a:focus-visible {
+  color: var(--ad-ink);
+  transform: translateY(-1px);
+}
+
+.ad-member-links svg {
+  width: 100%;
+  height: 100%;
+}
+
 .ad-closing {
   position: relative;
   isolation: isolate;
@@ -1033,8 +1059,12 @@
   }
 
   .ad-member .ad-avatar {
-    grid-row: span 2;
+    grid-row: span 3;
     margin: 0;
+  }
+
+  .md-typeset .ad-member-links {
+    justify-content: flex-start;
   }
 
   .ad-closing-links {
