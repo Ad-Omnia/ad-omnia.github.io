@@ -149,7 +149,11 @@
 }
 
 .md-container {
-  overflow: clip;
+  overflow-x: clip;
+}
+
+.md-main {
+  overflow-y: clip;
 }
 
 .ad-full-bleed {
