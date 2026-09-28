@@ -14,7 +14,7 @@
 Segundo o slide "Communication Plan", os relatórios/apresentações do projeto são partilhados através de 4 canais:
 
 1. **Website** — inclui uma visão geral do projeto, documentação e links para os repositórios.
-2. **??? (por definir)** — "apresentação do projeto". No PowerPoint este canal aparece literalmente como "?????", ou seja, ainda não foi decidido. Diz-me o que é (ex: apresentação aos orientadores, LinkedIn, newsletter interna, etc.) que eu preencho.
+2. **Eventos** — participação em eventos: exposições e competições (ex: Think Tank)
 3. **Students@DETI** — apresentação com demonstração do projeto.
 4. **Outro** — reuniões com agências de emergência e segurança.
 
