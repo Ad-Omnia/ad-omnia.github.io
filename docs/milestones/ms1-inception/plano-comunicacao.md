@@ -5,7 +5,7 @@
 
 ## Website e repositório do projeto
 
-- **Website:** [https://ad-omnia.github.io/micro-site/](https://ad-omnia.github.io/micro-site/) (publicado via GitHub Pages)
+- **Website:** [https://ad-omnia.github.io/](https://ad-omnia.github.io/) (publicado via GitHub Pages)
 - **Repositório de código:** [GitHub](https://github.com/Ad-Omnia)
 - **Email de contacto:** adomnia.inperpetuum@gmail.com
 
