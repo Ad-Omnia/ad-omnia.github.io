@@ -61,19 +61,18 @@ nav:
   - Journey: journey.md
   - Milestones:
       - MS1 - Inception:
-          - Project description: milestones/ms1-inception/project-description.md
-          - Project calendar: milestones/ms1-inception/calendar.md
-          - Communication plan: milestones/ms1-inception/communication-plan.md
-      - MS2 - Fase de Elaboration:
-          - Em breve: milestones/ms2-elaboration/em-breve.md
-      - MS3 - Fase de Construction:
-          - Em breve: milestones/ms3-construction/em-breve.md
-      - MS4 - Fase de Transition:
-          - Em breve: milestones/ms4-transition/em-breve.md
-      - Calendário geral: milestones/calendario-geral.md
+          - Project Description: milestones/ms1-inception/project-description.md
+          - Project Calendar: milestones/ms1-inception/calendar.md
+          - Communication Plan: milestones/ms1-inception/communication-plan.md
+      - MS2 - Elaboration:
+          - Soon: milestones/ms2-elaboration/ms2-soon.md
+      - MS3 - Construction:
+          - Soon: milestones/ms3-construction/ms3-soon.md
+      - MS4 - Transition:
+          - Soon: milestones/ms4-transition/ms4-soon.md
   - Minutes:
-    - Minute 1: minutes/2026-09-23_Minute1_AdOmnia.md
-    - Minute 2: minutes/2026-09-30_Minute2_AdOmnia.md
+    - Minute 1 - 23/09/2026: minutes/2026-09-23_Minute1_AdOmnia.md
+    - Minute 2 - 30/09/2026: minutes/2026-09-30_Minute2_AdOmnia.md
   - Team: team.md
   # - Architecture: architecture.md
   # - Reports and Presentations: reports.md

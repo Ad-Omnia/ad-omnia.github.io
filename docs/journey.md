@@ -64,7 +64,7 @@ The team's communication channels and cadence.
 
 Architecture, detailed requirements and prototypes.
 
-[Read document →](milestones/ms2-elaboration/em-breve.md/){ .ad-timeline-link }
+[Read document →](milestones/ms2-elaboration/ms2-soon.md/){ .ad-timeline-link }
 
 </div>
 </div>
@@ -80,7 +80,7 @@ Architecture, detailed requirements and prototypes.
 
 Implementation of the system's features.
 
-[Read document →](milestones/ms3-construction/em-breve.md/){ .ad-timeline-link }
+[Read document →](milestones/ms3-construction/ms3-soon.md/){ .ad-timeline-link }
 
 </div>
 </div>
@@ -96,7 +96,7 @@ Implementation of the system's features.
 
 Validation, delivery and project close.
 
-[Read document →](milestones/ms4-transition/em-breve.md/){ .ad-timeline-link }
+[Read document →](milestones/ms4-transition/ms4-soon.md/){ .ad-timeline-link }
 
 </div>
 </div>
