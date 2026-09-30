@@ -72,8 +72,8 @@ nav:
           - Em breve: milestones/ms4-transition/em-breve.md
       - Calendário geral: milestones/calendario-geral.md
   - Minutes:
-    - Minute 1: minutes\2026-09-23_Minute1_AdOmnia.md
-    - Minute 2: minutes\2026-09-30_Minute2_AdOmnia.md
+    - Minute 1: minutes/2026-09-23_Minute1_AdOmnia.md
+    - Minute 2: minutes/2026-09-30_Minute2_AdOmnia.md
   - Team: team.md
   # - Arquitetura: arquitetura.md
   # - Relatórios e apresentações: relatorios.md
