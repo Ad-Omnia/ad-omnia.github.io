@@ -20,7 +20,7 @@ hide:
 
 Vision, scope and objectives of Ad Omnia.
 
-[Read document →](milestones/ms1-inception/descricao-projeto.md/){ .ad-timeline-link }
+[Read document →](milestones/ms1-inception/project-description.md/){ .ad-timeline-link }
 
 </div>
 </div>
@@ -34,7 +34,7 @@ Vision, scope and objectives of Ad Omnia.
 
 Timeline of phases and deliverables.
 
-[Read document →](milestones/ms1-inception/calendario.md/){ .ad-timeline-link }
+[Read document →](milestones/ms1-inception/calendar.md/){ .ad-timeline-link }
 
 </div>
 </div>
@@ -48,7 +48,7 @@ Timeline of phases and deliverables.
 
 The team's communication channels and cadence.
 
-[Read document →](milestones/ms1-inception/plano-comunicacao.md/){ .ad-timeline-link }
+[Read document →](milestones/ms1-inception/communication-plan.md/){ .ad-timeline-link }
 
 </div>
 </div>

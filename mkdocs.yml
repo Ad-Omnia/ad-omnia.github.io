@@ -54,16 +54,16 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format:
-            !!python/name:pymdownx.superfences.fence_code_format # Ir descomentando/expandindo à medida que as páginas forem criadas
+            !!python/name:pymdownx.superfences.fence_code_format
 
 nav:
   - Documentation: documentation.md
   - Journey: journey.md
   - Milestones:
-      - MS1 - Fase de Inception:
-          - Descrição do projeto: milestones/ms1-inception/descricao-projeto.md
-          - Calendário do projeto: milestones/ms1-inception/calendario.md
-          - Plano de comunicação: milestones/ms1-inception/plano-comunicacao.md
+      - MS1 - Inception:
+          - Project description: milestones/ms1-inception/project-description.md
+          - Project calendar: milestones/ms1-inception/calendar.md
+          - Communication plan: milestones/ms1-inception/communication-plan.md
       - MS2 - Fase de Elaboration:
           - Em breve: milestones/ms2-elaboration/em-breve.md
       - MS3 - Fase de Construction:
@@ -75,8 +75,8 @@ nav:
     - Minute 1: minutes/2026-09-23_Minute1_AdOmnia.md
     - Minute 2: minutes/2026-09-30_Minute2_AdOmnia.md
   - Team: team.md
-  # - Arquitetura: arquitetura.md
-  # - Relatórios e apresentações: relatorios.md
+  # - Architecture: architecture.md
+  # - Reports and Presentations: reports.md
 
 copyright: "© 2026 Ad Omnia · University of Aveiro"
 

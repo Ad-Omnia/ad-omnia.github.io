@@ -38,4 +38,4 @@ There are multiple data sources and no platform to aggregate, correlate, and pre
 
 ◯ - No
 ◑ - Does it in a limited capacity
-⬤ - yes
+⬤ - Yes
