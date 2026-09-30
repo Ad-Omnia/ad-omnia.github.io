@@ -1,6 +1,6 @@
 site_name: Ad Omnia
 site_description: Informatics Engineering Project 2026/2027 - University of Aveiro
-site_url: https://ad-omnia.github.io/micro-site/
+site_url: https://ad-omnia.github.io/
 repo_url: https://github.com/Ad-Omnia/micro-site
 repo_name: Ad-Omnia/micro-site
 
@@ -73,6 +73,7 @@ nav:
       - Calendário geral: milestones/calendario-geral.md
   - Minutes:
     - Minute 1: minutes\2026-09-23_Minute1_AdOmnia.md
+    - Minute 2: minutes\2026-09-30_Minute2_AdOmnia.md
   - Team: team.md
   # - Arquitetura: arquitetura.md
   # - Relatórios e apresentações: relatorios.md
