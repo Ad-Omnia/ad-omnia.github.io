@@ -15,4 +15,3 @@ The meeting took place on XX/XX/XXXX at XX:XX.
 ## Topics of Discussion
 
 ## Decisions Made
-
