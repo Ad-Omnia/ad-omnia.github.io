@@ -2,7 +2,7 @@
 
 ## Participants
 
-- Bernando Reis 126004
+- Bernardo Reis 126004
 - Diogo Silva 125240
 - Fernando Santos 124808
 - Guilherme Martins 125260

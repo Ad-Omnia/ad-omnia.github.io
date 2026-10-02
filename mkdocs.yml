@@ -4,11 +4,22 @@ site_url: https://ad-omnia.github.io/
 repo_url: https://github.com/Ad-Omnia/ad-omnia.github.io
 repo_name: Ad-Omnia/ad-omnia.github.io
 
+hooks:
+  - hooks/minutes.py
+  - hooks/milestones.py
+  - hooks/journey.py
+  - hooks/footer.py
+
+watch:
+  - hooks
+
 extra_css:
   - stylesheets/extra.css
 
 extra_javascript:
   - javascripts/home.js
+  - javascripts/nav.js
+  - javascripts/deck.js
 
 theme:
   name: material
@@ -24,6 +35,9 @@ theme:
     - navigation.tabs.sticky
     #- navigation.sections
     - navigation.top
+    - navigation.indexes
+    - navigation.footer
+    - toc.follow
     - content.code.copy
   font:
     text: Lato
@@ -48,7 +62,7 @@ markdown_extensions:
   - attr_list
   - md_in_html
   - toc:
-      permalink: true
+      permalink: false
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
@@ -60,19 +74,9 @@ nav:
   - Documentation: documentation.md
   - Journey: journey.md
   - Milestones:
-      - MS1 - Inception:
-          - Project Description: milestones/ms1-inception/project-description.md
-          - Project Calendar: milestones/ms1-inception/calendar.md
-          - Communication Plan: milestones/ms1-inception/communication-plan.md
-      - MS2 - Elaboration:
-          - Soon: milestones/ms2-elaboration/ms2-soon.md
-      - MS3 - Construction:
-          - Soon: milestones/ms3-construction/ms3-soon.md
-      - MS4 - Transition:
-          - Soon: milestones/ms4-transition/ms4-soon.md
+      - milestones/index.md
   - Minutes:
-    - Minute 1 - 23/09/2026: minutes/2026-09-23_Minute1_AdOmnia.md
-    - Minute 2 - 30/09/2026: minutes/2026-09-30_Minute2_AdOmnia.md
+    - minutes/index.md
   - Team: team.md
   # - Architecture: architecture.md
   # - Reports and Presentations: reports.md

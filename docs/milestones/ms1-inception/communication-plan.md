@@ -1,3 +1,9 @@
+---
+date: 2026-09-29
+order: 3
+description: Channels, website and team contacts
+---
+
 # Communication Plan
 
 ## Project website and repository

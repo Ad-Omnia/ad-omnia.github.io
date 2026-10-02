@@ -7,5 +7,59 @@
      modo escuro — os dois <link> coexistem, o browser escolhe consoante
      "prefers-color-scheme". #}
   <link rel="icon" href="{{ 'assets/logo-colour-white.svg' | url }}" media="(prefers-color-scheme: dark)">
-  <script>document.documentElement.classList.add("ad-js")</script>
+  <script>document.documentElement.classList.add("ad-js");try{["ad-nav-collapsed","ad-toc-collapsed"].forEach(function(k){if(localStorage.getItem(k))document.documentElement.classList.add(k)})}catch(e){}</script>
+{% endblock %}
+{% block site_nav %}
+  {% if page.meta and page.meta.minute %}
+    {% set minute = page.meta.minute %}
+    <div class="md-sidebar md-sidebar--primary ad-minute-sidebar" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          <aside class="ad-minute-info">
+            {% if minute.when %}
+              <p class="ad-minute-label">Date</p>
+              <p class="ad-minute-value">{{ minute.when }}</p>
+            {% endif %}
+            {% if minute.participants %}
+              <p class="ad-minute-label">Attendees · {{ minute.participants | length }}</p>
+              <ul class="ad-minute-people">
+                {% for person in minute.participants %}
+                  <li><span>{{ person.name }}</span><span>{{ person.id }}</span></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </aside>
+          {% include "partials/nav.html" %}
+        </div>
+      </div>
+    </div>
+    {% if page.meta.hide %}
+      {% set hidden = "hidden" if "toc" in page.meta.hide %}
+    {% endif %}
+    <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" {{ hidden }}>
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          {% include "partials/toc.html" %}
+        </div>
+      </div>
+    </div>
+  {% else %}
+    {{ super() }}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% if page.meta and page.meta.downloads %}
+    <div class="ad-doc-actions">
+      {% for item in page.meta.downloads %}
+        <a class="ad-doc-action" href="{{ item.href | url }}" download target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg>{{ item.label }}
+        </a>
+      {% endfor %}
+      <button class="ad-doc-action" type="button" onclick="window.print()">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 9V3h10v6M7 17H4v-7h16v7h-3M7 14h10v7H7z"/></svg>Print
+      </button>
+    </div>
+  {% endif %}
+  {{ super() }}
 {% endblock %}
