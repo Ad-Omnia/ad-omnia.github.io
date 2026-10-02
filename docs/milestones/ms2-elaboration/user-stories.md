@@ -10,7 +10,6 @@ Operador
 7. Criar, atualizar e fechar incidentes e acompanhar o estado dos meios.
 8. Registar as ordens transmitidas às equipas no terreno e a confirmação de receção.
 9. Ser alertado de novos incidentes vindos dos feeds e de mudanças relevantes, e validá-los ou descartá-los.
-10. Ter uma fila de triagem das denúncias de cidadãos, com duplicados agrupados, onde as posso validar, descartar ou associar a um incidente existente.
 11. Ver quando cada fonte de dados foi atualizada pela última vez.
 12. Consultar a disponibilidade hospitalar (SNS) e a posição dos meios aéreos.
 
