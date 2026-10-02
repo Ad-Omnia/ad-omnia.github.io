@@ -19,7 +19,18 @@
 | FR-16 | The commander accepts, adjusts or rejects each recommendation, and the decision is recorded | 3,6 |
 
 # Non Functional Requirements
-
+- Perfomance
+    - Data from a source appears on the map within a few seconds of ingestion
+    - Map interaction remains smooth with hundreds of visible entities
+    - Tactical recommendations and incident progression predictions are generated in useful time
+- Usability
+    - The commander can answer simple questions with few clicks and without extensive training.
+    - The screen is readable in a command room.
+    - The public application works on mobile and requires no installation.
+    - All predictions and recommendations show their confidence or justification.
+- Security
+    - eu não sou expert nisto :) -Miguel
+- ???? provavlemente hà mais need help
 
 
 # Assumptions
