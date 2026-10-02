@@ -29,9 +29,13 @@
     - The public application works on mobile and requires no installation.
     - All predictions and recommendations show their confidence or justification.
 - Security
-    - eu não sou expert nisto :) -Miguel
+    - Features from the privileged access tier are kept inaccessible to the regular, publicly-available tier
+    - Privileged data is kept secure and encrypted
+    - Data is kept in localhost and never shared
+    - ???? prob more
 - ???? provavlemente hà mais need help
 
+- The system must operate in real time -> dont know where to put this
 
 # Assumptions
 
