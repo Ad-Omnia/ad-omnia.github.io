@@ -6,8 +6,8 @@ Ad Omnia is a command-and-control platform for crisis and emergency management, 
 
 The platform is composed of two applications:
 
-- **Private application (control room)** — used by emergency and security agencies. Runs locally in the control room to reduce exposure to tracking and external attack surfaces. Provides the full COP, predictive scenarios and tactical recommendations.
-- **Public application (citizens)** — shows active emergencies and essential information during a crisis, and allows citizens to follow incidents.
+- **Private application (control room)** — used by emergency and security agencies. Runs locally in the control room to reduce exposure to tracking and external attack surfaces. Provides the full COP, predictive scenarios and tactical recommendations. Contains the core layer of the architecture as well as plugins built with advanced particularities and deeper operational control.
+- **Public application (citizens)** — shows active emergencies and essential information during a crisis, and allows citizens to follow incidents. Contains the core layer of the architecture.
 
 ## Objectives
 
