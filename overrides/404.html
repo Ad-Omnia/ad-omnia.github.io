@@ -1,0 +1,15 @@
+{% extends "main.html" %}
+
+{% block site_nav %}{% endblock %}
+
+{% block content %}
+  <section class="ad-404">
+    <p class="ad-404-code">404</p>
+    <h1 class="ad-404-title">Page not found</h1>
+    <p class="ad-404-text">This page doesn't exist, or moved somewhere we didn't follow.</p>
+    <div class="ad-404-actions">
+      <button type="button" class="ad-404-button" onclick="history.back()">Go Back</button>
+      <a class="ad-404-button" href="{{ nav.homepage.url | url }}">Go to the main page</a>
+    </div>
+  </section>
+{% endblock %}
