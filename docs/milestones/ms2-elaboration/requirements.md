@@ -10,7 +10,7 @@
 | FR-07 | The system displays the location and status of resources from multiple agencies | 4 |
 | FR-08 | The map updates automatically without reloading the page (NOTA: isto pode ser RNF?) | 1 |
 | FR-09 | The system detects potential incidents in the feeds and notifies the operator, who validates or discards them. | 9 |
-| FR-10 | The system alerts the operator when relevant changes occur (new incident, status change, source failure) | 9,11 (NOTA: never forget) |
+| FR-10 | The system alerts the operator when relevant changes occur (new incident, status change, source failure) | 9,11 |
 | FR-11 | The commander assigns tasks to the operator and tracks their status | 5 |
 | FR-12 | The operator records the orders relayed to field teams and their ackknowledgement of receipt | 8 |
 | FR-13 | The system records, per incident, the recommendations generated and the decisions made, with date, author and justification | 6 |
@@ -33,7 +33,7 @@
     - Privileged data is kept secure and encrypted
     - Data is kept in localhost and never shared
     - ???? prob more
-- ???? provavlemente hà mais need help
+- ???? probably there is more need help
 
 - The system must operate in real time -> dont know where to put this
 
