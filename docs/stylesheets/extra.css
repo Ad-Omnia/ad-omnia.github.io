@@ -1573,14 +1573,6 @@
   box-shadow: none;
 }
 
-.md-typeset .mermaid {
-  margin: 1.2rem 0;
-  padding: 1rem;
-  border: 1px solid var(--ad-border);
-  border-radius: 0.7rem;
-  background: var(--ad-paper);
-}
-
 .md-typeset .admonition,
 .md-typeset details {
   border-width: 1px;
@@ -1879,12 +1871,39 @@ body[data-md-color-scheme="slate"]:not(:has(.ad-block, .ad-timeline, .ad-hero)) 
   text-align: center;
 }
 
+.ad-404-mark {
+  display: block;
+  width: 2.2rem;
+  height: 2.2rem;
+  margin: 0 auto 1rem;
+  opacity: 0.8;
+}
+
+[data-md-color-scheme="slate"] .ad-404-mark {
+  content: url("../assets/logo-colour-white.svg");
+}
+
 .md-typeset .ad-404-code {
+  position: relative;
+  display: inline-block;
   margin: 0;
+  padding-bottom: 0.6rem;
   font-size: clamp(2.6rem, 6vw, 3.6rem);
   font-weight: 300;
   line-height: 1;
-  color: var(--ad-ink-faint);
+  color: var(--ad-blue);
+}
+
+.md-typeset .ad-404-code::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  translate: -50% 0;
+  width: 2.6rem;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--ad-teal), var(--ad-blue), var(--ad-violet));
 }
 
 .md-typeset .ad-404-title {

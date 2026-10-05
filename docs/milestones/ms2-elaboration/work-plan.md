@@ -1,3 +1,9 @@
+---
+date: 2026-10-04
+order: 5
+description: Scope, methodology, module breakdown and calendar
+---
+
 # Ad-Omnia Workplan
 
 ## Scope
@@ -22,9 +28,9 @@ The team follows an Agile methodology based on Scrum, adapted to the academic ca
 
 - **Sprints**: 2 weeks, aligned with milestone boundaries whenever possible. Each milestone (M2–M4) is composed of one or more sprints.
 - **Ceremonies**:
-  - **Sprint Planning**: at the start of each sprint, select and estimate backlog items
-  - **Sprint Review**: demo of the sprint increment to the advisors
-  - **Sprint Retrospective**: what went well, what to improve
+    - **Sprint Planning**: at the start of each sprint, select and estimate backlog items
+    - **Sprint Review**: demo of the sprint increment to the advisors
+    - **Sprint Retrospective**: what went well, what to improve
 - **Backlog management**: GitHub Projects
 - **Version control**: GitHub organization (Ad-Omnia), feature branches, Pull Requests with at least one reviewer before merging into main.
 - **Definition of Done**: code reviewed and merged, tests passing in CI, documentation updated in the project website, feature demonstrable.
@@ -37,29 +43,31 @@ The team follows an Agile methodology based on Scrum, adapted to the academic ca
 Initial requirements elicitation and system design, shared by all other modules. Corresponds to the Elaboration milestone (M2). After M2, user stories keep being refined within each module during the sprints.
 
 **Tasks**:
+
 - M2:
-  - Personas for control room operators and citizens
-  - Functional and non-functional requirements
-  - User stories for both applications
-  - Architecture design (microservices, communication between services, plugin system)
-  - Common (harmonized) data model for incidents, resources, locations and events
-  - ER and class diagrams
-  - High-fidelity UI mockups for the COP and the public application
-  - Decide whether the private application consumes external feeds directly or through an intermediate component
+    - Personas for control room operators and citizens
+    - Functional and non-functional requirements
+    - User stories for both applications
+    - Architecture design (microservices, communication between services, plugin system)
+    - Common (harmonized) data model for incidents, resources, locations and events
+    - ER and class diagrams
+    - High-fidelity UI mockups for the COP and the public application
+    - Decide whether the private application consumes external feeds directly or through an intermediate component
 
 ### Module 2: Data Ingestion & Harmonization
 
 Responsible for collecting, normalizing and storing data from all external sources into a common data model.
 
 **Tasks**:
+
 - M1:
-  - Map available data sources, formats, update frequencies and access conditions
+    - Map available data sources, formats, update frequencies and access conditions
 - M3: 
-  - Implement connectors for each source as independent plugins
-  - Storage of historical data for AI training
+    - Implement connectors for each source as independent plugins
+    - Storage of historical data for AI training
 - M4:
-  - Data quality checks (missing values, duplicates, outdated records)
-  - Real-time ingestion pipeline
+    - Data quality checks (missing values, duplicates, outdated records)
+    - Real-time ingestion pipeline
 
 ### Module 3: Core Platform & Architecture
 
@@ -68,11 +76,11 @@ Backend services, APIs and the plugin architecture that connect all other module
 **Tasks**:
 
 - M3:
-  - API gateway and internal APIs
-  - Authentication, authorization and access levels
+    - API gateway and internal APIs
+    - Authentication, authorization and access levels
 - M4:
-  - Separation between the private and public deployments
-  - Plugin interface for new data sources and modules (dual-use extensibility)
+    - Separation between the private and public deployments
+    - Plugin interface for new data sources and modules (dual-use extensibility)
 
 ### Module 4: COP Interface (Private Application)
 
@@ -81,25 +89,25 @@ The main control room console.
 **Tasks**:
 
 - M3:
-  - Temporal navigation (timeline / replay of events)
+    - Temporal navigation (timeline / replay of events)
 - M4:
-  - Interactive map with layers (incidents, resources, aircraft, infrastructure)
-  - Visualization of predicted scenarios and recommendations
-  - Alerts and notifications
+    - Interactive map with layers (incidents, resources, aircraft, infrastructure)
+    - Visualization of predicted scenarios and recommendations
+    - Alerts and notifications
 - M5:
-  - Usability testing with representative users
+    - Usability testing with representative users
 
 ### Module 5: Public Application (Citizens)
 
 **Tasks**:
 
 - M3:
-  - Map and list of active emergencies
-  - Incident reporting (location, description, photos)
+    - Map and list of active emergencies
+    - Incident reporting (location, description, photos)
 - M4:
-  - Validation/moderation flow for citizen reports before they reach the COP
+    - Validation/moderation flow for citizen reports before they reach the COP
 - M5:
-  - Usability testing
+    - Usability testing
 
 
 ### Module 6: Predictive AI & Synthetic Data Engine
@@ -107,12 +115,12 @@ The main control room console.
 **Tasks**:
 
 - M3:
-  - Dataset preparation from historical records
-  - Model training and evaluation against baselines
-  - Synthetic data generation module for extreme / rare events
+    - Dataset preparation from historical records
+    - Model training and evaluation against baselines
+    - Synthetic data generation module for extreme / rare events
 - M4:
-  - Model serving (inference API) and integration with the COP
-  - Model monitoring and retraining strategy
+    - Model serving (inference API) and integration with the COP
+    - Model monitoring and retraining strategy
 
 ### Module 7: Tactical Recommendation Engine
 
@@ -122,39 +130,39 @@ The main control room console.
 - Routing over the road network (cartography)
 - Allocation algorithms (heuristics / optimization)
 - M4:
-  - Integrate predictions from Module 6 into recommendations
+    - Integrate predictions from Module 6 into recommendations
 - M5:
-  - Present recommendations in the COP with explanation of the reasoning
-  - Evaluate recommendations in simulated scenarios
+    - Present recommendations in the COP with explanation of the reasoning
+    - Evaluate recommendations in simulated scenarios
 
 ### Module 8: DevOps, Security & Quality Assurance
 
 **Tasks**:
 
 - M3:
-  - Development environment setup (containers, shared configuration)
-  - CI/CD pipeline (build, tests, linting, deployment)
+    - Development environment setup (containers, shared configuration)
+    - CI/CD pipeline (build, tests, linting, deployment)
 - M4:
-  - Deployment of the public application and of a local control room setup
-  - Security hardening of the private application (network isolation, access control, secrets management)
-  - Automated testing (unit, integration, end-to-end)
-  - Stress and load testing (ingestion throughput, COP latency)
+    - Deployment of the public application and of a local control room setup
+    - Security hardening of the private application (network isolation, access control, secrets management)
+    - Automated testing (unit, integration, end-to-end)
+    - Stress and load testing (ingestion throughput, COP latency)
 - M5:
-  - Validation in simulated crisis scenarios
+    - Validation in simulated crisis scenarios
 
 ### Module 9: Project Management & Dissemination
 
 **Tasks**:
 
 - All Milestones:
-  - GitHub organization and backlog in GitHub Projects
-  - Participation in events and meetings with emergency/security agencies
+    - GitHub organization and backlog in GitHub Projects
+    - Participation in events and meetings with emergency/security agencies
 - M1:
-  - Project logo and website (documentation)
+    - Project logo and website (documentation)
 - M5:
-  - Commercial video
-  - Poster and demonstration for Students@DETI
-  - Final report
+    - Commercial video
+    - Poster and demonstration for Students@DETI
+    - Final report
 
 ## Calendar
 
@@ -165,47 +173,6 @@ The main control room console.
 | M3 | **Construction I** — UI and core features | 14/10/2026 – 03/11/2026 | UI implementation, core features, first connectors, dev environment, CI/CD, usability testing, dataset preparation | Mod 2, Mod 3, Mod 4, Mod 5, Mod 6, Mod 8 |
 | M4 | **Construction II** — MVP, QA, deployment | 04/11/2026 – 15/12/2026 | MVP: unified ingestion engine, COP interface, predictive AI, recommendation system; QA testing, stabilization and deployment | Mod 2 – Mod 8 |
 | M5 | **Transition** — refinement, dissemination, final report | 15/12/2026 – 01/06/2027 | Continuous development and refinement, stress testing and validation, commercial video, poster and demo at Students@DETI, final report | Mod 4 – Mod 9 |
-
-```mermaid
-gantt
-    dateFormat  YYYY-MM-DD
-    title Ad Omnia Timeline
-    section Milestones
-    M1 Inception                       :milestone, m1, 2026-09-29, 0d
-    M2 Elaboration                     :milestone, m2, 2026-10-13, 0d
-    M3 Construction I                  :milestone, m3, 2026-11-03, 0d
-    M4 Construction II (MVP)           :milestone, m4, 2026-12-15, 0d
-    M5 Transition                      :milestone, m5, 2027-06-01, 0d
-    section Mod 1 - Requirements & Design
-    Personas, requirements, user stories :q1, 2026-09-30, 2026-10-13
-    Architecture, data model, diagrams :q2, 2026-09-30, 2026-10-13
-    High-fidelity mockups              :q3, 2026-09-30, 2026-10-13
-    section Mod 2 - Data Ingestion
-    Source mapping                     :d1, 2026-09-22, 2026-09-29
-    Connectors & pipeline              :d2, 2026-10-14, 2026-12-15
-    section Mod 3 - Core Platform
-    Backend, APIs, auth                :c1, 2026-10-14, 2026-12-15
-    section Mod 4 - COP Interface
-    Implementation                     :u1, 2026-10-14, 2026-12-15
-    Usability testing & refinement     :u2, 2026-12-15, 2027-04-30
-    section Mod 5 - Public App
-    Implementation                     :p1, 2026-10-14, 2026-12-15
-    section Mod 6 - Predictive AI
-    Datasets & synthetic data          :a1, 2026-10-14, 2026-11-15
-    Training & integration             :a2, 2026-11-04, 2026-12-15
-    Model improvement                  :a3, 2026-12-15, 2027-04-30
-    section Mod 7 - Recommendations
-    Problem formalization & routing    :r1, 2026-11-04, 2026-12-15
-    Optimization & evaluation          :r2, 2026-12-15, 2027-04-30
-    section Mod 8 - DevOps & QA
-    Dev environment & CI/CD            :o1, 2026-10-14, 2026-11-03
-    QA & deployment                    :o2, 2026-11-04, 2026-12-15
-    Stress testing & validation        :o3, 2027-01-15, 2027-05-15
-    section Mod 9 - Management & Dissemination
-    Setup, SotA, website               :g1, 2026-09-22, 2026-09-29
-    Video, poster, Students@DETI       :g2, 2027-03-01, 2027-06-01
-    Final report                       :g3, 2027-04-01, 2027-06-01
-```
 
 ## Team roles
 

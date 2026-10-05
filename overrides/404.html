@@ -4,9 +4,10 @@
 
 {% block content %}
   <section class="ad-404">
+    <img class="ad-404-mark" src="{{ 'assets/logo-colour-black.svg' | url }}" alt="" width="40" height="40">
     <p class="ad-404-code">404</p>
-    <h1 class="ad-404-title">Page not found</h1>
-    <p class="ad-404-text">This page doesn't exist, or moved somewhere we didn't follow.</p>
+    <h1 class="ad-404-title">Incident not found.</h1>
+    <p class="ad-404-text">Even our predictive AI didn't see this one coming.</p>
     <div class="ad-404-actions">
       <button type="button" class="ad-404-button" onclick="history.back()">Go Back</button>
       <a class="ad-404-button" href="{{ nav.homepage.url | url }}">Go to the main page</a>
