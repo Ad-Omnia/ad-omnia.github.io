@@ -765,18 +765,16 @@
     }, { threshold: 0.15 });
     reveals.forEach(function (x) { io.observe(x); });
 
-    var queued = false;
     function frame() {
-      queued = false;
       if (story) updateStory(story, chapters, scene);
       teams.forEach(function (t) { updateTeam(t.node, t.state); });
       if (journey) updateJourney(timeline, journey);
     }
-    function onScroll() {
-      if (!queued) {
-        queued = true;
-        requestAnimationFrame(frame);
-      }
+
+    var raf = 0;
+    function loop() {
+      frame();
+      raf = requestAnimationFrame(loop);
     }
 
     var ro = null;
@@ -788,7 +786,6 @@
           t.size = now;
           t.state = safely(function () { return buildTeam(t.node, t.prefix); });
         });
-        onScroll();
       });
       teams.forEach(function (t) { ro.observe(t.node); });
     }
@@ -800,18 +797,14 @@
         if (now === journeySize) return;
         journeySize = now;
         journey = safely(function () { return buildJourney(timeline); });
-        onScroll();
       });
       roJourney.observe(timeline);
     }
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    frame();
+    raf = requestAnimationFrame(loop);
 
     cleanup = function () {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      cancelAnimationFrame(raf);
       io.disconnect();
       if (ro) ro.disconnect();
       if (stopLogo) stopLogo();

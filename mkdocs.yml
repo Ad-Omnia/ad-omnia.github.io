@@ -4,6 +4,9 @@ site_url: https://ad-omnia.github.io/
 repo_url: https://github.com/Ad-Omnia/ad-omnia.github.io
 repo_name: Ad-Omnia/ad-omnia.github.io
 
+exclude_docs: |
+  0000-*.md
+
 hooks:
   - hooks/minutes.py
   - hooks/milestones.py
@@ -20,6 +23,7 @@ extra_javascript:
   - javascripts/home.js
   - javascripts/nav.js
   - javascripts/deck.js
+  - javascripts/minutes.js
 
 theme:
   name: material
@@ -63,12 +67,7 @@ markdown_extensions:
   - md_in_html
   - toc:
       permalink: false
-  - pymdownx.superfences:
-      custom_fences:
-        - name: mermaid
-          class: mermaid
-          format:
-            !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.superfences
 
 nav:
   - Documentation: documentation.md

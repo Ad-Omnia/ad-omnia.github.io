@@ -90,6 +90,27 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
     return markdown
 
 
+def filter_bar():
+    return (
+        '<div class="ad-hub-filter" data-ad-filter>'
+        '<div class="ad-hub-filter-group">'
+        '<svg class="ad-hub-filter-icon" viewBox="0 0 24 24" aria-hidden="true">'
+        '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"'
+        ' d="M4 10h16M7 3v4M17 3v4M6 5h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/>'
+        '</svg>'
+        '<label class="ad-hub-filter-field"><span>From</span><input type="date" data-role="from" aria-label="From date"></label>'
+        '<span class="ad-hub-filter-sep" aria-hidden="true"></span>'
+        '<label class="ad-hub-filter-field"><span>To</span><input type="date" data-role="to" aria-label="To date"></label>'
+        '</div>'
+        '<button type="button" class="ad-hub-filter-clear" data-role="clear" hidden>'
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2"'
+        ' stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6 6 18"/></svg>Clear'
+        '</button>'
+        '</div>'
+        '<p class="ad-hub-filter-empty" data-role="empty" hidden>No minutes in this range.</p>'
+    )
+
+
 def index(files):
     minutes = []
     for file in files:
@@ -101,7 +122,8 @@ def index(files):
         minutes.append((day, int(match.group(4)), Path(file.src_uri).name, info))
     minutes.sort(key=lambda item: (item[0], item[1]), reverse=True)
 
-    out = ['<div class="ad-hub" markdown="1">']
+    out = [filter_bar()] if minutes else []
+    out.append('\n<div class="ad-hub" markdown="1">')
     month = None
     for day, number, name, info in minutes:
         label = day.strftime("%B %Y")
@@ -111,7 +133,7 @@ def index(files):
             out.append(f'\n<div class="ad-hub-group" markdown="1">\n<p class="ad-hub-label"><span>{day.year}</span>{day.strftime("%B")}</p>\n')
             month = label
         topics = html.escape(", ".join(info["topics"]))
-        out.append(f"[Minute {number}<span>{short(day)} · {topics}</span>]({name}){{ .ad-hub-card }}")
+        out.append(f'[Minute {number}<span>{short(day)} · {topics}</span>]({name}){{ .ad-hub-card data-date="{day.isoformat()}" }}')
     if month is not None:
         out.append("\n</div>\n")
     out.append("</div>")

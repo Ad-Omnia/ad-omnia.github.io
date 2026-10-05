@@ -1,3 +1,10 @@
+---
+title: User Stories
+date: 2026-10-01
+order: 2
+description: User stories for commanders, operators and citizens
+---
+
 Comandante
 1. Ver num único mapa em tempo real os incidentes, os meios e os dados de todas as entidades (COP).
 2. Ver a previsão de progressão de um incidente com indicação do seu nível de confiança.

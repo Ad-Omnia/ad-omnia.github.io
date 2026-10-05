@@ -1,3 +1,9 @@
+---
+date: 2026-10-02
+order: 3
+description: Functional and non-functional requirements
+---
+
 # Functional Requirements
 | ID | Requirement | US |
 | --- | --- | --- |
@@ -19,6 +25,7 @@
 | FR-16 | The commander accepts, adjusts or rejects each recommendation, and the decision is recorded | 3,6 |
 
 # Non Functional Requirements
+
 - Perfomance
     - Data from a source appears on the map within a few seconds of ingestion
     - Map interaction remains smooth with hundreds of visible entities

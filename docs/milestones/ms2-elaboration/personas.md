@@ -1,3 +1,9 @@
+---
+date: 2026-09-30
+order: 1
+description: Personas for the command room and public application
+---
+
 # Personas
 
 Ad Omnia is composed of two applications with distinct audiences:
