@@ -196,10 +196,8 @@ description: User stories for commanders, operators, analysts and citizens
 
 **Acceptance Criteria:**
 
-- The map shows all currently active incidents, of any type (wildfires, traffic accidents, floods, structural incidents, etc.), each with a distinct icon and a legend. Closed incidents are not shown.
-- Selecting an incident shows its type, approximate location, current status and the time of the last update.
-- The map shows when the data was last updated. If the data is stale or the source is unavailable, the user sees a clear warning; the map never shows "no emergencies" when data is simply missing.
+- The system shows all currently active incidents of any type, each with a distinct icon and a legend.
+- Selecting an incident should shows its type, approximate location, current status and the time of the last update.
+- The map shows when the data was last updated, and gives a clear warning if the data is stale or if the data source is unavalaible/unreachable.
 - Only incidents validated by an operator are shown, and only information intended for the public; internal operational data is never exposed.
-
-Nota: isto pode ser de mais, as mais cortáveis são provavelmente 6, 11, 14 e 16, que 'são desejáveis mas não essenciais ao MVP'.
-Além disso, em diagramas e afins, pode-se contabilizar os agentes no terreno e as fontes externas (e possivelmente o admin???) como atores secundários (ao contrário do resto que seriam atores primários)
+- The system should allow filtering of the incident type shown to the user
