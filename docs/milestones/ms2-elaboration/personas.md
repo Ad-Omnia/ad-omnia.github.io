@@ -54,9 +54,9 @@ Sofia works in shifts in the command room. She monitors incoming occurrences, ke
 
 ## Emergency Planner
 
-**Name:** Tiago Ferreira
-**Age:** 41
-**Role:** Technician at a municipal civil protection service
+**Name:** Tiago Ferreira\
+**Age:** 41\
+**Role:** Technician at a municipal civil protection service\
 **Tech proficiency:** High. Uses GIS tools and spreadsheets regularly.
 
 ### Background
@@ -83,9 +83,9 @@ Tiago's work happens mostly outside of active emergencies. He prepares the munic
 
 ## Citizen
 
-**Name:** Ana Costa
-**Age:** 38
-**Role:** Teacher, living in a rural area close to forest
+**Name:** Ana Costa\
+**Age:** 38\
+**Role:** Teacher, living in a rural area close to forest\
 **Tech proficiency:** Medium. Uses her smartphone daily, does not install many apps.
 
 ### Background
