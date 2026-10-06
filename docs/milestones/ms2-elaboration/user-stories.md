@@ -34,7 +34,7 @@ description: User stories for commanders, operators, analysts and citizens
 ## US-3: Incident and resource management
 
 **As...** a control room operator,\
-**I want...** to create, update and close incidents, and update the status of resources,\
+**I want...** to create, update and close incidents/operations, and update the status of resources,\
 **So that...** the platform reflects the real situation, including occurrences reported by phone or radio.
 
 **Acceptance Criteria:**
@@ -85,12 +85,12 @@ description: User stories for commanders, operators, analysts and citizens
 ## US-7: Tactical recommendations
 
 **As...** a control room operator,\
-**I want...** to receive recommendations for allocating and routing resources, and to be able to accept, adjust or reject them,\
+**I want...** to receive recommendations on which resources to assign to or release from an incident, and how to route them, and to be able to accept, adjust or reject them,\
 **So that...** I can respond faster without losing control over the final decision.
 
 **Acceptance Criteria:**
 
-- The system must suggest which resources to assign to an incident, with a short justification.
+- The system must suggest which resources to assign/release to an incident, with a short justification.
 - The system must show the recommended route for each suggested resource and its estimated arrival time.
 - The system must allow the user to accept, adjust or reject a recommendation before it is applied.
 
@@ -122,7 +122,7 @@ description: User stories for commanders, operators, analysts and citizens
 
 ## US-10: Consult historical incident data filtered by zone, period and type
 
-**As...** an operator,\
+**As...** a planning officer,\
 **I want to...** search historical incidents filtered by zone, time period and incident type,\
 **So that...** I can analyze past activity and support planning decisions.
 
