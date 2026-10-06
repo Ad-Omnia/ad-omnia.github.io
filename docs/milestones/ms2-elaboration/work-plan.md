@@ -28,9 +28,9 @@ The team follows an Agile methodology based on Scrum, adapted to the academic ca
 
 - **Sprints**: 2 weeks, aligned with milestone boundaries whenever possible. Each milestone (M2–M4) is composed of one or more sprints.
 - **Ceremonies**:
-    - **Sprint Planning**: at the start of each sprint, select and estimate backlog items
-    - **Sprint Review**: demo of the sprint increment to the advisors
-    - **Sprint Retrospective**: what went well, what to improve
+  - **Sprint Planning**: at the start of each sprint, select and estimate backlog items
+  - **Sprint Review**: demo of the sprint increment to the advisors
+  - **Sprint Retrospective**: what went well, what to improve
 - **Backlog management**: GitHub Projects
 - **Version control**: GitHub organization (Ad-Omnia), feature branches, Pull Requests with at least one reviewer before merging into main.
 - **Definition of Done**: code reviewed and merged, tests passing in CI, documentation updated in the project website, feature demonstrable.
@@ -45,14 +45,14 @@ Initial requirements elicitation and system design, shared by all other modules.
 **Tasks**:
 
 - M2:
-    - Personas for control room operators and citizens
-    - Functional and non-functional requirements
-    - User stories for both applications
-    - Architecture design (microservices, communication between services, plugin system)
-    - Common (harmonized) data model for incidents, resources, locations and events
-    - ER and class diagrams
-    - High-fidelity UI mockups for the COP and the public application
-    - Decide whether the private application consumes external feeds directly or through an intermediate component
+  - Personas for control room operators and citizens
+  - Functional and non-functional requirements
+  - User stories for both applications
+  - Architecture design (microservices, communication between services, plugin system)
+  - Common (harmonized) data model for incidents, resources, locations and events
+  - ER and class diagrams
+  - High-fidelity UI mockups for the COP and the public application
+  - Decide whether the private application consumes external feeds directly or through an intermediate component
 
 ### Module 2: Data Ingestion & Harmonization
 
@@ -61,13 +61,13 @@ Responsible for collecting, normalizing and storing data from all external sourc
 **Tasks**:
 
 - M1:
-    - Map available data sources, formats, update frequencies and access conditions
-- M3: 
-    - Implement connectors for each source as independent plugins
-    - Storage of historical data for AI training
+  - Map available data sources, formats, update frequencies and access conditions
+- M3:
+  - Implement connectors for each source as independent plugins
+  - Storage of historical data for AI training
 - M4:
-    - Data quality checks (missing values, duplicates, outdated records)
-    - Real-time ingestion pipeline
+  - Data quality checks (missing values, duplicates, outdated records)
+  - Real-time ingestion pipeline
 
 ### Module 3: Core Platform & Architecture
 
@@ -76,11 +76,11 @@ Backend services, APIs and the plugin architecture that connect all other module
 **Tasks**:
 
 - M3:
-    - API gateway and internal APIs
-    - Authentication, authorization and access levels
+  - API gateway and internal APIs
+  - Authentication, authorization and access levels
 - M4:
-    - Separation between the private and public deployments
-    - Plugin interface for new data sources and modules (dual-use extensibility)
+  - Separation between the private and public deployments
+  - Plugin interface for new data sources and modules (dual-use extensibility)
 
 ### Module 4: COP Interface (Private Application)
 
@@ -89,38 +89,37 @@ The main control room console.
 **Tasks**:
 
 - M3:
-    - Temporal navigation (timeline / replay of events)
+  - Temporal navigation (timeline / replay of events)
 - M4:
-    - Interactive map with layers (incidents, resources, aircraft, infrastructure)
-    - Visualization of predicted scenarios and recommendations
-    - Alerts and notifications
+  - Interactive map with layers (incidents, resources, aircraft, infrastructure)
+  - Visualization of predicted scenarios and recommendations
+  - Alerts and notifications
 - M5:
-    - Usability testing with representative users
+  - Usability testing with representative users
 
 ### Module 5: Public Application (Citizens)
 
 **Tasks**:
 
 - M3:
-    - Map and list of active emergencies
-    - Incident reporting (location, description, photos)
+  - Map and list of active emergencies
+  - Incident reporting (location, description, photos)
 - M4:
-    - Validation/moderation flow for citizen reports before they reach the COP
+  - Validation/moderation flow for citizen reports before they reach the COP
 - M5:
-    - Usability testing
-
+  - Usability testing
 
 ### Module 6: Predictive AI & Synthetic Data Engine
 
 **Tasks**:
 
 - M3:
-    - Dataset preparation from historical records
-    - Model training and evaluation against baselines
-    - Synthetic data generation module for extreme / rare events
+  - Dataset preparation from historical records
+  - Model training and evaluation against baselines
+  - Synthetic data generation module for extreme / rare events
 - M4:
-    - Model serving (inference API) and integration with the COP
-    - Model monitoring and retraining strategy
+  - Model serving (inference API) and integration with the COP
+  - Model monitoring and retraining strategy
 
 ### Module 7: Tactical Recommendation Engine
 
@@ -130,39 +129,39 @@ The main control room console.
 - Routing over the road network (cartography)
 - Allocation algorithms (heuristics / optimization)
 - M4:
-    - Integrate predictions from Module 6 into recommendations
+  - Integrate predictions from Module 6 into recommendations
 - M5:
-    - Present recommendations in the COP with explanation of the reasoning
-    - Evaluate recommendations in simulated scenarios
+  - Present recommendations in the COP with explanation of the reasoning
+  - Evaluate recommendations in simulated scenarios
 
 ### Module 8: DevOps, Security & Quality Assurance
 
 **Tasks**:
 
 - M3:
-    - Development environment setup (containers, shared configuration)
-    - CI/CD pipeline (build, tests, linting, deployment)
+  - Development environment setup (containers, shared configuration)
+  - CI/CD pipeline (build, tests, linting, deployment)
 - M4:
-    - Deployment of the public application and of a local control room setup
-    - Security hardening of the private application (network isolation, access control, secrets management)
-    - Automated testing (unit, integration, end-to-end)
-    - Stress and load testing (ingestion throughput, COP latency)
+  - Deployment of the public application and of a local control room setup
+  - Security hardening of the private application (network isolation, access control, secrets management)
+  - Automated testing (unit, integration, end-to-end)
+  - Stress and load testing (ingestion throughput, COP latency)
 - M5:
-    - Validation in simulated crisis scenarios
+  - Validation in simulated crisis scenarios
 
 ### Module 9: Project Management & Dissemination
 
 **Tasks**:
 
 - All Milestones:
-    - GitHub organization and backlog in GitHub Projects
-    - Participation in events and meetings with emergency/security agencies
+  - GitHub organization and backlog in GitHub Projects
+  - Participation in events and meetings with emergency/security agencies
 - M1:
-    - Project logo and website (documentation)
+  - Project logo and website (documentation)
 - M5:
-    - Commercial video
-    - Poster and demonstration for Students@DETI
-    - Final report
+  - Commercial video
+  - Poster and demonstration for Students@DETI
+  - Final report
 
 ## Calendar
 
