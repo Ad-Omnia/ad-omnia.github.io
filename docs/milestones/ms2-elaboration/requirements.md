@@ -6,47 +6,74 @@ description: Functional and non-functional requirements
 
 # Requirements
 
-## Functional Requirements
+## Functional Requirements (FR)
 
-| ID | Requirement | US |
-| --- | --- | --- |
-| FR-01 | The system ingests real time data from external sources | 1,9,12 |
-| FR-02 | The system imports statiscal and historical data from external sources | 13,14 |
-| FR-03 | The system gathers the data from all sources into one model | 1 |
-| FR-04 | New sources can be added through plugins without affecting the core | 1 |
-| FR-05 | The system displays incidents, resources, and external data layers on a single map | 1 |
-| FR-06 | The map allows layers to be toggled and filtered by agency(?), type and status | 1,4 |
-| FR-07 | The system displays the location and status of resources from multiple agencies | 4 |
-| FR-08 | The map updates automatically without reloading the page (NOTA: isto pode ser RNF?) | 1 |
-| FR-09 | The system detects potential incidents in the feeds and notifies the operator, who validates or discards them. | 9 |
-| FR-10 | The system alerts the operator when relevant changes occur (new incident, status change, source failure) | 9,11 |
-| FR-11 | The commander assigns tasks to the operator and tracks their status | 5 |
-| FR-12 | The operator records the orders relayed to field teams and their ackknowledgement of receipt | 8 |
-| FR-13 | The system records, per incident, the recommendations generated and the decisions made, with date, author and justification | 6 |
-| FR-14 | The system projects the progression of an incident and indicates the confidence level of the prediction | 2 |
-| FR-15 | The system recommends resource allocation, routing, or others, and explains the recommendation | 3 |
-| FR-16 | The commander accepts, adjusts or rejects each recommendation, and the decision is recorded | 3,6 |
+### Data ingestion (ING)
 
-## Non Functional Requirements
+- **FR-ING-1:** The system shall ingest data from multiple external sources through independent, pluggable connectors, converting it into a common internal data model.
+- **FR-ING-2:** The system shall monitor the health and last successful update of each connector.
+- **FR-ING-3:** The system shall detect changes in ingested incidents and emit them as events.
 
-- Perfomance
-  - Data from a source appears on the map within a few seconds of ingestion
-  - Map interaction remains smooth with hundreds of visible entities
-  - Tactical recommendations and incident progression predictions are generated in useful time
-- Usability
-  - The commander can answer simple questions with few clicks and without extensive training.
-  - The screen is readable in a command room.
-  - The public application works on mobile and requires no installation.
-  - All predictions and recommendations show their confidence or justification.
-- Security
-  - Features from the privileged access tier are kept inaccessible to the regular, publicly-available tier
-  - Privileged data is kept secure and encrypted
-  - Data is kept in localhost and never shared
-  - ???? prob more
-- ???? probably there is more need help
+### Operational picture (COP)
 
-- The system must operate in real time -> dont know where to put this
+- **FR-COP-1:** The system shall maintain a unified, real-time state of incidents and resources and push updates to clients without a manual refresh.
+- **FR-COP-2:** The system shall provide a layered map that can be filtered by agency, resource type, incident type, data source, area and time window.
 
-## Assumptions
+### Incident and resource management (INC)
 
-## Dependencies
+- **FR-INC-1:** The system shall manage the incident lifecycle, including incidents created manually by the operator.
+- **FR-INC-2:** The system shall manage the assignment and release of resources to incidents and the resource status lifecycle.
+- **FR-INC-3:** The system shall manage orders sent to field teams, linked to an incident and a resource, tracking their acknowledgement and flagging those not acknowledged within a configurable period.
+
+### Alerts (ALR)
+
+- **FR-ALR-1:** The system shall generate alerts from change events, filtered according to each user's configuration, and track their acknowledgement.
+
+### Prediction (PRD)
+
+- **FR-PRD-1:** The system shall generate progression forecasts for incidents and risk maps for an area, each with a confidence level, generation time and input data.
+
+### Recommendation (REC)
+
+- **FR-REC-1:** The system shall generate recommendations to assign or release resources, each with a justification.
+- **FR-REC-2:** The system shall compute routes and estimated arrival times over the road network.
+- **FR-REC-3:** The system shall apply a recommendation only after explicit operator confirmation, storing the decision and an optional reason.
+
+### Audit (AUD)
+
+- **FR-AUD-1:** The system shall record every change to incidents, resources, orders and recommendations with its author and timestamp, consultable per incident and exportable.
+
+### Public publishing (PUB)
+
+- **FR-PUB-1:** The system shall publish incidents and area warnings selected by the operator to the public application, using a public view that excludes operational data.
+
+## Non-functional requirements
+
+| ID | Attribute | Situation | Expected response | Measure |
+| --- | --- | --- | --- | --- |
+| NFR-PERF-1 | Performance | New data is received by the platform | It is shown on the map, as an alert or on the public app | Within X seconds |
+| NFR-PERF-2 | Performance | A major incident with N incidents and M resources on the map | The map remains usable | Interactions under 200 ms; filters applied under 1 s |
+| NFR-AVL-1 | Availability | An external data source stops responding | Last known data stays visible and the source is flagged as outdated; other sources keep updating | Flag shown within 30 s; no other source affected |
+| NFR-AVL-2 | Availability | The predictive or recommendation engine fails | The rest of the platform keeps working and the failure is shown to the operator | No impact on map, incidents, orders or alerts |
+| NFR-AVL-3 | Availability | The command room loses internet access | The private app keeps working with the last data received and the local operations | Incident, order and audit functions fully usable offline |
+| NFR-INT-1 | Integrity | Someone tries to edit or delete an audit, order or decision record | The operation is refused and any tampering is detectable | 0 records modified or removed |
+| NFR-SEC-1 | Security | An unauthenticated or unauthorized user tries to access the private app or a restricted function | Access is denied and the attempt is logged | 100% of attempts denied and logged |
+| NFR-SEC-2 | Security | The public application is compromised | The attacker has no path to the private application or its data | Data flows only from private to public; no inbound connection to the private app |
+| NFR-SCA-1 | Scalability | A crisis causes a traffic peak on the public app | The public app keeps serving incidents and warnings | N concurrent users without degradation |
+| NFR-USA-1 | Usability | An operator registers a phone-reported incident | The incident is created without assistance | Under 30 seconds |
+
+## Traceability
+
+| User story | Requirements |
+| --- | --- |
+| US-1: Real-time operational map | FR-ING-1, FR-ING-2, FR-COP-1, NFR-PERF-1, NFR-PERF-2, NFR-AVL-1 |
+| US-2: Map filtering and details | FR-ING-1, FR-COP-2, NFR-PERF-2 |
+| US-3: Incident and resource management | FR-INC-1, FR-INC-2, FR-AUD-1, NFR-INT-1, NFR-USA-1, NFR-AVL-3 |
+| US-4: Order tracking | FR-INC-3, FR-AUD-1, NFR-INT-1, NFR-AVL-3 |
+| US-5: Incident alerts | FR-ING-3, FR-ALR-1, NFR-PERF-1 |
+| US-6: Risk forecasting | FR-PRD-1, NFR-AVL-2 |
+| US-7: Tactical recommendations | FR-REC-1, FR-REC-2, FR-REC-3, FR-INC-2, NFR-AVL-2 |
+| US-8: Decision log | FR-REC-3, FR-AUD-1, NFR-INT-1 |
+| US-9: Public communication | FR-PUB-1, NFR-PERF-1, NFR-SEC-2, NFR-SCA-1 |
+
+NFR-SEC-1 applies to all user stories of the private application.

@@ -44,17 +44,18 @@ description: User stories for commanders, operators, analysts and citizens
 - The system must allow the user to assign resources to an incident and update their status.
 - The system must record who made each change and when.
 
-## US-4: Order logging
+## US-4: Order tracking
 
 **As...** a control room operator,\
-**I want...** to log the orders sent to field teams and their acknowledgement of receipt,\
-**So that...** there is a reliable record of what was ordered, to whom and when.
+**I want...** to register the orders sent to field teams and track whether each one was acknowledged,\
+**So that...** I can make sure every order reached its team and follow up on those that did not.
 
 **Acceptance Criteria:**
 
 - The system must allow the user to log an order associated with an incident and a resource, with an automatic timestamp.
 - The system must allow the user to mark an order as acknowledged, recording the time of acknowledgement.
-- The system must display the order history of each incident in chronological order.
+- The system must highlight orders that have not been acknowledged within a configurable period.
+- The system must show the pending (unacknowledged) orders of each incident.
 
 ## US-5: Incident alerts
 
