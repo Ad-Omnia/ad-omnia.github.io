@@ -13,69 +13,44 @@ Ad Omnia is composed of two applications with distinct audiences:
 
 | Persona | Application | Role in the system |
 | --- | --- | --- |
-| [Operational Commander](#operational-commander) | Private | Makes decisions and approves resource allocation |
 | [Command Room Operator](#command-room-operator) | Private | Monitors data, manages incidents, triages citizen reports |
 | [Emergency Planner](#emergency-planner) | Private | Analyses history and simulates scenarios before events |
 | [Citizen](#citizen) | Public | Follows active emergencies and reports incidents |
 
-## Operational Commander
-
-**Name:** Francisco Almeida
-**Age:** 52
-**Role:** Operational commander at a sub-regional emergency and civil protection command
-**Tech proficiency:** Medium. Comfortable with maps and dashboards, no patience for complex interfaces.
-
-### Background
-
-Francisco has more than 25 years of experience in civil protection, having started as a volunteer firefighter. During major incidents he leads the operational response, deciding where to deploy firefighters, vehicles and aerial means, and coordinating with INEM, GNR and PSP. Today, the information he needs reaches him through radio, phone calls and several separate systems, and his team spends critical time consolidating it.
-
-### Goals
-
-- Get a complete, up-to-date picture of the situation at a glance.
-- Anticipate how an incident will evolve, not just react to it.
-- Allocate resources quickly and justify those decisions afterwards.
-
-### Frustrations
-
-- Information from different agencies arrives late, incomplete or contradictory.
-- Has to ask several people to build the overall picture.
-- Tools that require many clicks or training to answer simple questions.
-
-### What he needs from Ad Omnia
-
-- A Common Operational Picture (COP) combining incidents, resources and relevant data from all agencies on one map.
-- Predictions of incident progression, with a clear indication of their confidence.
-- Resource allocation and routing recommendations that he can accept, adjust or reject.
-
 ## Command Room Operator
 
-**Name:** Sofia Marques
-**Age:** 34
-**Role:** Operator in the command room of a sub-regional emergency and civil protection command
+**Name:** Sofia Marques\
+**Age:** 34\
+**Role:** Shift operator in the command room of a sub-regional emergency and civil protection command\
 **Tech proficiency:** High. Works with several systems simultaneously during long shifts.
 
 ### Background
 
-Sofia works in shifts in the command room. She monitors incoming occurrences, keeps incident records up to date, tracks the status and location of resources, and is the main point of contact with other agencies. During a crisis she handles a high volume of information under pressure and is responsible for making sure the commander's view is accurate.
+Sofia works in shifts in the command room. She monitors incoming occurrences, keeps incident records up to date, tracks the status and location of resources, and is the main point of contact with other agencies and field teams. During a crisis she handles a high volume of information under pressure and is responsible for deciding how resources are allocated and for keeping the public informed. Today, the information she needs is spread across radio, phone calls and several separate systems, and she spends critical time consolidating it before she can act.
 
 ### Goals
 
-- Keep the operational picture up to date with as little manual work as possible.
-- Quickly find information from other agencies, such as hospital availability from the SNS or the position of aerial means.
-- Filter relevant citizen reports from noise.
+- Get a complete, up-to-date picture of the situation at a glance, with as little manual work as possible.
+- Anticipate how an incident will evolve, not just react to it.
+- Allocate resources quickly and be able to justify those decisions afterwards.
+- Quickly find information from other agencies.
 
 ### Frustrations
 
-- Copying the same information between different systems.
+- Information spreaded between different systems.
 - Not knowing whether the data she sees is current or outdated.
-- Receiving many duplicate or unverified reports during major incidents.
+- Information from different agencies arriving late, incomplete or contradictory.
+- Having no record of why a decision was made when it is questioned later.
 
 ### What she needs from Ad Omnia
 
+- A Common Operational Picture (COP) combining incidents, resources and relevant data from all agencies on one map.
 - Automatic ingestion of external data sources, with a visible indication of when each was last updated.
-- Tools to create, update and close incidents and to track resources.
-- A triage queue for citizen reports, with grouping of duplicates and the ability to validate, discard or associate them with an existing incident.
-- Alerts when relevant changes occur.
+- Tools to create, update and close incidents, track resources and log orders sent to field teams.
+- Alerts when new incidents appear or relevant changes occur.
+- Predictions of incident progression, with a clear indication of their confidence.
+- Resource allocation and routing recommendations that she can accept, adjust or reject, with a log of every decision.
+- A way to publish incidents and warnings to the public application.
 
 ## Emergency Planner
 
