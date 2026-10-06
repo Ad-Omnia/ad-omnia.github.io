@@ -20,14 +20,14 @@ Ad Omnia is composed of two applications with distinct audiences:
 
 ## Operational Commander
 
-**Name:** Ricardo Almeida
+**Name:** Francisco Almeida
 **Age:** 52
 **Role:** Operational commander at a sub-regional emergency and civil protection command
 **Tech proficiency:** Medium. Comfortable with maps and dashboards, no patience for complex interfaces.
 
 ### Background
 
-Ricardo has more than 25 years of experience in civil protection, having started as a volunteer firefighter. During major incidents he leads the operational response, deciding where to deploy firefighters, vehicles and aerial means, and coordinating with INEM, GNR and PSP. Today, the information he needs reaches him through radio, phone calls and several separate systems, and his team spends critical time consolidating it.
+Francisco has more than 25 years of experience in civil protection, having started as a volunteer firefighter. During major incidents he leads the operational response, deciding where to deploy firefighters, vehicles and aerial means, and coordinating with INEM, GNR and PSP. Today, the information he needs reaches him through radio, phone calls and several separate systems, and his team spends critical time consolidating it.
 
 ### Goals
 
