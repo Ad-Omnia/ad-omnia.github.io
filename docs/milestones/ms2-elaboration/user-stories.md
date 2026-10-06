@@ -122,11 +122,7 @@ description: User stories for commanders, operators, analysts and citizens
 
 ## US-10: Consult historical incident data filtered by zone, period and type
 
-<<<<<<< HEAD
 **As...** an analyst,\
-=======
-**As...** a planning officer,\
->>>>>>> dc14261fefb266f026960e8654f41c6c87ea0aa8
 **I want to...** search historical incidents filtered by zone, time period and incident type,\
 **So that...** I can analyze past activity and support planning decisions.
 
