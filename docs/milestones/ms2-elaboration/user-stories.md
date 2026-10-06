@@ -120,20 +120,81 @@ description: User stories for commanders, operators, analysts and citizens
 - The system must allow the user to issue a warning for a geographic area, with a message and severity level.
 - The system should allow the user to update or end an active warning.
 
-Planeador/Analista
-13. Consultar dados históricos de incidentes filtrados por zona, período e tipo.
-14. Ver num mapa as zonas e épocas de maior risco, com base no histórico.
-15. Simular cenários antes de grandes eventos ou da época de incêndios, com o motor preditivo e dados sintéticos.
-16. Exportar mapas, dados e relatórios que apoiem decisões de planeamento e pedidos de meios.
+## US-10: Consult historical incident data filtered by zone, period and type
 
-Cidadão
-## US-17: View active emergencies on a simple map
+**As...** an operator,\
+**I want to...** search historical incidents filtered by zone, time period and incident type,\
+**So that...** I can analyze past activity and support planning decisions.
+
+**Acceptance Criteria:**
+
+- The search supports filtering by any combination of zone, date/time range and incident type, and returns results within a reasonable time for the expected data volume.
+- Each result shows not only the incident's own data (location, type, status, timestamps) but also all directly related information: the incident's foreign-key relationships are followed to surface linked entities (e.g. assigned resources, reports, logs) and other incidents that reference it (e.g. a follow-up or a duplicate/merged incident).
+- Related incidents and entities are clearly labeled with their relationship to the queried incident (e.g. "referenced by", "caused by", "merged into"), not just listed flatly.
+- If no incidents match the filters, the system shows an explicit "no results" state rather than an empty or ambiguous screen.
+- Access to historical data respects the same visibility rules as other operator views (no public exposure of internal-only fields).
+
+## US-11: View zones and seasons of highest risk on a map
+
+**As...** a planning officer,\
+**I want to...** see on a map which zones and time periods have historically had the highest incident risk,\
+**So that...** I can anticipate where and when resources are most likely to be needed (to prevent repeated events).
+
+**Acceptance Criteria:**
+
+- The map displays zones color-coded or ranked by historical risk level, computed from past incident data (frequency, severity, type).
+- The user can filter or select a time period (e.g. a season, a month range) to see how risk concentration shifts accordingly.
+- Selecting a zone shows the underlying data behind its risk rating (incident count, types, trend over time).
+- The map indicates the date range of the underlying data and when the risk calculation was last refreshed.
+
+## US-12: Simulate scenarios before major events or fire season
+
+**As...** a planning officer,\
+**I want to...** run simulations using the predictive engine and synthetic data before major events or the start of fire season,\
+**So that...** I can anticipate likely demand and prepare resource allocation in advance as well as requesting help timely.
+
+**Acceptance Criteria:**
+
+- The user can configure a simulation with parameters such as time window, zone(s), expected event type, and synthetic/historical data inputs.
+- The predictive engine produces a projected outcome (e.g. likely incident volume, severity distribution, resource demand) based on those parameters.
+- Simulation results are clearly marked as predictive/synthetic and are visually distinct from real operational data, so they can never be mistaken for live incidents.
+- Optional feature: Simulations can be saved, re-run with adjusted parameters, and compared against each other.
+- Running a simulation has no effect on live operational data or active incident records.
+
+## US-13: Simulate limit scenarios using maximum available resource capacity
+
+**As...** a planning officer,\
+**I want to...** simulate limit/worst-case scenarios that use the maximum capacity of all available resources,\
+**So that...** I can assess whether current resource levels are sufficient under extreme demand and identify breaking points.
+
+**Acceptance Criteria:**
+
+- The user can define a scenario where simulated demand is scaled up until it saturates all available resources (personnel, vehicles, equipment, etc.).
+- The simulation reports the point at which resource capacity is exceeded, and which resource types run out first.
+- Results clearly show gaps between demand and available capacity (e.g. unmet requests, response delays) under the simulated limit scenario.
+- Results are clearly marked as synthetic/predictive, with no effect on live data or active incidents.
+
+## US-14: Export maps, data and reports for planning and resource requests
+
+**As...** a planning officer,\
+**I want to...** export maps, underlying data and reports,\
+**So that...** I can support planning decisions and formal requests for additional resources with shareable documentation.
+
+**Acceptance Criteria:**
+
+- The user can export the current map view (including active filters/layers) as an image or document format suitable for sharing or printing.
+- The user can export underlying data (e.g. historical incidents, simulation results, risk analysis) in a structured format (e.g. CSV/PDF).
+- Exported reports include metadata: generation date/time, applied filters, and data source/time range, so recipients know exactly what they're looking at.
+- Only information the user is authorized to see is included in the export; internal-only or restricted fields are excluded unless the user's role permits them.
+- Export actions are logged for traceability (who exported what, and when).
+
+## US-15: View active emergencies on a simple map
 
 **As...** a citizen,
 **I want to...** see the active emergencies of any type on a simple map,
 **So that...** I can quickly tell whether there is an emergency near my home, my family or my route, without relying on social media or unofficial sources.
 
-**Acceptance Criteria**
+**Acceptance Criteria:**
 
 - The map shows all currently active incidents, of any type (wildfires, traffic accidents, floods, structural incidents, etc.), each with a distinct icon and a legend. Closed incidents are not shown.
 - Selecting an incident shows its type, approximate location, current status and the time of the last update.
