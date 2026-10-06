@@ -34,7 +34,7 @@ description: User stories for commanders, operators, analysts and citizens
 ## US-3: Incident and resource management
 
 **As...** a control room operator,\
-**I want...** to create, update and close incidents, and update the status of resources,\
+**I want...** to create, update and close incidents/operations, and update the status of resources,\
 **So that...** the platform reflects the real situation, including occurrences reported by phone or radio.
 
 **Acceptance Criteria:**
@@ -85,12 +85,12 @@ description: User stories for commanders, operators, analysts and citizens
 ## US-7: Tactical recommendations
 
 **As...** a control room operator,\
-**I want...** to receive recommendations for allocating and routing resources, and to be able to accept, adjust or reject them,\
+**I want...** to receive recommendations on which resources to assign to or release from an incident, and how to route them, and to be able to accept, adjust or reject them,\
 **So that...** I can respond faster without losing control over the final decision.
 
 **Acceptance Criteria:**
 
-- The system must suggest which resources to assign to an incident, with a short justification.
+- The system must suggest which resources to assign/release to an incident, with a short justification.
 - The system must show the recommended route for each suggested resource and its estimated arrival time.
 - The system must allow the user to accept, adjust or reject a recommendation before it is applied.
 
@@ -122,7 +122,11 @@ description: User stories for commanders, operators, analysts and citizens
 
 ## US-10: Consult historical incident data filtered by zone, period and type
 
+<<<<<<< HEAD
 **As...** an analyst,\
+=======
+**As...** a planning officer,\
+>>>>>>> dc14261fefb266f026960e8654f41c6c87ea0aa8
 **I want to...** search historical incidents filtered by zone, time period and incident type,\
 **So that...** I can analyze past activity and support planning decisions.
 
@@ -196,10 +200,8 @@ description: User stories for commanders, operators, analysts and citizens
 
 **Acceptance Criteria:**
 
-- The map shows all currently active incidents, of any type (wildfires, traffic accidents, floods, structural incidents, etc.), each with a distinct icon and a legend. Closed incidents are not shown.
-- Selecting an incident shows its type, approximate location, current status and the time of the last update.
-- The map shows when the data was last updated. If the data is stale or the source is unavailable, the user sees a clear warning; the map never shows "no emergencies" when data is simply missing.
+- The system shows all currently active incidents of any type, each with a distinct icon and a legend.
+- Selecting an incident should shows its type, approximate location, current status and the time of the last update.
+- The map shows when the data was last updated, and gives a clear warning if the data is stale or if the data source is unavalaible/unreachable.
 - Only incidents validated by an operator are shown, and only information intended for the public; internal operational data is never exposed.
-
-Nota: isto pode ser de mais, as mais cortáveis são provavelmente 6, 11, 14 e 16, que 'são desejáveis mas não essenciais ao MVP'.
-Além disso, em diagramas e afins, pode-se contabilizar os agentes no terreno e as fontes externas (e possivelmente o admin???) como atores secundários (ao contrário do resto que seriam atores primários)
+- The system should allow filtering of the incident type shown to the user
