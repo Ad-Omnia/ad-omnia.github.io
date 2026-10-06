@@ -35,10 +35,10 @@ description: Task list, timeline, milestones and deliverables
 ### M4 — Construction II (04/11-15/12)
 
 - MVP features:
-    - Unified data ingestion engine
-    - COP interface
-    - Predictive AI
-    - Automatic recommendation system
+  - Unified data ingestion engine
+  - COP interface
+  - Predictive AI
+  - Automatic recommendation system
 - QA testing
 - Stabilization and deployment
 

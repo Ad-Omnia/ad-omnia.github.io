@@ -4,7 +4,10 @@ order: 3
 description: Functional and non-functional requirements
 ---
 
-# Functional Requirements
+# Requirements
+
+## Functional Requirements
+
 | ID | Requirement | US |
 | --- | --- | --- |
 | FR-01 | The system ingests real time data from external sources | 1,9,12 |
@@ -24,26 +27,26 @@ description: Functional and non-functional requirements
 | FR-15 | The system recommends resource allocation, routing, or others, and explains the recommendation | 3 |
 | FR-16 | The commander accepts, adjusts or rejects each recommendation, and the decision is recorded | 3,6 |
 
-# Non Functional Requirements
+## Non Functional Requirements
 
 - Perfomance
-    - Data from a source appears on the map within a few seconds of ingestion
-    - Map interaction remains smooth with hundreds of visible entities
-    - Tactical recommendations and incident progression predictions are generated in useful time
+  - Data from a source appears on the map within a few seconds of ingestion
+  - Map interaction remains smooth with hundreds of visible entities
+  - Tactical recommendations and incident progression predictions are generated in useful time
 - Usability
-    - The commander can answer simple questions with few clicks and without extensive training.
-    - The screen is readable in a command room.
-    - The public application works on mobile and requires no installation.
-    - All predictions and recommendations show their confidence or justification.
+  - The commander can answer simple questions with few clicks and without extensive training.
+  - The screen is readable in a command room.
+  - The public application works on mobile and requires no installation.
+  - All predictions and recommendations show their confidence or justification.
 - Security
-    - Features from the privileged access tier are kept inaccessible to the regular, publicly-available tier
-    - Privileged data is kept secure and encrypted
-    - Data is kept in localhost and never shared
-    - ???? prob more
+  - Features from the privileged access tier are kept inaccessible to the regular, publicly-available tier
+  - Privileged data is kept secure and encrypted
+  - Data is kept in localhost and never shared
+  - ???? prob more
 - ???? probably there is more need help
 
 - The system must operate in real time -> dont know where to put this
 
-# Assumptions
+## Assumptions
 
-# Dependencies
+## Dependencies
