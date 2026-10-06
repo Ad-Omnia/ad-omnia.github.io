@@ -35,15 +35,10 @@ Cidadão
 
 **Acceptance Criteria**
 
-- The map is available without registration or login, and works on mobile browsers as well as desktop.
-- The map shows incidents that are currently active, closed incidents are not shown in the map.
-- Any incident type (wildfires, traffic accidents, floods, structural incidents, etc.) is displayed, each with a distinct icon and a small description.
+- The map shows all currently active incidents, of any type (wildfires, traffic accidents, floods, structural incidents, etc.), each with a distinct icon and a legend. Closed incidents are not shown.
 - Selecting an incident shows its type, approximate location, current status and the time of the last update.
-- The map shows when the data was last updated; if the data is stale, the user is warned.
-- The user can search for a place or, with their permission, centre the map on their current location. Denying location access does not break the map.
-- New incidents and status changes appear without the user having to reload the page, within an agreed delay.
-- The public map only shows information intended for the public; it should never expose internal operational data
-- If the map or the data source is unavailable, the user sees a clear message instead of an empty or misleading map; showing "no emergencies" when the data is simply missing is not acceptable.
+- The map shows when the data was last updated. If the data is stale or the source is unavailable, the user sees a clear warning; the map never shows "no emergencies" when data is simply missing.
+- Only incidents validated by an operator are shown, and only information intended for the public; internal operational data is never exposed.
 
 Nota: isto pode ser de mais, as mais cortáveis são provavelmente 6, 11, 14 e 16, que 'são desejáveis mas não essenciais ao MVP'.
 Além disso, em diagramas e afins, pode-se contabilizar os agentes no terreno e as fontes externas (e possivelmente o admin???) como atores secundários (ao contrário do resto que seriam atores primários)
