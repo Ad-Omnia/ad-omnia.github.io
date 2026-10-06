@@ -27,8 +27,23 @@ Planeador/Analista
 16. Exportar mapas, dados e relatórios que apoiem decisões de planeamento e pedidos de meios.
 
 Cidadão
-17. Ver num mapa simples as emergências ativas, de qualquer tipo e não só incêndios.
-18. Saber o que fazer: zonas afetadas, estradas cortadas, pontos de abrigo e instruções de segurança.
+## US-17: View active emergencies on a simple map
+
+**As...** a citizen,
+**I want to...** see the active emergencies of any type on a simple map,
+**So that...** I can quickly tell whether there is an emergency near my home, my family or my route, without relying on social media or unofficial sources.
+
+**Acceptance Criteria**
+
+- The map is available without registration or login, and works on mobile browsers as well as desktop.
+- The map shows incidents that are currently active, closed incidents are not shown in the map.
+- Any incident type (wildfires, traffic accidents, floods, structural incidents, etc.) is displayed, each with a distinct icon and a small description.
+- Selecting an incident shows its type, approximate location, current status and the time of the last update.
+- The map shows when the data was last updated; if the data is stale, the user is warned.
+- The user can search for a place or, with their permission, centre the map on their current location. Denying location access does not break the map.
+- New incidents and status changes appear without the user having to reload the page, within an agreed delay.
+- The public map only shows information intended for the public; it should never expose internal operational data
+- If the map or the data source is unavailable, the user sees a clear message instead of an empty or misleading map; showing "no emergencies" when the data is simply missing is not acceptable.
 
 Nota: isto pode ser de mais, as mais cortáveis são provavelmente 6, 11, 14 e 16, que 'são desejáveis mas não essenciais ao MVP'.
 Além disso, em diagramas e afins, pode-se contabilizar os agentes no terreno e as fontes externas (e possivelmente o admin???) como atores secundários (ao contrário do resto que seriam atores primários)
