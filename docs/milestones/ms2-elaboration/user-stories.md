@@ -122,7 +122,7 @@ description: User stories for commanders, operators, analysts and citizens
 
 ## US-10: Consult historical incident data filtered by zone, period and type
 
-**As...** an operator,\
+**As...** an analyst,\
 **I want to...** search historical incidents filtered by zone, time period and incident type,\
 **So that...** I can analyze past activity and support planning decisions.
 
@@ -136,7 +136,7 @@ description: User stories for commanders, operators, analysts and citizens
 
 ## US-11: View zones and seasons of highest risk on a map
 
-**As...** a planning officer,\
+**As...** an analyst,\
 **I want to...** see on a map which zones and time periods have historically had the highest incident risk,\
 **So that...** I can anticipate where and when resources are most likely to be needed (to prevent repeated events).
 
@@ -149,7 +149,7 @@ description: User stories for commanders, operators, analysts and citizens
 
 ## US-12: Simulate scenarios before major events or fire season
 
-**As...** a planning officer,\
+**As...** an analyst,\
 **I want to...** run simulations using the predictive engine and synthetic data before major events or the start of fire season,\
 **So that...** I can anticipate likely demand and prepare resource allocation in advance as well as requesting help timely.
 
@@ -163,7 +163,7 @@ description: User stories for commanders, operators, analysts and citizens
 
 ## US-13: Simulate limit scenarios using maximum available resource capacity
 
-**As...** a planning officer,\
+**As...** an analyst,\
 **I want to...** simulate limit/worst-case scenarios that use the maximum capacity of all available resources,\
 **So that...** I can assess whether current resource levels are sufficient under extreme demand and identify breaking points.
 
@@ -176,7 +176,7 @@ description: User stories for commanders, operators, analysts and citizens
 
 ## US-14: Export maps, data and reports for planning and resource requests
 
-**As...** a planning officer,\
+**As...** an analyst,\
 **I want to...** export maps, underlying data and reports,\
 **So that...** I can support planning decisions and formal requests for additional resources with shareable documentation.
 
