@@ -185,7 +185,6 @@ description: User stories for commanders, operators, analysts and citizens
 - The user can export the current map view (including active filters/layers) as an image or document format suitable for sharing or printing.
 - The user can export underlying data (e.g. historical incidents, simulation results, risk analysis) in a structured format (e.g. CSV/PDF).
 - Exported reports include metadata: generation date/time, applied filters, and data source/time range, so recipients know exactly what they're looking at.
-- Only information the user is authorized to see is included in the export; internal-only or restricted fields are excluded unless the user's role permits them.
 - Export actions are logged for traceability (who exported what, and when).
 
 ## US-15: View active emergencies on a simple map
