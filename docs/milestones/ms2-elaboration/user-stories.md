@@ -68,7 +68,6 @@ description: User stories for commanders, operators, analysts and citizens
 - The system must alert the user when a new incident is received from an external data source.
 - The system must alert the user when an existing incident changes severity or status.
 - The system must allow the user to acknowledge an alert and must keep unacknowledged alerts visible.
-- The system should allow the user to configure which alerts to receive.
 
 ## US-6: Risk forecasting
 
@@ -190,8 +189,8 @@ description: User stories for commanders, operators, analysts and citizens
 
 ## US-15: View active emergencies on a simple map
 
-**As...** a citizen,
-**I want to...** see the active emergencies of any type on a simple map,
+**As...** a citizen,\
+**I want to...** see the active emergencies of any type on a simple map,\
 **So that...** I can quickly tell whether there is an emergency near my home, my family or my route, without relying on social media or unofficial sources.
 
 **Acceptance Criteria:**
