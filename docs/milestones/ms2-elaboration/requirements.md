@@ -45,7 +45,13 @@ description: Functional and non-functional requirements
 
 ### Public publishing (PUB)
 
-- **FR-PUB-1:** The system shall publish incidents and area warnings selected by the operator to the public application, using a public view that excludes operational data.
+- **FR-PUB-1:** The system shall publish incidents and area warnings selected by the operator to the public application.
+- **FR-PUB-2:** The system shall display in the public application a map of all active incidents validated by an operator, each with an icon distinct by incident type, and a legend.
+- **FR-PUB-3:** The system shall show, when an incident is selected, its type, approximate location, current status and time of last update.
+- **FR-PUB-4:** The system shall allow the citizen to filter the incidents shown by type.
+- **FR-PUB-5:** The system shall show the time of the last update of the public data and display a clear warning when the data is outdated or the source is unavailable.
+- **FR-PUB-6:** The system shall remove from the public application any incident that the operator hides or closes.
+- **FR-PUB-7:** The public view shall exclude all operational data.
 
 ## Non-functional requirements
 
@@ -56,11 +62,14 @@ description: Functional and non-functional requirements
 | NFR-AVL-1 | Availability | An external data source stops responding | Last known data stays visible and the source is flagged as outdated; other sources keep updating | Flag shown within 30 s; no other source affected |
 | NFR-AVL-2 | Availability | The predictive or recommendation engine fails | The rest of the platform keeps working and the failure is shown to the operator | No impact on map, incidents, orders or alerts |
 | NFR-AVL-3 | Availability | The command room loses internet access | The private app keeps working with the last data received and the local operations | Incident, order and audit functions fully usable offline |
+| NFR-AVL-4 | Availability | The private application or the private-to-public link becomes unavailable | The public app keeps serving the last published state and shows that the data is outdated | Warning shown within 30 s; public app stays available |
 | NFR-INT-1 | Integrity | Someone tries to edit or delete an audit, order or decision record | The operation is refused and any tampering is detectable | 0 records modified or removed |
 | NFR-SEC-1 | Security | An unauthenticated or unauthorized user tries to access the private app or a restricted function | Access is denied and the attempt is logged | 100% of attempts denied and logged |
 | NFR-SEC-2 | Security | The public application is compromised | The attacker has no path to the private application or its data | Data flows only from private to public; no inbound connection to the private app |
+| NFR-SEC-3 | Security | A citizen uses the public application | No personal data is collected or stored, and no internal-only field is exposed | 0 personal identifiers collected; 0 internal-only fields in public responses |
 | NFR-SCA-1 | Scalability | A crisis causes a traffic peak on the public app | The public app keeps serving incidents and warnings | N concurrent users without degradation |
 | NFR-USA-1 | Usability | An operator registers a phone-reported incident | The incident is created without assistance | Under 30 seconds |
+| NFR-USA-2 | Usability | A citizen opens the public app on a smartphone | It is usable in the browser without installing anything | Responsive layout |
 
 ## Traceability
 
@@ -74,6 +83,7 @@ description: Functional and non-functional requirements
 | US-6: Risk forecasting | FR-PRD-1, NFR-AVL-2 |
 | US-7: Tactical recommendations | FR-REC-1, FR-REC-2, FR-REC-3, FR-INC-2, NFR-AVL-2 |
 | US-8: Decision log | FR-REC-3, FR-AUD-1, NFR-INT-1 |
-| US-9: Public communication | FR-PUB-1, NFR-PERF-1, NFR-SEC-2, NFR-SCA-1 |
+| US-9: Public communication | FR-PUB-1, FR-PUB-6, NFR-PERF-1, NFR-SEC-2, NFR-SCA-1 |
+| US-15: Public emergency map | FR-PUB-1, FR-PUB-2, FR-PUB-3, FR-PUB-4, FR-PUB-5, FR-PUB-6, FR-PUB-7, FR-ING-2, NFR-PERF-1, NFR-AVL-4, NFR-SEC-2, NFR-SEC-3, NFR-SCA-1, NFR-USA-2 |
 
 NFR-SEC-1 applies to all user stories of the private application.

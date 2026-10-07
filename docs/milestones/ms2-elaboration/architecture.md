@@ -9,3 +9,6 @@
 - Blue = User-Facing; shown to the user/client
 - Green = Business logic and data flow
 - Purple = Integration with everything outside the Core (data and AI)
+
+## Tech Stack
+![Tech Stack Diagram](../../assets/PEITechStack.png)
