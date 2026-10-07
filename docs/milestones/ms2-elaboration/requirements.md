@@ -1,5 +1,5 @@
 ---
-date: 2026-10-02
+date: 2026-10-07
 order: 3
 description: Functional and non-functional requirements
 ---
@@ -37,9 +37,10 @@ description: Functional and non-functional requirements
 
 ### Prediction (PRD)
 
-- **FR-PRD-1:** The system shall generate progression forecasts for incidents and risk maps for an area, each with a confidence level, generation time and input data.
+- **FR-PRD-1:** The system shall generate progression forecasts for active incidents, each with a confidence level, generation time and input data.
 - **FR-PRD-2:** The system shall let the analyst configure and run a simulation through the predictive engine using parameters such as time window, zone(s), expected event type and synthetic/historical data inputs, producing a projected outcome (incident volume, severity distribution, resource demand) that is visually and explicitly marked as synthetic/predictive and has no effect on live operational data or active incident records.
 - **FR-PRD-3:** The system shall support limit-scenario simulations in which simulated demand is scaled up until it saturates all available resources (personnel, vehicles, equipment, etc.), reporting the saturation point, the resource types that run out first, and the resulting gaps between demand and available capacity (e.g. unmet requests, response delays); results shall be marked as synthetic/predictive with no effect on live data.
+- **FR-PRD-4:** The system shall generate occurrence risk levels per area for the current and following days, based on current and forecast environmental data, indicating the main contributing factors.
 
 ### Recommendation (REC)
 
@@ -103,5 +104,6 @@ description: Functional and non-functional requirements
 | US-13: Limit-scenario simulation | FR-PRD-3, NFR-AVL-2 |
 | US-14: Export for planning and resource requests | FR-EXP-1, FR-AUD-2 |
 | US-15: Public emergency map | FR-PUB-1, FR-PUB-2, FR-PUB-3, FR-PUB-4, FR-PUB-5, FR-PUB-6, FR-PUB-7, FR-ING-2, NFR-PERF-1, NFR-AVL-4, NFR-SEC-2, NFR-SEC-3, NFR-SCA-1, NFR-USA-2 |
+| US-16: Occurrence risk forecasting | FR-ING-1, FR-PRD-4, NFR-AVL-2 |
 
 NFR-SEC-1 applies to all user stories of the private application.
