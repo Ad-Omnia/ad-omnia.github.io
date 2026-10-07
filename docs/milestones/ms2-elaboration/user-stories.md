@@ -200,3 +200,16 @@ description: User stories for commanders, operators, analysts and citizens
 - The map shows when the data was last updated, and gives a clear warning if the data is stale or if the data source is unavalaible/unreachable.
 - Only incidents validated by an operator are shown, and only information intended for the public; internal operational data is never exposed.
 - The system should allow filtering of the incident type shown to the user
+
+## US-16: Occurrence risk forecasting
+
+**As...** a control room operator,\
+**I want...** to view the risk of new incidents occurring in each area over the coming days, based on current and forecast environmental conditions,\
+**So that...** I can pre-position resources and raise readiness before incidents happen.
+
+**Acceptance Criteria:**
+
+- The system must display a risk level per area for the current day and the following days.
+- The system must base the risk on current and forecast environmental data, such as wind, humidity, temperature and precipitation.
+- The system must show which factors contribute most to the risk level of a selected area.
+- The system must indicate when the risk was last calculated and the date of the forecast data used.
