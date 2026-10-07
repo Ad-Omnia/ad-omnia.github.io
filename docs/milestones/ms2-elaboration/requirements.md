@@ -45,12 +45,13 @@ description: Functional and non-functional requirements
 
 ### Public publishing (PUB)
 
-- **FR-PUB-1:** The system shall publish incidents and area warnings selected by the operator to the public application, using a public view that excludes operational data.
+- **FR-PUB-1:** The system shall publish incidents and area warnings selected by the operator to the public application.
 - **FR-PUB-2:** The system shall display in the public application a map of all active incidents validated by an operator, each with an icon distinct by incident type, and a legend.
-- **FR-PUB-3:** The system shall show, when an incident is selected, its type, approximate location, current status and time of last update. The public view shall exclude all operational data.
+- **FR-PUB-3:** The system shall show, when an incident is selected, its type, approximate location, current status and time of last update.
 - **FR-PUB-4:** The system shall allow the citizen to filter the incidents shown by type.
 - **FR-PUB-5:** The system shall show the time of the last update of the public data and display a clear warning when the data is outdated or the source is unavailable.
 - **FR-PUB-6:** The system shall remove from the public application any incident that the operator hides or closes.
+- **FR-PUB-7:** The public view shall exclude all operational data.
 
 ## Non-functional requirements
 
@@ -83,6 +84,6 @@ description: Functional and non-functional requirements
 | US-7: Tactical recommendations | FR-REC-1, FR-REC-2, FR-REC-3, FR-INC-2, NFR-AVL-2 |
 | US-8: Decision log | FR-REC-3, FR-AUD-1, NFR-INT-1 |
 | US-9: Public communication | FR-PUB-1, FR-PUB-6, NFR-PERF-1, NFR-SEC-2, NFR-SCA-1 |
-| US-15: Public emergency map | FR-PUB-1, FR-PUB-2, FR-PUB-3, FR-PUB-4, FR-PUB-5, FR-PUB-6, FR-ING-2, NFR-PERF-1, NFR-AVL-4, NFR-SEC-2, NFR-SEC-3, NFR-SCA-1, NFR-USA-2 |
+| US-15: Public emergency map | FR-PUB-1, FR-PUB-2, FR-PUB-3, FR-PUB-4, FR-PUB-5, FR-PUB-6, FR-PUB-7, FR-ING-2, NFR-PERF-1, NFR-AVL-4, NFR-SEC-2, NFR-SEC-3, NFR-SCA-1, NFR-USA-2 |
 
 NFR-SEC-1 applies to all user stories of the private application.
