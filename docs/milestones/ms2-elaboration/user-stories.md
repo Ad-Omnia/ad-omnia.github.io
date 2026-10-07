@@ -201,7 +201,7 @@ description: User stories for commanders, operators, analysts and citizens
 - Only incidents validated by an operator are shown, and only information intended for the public; internal operational data is never exposed.
 - The system should allow filtering of the incident type shown to the user
 
-## US-16: Occurrence risk forecasting
+## US-16: New occurrence risk forecasting
 
 **As...** a control room operator,\
 **I want...** to view the risk of new incidents occurring in each area over the coming days, based on current and forecast environmental conditions,\
