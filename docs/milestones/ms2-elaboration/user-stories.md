@@ -134,7 +134,7 @@ description: User stories for commanders, operators, analysts and citizens
 - If no incidents match the filters, the system shows an explicit "no results" state rather than an empty or ambiguous screen.
 - Access to historical data respects the same visibility rules as other operator views (no public exposure of internal-only fields).
 
-## US-11: View zones and seasons of highest risk on a map
+## US-11: View zones and seasons of most common risk on a map
 
 **As...** an analyst,\
 **I want to...** see on a map which zones and time periods have historically had the highest incident risk,\

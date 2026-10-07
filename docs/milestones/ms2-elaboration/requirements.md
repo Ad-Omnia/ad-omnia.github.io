@@ -19,6 +19,12 @@ description: Functional and non-functional requirements
 - **FR-COP-1:** The system shall maintain a unified, real-time state of incidents and resources and push updates to clients without a manual refresh.
 - **FR-COP-2:** The system shall provide a layered map that can be filtered by agency, resource type, incident type, data source, area and time window.
 
+### Historical analysis (HIST)
+
+- **FR-HIST-1:** The system shall support searching historical incidents by any combination of zone, date/time range and incident type, returning results within a reasonable time for the expected data volume; each result shall show the incident's own data (location, type, status, timestamps) together with all directly related entities reached through its foreign-key relationships (e.g. assigned resources, reports, logs) and other incidents that reference it (e.g. a follow-up or a duplicate/merged incident), each labeled with its relationship to the queried incident (e.g. "referenced by", "caused by", "merged into").
+- **FR-HIST-2:** The system shall provide a map ranking zones and time periods by historical risk level, computed from past incident frequency, severity and type, filterable by time period, with a per-zone drill-down showing the underlying data (incident count, types, trend over time) and the date range and refresh time of that computation.
+- **FR-HIST-3:** The system shall show an explicit "no results" state when a historical search matches no incidents, instead of an empty or ambiguous screen.
+
 ### Incident and resource management (INC)
 
 - **FR-INC-1:** The system shall manage the incident lifecycle, including incidents created manually by the operator.
@@ -32,6 +38,8 @@ description: Functional and non-functional requirements
 ### Prediction (PRD)
 
 - **FR-PRD-1:** The system shall generate progression forecasts for incidents and risk maps for an area, each with a confidence level, generation time and input data.
+- **FR-PRD-2:** The system shall let the analyst configure and run a simulation through the predictive engine using parameters such as time window, zone(s), expected event type and synthetic/historical data inputs, producing a projected outcome (incident volume, severity distribution, resource demand) that is visually and explicitly marked as synthetic/predictive and has no effect on live operational data or active incident records.
+- **FR-PRD-3:** The system shall support limit-scenario simulations in which simulated demand is scaled up until it saturates all available resources (personnel, vehicles, equipment, etc.), reporting the saturation point, the resource types that run out first, and the resulting gaps between demand and available capacity (e.g. unmet requests, response delays); results shall be marked as synthetic/predictive with no effect on live data.
 
 ### Recommendation (REC)
 
@@ -42,6 +50,11 @@ description: Functional and non-functional requirements
 ### Audit (AUD)
 
 - **FR-AUD-1:** The system shall record every change to incidents, resources, orders and recommendations with its author and timestamp, consultable per incident and exportable.
+- **FR-AUD-2:** The system shall log every export action, recording who exported what and when, for traceability.
+
+### Export and reporting (EXP)
+
+- **FR-EXP-1:** The system shall allow exporting the current map view, including active filters and layers, as an image or document, and exporting underlying data (e.g. historical incidents, simulation results, risk analysis) in a structured format (e.g. CSV, PDF); each export shall include the generation date/time, applied filters and data source/time range as metadata.
 
 ### Public publishing (PUB)
 
@@ -84,6 +97,11 @@ description: Functional and non-functional requirements
 | US-7: Tactical recommendations | FR-REC-1, FR-REC-2, FR-REC-3, FR-INC-2, NFR-AVL-2 |
 | US-8: Decision log | FR-REC-3, FR-AUD-1, NFR-INT-1 |
 | US-9: Public communication | FR-PUB-1, FR-PUB-6, NFR-PERF-1, NFR-SEC-2, NFR-SCA-1 |
+| US-10: Historical incident search | FR-HIST-1, FR-HIST-3 |
+| US-11: Historical risk map | FR-HIST-2 |
+| US-12: Pre-event simulation | FR-PRD-2, NFR-AVL-2 |
+| US-13: Limit-scenario simulation | FR-PRD-3, NFR-AVL-2 |
+| US-14: Export for planning and resource requests | FR-EXP-1, FR-AUD-2 |
 | US-15: Public emergency map | FR-PUB-1, FR-PUB-2, FR-PUB-3, FR-PUB-4, FR-PUB-5, FR-PUB-6, FR-PUB-7, FR-ING-2, NFR-PERF-1, NFR-AVL-4, NFR-SEC-2, NFR-SEC-3, NFR-SCA-1, NFR-USA-2 |
 
 NFR-SEC-1 applies to all user stories of the private application.
