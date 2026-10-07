@@ -90,26 +90,20 @@ Tiago's work happens mostly outside of active emergencies. He prepares the munic
 
 ### Background
 
-Ana lives with her family in a village surrounded by forest. Every summer she follows the news about wildfires anxiously, often relying on social media posts of uncertain origin. When she sees smoke nearby, she does not know whether it has already been reported or whom to tell besides calling 112.
+Ana lives with her family in a village surrounded by forest. Every summer she follows the news about wildfires anxiously, often relying on social media posts of uncertain origin.
 
 ### Goals
 
 - Know whether there is an active emergency near her home, her family or her route.
-- Know what to do: which roads are closed, where to go, whether she should leave.
-- Report what she sees quickly and know that it reached someone.
 
 ### Frustrations
 
 - Contradictory or alarmist information on social media.
 - Official information that is hard to find or not specific to her area.
-- No feedback after reporting something.
 
 ### What she needs from Ad Omnia
 
 - A simple map of active emergencies, not limited to wildfires.
-- Actionable information: affected areas, road closures, shelter points.
-- A quick way to report an incident with location and, optionally, a photo.
-- Confirmation that her report was received.
 
 ## Out of scope
 
