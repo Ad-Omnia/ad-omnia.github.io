@@ -205,7 +205,7 @@ description: User stories for commanders, operators, analysts and citizens
 
 **As...** a control room operator,\
 **I want...** to view the risk of new incidents occurring in each area over the coming days, based on current and forecast environmental conditions,\
-**So that...** I can pre-position resources and raise readiness before incidents happen.
+**So that...** I can position resources and raise readiness before incidents happen.
 
 **Acceptance Criteria:**
 
