@@ -1,32 +1,32 @@
 ---
 date: 2026-09-30
 order: 1
-description: Personas for the command room and public application
+description: Personas for the control room and public application
 ---
 
 # Personas
 
 Ad Omnia is composed of two applications with distinct audiences:
 
-- **Private application (command room):** runs on-premises in the command room of emergency and civil protection agencies. Used by commanders, operators and planners to manage incidents and resources.
-- **Public application:** internet-facing. Lets citizens follow active emergencies and report incidents.
+- **Private application (control room):** runs on-premises in the control room of emergency and civil protection agencies. Used by operators and analysts to manage incidents and resources.
+- **Public application:** internet-facing. Lets citizens follow active emergencies.
 
 | Persona | Application | Role in the system |
 | --- | --- | --- |
-| [Command Room Operator](#command-room-operator) | Private | Monitors data, manages incidents, triages citizen reports |
-| [Emergency Planner](#emergency-planner) | Private | Analyses history and simulates scenarios before events |
-| [Citizen](#citizen) | Public | Follows active emergencies and reports incidents |
+| [Control Room Operator](#control-room-operator) | Private | Monitors data, manages incidents |
+| [Emergency Analyst](#emergency-analyst) | Private | Analyses history and simulates scenarios before events |
+| [Citizen](#citizen) | Public | Follows active emergencies |
 
-## Command Room Operator
+## Control Room Operator
 
 **Name:** Sofia Marques\
 **Age:** 34\
-**Role:** Shift operator in the command room of a sub-regional emergency and civil protection command\
+**Role:** Shift operator in the control room of a sub-regional emergency and civil protection command.\
 **Tech proficiency:** High. Works with several systems simultaneously during long shifts.
 
 ### Background
 
-Sofia works in shifts in the command room. She monitors incoming occurrences, keeps incident records up to date, tracks the status and location of resources, and is the main point of contact with other agencies and field teams. During a crisis she handles a high volume of information under pressure and is responsible for deciding how resources are allocated and for keeping the public informed. Today, the information she needs is spread across radio, phone calls and several separate systems, and she spends critical time consolidating it before she can act.
+Sofia works in shifts in the control room. She monitors incoming occurrences, keeps incident records up to date, tracks the status and location of resources, and is the main point of contact with other agencies and field teams. During a crisis she handles a high volume of information under pressure and is responsible for deciding how resources are allocated and for keeping the public informed. Today, the information she needs is spread across radio, phone calls and several separate systems, and she spends critical time consolidating it before she can act.
 
 ### Goals
 
@@ -37,7 +37,7 @@ Sofia works in shifts in the command room. She monitors incoming occurrences, ke
 
 ### Frustrations
 
-- Information spreaded between different systems.
+- Information spread between different systems.
 - Not knowing whether the data she sees is current or outdated.
 - Information from different agencies arriving late, incomplete or contradictory.
 - Having no record of why a decision was made when it is questioned later.
@@ -52,16 +52,16 @@ Sofia works in shifts in the command room. She monitors incoming occurrences, ke
 - Resource allocation and routing recommendations that she can accept, adjust or reject, with a log of every decision.
 - A way to publish incidents and warnings to the public application.
 
-## Emergency Planner
+## Emergency Analyst
 
 **Name:** Tiago Ferreira\
 **Age:** 41\
-**Role:** Technician at a municipal civil protection service\
+**Role:** Analyst at the sub-regional Aveiro command\
 **Tech proficiency:** High. Uses GIS tools and spreadsheets regularly.
 
 ### Background
 
-Tiago's work happens mostly outside of active emergencies. He prepares the municipality for the wildfire season, plans the safety arrangements for large events such as festivals and pilgrimages, and analyses past occurrences to identify high-risk areas. He currently gathers historical data manually from several sources and has no way of simulating scenarios.
+Tiago's work happens mostly outside of active emergencies. He prepares the region for the wildfire season, plans the safety arrangements for large events such as festivals and pilgrimages, and analyses past occurrences to identify high-risk areas. He currently gathers historical data manually from several sources and has no way of simulating scenarios.
 
 ### Goals
 
@@ -80,6 +80,7 @@ Tiago's work happens mostly outside of active emergencies. He prepares the munic
 - Access to historical incident data, filterable by area, period and type.
 - Scenario simulation using the predictive engine and synthetic data.
 - Export of maps, data and reports.
+- Test whether current resources are enough under extreme demand.
 
 ## Citizen
 
@@ -109,5 +110,5 @@ Ana lives with her family in a village surrounded by forest. Every summer she fo
 
 The following profiles were considered and are not covered as personas at this stage:
 
-- **Field responder** (firefighter, INEM crew, police officer): the private application runs only in the command room, so field teams do not access it directly.
-- **System administrator / data integrator:** connector configuration, permissions and monitoring are addressed as non-functional requirements.
+- **Field responder** (firefighter, INEM crew, police officer): the private application runs only in the control room, so field teams do not access it directly.
+- **System administrator:** connector configuration and monitoring are addressed as non-functional requirements.

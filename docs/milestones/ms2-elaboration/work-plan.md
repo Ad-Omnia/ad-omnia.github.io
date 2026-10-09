@@ -4,7 +4,7 @@ order: 5
 description: Scope, methodology, module breakdown and calendar
 ---
 
-# Ad-Omnia Workplan
+# Ad Omnia Workplan
 
 ## Scope
 
@@ -12,7 +12,7 @@ Ad Omnia is a command-and-control platform for crisis and emergency management, 
 
 The platform is composed of two applications:
 
-- **Private application (control room)** — used by emergency and security agencies. Runs locally in the control room to reduce exposure to tracking and external attack surfaces. Provides the full COP, predictive scenarios and tactical recommendations. Contains the core layer of the architecture as well as plugins built with advanced particularities and deeper operational control.
+- **Private application (control room)** — used by emergency and security agencies. Runs locally in the control room to reduce exposure to tracking and external attack surfaces. Provides the full COP, predictive scenarios and tactical recommendations. Contains the core layer of the architecture as well as plugins that provide advanced, operation-specific features.
 - **Public application (citizens)** — shows active emergencies and essential information during a crisis, and allows citizens to follow incidents. Contains the core layer of the architecture.
 
 ## Objectives
@@ -45,7 +45,7 @@ Initial requirements elicitation and system design, shared by all other modules.
 **Tasks**:
 
 - M2:
-  - Personas for control room operators and citizens
+  - Personas for control room operators, analysts and citizens
   - Functional and non-functional requirements
   - User stories for both applications
   - Architecture design (microservices, communication between services, plugin system)
@@ -77,10 +77,11 @@ Backend services, APIs and the plugin architecture that connect all other module
 
 - M3:
   - API gateway and internal APIs
-  - Authentication, authorization and access levels
 - M4:
   - Separation between the private and public deployments
   - Plugin interface for new data sources and modules (dual-use extensibility)
+  - Audit log of changes, decisions and exports
+  - License-based authentication of control room stations
 
 ### Module 4: COP Interface (Private Application)
 
@@ -89,11 +90,17 @@ The main control room console.
 **Tasks**:
 
 - M3:
-  - Temporal navigation (timeline / replay of events)
+  - Interactive map with layers (incidents, resources, aircraft, infrastructure) and source freshness indicators
+  - Map filtering and incident/resource details
+  - Creation, update and closing of incidents; resource status and assignment
 - M4:
-  - Interactive map with layers (incidents, resources, aircraft, infrastructure)
-  - Visualization of predicted scenarios and recommendations
-  - Alerts and notifications
+  - Temporal navigation (timeline / replay of events)
+  - Alerts panel with acknowledgement
+  - Order logging and tracking of unacknowledged orders
+  - Visualization of predictions
+  - Recommendations with accept, adjust or reject actions
+  - Decision log per incident, with export
+  - Publishing of incidents and public warnings
 - M5:
   - Usability testing with representative users
 
@@ -102,10 +109,10 @@ The main control room console.
 **Tasks**:
 
 - M3:
-  - Map and list of active emergencies
-  - Incident reporting (location, description, photos)
+  - Map and list of active emergencies, with filtering by incident type
 - M4:
-  - Validation/moderation flow for citizen reports before they reach the COP
+  - Display of public warnings issued by the control room
+  - Data freshness indicator and outdated-data warning
 - M5:
   - Usability testing
 
@@ -134,7 +141,21 @@ The main control room console.
   - Present recommendations in the COP with explanation of the reasoning
   - Evaluate recommendations in simulated scenarios
 
-### Module 8: DevOps, Security & Quality Assurance
+### Module 8: Analysis & Planning (Private Application)
+
+Tools used by analysts outside active emergencies, to study past activity and prepare for future events.
+
+**Tasks**:
+
+- M4:
+  - Historical incident search with related entities and relationships
+  - Risk rating computation from historical data and historical risk map
+- M5:
+  - Simulation configuration and results interface, clearly marked as synthetic
+  - Saving, re-running and comparing simulations
+  - Export of maps, data and reports with metadata
+
+### Module 9: DevOps, Security & Quality Assurance
 
 **Tasks**:
 
@@ -149,7 +170,7 @@ The main control room console.
 - M5:
   - Validation in simulated crisis scenarios
 
-### Module 9: Project Management & Dissemination
+### Module 10: Project Management & Dissemination
 
 **Tasks**:
 
@@ -167,11 +188,11 @@ The main control room console.
 
 | # | Milestone | Dates | Main tasks | Modules |
 | --- | --- | --- | --- | --- |
-| M1 | **Inception** — setup, organization, state of the art | 22/09/2026 – 29/09/2026 | GitHub organization, backlog, logo, state of the art, website, APIs and data collection | Mod 2, Mod 9 |
+| M1 | **Inception** — setup, organization, state of the art | 22/09/2026 – 29/09/2026 | GitHub organization, backlog, logo, state of the art, website, APIs and data collection | Mod 2, Mod 10 |
 | M2 | **Elaboration** — requirements, architecture, prototypes | 30/09/2026 – 13/10/2026 | Personas, requirements and user stories, architecture design, ER and class diagrams, high-fidelity mockups, common data model | Mod 1 |
-| M3 | **Construction I** — UI and core features | 14/10/2026 – 03/11/2026 | UI implementation, core features, first connectors, dev environment, CI/CD, usability testing, dataset preparation | Mod 2, Mod 3, Mod 4, Mod 5, Mod 6, Mod 8 |
-| M4 | **Construction II** — MVP, QA, deployment | 04/11/2026 – 15/12/2026 | MVP: unified ingestion engine, COP interface, predictive AI, recommendation system; QA testing, stabilization and deployment | Mod 2 – Mod 8 |
-| M5 | **Transition** — refinement, dissemination, final report | 15/12/2026 – 01/06/2027 | Continuous development and refinement, stress testing and validation, commercial video, poster and demo at Students@DETI, final report | Mod 4 – Mod 9 |
+| M3 | **Construction I** — UI and core features | 14/10/2026 – 03/11/2026 | UI implementation, core features, first connectors, dev environment, CI/CD, usability testing, dataset preparation | Mod 2, Mod 3, Mod 4, Mod 5, Mod 6, Mod 9 |
+| M4 | **Construction II** — MVP, QA, deployment | 04/11/2026 – 15/12/2026 | MVP: unified ingestion engine, COP interface, predictive AI, recommendation system; QA testing, stabilization and deployment | Mod 2 – Mod 9 |
+| M5 | **Transition** — refinement, dissemination, final report | 15/12/2026 – 01/06/2027 | Continuous development and refinement, stress testing and validation, commercial video, poster and demo at Students@DETI, final report | Mod 4 – Mod 10 |
 
 ## Team roles
 
@@ -192,9 +213,7 @@ The main control room console.
 | Insufficient or unlabelled historical data to train the predictive model | High | High | Synthetic data generation module |
 | Real-time performance of the COP degrades with many entities | Medium | High | Define latency targets early; load testing from M4; aggregation/clustering on the map; efficient streaming |
 | Scope too large for the available time | High | High | Prioritize the MVP in the backlog; deliver the minimum version of each module first and iterate; review scope at each Sprint Review |
-| Security vulnerabilities | Medium | High | Local deployment and network isolation for the private application; authentication and access control; dependency scanning in CI; security review before deployment; safe-by-design API |
-| False or malicious citizen reports in the public app | High | Medium | Moderation/validation before reports reach the COP; rate limiting; reports clearly marked as unverified |
-| Personal data in citizen reports (GDPR) | Medium | Medium | Collect the minimum necessary data; anonymization; clear privacy notice |
+| Security vulnerabilities | Medium | High | Local deployment and network isolation for the private application; license-based authentication; hashed license storage; dependency scanning in CI; security review before deployment; safe-by-design API |
 | No access to real operators for validation | Medium | Medium | Contact agencies early through the advisors; validate with simulated scenarios and proxy users |
 | Team availability (other courses, exams) | High | Medium | Plan sprints around evaluation periods; shared knowledge through code reviews and documentation; secondary roles as backup |
 
@@ -205,7 +224,7 @@ The main control room console.
 - Operational validation: access to professionals from emergency and security agencies to validate requirements, usability and the usefulness of recommendations, facilitated by the advisors.
 - Advisors and course calendar: feedback at Sprint Reviews and milestone deadlines defined by the course.
 
-## Criteria to success
+## Success criteria
 
 The project will be considered successful if, by the end of M5:
 
