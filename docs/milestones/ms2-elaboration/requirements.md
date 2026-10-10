@@ -73,8 +73,8 @@ description: Functional and non-functional requirements
 
 | ID | Attribute | Situation | Expected response | Measure |
 | --- | --- | --- | --- | --- |
-| NFR-PERF-1 | Performance | New data is received by the platform | It is shown on the map, as an alert or on the public app | Within X seconds |
-| NFR-PERF-2 | Performance | A major incident with N incidents and M resources on the map | The map remains usable | Interactions under 200 ms; filters applied under 1 s |
+| NFR-PERF-1 | Performance | New data is received by the platform | It is shown on the map, as an alert or on the public app | Within 5 seconds |
+| NFR-PERF-2 | Performance | A major incident with 500 incidents and 2500 resources on the map | The map remains usable | Interactions under 200 ms; filters applied under 1 s |
 | NFR-AVL-1 | Availability | An external data source stops responding | Last known data stays visible and the source is flagged as outdated; other sources keep updating | Flag shown within 30 s; no other source affected |
 | NFR-AVL-2 | Availability | The predictive or recommendation engine fails | The rest of the platform keeps working and the failure is shown to the operator | No impact on map, incidents, orders or alerts |
 | NFR-AVL-3 | Availability | The control room loses internet access | The private app keeps working with the last data received and the local operations | Incident, order and audit functions fully usable offline |
@@ -84,7 +84,7 @@ description: Functional and non-functional requirements
 | NFR-SEC-2 | Security | The public application is compromised | The attacker has no path to the private application or its data | Data flows only from private to public; no inbound connection to the private app |
 | NFR-SEC-3 | Security | A citizen uses the public application | No personal data is collected or stored, and no internal-only field is exposed | 0 personal identifiers collected; 0 internal-only fields in public responses |
 | NFR-SEC-4 | Security | An attacker obtains a copy of the private application's database | Stored licenses cannot be used to access the application | 0 licenses stored in plain text; licenses stored with a slow, salted hash |
-| NFR-SCA-1 | Scalability | A crisis causes a traffic peak on the public app | The public app keeps serving incidents and warnings | N concurrent users without degradation |
+| NFR-SCA-1 | Scalability | A crisis causes a traffic peak on the public app | The public app keeps serving incidents and warnings | 5000 concurrent users without degradation |
 | NFR-USA-1 | Usability | An operator registers a phone-reported incident | The incident is created without assistance | Under 30 seconds |
 | NFR-USA-2 | Usability | A citizen opens the public app on a smartphone | It is usable in the browser without installing anything | Responsive layout |
 
