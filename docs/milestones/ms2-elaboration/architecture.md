@@ -2,7 +2,7 @@
 
 ## Diagram
 
-![Architecture Diagram](../../assets/PEIArch.png)
+![Architecture Diagram](./images/PEIArch.png)
 
 ### Color coding
 
@@ -56,4 +56,4 @@
 
 ## Tech Stack
 
-![Tech Stack Diagram](../../assets/PEITechStack.png)
+![Tech Stack Diagram](./images/PEITechStack.png)
