@@ -24,6 +24,7 @@ extra_javascript:
   - javascripts/nav.js
   - javascripts/deck.js
   - javascripts/minutes.js
+  - javascripts/videos.js
 
 theme:
   name: material
@@ -83,6 +84,11 @@ nav:
 copyright: "© 2026 Ad Omnia · University of Aveiro"
 
 extra:
+  videos:
+    - title: A Thousand No's
+      meta: Brand video · 0:24
+      youtube: Q_YQUXswK0s
+      poster: assets/videos/a-thousand-nos.jpg
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/Ad-Omnia

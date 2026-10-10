@@ -111,16 +111,22 @@
 {% block content %}
   <section class="ad-block ad-reveal" id="project">
     <p class="ad-kicker ad-c-teal">The project</p>
-    <div class="ad-split">
-      <h2 class="ad-statement">A unified operational command and predictive intelligence platform for crisis and emergency management.</h2>
-      <div class="ad-split-body">
-        <p>Built for large events, public safety and crisis response. It fuses heterogeneous real-time
-          data into a single <em>Common Operational Picture</em> (COP) and uses predictive AI to anticipate
-          risk and recommend how to allocate resources.</p>
-        <p class="ad-status"></span>Current phase: Elaboration (MS2)</p>
-        <p class="ad-course">Informatics Engineering Project (43675)<br>University of Aveiro, 2026/2027</p>
+    <h2 class="ad-statement">Unified command and predictive intelligence for crisis management.</h2>
+    <p class="ad-lede">Live data from every source, fused into one <em>Common Operational Picture</em>, with AI that recommends where resources should go.</p>
+    <dl class="ad-facts">
+      <div>
+        <dt>Phase</dt>
+        <dd>Elaboration · MS2</dd>
       </div>
-    </div>
+      <div>
+        <dt>Built for</dt>
+        <dd>Public safety, incident response, crisis analysis</dd>
+      </div>
+      <div>
+        <dt>Course</dt>
+        <dd>Informatics Engineering Project · UA 2026/27</dd>
+      </div>
+    </dl>
   </section>
 
   <section class="ad-block ad-reveal" id="objectives">
@@ -182,6 +188,44 @@
       {"initials": "NC", "name": "Nuno Borges de Carvalho",   "note": "Advisor"}
     ], "mentors") }}
   </section>
+
+{%- set videos = config.extra.videos or [] %}
+{%- if videos %}
+  <section class="ad-block ad-reveal" id="videos">
+    <p class="ad-kicker ad-c-blue-violet">Videos</p>
+    <h2 class="ad-heading">Light, in motion.</h2>
+    <div class="ad-videos" tabindex="0" aria-label="Videos">
+      {%- for f in videos %}
+      <figure class="ad-video">
+        <div class="ad-video-frame">
+          {%- if f.youtube %}
+          <button type="button" class="ad-video-play" data-youtube="{{ f.youtube }}" aria-label="Play {{ f.title }}">
+            <img src="{{ f.poster | url if f.poster else 'https://i.ytimg.com/vi/' ~ f.youtube ~ '/hqdefault.jpg' }}" alt="" loading="lazy">
+            <span class="ad-video-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+          </button>
+          {%- else %}
+          <video playsinline preload="none" poster="{{ f.poster | url }}">
+            <source src="{{ f.src | url }}" type="video/mp4">
+          </video>
+          <button type="button" class="ad-video-play" aria-label="Play {{ f.title }}">
+            <span class="ad-video-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+          </button>
+          {%- endif %}
+        </div>
+        <figcaption>
+          <span class="ad-video-title">{{ f.title }}</span>
+          <span class="ad-video-meta">{{ f.meta }}</span>
+        </figcaption>
+      </figure>
+      {%- endfor %}
+    </div>
+    <div class="ad-videos-bar" hidden>
+      <button type="button" class="ad-videos-prev" aria-label="Previous video"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <div class="ad-videos-dots" aria-hidden="true"></div>
+      <button type="button" class="ad-videos-next" aria-label="Next video"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+    </div>
+  </section>
+{%- endif %}
 
   <section class="ad-closing ad-reveal">
     <img class="ad-closing-mark" src="{{ 'assets/logo-colour-black.svg' | url }}" alt="" width="56" height="56">

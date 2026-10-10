@@ -81,6 +81,15 @@
     this.total += bezLength(e, c1, c2, x);
   };
 
+  Path.prototype.arc = function (a, b, R, sweep, angle) {
+    this.parts.push({
+      d: "M " + fmt(a) + " A " + R.toFixed(2) + " " + R.toFixed(2) + " 0 " + (angle > Math.PI ? 1 : 0) + " " + sweep + " " + fmt(b),
+      start: this.total,
+      length: R * angle
+    });
+    this.total += R * angle;
+  };
+
   Path.prototype.open = function (L, point, dir, width) {
     var n = unit(sub(point, L.c));
     var cos = Math.max(Math.abs(dot(n, dir)), 0.22);
@@ -112,12 +121,8 @@
     return total;
   }
 
-  function bend(L, e, d, x, out, shape) {
+  function bend(L, e, d, x, out) {
     var k = dist(e, x) * 0.42;
-    if (shape === "arc") {
-      var turn = Math.acos(clamp(dot(d, out), -1, 1));
-      if (turn > 0.05) k = dist(e, x) * 0.48 * Math.tan(turn / 4) / Math.sin(turn / 2);
-    }
     var c1 = add(e, mul(d, k));
     var c2 = sub(x, mul(out, k));
     for (var i = 1; i < 20; i++) {
@@ -129,7 +134,7 @@
     return { e: e, c1: c1, c2: c2, x: x, out: out };
   }
 
-  function bendToward(L, e, d, aim, reach, shape) {
+  function bendToward(L, e, d, aim) {
     var best = null;
     for (var a = 0; a < 360; a += 2) {
       var x = onRing(L, a);
@@ -138,15 +143,36 @@
       if (!target) continue;
       var out = unit(sub(target, x));
       if (dot(out, unit(sub(x, L.c))) < 0.3) continue;
-      var b = bend(L, e, d, x, out, shape);
+      var b = bend(L, e, d, x, out);
       if (!b) continue;
-      var chord = unit(sub(x, e));
-      var asym = shape === "arc"
-        ? Math.abs(Math.acos(clamp(dot(d, chord), -1, 1)) - Math.acos(clamp(dot(chord, out), -1, 1))) * 4
-        : 0;
-      var v = Math.acos(clamp(dot(d, out), -1, 1)) + (target.cost || 0) + asym +
-        (1 - dot(out, unit(sub(x, L.c)))) * 1.6 - (reach || 0) * dist(e, x) / L.r;
+      var v = Math.acos(clamp(dot(d, out), -1, 1)) + (target.cost || 0) +
+        (1 - dot(out, unit(sub(x, L.c)))) * 1.6;
       if (!best || v < best.v) { best = b; best.v = v; }
+    }
+    return best;
+  }
+
+  function arcThrough(L, e, d, target) {
+    var side = cross(d, sub(target, e)) > 0 ? 1 : -1;
+    var n = mul([-d[1], d[0]], side);
+    var best = null;
+    for (var R = L.r * 0.35; R < L.r * 6; R += L.r * 0.01) {
+      var O = add(e, mul(n, R));
+      var u = unit(sub(L.c, O));
+      var proj = add(O, mul(u, dot(sub(e, O), u)));
+      var x = sub(mul(proj, 2), e);
+      if (dist(x, e) < L.r * 0.6) continue;
+      var rx = sub(x, O);
+      var out = mul(unit([-rx[1], rx[0]]), side);
+      if (dot(out, unit(sub(x, L.c))) < 0.35) continue;
+      var a0 = Math.atan2(e[1] - O[1], e[0] - O[0]);
+      var a1 = Math.atan2(x[1] - O[1], x[0] - O[0]);
+      var angle = side > 0 ? a1 - a0 : a0 - a1;
+      while (angle < 0) angle += Math.PI * 2;
+      var miss = missBy(x, out, target);
+      if (!best || miss < best.miss) {
+        best = { x: x, out: out, R: R, sweep: side > 0 ? 1 : 0, angle: angle, miss: miss };
+      }
     }
     return best;
   }
@@ -286,15 +312,8 @@
     beam.line(xB, eC);
     beam.open(C, eC, d2);
 
-    var ex = null;
-    [0, 0.3, -0.3, 0.5, -0.5].some(function (k) {
-      return [0.2, 0.1, 0].some(function (inner) {
-        C.inner = C.r * inner;
-        ex = bendToward(C, eC, d2, function () { return add(D.c, [0, D.r * k]); }, 0.35, "arc");
-        return !!ex;
-      });
-    });
-    beam.curve(ex.e, ex.c1, ex.c2, ex.x);
+    var ex = arcThrough(C, eC, d2, D.c);
+    beam.arc(eC, ex.x, ex.R, ex.sweep, ex.angle);
     beam.open(C, ex.x, ex.out);
     var endCurve = beam.total;
 
