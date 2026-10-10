@@ -2231,3 +2231,207 @@ body[data-md-color-scheme="slate"]:not(:has(.ad-block, .ad-timeline, .ad-hero)) 
     border-radius: 0.8rem;
   }
 }
+
+/* Persona CVs */
+
+.ad-cv {
+  position: relative;
+  margin: 1.2rem 0 2.8rem;
+  border: 1px solid var(--ad-border);
+  border-left: 4px solid var(--c);
+  border-radius: 0.8rem;
+  background: var(--ad-surface);
+  box-shadow: 0 1px 2px rgba(20, 23, 28, 0.04), 0 10px 26px rgba(20, 23, 28, 0.05);
+  overflow: hidden;
+}
+
+.ad-cv-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.6rem;
+  padding: 1.8rem 1.8rem 0;
+}
+
+.ad-cv-identity {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.md-typeset .ad-cv-kicker {
+  margin: 0 0 1.1rem;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--c);
+}
+
+.ad-cv-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, max-content));
+  gap: 1rem 2.4rem;
+}
+
+.ad-cv-field {
+  max-width: 100%;
+  margin-top: 0.9rem;
+}
+
+.md-typeset .ad-cv-grid span,
+.md-typeset .ad-cv-field span {
+  display: block;
+  margin: 0 0 0.25rem;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ad-ink-faint);
+}
+
+.md-typeset .ad-cv-grid strong,
+.md-typeset .ad-cv-field strong {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--ad-ink);
+}
+
+.ad-cv-photo {
+  flex-shrink: 0;
+  width: 6.2rem;
+  height: 6.2rem;
+  padding: 0.3rem;
+  border-radius: 0.8rem;
+  overflow: hidden;
+  background: var(--ad-surface-soft);
+  box-shadow: inset 0 0 0 1px var(--ad-border);
+}
+
+.ad-cv-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  object-fit: contain;
+}
+
+.ad-cv-tech {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin: 1.5rem 1.8rem 0;
+  padding: 1rem 0;
+  border-top: 1px solid var(--ad-rule);
+}
+
+.ad-cv-tech-bar {
+  display: flex;
+  gap: 0.25rem;
+  flex-shrink: 0;
+  margin-top: 0.35rem;
+}
+
+.ad-cv-tech-bar i {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--ad-rule);
+}
+
+.ad-cv-tech[data-level="1"] .ad-cv-tech-bar i:nth-child(1),
+.ad-cv-tech[data-level="2"] .ad-cv-tech-bar i:nth-child(-n+2),
+.ad-cv-tech[data-level="3"] .ad-cv-tech-bar i {
+  background: var(--c);
+}
+
+.md-typeset .ad-cv-tech p {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--ad-ink-muted);
+}
+
+.md-typeset .ad-cv-tech p strong {
+  color: var(--ad-ink);
+}
+
+.md-typeset .ad-cv-bar {
+  margin: 0;
+  padding: 0.55rem 1.8rem;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ad-ink);
+  background: color-mix(in srgb, var(--c) 16%, var(--ad-surface-soft));
+}
+
+.ad-cv-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.ad-cv-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.85rem 1.8rem;
+  border-bottom: 1px solid var(--ad-rule);
+}
+
+.ad-cv-rows .ad-cv-row:nth-child(even) {
+  background: var(--ad-surface-soft);
+}
+
+.ad-cv-section:last-child .ad-cv-row:last-child {
+  border-bottom: 0;
+}
+
+.ad-cv-num {
+  flex-shrink: 0;
+  width: 1.4rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--c);
+}
+
+.md-typeset .ad-cv-row p {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: var(--ad-ink-muted);
+}
+
+.ad-cv-section--needs .ad-cv-bar {
+  background: color-mix(in srgb, var(--c) 26%, var(--ad-surface-soft));
+}
+
+.ad-cv-section--needs .ad-cv-row p {
+  color: var(--ad-ink);
+}
+
+@media (max-width: 40em) {
+  .ad-cv-top {
+    flex-direction: column-reverse;
+    padding: 1.4rem 1.2rem 0;
+  }
+
+  .ad-cv-tech,
+  .md-typeset .ad-cv-bar,
+  .ad-cv-row {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+
+  .ad-cv-photo {
+    width: 4.6rem;
+    height: 4.6rem;
+  }
+}
