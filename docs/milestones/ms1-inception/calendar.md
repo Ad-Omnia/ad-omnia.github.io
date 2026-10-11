@@ -50,23 +50,6 @@ description: Task list, timeline, milestones and deliverables
 - Demonstration at Students@DETI
 - Final report
 
-## Timeline
-
-```mermaid
-gantt
-    dateFormat  YYYY-MM-DD
-    title Timeline
-    section MS1 - Inception
-    Setup & organization        :a1, 2026-09-22, 2026-09-29
-    section MS2 - Elaboration
-    Architecture and prototypes :a2, 2026-09-30, 2026-10-13
-    section MS3 - Construction
-    UI/core implementation      :a3, 2026-10-14, 2026-11-03
-    MVP development and QA      :a4, 2026-11-04, 2026-12-15
-    section MS4 - Transition
-    Refinement and final delivery :a5, 2026-12-15, 2027-06-01
-```
-
 ## Milestones
 
 | # | Description | Planned date |
