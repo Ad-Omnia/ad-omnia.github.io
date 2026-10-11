@@ -1,6 +1,6 @@
 ---
 date: 2026-10-10
-order: 4
+order: 3
 description: Use cases derived from the user stories, organized by package
 ---
 

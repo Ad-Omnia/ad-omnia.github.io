@@ -1,6 +1,6 @@
 ---
 date: 2026-10-04
-order: 5
+order: 8
 description: Scope, methodology, module breakdown and calendar
 ---
 

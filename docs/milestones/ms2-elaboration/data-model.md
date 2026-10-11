@@ -1,6 +1,6 @@
 ---
 date: 2026-10-07
-order: 4
+order: 6
 description: Data model for the application
 ---
 
