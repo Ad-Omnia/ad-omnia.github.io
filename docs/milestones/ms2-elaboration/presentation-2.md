@@ -1,5 +1,4 @@
 ---
-title: Presentation 2
 date: 2026-10-11
 order: 9
 description: Elaboration slides

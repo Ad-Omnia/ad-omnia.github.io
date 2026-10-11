@@ -60,14 +60,14 @@ Initial requirements elicitation and system design, shared by all other modules.
 **Tasks**:
 
 - M2:
-  - Personas for control room operators, analysts and citizens
-  - Functional and non-functional requirements
-  - User stories and use cases for both applications
-  - Architecture design (microservices, communication between services, plugin system)
-  - Common (harmonized) data model for incidents, resources, locations and events
-  - ER and class diagrams
-  - High-fidelity UI mockups for the COP and the public application
-  - Decide whether the private application consumes external feeds directly or through an intermediate component
+    - Personas for control room operators, analysts and citizens
+    - Functional and non-functional requirements
+    - User stories and use cases for both applications
+    - Architecture design (microservices, communication between services, plugin system)
+    - Common (harmonized) data model for incidents, resources, locations and events
+    - ER and class diagrams
+    - High-fidelity UI mockups for the COP and the public application
+    - Decide whether the private application consumes external feeds directly or through an intermediate component
 
 ### Module 2: Data Ingestion & Harmonization
 
@@ -76,14 +76,14 @@ Responsible for collecting, normalizing and storing data from all external sourc
 **Tasks**:
 
 - M1:
-  - Map available data sources, formats, update frequencies and access conditions
+    - Map available data sources, formats, update frequencies and access conditions
 - M3:
-  - Implement connectors for the core sources as independent plugins, following the integration strategy defined in M2
-  - Storage of historical data for AI training
+    - Implement connectors for the core sources as independent plugins, following the integration strategy defined in M2
+    - Storage of historical data for AI training
 - M4:
-  - Add further sources incrementally, as defined by the prioritization
-  - Data quality checks (missing values, duplicates, outdated records)
-  - Real-time ingestion pipeline
+    - Add further sources incrementally, as defined by the prioritization
+    - Data quality checks (missing values, duplicates, outdated records)
+    - Real-time ingestion pipeline
 
 ### Module 3: Core Platform & Architecture
 
@@ -92,12 +92,12 @@ Backend services, APIs and the plugin architecture that connect all other module
 **Tasks**:
 
 - M3:
-  - API gateway and internal APIs
+    - API gateway and internal APIs
 - M4:
-  - Separation between the private and public deployments
-  - Plugin interface for new data sources and modules (dual-use extensibility)
-  - Audit log of changes, decisions and exports
-  - License-based authentication of control room stations
+    - Separation between the private and public deployments
+    - Plugin interface for new data sources and modules (dual-use extensibility)
+    - Audit log of changes, decisions and exports
+    - License-based authentication of control room stations
 
 ### Module 4: COP Interface (Private Application)
 
@@ -106,43 +106,43 @@ The main control room console.
 **Tasks**:
 
 - M3:
-  - Interactive map with layers (incidents, resources, aircraft, infrastructure) and source freshness indicators
-  - Map filtering and incident/resource details
-  - Creation, update and closing of incidents; resource status and assignment
+    - Interactive map with layers (incidents, resources, aircraft, infrastructure) and source freshness indicators
+    - Map filtering and incident/resource details
+    - Creation, update and closing of incidents; resource status and assignment
 - M4:
-  - Temporal navigation (timeline / replay of events)
-  - Alerts panel with acknowledgement
-  - Order logging and tracking of unacknowledged orders
-  - Visualization of predictions
-  - Recommendations with accept, adjust or reject actions
-  - Decision log per incident, with export
-  - Publishing of incidents and public warnings
+    - Temporal navigation (timeline / replay of events)
+    - Alerts panel with acknowledgement
+    - Order logging and tracking of unacknowledged orders
+    - Visualization of predictions
+    - Recommendations with accept, adjust or reject actions
+    - Decision log per incident, with export
+    - Publishing of incidents and public warnings
 - M5:
-  - Usability testing with representative users
+    - Usability testing with representative users
 
 ### Module 5: Public Application (Citizens)
 
 **Tasks**:
 
 - M3:
-  - Map and list of active emergencies, with filtering by incident type
+    - Map and list of active emergencies, with filtering by incident type
 - M4:
-  - Display of public warnings issued by the control room
-  - Data freshness indicator and outdated-data warning
+    - Display of public warnings issued by the control room
+    - Data freshness indicator and outdated-data warning
 - M5:
-  - Usability testing
+    - Usability testing
 
 ### Module 6: Predictive AI & Synthetic Data Engine
 
 **Tasks**:
 
 - M3:
-  - Dataset preparation from historical records
-  - Model training and evaluation against baselines
-  - Synthetic data generation module for extreme / rare events
+    - Dataset preparation from historical records
+    - Model training and evaluation against baselines
+    - Synthetic data generation module for extreme / rare events
 - M4:
-  - Model serving (inference API) and integration with the COP
-  - Model monitoring and retraining strategy
+    - Model serving (inference API) and integration with the COP
+    - Model monitoring and retraining strategy
 
 ### Module 7: Tactical Recommendation Engine
 
@@ -152,10 +152,10 @@ The main control room console.
 - Routing over the road network (cartography)
 - Allocation algorithms (heuristics / optimization)
 - M4:
-  - Integrate predictions from Module 6 into recommendations
+    - Integrate predictions from Module 6 into recommendations
 - M5:
-  - Present recommendations in the COP with explanation of the reasoning
-  - Evaluate recommendations in simulated scenarios
+    - Present recommendations in the COP with explanation of the reasoning
+    - Evaluate recommendations in simulated scenarios
 
 ### Module 8: Analysis & Planning (Private Application)
 
@@ -164,41 +164,41 @@ Tools used by analysts outside active emergencies, to study past activity and pr
 **Tasks**:
 
 - M4:
-  - Historical incident search with related entities and relationships
-  - Risk rating computation from historical data and historical risk map
+    - Historical incident search with related entities and relationships
+    - Risk rating computation from historical data and historical risk map
 - M5:
-  - Simulation configuration and results interface, clearly marked as synthetic
-  - Saving, re-running and comparing simulations
-  - Export of maps, data and reports with metadata
+    - Simulation configuration and results interface, clearly marked as synthetic
+    - Saving, re-running and comparing simulations
+    - Export of maps, data and reports with metadata
 
 ### Module 9: DevOps, Security & Quality Assurance
 
 **Tasks**:
 
 - M3:
-  - Development environment setup (containers, shared configuration)
-  - CI/CD pipeline (build, tests, linting, deployment)
+    - Development environment setup (containers, shared configuration)
+    - CI/CD pipeline (build, tests, linting, deployment)
 - M4:
-  - Deployment of the public application and of a local control room setup
-  - Security hardening of the private application (network isolation, access control, secrets management)
-  - Automated testing (unit, integration, end-to-end)
-  - Stress and load testing (ingestion throughput, COP latency)
+    - Deployment of the public application and of a local control room setup
+    - Security hardening of the private application (network isolation, access control, secrets management)
+    - Automated testing (unit, integration, end-to-end)
+    - Stress and load testing (ingestion throughput, COP latency)
 - M5:
-  - Validation in simulated crisis scenarios
+    - Validation in simulated crisis scenarios
 
 ### Module 10: Project Management & Dissemination
 
 **Tasks**:
 
 - All Milestones:
-  - GitHub organization and backlog in GitHub Projects
-  - Participation in events and meetings with emergency/security agencies
+    - GitHub organization and backlog in GitHub Projects
+    - Participation in events and meetings with emergency/security agencies
 - M1:
-  - Project logo and website (documentation)
+    - Project logo and website (documentation)
 - M5:
-  - Commercial video
-  - Poster and demonstration for Students@DETI
-  - Final report
+    - Commercial video
+    - Poster and demonstration for Students@DETI
+    - Final report
 
 ## Calendar
 

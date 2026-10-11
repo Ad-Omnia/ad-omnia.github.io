@@ -8,8 +8,8 @@ description: User stories for operators, analysts and citizens
 
 ## US-1: Real-time operational map
 
-**As...** a control room operator,\
-**I want...** to view on a single real-time map all active incidents and the location and status of resources from every agency, including aerial assets,\
+**As...** a control room operator,<br>
+**I want...** to view on a single real-time map all active incidents and the location and status of resources from every agency, including aerial assets,<br>
 **So that...** I have a complete and up-to-date picture of the situation without switching between multiple systems.
 
 **Acceptance Criteria:**
@@ -21,8 +21,8 @@ description: User stories for operators, analysts and citizens
 
 ## US-2: Map filtering and details
 
-**As...** a control room operator,\
-**I want...** to filter the map by data layers, geographic area and time period, and to view the details of any incident or resource,\
+**As...** a control room operator,<br>
+**I want...** to filter the map by data layers, geographic area and time period, and to view the details of any incident or resource,<br>
 **So that...** I can focus on the information relevant to the situation I'm handling.
 
 **Acceptance Criteria:**
@@ -33,8 +33,8 @@ description: User stories for operators, analysts and citizens
 
 ## US-3: Incident and resource management
 
-**As...** a control room operator,\
-**I want...** to create, update and close incidents/operations, and update the status of resources,\
+**As...** a control room operator,<br>
+**I want...** to create, update and close incidents/operations, and update the status of resources,<br>
 **So that...** the platform reflects the real situation, including occurrences reported by phone or radio.
 
 **Acceptance Criteria:**
@@ -46,8 +46,8 @@ description: User stories for operators, analysts and citizens
 
 ## US-4: Order tracking
 
-**As...** a control room operator,\
-**I want...** to register the orders sent to field teams and track whether each one was acknowledged,\
+**As...** a control room operator,<br>
+**I want...** to register the orders sent to field teams and track whether each one was acknowledged,<br>
 **So that...** I can make sure every order reached its team and follow up on those that did not.
 
 **Acceptance Criteria:**
@@ -59,8 +59,8 @@ description: User stories for operators, analysts and citizens
 
 ## US-5: Incident alerts
 
-**As...** a control room operator,\
-**I want...** to be alerted when a new incident is detected in the external feeds or when an existing incident changes significantly,\
+**As...** a control room operator,<br>
+**I want...** to be alerted when a new incident is detected in the external feeds or when an existing incident changes significantly,<br>
 **So that...** I can react quickly without having to constantly monitor the map.
 
 **Acceptance Criteria:**
@@ -71,8 +71,8 @@ description: User stories for operators, analysts and citizens
 
 ## US-6: Risk forecasting
 
-**As...** a control room operator,\
-**I want...** to view the predicted progression of an incident and the high-risk areas, along with the confidence level of each prediction,\
+**As...** a control room operator,<br>
+**I want...** to view the predicted progression of an incident and the high-risk areas, along with the confidence level of each prediction,<br>
 **So that...** I can anticipate how the situation will evolve and act before it worsens.
 
 **Acceptance Criteria:**
@@ -84,8 +84,8 @@ description: User stories for operators, analysts and citizens
 
 ## US-7: Tactical recommendations
 
-**As...** a control room operator,\
-**I want...** to receive recommendations on which resources to assign to or release from an incident, and how to route them, and to be able to accept, adjust or reject them,\
+**As...** a control room operator,<br>
+**I want...** to receive recommendations on which resources to assign to or release from an incident, and how to route them, and to be able to accept, adjust or reject them,<br>
 **So that...** I can respond faster without losing control over the final decision.
 
 **Acceptance Criteria:**
@@ -96,8 +96,8 @@ description: User stories for operators, analysts and citizens
 
 ## US-8: Decision log
 
-**As...** a control room operator,\
-**I want...** to consult the log of recommendations and decisions made during an incident,\
+**As...** a control room operator,<br>
+**I want...** to consult the log of recommendations and decisions made during an incident,<br>
 **So that...** I can justify the actions taken afterwards.
 
 **Acceptance Criteria:**
@@ -109,8 +109,8 @@ description: User stories for operators, analysts and citizens
 
 ## US-9: Public communication
 
-**As...** a control room operator,\
-**I want...** to publish incidents and issue warnings on the public citizens' app,\
+**As...** a control room operator,<br>
+**I want...** to publish incidents and issue warnings on the public citizens' app,<br>
 **So that...** the population receives reliable information during a crisis.
 
 **Acceptance Criteria:**
@@ -122,8 +122,8 @@ description: User stories for operators, analysts and citizens
 
 ## US-10: Consult historical incident data filtered by zone, period and type
 
-**As...** an analyst,\
-**I want...** to search historical incidents filtered by zone, time period and incident type,\
+**As...** an analyst,<br>
+**I want...** to search historical incidents filtered by zone, time period and incident type,<br>
 **So that...** I can analyze past activity and support planning decisions.
 
 **Acceptance Criteria:**
@@ -136,8 +136,8 @@ description: User stories for operators, analysts and citizens
 
 ## US-11: View zones and seasons of highest risk on a map
 
-**As...** an analyst,\
-**I want...** to see on a map which zones and time periods have historically had the highest incident risk,\
+**As...** an analyst,<br>
+**I want...** to see on a map which zones and time periods have historically had the highest incident risk,<br>
 **So that...** I can anticipate where and when resources are most likely to be needed (to prevent repeated events).
 
 **Acceptance Criteria:**
@@ -149,8 +149,8 @@ description: User stories for operators, analysts and citizens
 
 ## US-12: Simulate scenarios before major events or fire season
 
-**As...** an analyst,\
-**I want...** to run simulations using the predictive engine and synthetic data before major events or the start of fire season,\
+**As...** an analyst,<br>
+**I want...** to run simulations using the predictive engine and synthetic data before major events or the start of fire season,<br>
 **So that...** I can anticipate likely demand and prepare resource allocation in advance as well as requesting help timely.
 
 **Acceptance Criteria:**
@@ -163,8 +163,8 @@ description: User stories for operators, analysts and citizens
 
 ## US-13: Simulate limit scenarios using maximum available resource capacity
 
-**As...** an analyst,\
-**I want...** to simulate limit/worst-case scenarios that use the maximum capacity of all available resources,\
+**As...** an analyst,<br>
+**I want...** to simulate limit/worst-case scenarios that use the maximum capacity of all available resources,<br>
 **So that...** I can assess whether current resource levels are sufficient under extreme demand and identify breaking points.
 
 **Acceptance Criteria:**
@@ -176,8 +176,8 @@ description: User stories for operators, analysts and citizens
 
 ## US-14: Export maps, data and reports for planning and resource requests
 
-**As...** an analyst,\
-**I want...** to export maps, underlying data and reports,\
+**As...** an analyst,<br>
+**I want...** to export maps, underlying data and reports,<br>
 **So that...** I can support planning decisions and formal requests for additional resources with shareable documentation.
 
 **Acceptance Criteria:**
@@ -189,8 +189,8 @@ description: User stories for operators, analysts and citizens
 
 ## US-15: View active emergencies on a simple map
 
-**As...** a citizen,\
-**I want...** to see the active emergencies of any type on a simple map,\
+**As...** a citizen,<br>
+**I want...** to see the active emergencies of any type on a simple map,<br>
 **So that...** I can quickly tell whether there is an emergency near my home, my family or my route, without relying on social media or unofficial sources.
 
 **Acceptance Criteria:**
@@ -203,8 +203,8 @@ description: User stories for operators, analysts and citizens
 
 ## US-16: New occurrence risk forecasting
 
-**As...** a control room operator,\
-**I want...** to view the risk of new incidents occurring in each area over the coming days, based on current and forecast environmental conditions,\
+**As...** a control room operator,<br>
+**I want...** to view the risk of new incidents occurring in each area over the coming days, based on current and forecast environmental conditions,<br>
 **So that...** I can position resources and raise readiness before incidents happen.
 
 **Acceptance Criteria:**

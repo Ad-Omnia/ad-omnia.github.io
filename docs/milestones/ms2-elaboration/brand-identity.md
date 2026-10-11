@@ -1,5 +1,4 @@
 ---
-title: Brand identity guidelines
 date: 2026-10-10
 order: 7
 description: Brand book, brand video and identity rules

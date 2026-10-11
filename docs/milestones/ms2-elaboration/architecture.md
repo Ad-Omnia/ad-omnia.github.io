@@ -1,5 +1,4 @@
 ---
-title: Architecture
 date: 2026-10-02
 order: 5
 description: Architecture and Tech Stack Diagrams, and Architecture Components
