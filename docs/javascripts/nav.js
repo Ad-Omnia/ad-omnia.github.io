@@ -3,13 +3,13 @@
 
   var root = document.documentElement;
   var SIDES = [
-    { sidebar: ".md-sidebar--primary", key: "ad-nav-collapsed", name: "menu", bar: "M9 4v16" },
-    { sidebar: ".md-sidebar--secondary", key: "ad-toc-collapsed", name: "table of contents", bar: "M15 4v16" }
+    { sidebar: ".md-sidebar--primary", key: "ad-nav-collapsed", name: "menu", bar: "M9 3v18" },
+    { sidebar: ".md-sidebar--secondary", key: "ad-toc-collapsed", name: "table of contents", bar: "M15 3v18" }
   ];
 
   function icon(bar) {
-    return '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
-      '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="' + bar + '"/></g></svg>';
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">' +
+      '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="' + bar + '"/></g></svg>';
   }
 
   function store(key, value) {
@@ -45,8 +45,35 @@
     inner.insertBefore(button, inner.firstChild);
   }
 
+  // The header line (and its frosted background) only shows once page
+  // content starts to slide under the header, not as soon as Material
+  // decides the header has a "shadow".
+  function firstContent() {
+    var hero = document.querySelector(".ad-hero-inner");
+    if (hero) return hero;
+    var inner = document.querySelector(".md-content__inner");
+    if (!inner) return null;
+    var style = getComputedStyle(inner);
+    if (style.borderTopStyle !== "none" && parseFloat(style.borderTopWidth) > 0) return inner;
+    var child = inner.firstElementChild;
+    while (child && !child.offsetHeight) child = child.nextElementSibling;
+    return child || inner;
+  }
+
+  function overlap() {
+    var header = document.querySelector(".md-header");
+    var target = firstContent();
+    if (!header) return;
+    var over = target ? target.getBoundingClientRect().top < header.getBoundingClientRect().bottom : window.scrollY > 0;
+    header.classList.toggle("ad-header-over", over);
+  }
+
+  window.addEventListener("scroll", overlap, { passive: true });
+  window.addEventListener("resize", overlap);
+
   function setup() {
     SIDES.forEach(mount);
+    overlap();
   }
 
   document.addEventListener("click", function (e) {

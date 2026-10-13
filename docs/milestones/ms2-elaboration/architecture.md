@@ -1,7 +1,7 @@
 ---
 date: 2026-10-02
 order: 5
-description: Architecture and Tech Stack Diagrams, and Architecture Components
+description: Architecture and tech stack diagrams, and architecture components
 ---
 
 # Architeture
@@ -52,7 +52,7 @@ description: Architecture and Tech Stack Diagrams, and Architecture Components
   - **Business Layer:** encapsulates the core domain logic and processing specific to the plugin.
   - **Persistance Layer:** manages data access and storage operations between the plugin and the dedicated Plugin DB.
 
-### Data and Data Ingestion
+### Data and data ingestion
 
 - **External APIs:** APIs external to the application that provide it with real-time data.
 - **Ingestion Worker:** consumes the data provided by the external APIs and inserts it into the Real Time DB.
@@ -60,6 +60,6 @@ description: Architecture and Tech Stack Diagrams, and Architecture Components
 - **Global DB:** the database where data is fetched from and stored long-term.
 - **Plugin DB:** handles data produced and required by plugins.
 
-## Tech Stack
+## Tech stack
 
 ![Tech Stack Diagram](./images/PEITechStack.png)

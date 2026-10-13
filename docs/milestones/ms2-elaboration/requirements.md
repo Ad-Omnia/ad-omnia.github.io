@@ -6,7 +6,7 @@ description: Functional and non-functional requirements
 
 # Requirements
 
-## Functional Requirements (FR)
+## Functional requirements (FR)
 
 ### Data ingestion (ING)
 
