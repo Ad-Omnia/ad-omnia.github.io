@@ -4,7 +4,7 @@ order: 8
 description: Scope, methodology, module breakdown and calendar
 ---
 
-# Ad Omnia Workplan
+# Ad Omnia work plan
 
 ## Scope
 
@@ -69,7 +69,7 @@ Initial requirements elicitation and system design, shared by all other modules.
     - High-fidelity UI mockups for the COP and the public application
     - Decide whether the private application consumes external feeds directly or through an intermediate component
 
-### Module 2: Data Ingestion & Harmonization
+### Module 2: Data ingestion and harmonization
 
 Responsible for collecting, normalizing and storing data from all external sources into a common data model. This module carries the main differentiator of the project.
 
@@ -85,7 +85,7 @@ Responsible for collecting, normalizing and storing data from all external sourc
     - Data quality checks (missing values, duplicates, outdated records)
     - Real-time ingestion pipeline
 
-### Module 3: Core Platform & Architecture
+### Module 3: Core platform and architecture
 
 Backend services, APIs and the plugin architecture that connect all other modules.
 
@@ -99,7 +99,7 @@ Backend services, APIs and the plugin architecture that connect all other module
     - Audit log of changes, decisions and exports
     - License-based authentication of control room stations
 
-### Module 4: COP Interface (Private Application)
+### Module 4: COP interface (private application)
 
 The main control room console.
 
@@ -120,7 +120,7 @@ The main control room console.
 - M5:
     - Usability testing with representative users
 
-### Module 5: Public Application (Citizens)
+### Module 5: Public application (citizens)
 
 **Tasks**:
 
@@ -132,7 +132,7 @@ The main control room console.
 - M5:
     - Usability testing
 
-### Module 6: Predictive AI & Synthetic Data Engine
+### Module 6: Predictive AI and synthetic data engine
 
 **Tasks**:
 
@@ -144,7 +144,7 @@ The main control room console.
     - Model serving (inference API) and integration with the COP
     - Model monitoring and retraining strategy
 
-### Module 7: Tactical Recommendation Engine
+### Module 7: Tactical recommendation engine
 
 **Tasks**:
 
@@ -157,7 +157,7 @@ The main control room console.
     - Present recommendations in the COP with explanation of the reasoning
     - Evaluate recommendations in simulated scenarios
 
-### Module 8: Analysis & Planning (Private Application)
+### Module 8: Analysis and planning (private application)
 
 Tools used by analysts outside active emergencies, to study past activity and prepare for future events.
 
@@ -171,7 +171,7 @@ Tools used by analysts outside active emergencies, to study past activity and pr
     - Saving, re-running and comparing simulations
     - Export of maps, data and reports with metadata
 
-### Module 9: DevOps, Security & Quality Assurance
+### Module 9: DevOps, security and quality assurance
 
 **Tasks**:
 
@@ -186,7 +186,7 @@ Tools used by analysts outside active emergencies, to study past activity and pr
 - M5:
     - Validation in simulated crisis scenarios
 
-### Module 10: Project Management & Dissemination
+### Module 10: Project management and dissemination
 
 **Tasks**:
 

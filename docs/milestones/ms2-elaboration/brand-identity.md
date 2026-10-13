@@ -15,7 +15,7 @@ downloads:
   <div class="ad-video-frame">
     <button type="button" class="ad-video-play" data-youtube="Q_YQUXswK0s" aria-label="Play A Thousand No's">
       <img src="../../../assets/videos/a-thousand-nos.jpg" alt="" loading="lazy">
-      <span class="ad-video-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+      <span class="ad-video-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3 20 12 6 21Z"/></svg></span>
     </button>
   </div>
   <figcaption>
@@ -34,10 +34,10 @@ downloads:
   <div class="ad-deck-bar">
     <div class="ad-deck-progress"></div>
     <div class="ad-deck-controls">
-      <button type="button" class="ad-deck-prev" aria-label="Previous page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <button type="button" class="ad-deck-prev" aria-label="Previous page" title="Previous page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
       <span class="ad-deck-count"></span>
-      <button type="button" class="ad-deck-next" aria-label="Next page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
-      <button type="button" class="ad-deck-full" aria-label="Full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+      <button type="button" class="ad-deck-next" aria-label="Next page" title="Next page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+      <button type="button" class="ad-deck-full" aria-label="Full screen" title="Full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
     </div>
   </div>
 </div>

@@ -6,7 +6,7 @@ from mkdocs.utils.meta import get_data
 FOLDER = re.compile(r"^ms(\d+)-(.+)$")
 HEADING = re.compile(r"^#\s+(.+?)\s*$", re.M)
 PLACEHOLDER = "<!-- milestones -->"
-COLOURS = ["ad-c-teal", "ad-c-blue", "ad-c-blue-violet", "ad-c-violet"]
+COLOURS = ["ad-c-teal", "ad-c-blue", "ad-c-violet", "ad-c-teal"]
 
 
 def milestones(docs_dir):

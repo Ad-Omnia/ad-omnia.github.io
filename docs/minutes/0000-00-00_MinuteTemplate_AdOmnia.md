@@ -8,10 +8,10 @@
 - Guilherme Martins 125260
 - Miguel Neto 125200
 
-## Date and Time
+## Date and time
 
 The meeting took place on XX/XX/XXXX at XX:XX.
 
-## Topics of Discussion
+## Topics of discussion
 
-## Decisions Made
+## Decisions made

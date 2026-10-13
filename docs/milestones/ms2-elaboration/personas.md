@@ -17,7 +17,7 @@ Ad Omnia is composed of two applications with distinct audiences:
 | [Emergency Analyst](#emergency-analyst) | Private | Analyses history and simulates scenarios before events |
 | [Citizen](#citizen) | Public | Follows active emergencies |
 
-## Control Room Operator
+## Control room operator
 
 <div class="ad-cv ad-c-teal">
   <div class="ad-cv-top">
@@ -76,7 +76,7 @@ Ad Omnia is composed of two applications with distinct audiences:
   </div>
 </div>
 
-## Emergency Analyst
+## Emergency analyst
 
 <div class="ad-cv ad-c-blue">
   <div class="ad-cv-top">

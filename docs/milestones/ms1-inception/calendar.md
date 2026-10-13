@@ -4,7 +4,7 @@ order: 2
 description: Task list, timeline, milestones and deliverables
 ---
 
-# Project Calendar
+# Project calendar
 
 ## Task list
 

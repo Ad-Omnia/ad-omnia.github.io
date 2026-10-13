@@ -4,7 +4,7 @@ order: 3
 description: Channels, website and team contacts
 ---
 
-# Communication Plan
+# Communication plan
 
 ## Project website and repository
 

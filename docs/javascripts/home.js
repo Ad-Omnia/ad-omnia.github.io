@@ -2,7 +2,7 @@
   "use strict";
 
   var SVG_NS = "http://www.w3.org/2000/svg";
-  var HUES = ["#2ee8c9", "#3d8bff", "#a03cff"];
+  var HUES = ["#2ec4aa", "#3d8bff", "#a03cff"];
 
   function clamp(v, lo, hi) {
     return Math.min(hi === undefined ? 1 : hi, Math.max(lo || 0, v));
@@ -547,7 +547,7 @@
     var dots = Array.prototype.slice.call(timeline.querySelectorAll(".ad-timeline-dot"));
     if (!dots.length) return null;
     timeline.classList.add("is-lensed");
-    var phaseHues = ["var(--ad-teal)", "var(--ad-blue)", "var(--ad-blue-violet)", "var(--ad-violet)"];
+    var phaseHues = ["var(--ad-teal)", "var(--ad-blue)", "var(--ad-violet)", "var(--ad-teal)"];
     Array.prototype.slice.call(timeline.querySelectorAll(".ad-timeline-phase")).forEach(function (ph, i) {
       ph.style.setProperty("--c", phaseHues[Math.min(i, phaseHues.length - 1)]);
     });

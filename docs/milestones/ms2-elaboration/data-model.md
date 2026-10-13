@@ -4,7 +4,7 @@ order: 6
 description: Data model for the application
 ---
 
-# Data Model
+# Data model
 
 ## Introduction
 
@@ -35,7 +35,7 @@ Core entities fall into six areas:
 | Public communication | Public Warning | What citizens are told |
 | Cross-cutting | Audit Log | Traceability of actions |
 
-## Entity-Relationship Diagram
+## Entity-relationship diagram
 
 [![Entity-Relationship Diagram](images/der.svg)](images/der.svg)
 
@@ -247,6 +247,6 @@ The examples below show the two forms of extension; each plugin's actual entitie
 **Ownership:** ADS-B plugin.<br>
 **Rationale:** The operator tracks aerial assets in real time; the high volume justifies a dedicated entity rather than generic Observations.
 
-## Relational Model
+## Relational model
 
 [![Relational Model](images/relational-model.svg)](images/relational-model.svg)
