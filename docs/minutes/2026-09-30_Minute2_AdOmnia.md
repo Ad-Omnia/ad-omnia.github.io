@@ -8,16 +8,16 @@
 - Guilherme Martins 125260
 - Miguel Neto 125200
 
-## Date and Time
+## Date and time
 
 The meeting took place on 30/09/2026 at 15:00.
 
-## Topics of Discussion
+## Topics of discussion
 
 - Assessment of tasks to be done
 - Task distribution
 
-## Decisions Made
+## Decisions made
 
 ### Task distribution
 

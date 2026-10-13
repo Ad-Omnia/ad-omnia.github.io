@@ -4,7 +4,7 @@ order: 1
 description: Context, problem, objectives and state of the art
 ---
 
-# Project Description
+# Project description
 
 ## Context
 
@@ -23,7 +23,7 @@ There are multiple data sources and no platform to aggregate, correlate, and pre
 - Develop a predictive AI engine to anticipate risk scenarios​
 - Automated recommendation for resource allocation, routing, etc.​
 
-## Expected Results
+## Expected results
 
 - Unified data ingestion engine with built-in connectors for public data sources​
 - Functional COP platform for spatio-temporal data visualization, featuring public and private access tiers​
@@ -31,7 +31,7 @@ There are multiple data sources and no platform to aggregate, correlate, and pre
 - Scalable, plugin-based architecture designed for future platform expansion​
 - Tactical recommendation system providing automated suggestions for asset allocation and routing​
 
-## State of the Art
+## State of the art
 
 | FEATURE | Palantir Gotham | Thales HexaForce | SADO | HxGN OnCall | Esri ArcGIS | Ours (Ad Omnia) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
