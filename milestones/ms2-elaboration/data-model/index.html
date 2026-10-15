@@ -1,0 +1,2767 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Data model for the application">
+      
+      
+      
+        <link rel="canonical" href="https://ad-omnia.github.io/milestones/ms2-elaboration/data-model/">
+      
+      
+        <link rel="prev" href="../architecture/">
+      
+      
+        <link rel="next" href="../brand-identity/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/logo-colour-black.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Data Model - Ad Omnia</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Lato";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  
+  <link rel="icon" href="../../../assets/logo-colour-white.svg" media="(prefers-color-scheme: dark)">
+  <script>document.documentElement.classList.add("ad-js");try{["ad-nav-collapsed","ad-toc-collapsed"].forEach(function(k){if(localStorage.getItem(k))document.documentElement.classList.add(k)})}catch(e){}</script>
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#data-model" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Ad Omnia" class="md-header__button md-logo" aria-label="Ad Omnia" data-md-component="logo">
+      
+  <img src="../../../assets/logo-colour-black.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Ad Omnia
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data Model
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Ad-Omnia/ad-omnia.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ad-Omnia/ad-omnia.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../documentation/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Documentation
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../journey/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Journey
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Milestones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../minutes/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Minutes
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../team/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Team
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+  
+    
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Ad Omnia" class="md-nav__button md-logo" aria-label="Ad Omnia" data-md-component="logo">
+      
+  <img src="../../../assets/logo-colour-black.svg" alt="logo">
+
+    </a>
+    Ad Omnia
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Ad-Omnia/ad-omnia.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ad-Omnia/ad-omnia.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../journey/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Journey
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Milestones
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Milestones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MS1 - Inception
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MS1 - Inception
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms1-inception/project-description/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Description
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms1-inception/calendar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Calendar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms1-inception/communication-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Communication Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms1-inception/presentation-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presentation 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MS2 - Elaboration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MS2 - Elaboration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../personas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Personas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-stories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Stories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use Cases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../requirements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Requirements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architeture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Model
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entity-relationship-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entity-Relationship Diagram
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#organizational-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Organizational entities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Organizational entities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agency
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Source
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#geographic-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Geographic entities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Geographic entities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zone
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operational-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operational entities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Operational entities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#incident" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Incident
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incident-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Incident Source
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incident-relation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Incident Relation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Asset
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#observation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Observation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Order
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alert
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision-support-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decision support entities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decision support entities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prediction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recommendation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommendation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recommendation-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommendation Item
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risk-rating" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Risk Rating
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Simulation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simulation-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Simulation Result
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simulated-incident" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Simulated Incident
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#public-communication-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public communication entities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Public communication entities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#public-warning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public Warning
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cross-cutting-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-cutting entities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cross-cutting entities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#audit-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Audit Log
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plugin-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin extensions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Plugin extensions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fogospt-incident-detail-specialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fogos.pt Incident Detail (specialization)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ads-b-track-point-time-series" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ADS-B Track Point (time series)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relational-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relational Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../brand-identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Brand identity guidelines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../work-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ad Omnia Workplan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../presentation-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presentation 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MS3 - Construction
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MS3 - Construction
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms3-construction/ms3-soon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coming soon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MS4 - Transition
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MS4 - Transition
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms4-transition/ms4-soon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coming soon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../minutes/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minutes
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Minutes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-09-23_Minute1_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 1 · 23 Sep 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-09-30_Minute2_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 2 · 30 Sep 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-10-06_Minute3_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 3 · 6 Oct 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-10-07_Minute4_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 4 · 7 Oct 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-10-14_Minute5_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 5 · 14 Oct 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../team/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Team
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entity-relationship-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entity-Relationship Diagram
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#organizational-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Organizational entities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Organizational entities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agency
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Source
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#geographic-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Geographic entities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Geographic entities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zone
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operational-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operational entities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Operational entities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#incident" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Incident
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incident-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Incident Source
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incident-relation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Incident Relation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Asset
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#observation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Observation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Order
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alert
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision-support-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decision support entities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decision support entities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prediction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recommendation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommendation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recommendation-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommendation Item
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risk-rating" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Risk Rating
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Simulation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simulation-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Simulation Result
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simulated-incident" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Simulated Incident
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#public-communication-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public communication entities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Public communication entities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#public-warning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public Warning
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cross-cutting-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-cutting entities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cross-cutting entities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#audit-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Audit Log
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plugin-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin extensions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Plugin extensions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fogospt-incident-detail-specialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fogos.pt Incident Detail (specialization)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ads-b-track-point-time-series" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ADS-B Track Point (time series)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relational-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relational Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+  
+
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+  
+    <div class="ad-doc-actions">
+      
+        <a class="ad-doc-action" href="../data-model.md" download target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg>Markdown
+        </a>
+      
+      <button class="ad-doc-action" type="button" onclick="window.print()">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 9V3h10v6M7 17H4v-7h16v7h-3M7 14h10v7H7z"/></svg>Print
+      </button>
+    </div>
+  
+  
+                  
+
+
+  
+  
+
+
+<h1 id="data-model">Data Model</h1>
+<h2 id="introduction">Introduction</h2>
+<p>This catalog defines the entities of the Ad Omnia platform's data model. Each entity is described using the same structure:</p>
+<ul>
+<li><strong>Description:</strong> What the entity represents.</li>
+<li><strong>Key attributes:</strong> The attributes relevant to the domain.</li>
+<li><strong>Relationships:</strong> The entities it connects to, and in which direction.</li>
+<li><strong>Ownership:</strong> Whether the entity belongs to the core or to a plugin.</li>
+<li><strong>Rationale:</strong> The user stories that require it.</li>
+</ul>
+<h2 id="overview">Overview</h2>
+<p>The model is split into a stable core, controlled by the platform, and extensions brought in by plugins. Connector plugins translate data from external sources into core entities; when they need their own structure, they create entities in their own space that reference the core.</p>
+<p>There is a single dependency rule: <strong>plugins may reference the core, but the core never references a plugin.</strong> This way a plugin can be added, updated or removed without changing the core.</p>
+<p>The Plugin entity is the exception that confirms the rule: it is a core registry of installed plugins, not part of any plugin's own data.</p>
+<p>Core entities fall into six areas:</p>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Entities</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Organizational</td>
+<td>Agency, User, Source, Plugin</td>
+<td>Who operates the platform and where data comes from</td>
+</tr>
+<tr>
+<td>Geographic</td>
+<td>Zone</td>
+<td>Reference areas for filtering, risk analysis and simulation</td>
+</tr>
+<tr>
+<td>Operational</td>
+<td>Incident, Incident Source, Incident Relation, Asset, Observation, Assignment, Order, Alert</td>
+<td>The situation on the ground and how it is managed</td>
+</tr>
+<tr>
+<td>Decision support</td>
+<td>Prediction, Recommendation, Recommendation Item, Risk Rating, Simulation, Simulation Result, Simulated Incident</td>
+<td>What the AI projects, suggests and simulates</td>
+</tr>
+<tr>
+<td>Public communication</td>
+<td>Public Warning</td>
+<td>What citizens are told</td>
+</tr>
+<tr>
+<td>Cross-cutting</td>
+<td>Audit Log</td>
+<td>Traceability of actions</td>
+</tr>
+</tbody>
+</table>
+<h2 id="entity-relationship-diagram">Entity-Relationship Diagram</h2>
+<p><a href="../images/der.svg"><img alt="Entity-Relationship Diagram" src="../images/der.svg" /></a></p>
+<h2 id="organizational-entities">Organizational entities</h2>
+<h3 id="agency">Agency</h3>
+<p><strong>Description:</strong> Emergency or security organization that owns assets.<br>
+<strong>Key attributes:</strong> Id, name, location, type.<br>
+<strong>Relationships:</strong> Owns many Assets.<br>
+<strong>Ownership:</strong> Core.<br>
+<strong>Rationale:</strong> US-1 and US-2 require assets to be distinguished and filtered by agency on the map.</p>
+<h3 id="user">User</h3>
+<p><strong>Description:</strong> Station authenticated in the private application through a software license.<br>
+<strong>Key attributes:</strong> Id, name, license (hash).<br>
+<strong>Relationships:</strong> Creates and validates Incidents; makes Assignments; issues and acknowledges Orders; acknowledges Alerts; decides on Recommendations; issues Public Warnings; creates Simulations; generates Audit Log entries.<br>
+<strong>Ownership:</strong> Core.<br>
+<strong>Rationale:</strong> The private application runs locally in each control room, so the license identifies the station rather than an individual. The operator and analyst personas describe use cases, not access roles: any station can use the operational and predictive parts of the application. US-3, US-4 and US-8 require recording which station performed each action. Citizens use the public application without an account, so they are not Users.</p>
+<h3 id="plugin">Plugin</h3>
+<p><strong>Description:</strong> Installed module that feeds one or more Sources, usually a connector.<br>
+<strong>Key attributes:</strong> Id, name, version, enabled.<br>
+<strong>Relationships:</strong> Feeds one or more Sources.<br>
+<strong>Ownership:</strong> Core (the plugin's registration belongs to the core; its own data does not).<br>
+<strong>Rationale:</strong> Traces which code and version produced each Source's data, and allows a plugin to be disabled without removing its Sources (US-1, US-2).</p>
+<h3 id="source">Source</h3>
+<p><strong>Description:</strong> Concrete origin of data.<br>
+<strong>Key attributes:</strong> Id, name, enabled, trust level, staleness threshold, last update, status, type.<br>
+<strong>Relationships:</strong> Fed by a Plugin; produces Observations; reports Incidents through Incident Sources; supports Predictions.<br>
+<strong>Ownership:</strong> Core.<br>
+<strong>Rationale:</strong> US-1 and US-15 require showing each source's last update and flagging outdated or unavailable sources; US-2 requires filtering by source. The staleness threshold is set per source because update frequencies differ widely.</p>
+<h2 id="geographic-entities">Geographic entities</h2>
+<h3 id="zone">Zone</h3>
+<p><strong>Description:</strong> Geographic area (district, municipality or sub-region).<br>
+<strong>Key attributes:</strong> Id, name, type (district, municipality, sub-region), boundaries.<br>
+<strong>Relationships:</strong> Contained in a parent Zone (optional); contains other Zones; has Risk Ratings; can be targeted by Simulations.<br>
+<strong>Ownership:</strong> Core.<br>
+<strong>Rationale:</strong> US-2 (filter by region), US-10 (search by zone), US-11 (risk per zone) and US-12 (simulate selected zones). The parent link lets a search or filter by district include all of its municipalities.</p>
+<h2 id="operational-entities">Operational entities</h2>
+<h3 id="incident">Incident</h3>
+<p><strong>Description:</strong> Occurrence that requires a response, received from an external source or created manually by an operator.<br>
+<strong>Key attributes:</strong> Id, type, severity, status (active, in resolution, closed), description, location or affected area, start date, end date, validated at, published on the public app, last update, source-specific attributes.<br>
+<strong>Relationships:</strong> Reported by one or more Sources through Incident Sources, or created by a User; validated by a User; aggregates Observations; linked to other Incidents through Incident Relations; has Assignments, Orders and Alerts; subject of Predictions and Recommendations; may be referenced by Public Warnings.<br>
+<strong>Ownership:</strong> Core. Details specific to one source live in an extensible field or in a plugin entity.<br>
+<strong>Rationale:</strong> The central unit of the COP (US-1). Manual creation covers occurrences reported by phone or radio (US-3). Validation and publication separate what the control room knows from what citizens see: only validated, published incidents reach the public app (US-9, US-15).</p>
+<h3 id="incident-source">Incident Source</h3>
+<p><strong>Description:</strong> Link between an incident and one of the sources that reported it.<br>
+<strong>Key attributes:</strong> Incident and source (together identify the link), first seen, last seen.<br>
+<strong>Relationships:</strong> Links an Incident to a Source (resolves their many-to-many relationship).<br>
+<strong>Ownership:</strong> Core.<br>
+<strong>Rationale:</strong> The same occurrence can be reported by several sources (e.g. a wildfire on Fogos.pt and in another feed). Keeping one Incident with several links avoids duplicates on the COP (US-1) and shows where each piece of information came from (US-2, US-10). Manually created incidents have no links.</p>
+<h3 id="incident-relation">Incident Relation</h3>
+<p><strong>Description:</strong> Link between two incidents.<br>
+<strong>Key attributes:</strong> Origin incident, target incident and relation type (together identify the link).<br>
+<strong>Relationships:</strong> Links two Incidents; has an Incident Relation Type (e.g. follow-up of, caused by, duplicate of, merged into).<br>
+<strong>Ownership:</strong> Core.<br>
+<strong>Rationale:</strong> US-10 requires related incidents to be shown with their relationship labeled, not as a flat list. The "duplicate of" and "merged into" types also record when an operator merges two incidents that turn out to be the same occurrence.</p>
+<h3 id="asset">Asset</h3>
+<p><strong>Description:</strong> Resource that can be committed to an incident.<br>
+<strong>Key attributes:</strong> Id, type, callsign, status (available, engaged, out of service), last known position, last update.<br>
+<strong>Relationships:</strong> Owned by an Agency; reports Observations; has Assignments; receives Orders; appears in Recommendation Items; can be allocated to Simulated Incidents.<br>
+<strong>Ownership:</strong> Core.<br>
+<strong>Rationale:</strong> US-1 and US-2 (position and status by agency and type); US-3 (operators update status); US-7 (the recommendation engine needs available assets); US-13 (simulations allocate assets to measure capacity).</p>
+<h3 id="observation">Observation</h3>
+<p><strong>Description:</strong> Single timestamped record coming from a source (an asset's position, an incident's status, a weather reading).<br>
+<strong>Key attributes:</strong> Id, type, location, observed time, ingestion time, source-specific content.<br>
+<strong>Relationships:</strong> Produced by a Source; optionally linked to an Incident and/or an Asset.<br>
+<strong>Ownership:</strong> Core. It is the uniform entry point for all connectors.<br>
+<strong>Rationale:</strong> Lets the analyst reconstruct how an incident evolved (US-10) and provides historical data to train the predictive AI (US-6).</p>
+<h3 id="assignment">Assignment</h3>
+<p><strong>Description:</strong> Actual commitment of an Asset to an Incident over a period of time.<br>
+<strong>Key attributes:</strong> Id, start date, end date.<br>
+<strong>Relationships:</strong> Links an Incident to an Asset (resolves their many-to-many relationship); made by a User; optionally results from a Recommendation Item.<br>
+<strong>Ownership:</strong> Core.<br>
+<strong>Rationale:</strong> US-3 (assign resources to an incident). It records what was actually done, separately from what was suggested. An Assignment that follows a Recommendation Item points to it, even when the operator adjusted it (e.g. a different asset); one added by the operator has no link. Comparing items with Assignments shows the difference between suggestion and decision (US-8).</p>
+<h3 id="order">Order</h3>
+<p><strong>Description:</strong> Instruction sent to a field team about an incident.<br>
+<strong>Key attributes:</strong> Id, content, issued at, acknowledged at.<br>
+<strong>Relationships:</strong> Belongs to an Incident; addressed to an Asset; issued by a User; acknowledgment recorded by a User.<br>
+<strong>Ownership:</strong> Core.<br>
+<strong>Rationale:</strong> US-4. An order is pending while it has no acknowledgment time, so no separate status is needed; the overdue period is a configuration setting, not stored per order.</p>
+<h3 id="alert">Alert</h3>
+<p><strong>Description:</strong> Notification to the control room about a new incident from an external source, or a significant change to an existing one.<br>
+<strong>Key attributes:</strong> Id, type (new incident, severity change, status change), created at, acknowledged at.<br>
+<strong>Relationships:</strong> Refers to an Incident; acknowledged by a User.<br>
+<strong>Ownership:</strong> Core.<br>
+<strong>Rationale:</strong> US-5. Alerts are shared by the whole control room: every user sees all of them, and an alert is acknowledged once for the room, staying visible until then.</p>
+<h2 id="decision-support-entities">Decision support entities</h2>
+<h3 id="prediction">Prediction</h3>
+<p><strong>Description:</strong> Output of the predictive AI engine: either the projected progression of an incident, or a high-risk area for the coming hours.<br>
+<strong>Key attributes:</strong> Id, type (incident progression, risk area), model version, generated at, time horizon, risk score, confidence level, projected area, input data timestamp.<br>
+<strong>Relationships:</strong> Refers to an Incident (progression only); based on one or more Sources (many-to-many); may support Recommendations.<br>
+<strong>Ownership:</strong> Core.<br>
+<strong>Rationale:</strong> US-6 requires configurable horizons, risk areas not tied to an incident, the confidence of each prediction, and when and from which data it was generated.</p>
+<h3 id="recommendation">Recommendation</h3>
+<p><strong>Description:</strong> Proposal from the tactical recommendation engine for responding to an incident, together with the operator's decision.<br>
+<strong>Key attributes:</strong> Id, generated at, justification, status (proposed, accepted, adjusted, rejected), decided at, decision reason.<br>
+<strong>Relationships:</strong> Refers to an Incident; optionally based on a Prediction; contains one or more Recommendation Items; decided by a User.<br>
+<strong>Ownership:</strong> Core.<br>
+<strong>Rationale:</strong> US-7 (short justification; accept, adjust or reject before applying). US-8 (log of every recommendation, the decision, who and when, with an optional reason, in chronological order). An adjusted recommendation is never edited: its items keep what the engine suggested, and what the operator actually applied is recorded in Assignments.</p>
+<h3 id="recommendation-item">Recommendation Item</h3>
+<p><strong>Description:</strong> Concrete action proposed for one asset within a recommendation.<br>
+<strong>Key attributes:</strong> Id, action (assign, release), suggested route, estimated time of arrival.<br>
+<strong>Relationships:</strong> Belongs to a Recommendation; refers to an Asset; may result in Assignments.<br>
+<strong>Ownership:</strong> Core.<br>
+<strong>Rationale:</strong> US-7 requires a route and arrival estimate for each suggested resource, and covers both assigning and releasing resources. Items are immutable once generated, so the log always shows what the engine originally suggested (US-8).</p>
+<h3 id="risk-rating">Risk Rating</h3>
+<p><strong>Description:</strong> Historical risk level of a zone for a time period, computed from past incidents.<br>
+<strong>Key attributes:</strong> Id, period, risk level, incident count, breakdown by type and severity, trend, data date range, computed at.<br>
+<strong>Relationships:</strong> Belongs to a Zone.<br>
+<strong>Ownership:</strong> Core.<br>
+<strong>Rationale:</strong> US-11 requires the data behind each rating, the date range used and when it was last refreshed. Unlike Prediction, it describes the past rather than the coming hours.</p>
+<h3 id="simulation">Simulation</h3>
+<p><strong>Description:</strong> Scenario run by an analyst with the predictive engine and synthetic or historical data, fully isolated from live operations.<br>
+<strong>Key attributes:</strong> Id, name, type (scenario, capacity limit), status, created at.<br>
+<strong>Relationships:</strong> Created by a User; covers one or more Zones (many-to-many); has one Simulation Result; contains Simulated Incidents; may be a re-run of another Simulation (optional).<br>
+<strong>Ownership:</strong> Core.<br>
+<strong>Rationale:</strong> US-12 and US-13. Nothing a simulation produces is written to Incident, Asset or Assignment, so it cannot be mistaken for live data. The re-run link supports saving and comparing simulations (optional in US-12).</p>
+<h3 id="simulation-result">Simulation Result</h3>
+<p><strong>Description:</strong> Aggregated outcome of a simulation, computed from its Simulated Incidents.<br>
+<strong>Key attributes:</strong> Projected incident volume, severity distribution, resource demand, saturation point, first resource types to run out, unmet demand.<br>
+<strong>Relationships:</strong> Belongs to exactly one Simulation, which also identifies it (one-to-one).<br>
+<strong>Ownership:</strong> Core.<br>
+<strong>Rationale:</strong> US-12 (projected outcome: incident volume, severity distribution, resource demand) and US-13 (saturation point, first resources to run out, gaps between demand and capacity).</p>
+<h3 id="simulated-incident">Simulated Incident</h3>
+<p><strong>Description:</strong> Single synthetic incident generated within a simulation, together with the simulated response to it.<br>
+<strong>Key attributes:</strong> Id, type, severity, location, simulated time, simulated response time, whether demand was met.<br>
+<strong>Relationships:</strong> Belongs to a Simulation; allocated one or more Assets (many-to-many, with no effect on real Assignments).<br>
+<strong>Ownership:</strong> Core.<br>
+<strong>Rationale:</strong> US-13 requires unmet requests and response delays, which can only be computed by simulating incidents one by one and allocating assets to each. Individual incidents can also be drawn on a map and replayed over time, clearly marked as synthetic (US-12). They are kept in their own entity, never in Incident, to guarantee isolation from live data.</p>
+<h2 id="public-communication-entities">Public communication entities</h2>
+<h3 id="public-warning">Public Warning</h3>
+<p><strong>Description:</strong> Warning issued to citizens for a geographic area.<br>
+<strong>Key attributes:</strong> Id, message, severity, area, issued at, last update, ended at.<br>
+<strong>Relationships:</strong> Issued by a User; optionally related to an Incident.<br>
+<strong>Ownership:</strong> Core.<br>
+<strong>Rationale:</strong> US-9 (issue, update and end warnings for an area). A warning is active until it has an end time, so no separate status is needed. Publishing incidents themselves is handled by Incident attributes.</p>
+<h2 id="cross-cutting-entities">Cross-cutting entities</h2>
+<h3 id="audit-log">Audit Log</h3>
+<p><strong>Description:</strong> Immutable record of an action taken by a user in the private application.<br>
+<strong>Key attributes:</strong> Id, action, affected entity type, affected entity id, timestamp, details (e.g. previous and new values, or the filters applied to an export).<br>
+<strong>Relationships:</strong> Generated by a User; points generically to any entity through the affected entity type and id.<br>
+<strong>Ownership:</strong> Core.<br>
+<strong>Rationale:</strong> US-3 (record who made each change and when) and US-14 (log who exported what, and when); also a platform security requirement. The affected entity id has no foreign key, because it can refer to different tables depending on the entity type.</p>
+<h2 id="plugin-extensions">Plugin extensions</h2>
+<p>The examples below show the two forms of extension; each plugin's actual entities will be defined together with its connector.</p>
+<h3 id="fogospt-incident-detail-specialization">Fogos.pt Incident Detail (specialization)</h3>
+<p><strong>Description:</strong> Data specific to a wildfire reported by Fogos.pt that does not make sense for other incident types.<br>
+<strong>Key attributes:</strong> Ground assets, aerial assets, personnel deployed, nature of the occurrence.<br>
+<strong>Relationships:</strong> Specializes an Incident (one-to-one).<br>
+<strong>Ownership:</strong> Fogos.pt plugin.<br>
+<strong>Rationale:</strong> The operator sees the officially reported resources for each wildfire, without the core needing to know the Fogos.pt format.</p>
+<h3 id="ads-b-track-point-time-series">ADS-B Track Point (time series)</h3>
+<p><strong>Description:</strong> Aircraft's position at a given moment, received via ADS-B.<br>
+<strong>Key attributes:</strong> ICAO identifier, position, altitude, speed, observed time.<br>
+<strong>Relationships:</strong> Refers to an Asset of type aircraft.<br>
+<strong>Ownership:</strong> ADS-B plugin.<br>
+<strong>Rationale:</strong> The operator tracks aerial assets in real time; the high volume justifies a dedicated entity rather than generic Observations.</p>
+<h2 id="relational-model">Relational Model</h2>
+<p><a href="../images/relational-model.svg"><img alt="Relational Model" src="../images/relational-model.svg" /></a></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../architecture/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Architeture">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Architeture
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../brand-identity/" class="md-footer__link md-footer__link--next" aria-label="Next: Brand identity guidelines">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Brand identity guidelines
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Ad Omnia · University of Aveiro
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Ad-Omnia" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.indexes", "navigation.footer", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/home.js"></script>
+      
+        <script src="../../../javascripts/nav.js"></script>
+      
+        <script src="../../../javascripts/deck.js"></script>
+      
+        <script src="../../../javascripts/minutes.js"></script>
+      
+        <script src="../../../javascripts/videos.js"></script>
+      
+    
+  </body>
+</html>
