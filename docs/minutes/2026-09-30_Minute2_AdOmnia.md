@@ -12,12 +12,12 @@
 
 The meeting took place on 30/09/2026 at 15:00.
 
-## Topics of Discussion
+## Agenda
 
 - Assessment of tasks to be done
 - Task distribution
 
-## Decisions Made
+## Discussion and Decisions
 
 ### Task distribution
 
