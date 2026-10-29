@@ -4,7 +4,7 @@ order: 3
 description: Use cases derived from the user stories, organized by package
 ---
 
-# Use Cases
+# Use cases
 
 This document describes the interactions between the actors and Ad Omnia, organized by package. Each use case (UC) is derived from the [user stories](./user-stories.md) and traced to the [requirements](./requirements.md).
 
@@ -27,7 +27,7 @@ Out of scope (see [personas](./personas.md)): field responders and system admini
 
 ---
 
-## Package 1: Operational Picture (COP)
+## Package 1: Operational picture (COP)
 
 ### UC-01: View real-time operational map
 
@@ -92,7 +92,7 @@ Out of scope (see [personas](./personas.md)): field responders and system admini
 
 ---
 
-## Package 2: Incident and Resource Management
+## Package 2: Incident and resource management
 
 ### UC-04: Create incident
 
@@ -248,7 +248,7 @@ Out of scope (see [personas](./personas.md)): field responders and system admini
 
 ---
 
-## Package 4: Prediction and Recommendation
+## Package 4: Prediction and recommendation
 
 ### UC-11: View incident progression forecast
 
@@ -357,7 +357,7 @@ Out of scope (see [personas](./personas.md)): field responders and system admini
 
 ---
 
-## Package 5: Public Communication (private side)
+## Package 5: Public communication (private side)
 
 ### UC-16: Publish or hide incident
 
@@ -402,7 +402,7 @@ Out of scope (see [personas](./personas.md)): field responders and system admini
 
 ---
 
-## Package 6: Historical Analysis
+## Package 6: Historical analysis
 
 ### UC-18: Search historical incidents
 
@@ -508,7 +508,7 @@ Out of scope (see [personas](./personas.md)): field responders and system admini
 
 ---
 
-## Package 8: Export and Audit
+## Package 8: Export and audit
 
 ### UC-23: Export map, data or report
 
@@ -549,7 +549,7 @@ Out of scope (see [personas](./personas.md)): field responders and system admini
 
 ---
 
-## Package 9: Public Application
+## Package 9: Public application
 
 ### UC-25: View public emergency map
 

@@ -4,7 +4,7 @@ order: 2
 description: User stories for operators, analysts and citizens
 ---
 
-# User Stories
+# User stories
 
 ## US-1: Real-time operational map
 

@@ -8,7 +8,7 @@
 - Guilherme Martins 125260
 - Miguel Neto 125200
 
-## Date and Time
+## Date and time
 
 The meeting took place on 23/09/2026 at 15:00.
 
@@ -22,7 +22,7 @@ The meeting took place on 23/09/2026 at 15:00.
 
 ## Discussion and Decisions
 
-### Tasks for First Presentation
+### Tasks for first presentation
 
 The team debated the tasks to-do for the first presentation and the respective assignments, hence:
 
@@ -36,11 +36,11 @@ The team debated the tasks to-do for the first presentation and the respective a
 - Defining the communication plan
 - Presentation slides
 
-### Project Calendar
+### Project calendar
 
 The team debated and agreed on the project calendar, including the respective tasks, expected results, and deadlines.
 
-### Communication Plan
+### Communication plan
 
 The team defined the communication plan:
 
@@ -49,7 +49,7 @@ The team defined the communication plan:
 - **Organizer** (WebApp built by Fernando): Sharing notes between Team members
 - **Project Website**: Progress updates destined for the Evaluators
 
-### Team Rules
+### Team rules
 
 The team debated and agreed on the following rules:
 
@@ -60,6 +60,6 @@ The team debated and agreed on the following rules:
 - Any new feature is onlt accepted if accompanied by the respective tests to ensure the new code doesn't break existing functionalities
 - A task/issue is considered finished when the code is written, reviewed in a PR, tested and successfully merged
 
-### Architecture Overview
+### Architecture overview
 
 The team reached an agreement for the first, high-level, architecture overview, that will be developed in the next weeks and after receiving feedback from the advisors.

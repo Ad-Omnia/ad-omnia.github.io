@@ -50,7 +50,7 @@ def short(day):
 
 
 def without_sidebar_sections(markdown):
-    return re.sub(r"^## (?:Participants|Date and Time)\n.*?(?=^## |\Z)", "", markdown, flags=re.M | re.S)
+    return re.sub(r"^## (?:Participants|Date and time)\n.*?(?=^## |\Z)", "", markdown, flags=re.M | re.S | re.I)
 
 
 def minute_files(docs_dir):
@@ -94,17 +94,16 @@ def filter_bar():
     return (
         '<div class="ad-hub-filter" data-ad-filter>'
         '<div class="ad-hub-filter-group">'
-        '<svg class="ad-hub-filter-icon" viewBox="0 0 24 24" aria-hidden="true">'
-        '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"'
-        ' d="M4 10h16M7 3v4M17 3v4M6 5h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/>'
+        '<svg class="ad-hub-filter-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">'
+        '<path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/>'
         '</svg>'
         '<label class="ad-hub-filter-field"><span>From</span><input type="date" data-role="from" aria-label="From date"></label>'
         '<span class="ad-hub-filter-sep" aria-hidden="true"></span>'
         '<label class="ad-hub-filter-field"><span>To</span><input type="date" data-role="to" aria-label="To date"></label>'
         '</div>'
-        '<button type="button" class="ad-hub-filter-clear" data-role="clear" hidden>'
-        '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2"'
-        ' stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6 6 18"/></svg>Clear'
+        '<button type="button" class="ad-hub-filter-clear" data-role="clear" title="Clear" aria-label="Clear" hidden>'
+        '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>'
+        '<path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>'
         '</button>'
         '</div>'
         '<p class="ad-hub-filter-empty" data-role="empty" hidden>No minutes in this range.</p>'

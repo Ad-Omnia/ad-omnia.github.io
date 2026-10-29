@@ -8,7 +8,7 @@
 - Guilherme Martins 125260
 - Miguel Neto 125200
 
-## Date and Time
+## Date and time
 
 The meeting took place on 06/10/2026 at 11:00.
 
@@ -18,7 +18,7 @@ The meeting took place on 06/10/2026 at 11:00.
 
 ## Discussion and Decisions
 
-### Scope of the Project
+### Scope of the project
 
 After meeting with the Ílhavo Firefighters' Commander, Artur Ferreira, the team was able to get a more detailed vision of the project which allowed for a better definition of the project's scope.
 

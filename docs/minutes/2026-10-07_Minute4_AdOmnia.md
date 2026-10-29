@@ -8,7 +8,7 @@
 - Guilherme Martins 125260
 - Miguel Neto 125200
 
-## Date and Time
+## Date and time
 
 The meeting took place on 07/10/2026 at 15:00.
 
@@ -19,10 +19,10 @@ The meeting took place on 07/10/2026 at 15:00.
 
 ## Discussion and Decisions
 
-### Data Model
+### Data model
 
 The Data Model was debated and some decisions were made regarding entities that should or not exist. Those decisions will be reflected on the final document.
 
-### User Stories' Priorities and Size
+### User stories' priorities and size
 
 The user stories' priorities and size were decided and are now on the project backlog.
