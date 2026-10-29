@@ -1,0 +1,2289 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="User stories for operators, analysts and citizens">
+      
+      
+      
+        <link rel="canonical" href="https://ad-omnia.github.io/milestones/ms2-elaboration/user-stories/">
+      
+      
+        <link rel="prev" href="../personas/">
+      
+      
+        <link rel="next" href="../use-cases/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/logo-mono-black.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>User stories - Ad Omnia</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  
+  <link rel="icon" href="../../../assets/logo-mono-white.svg" media="(prefers-color-scheme: dark)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,400..600;1,400..600&family=JetBrains+Mono:wght@400..500&display=swap">
+  <script>document.documentElement.classList.add("ad-js");try{["ad-nav-collapsed","ad-toc-collapsed"].forEach(function(k){if(localStorage.getItem(k))document.documentElement.classList.add(k)})}catch(e){}</script>
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#user-stories" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Ad Omnia" class="md-header__button md-logo" aria-label="Ad Omnia" data-md-component="logo">
+      
+  <img src="../../../assets/logo-colour-black.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="M4 6h16"/><path d="M4 18h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Ad Omnia
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              User stories
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Ad-Omnia/ad-omnia.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ad-Omnia/ad-omnia.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../documentation/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Documentation
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../journey/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Journey
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Milestones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../minutes/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Minutes
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../team/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Team
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+  
+    
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Ad Omnia" class="md-nav__button md-logo" aria-label="Ad Omnia" data-md-component="logo">
+      
+  <img src="../../../assets/logo-colour-black.svg" alt="logo">
+
+    </a>
+    Ad Omnia
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Ad-Omnia/ad-omnia.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ad-Omnia/ad-omnia.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../journey/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Journey
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Milestones
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Milestones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MS1 - Inception
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MS1 - Inception
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms1-inception/project-description/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project description
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms1-inception/calendar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project calendar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms1-inception/communication-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Communication plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms1-inception/presentation-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presentation 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MS2 - Elaboration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MS2 - Elaboration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../personas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Personas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User stories
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User stories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#us-1-real-time-operational-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-1: Real-time operational map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-2-map-filtering-and-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-2: Map filtering and details
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-3-incident-and-resource-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-3: Incident and resource management
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-4-order-tracking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-4: Order tracking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-5-incident-alerts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-5: Incident alerts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-6-risk-forecasting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-6: Risk forecasting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-7-tactical-recommendations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-7: Tactical recommendations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-8-decision-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-8: Decision log
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-9-public-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-9: Public communication
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-10-consult-historical-incident-data-filtered-by-zone-period-and-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-10: Consult historical incident data filtered by zone, period and type
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-11-view-zones-and-seasons-of-highest-risk-on-a-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-11: View zones and seasons of highest risk on a map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-12-simulate-scenarios-before-major-events-or-fire-season" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-12: Simulate scenarios before major events or fire season
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-13-simulate-limit-scenarios-using-maximum-available-resource-capacity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-13: Simulate limit scenarios using maximum available resource capacity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-14-export-maps-data-and-reports-for-planning-and-resource-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-14: Export maps, data and reports for planning and resource requests
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-15-view-active-emergencies-on-a-simple-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-15: View active emergencies on a simple map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-16-new-occurrence-risk-forecasting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-16: New occurrence risk forecasting
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use cases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../requirements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Requirements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architeture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../brand-identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Brand identity guidelines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../work-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ad Omnia work plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../presentation-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presentation 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MS3 - Construction
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MS3 - Construction
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms3-construction/PESTEL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PESTEL Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms3-construction/data-source-licenses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data source licenses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms3-construction/software-licenses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software licenses and intellectual property
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MS4 - Transition
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MS4 - Transition
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms4-transition/ms4-soon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coming soon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../minutes/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minutes
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Minutes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-09-23_Minute1_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 1 · 23 Sep 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-09-30_Minute2_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 2 · 30 Sep 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-10-06_Minute3_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 3 · 6 Oct 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-10-07_Minute4_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 4 · 7 Oct 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-10-14_Minute5_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 5 · 14 Oct 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../team/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Team
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#us-1-real-time-operational-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-1: Real-time operational map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-2-map-filtering-and-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-2: Map filtering and details
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-3-incident-and-resource-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-3: Incident and resource management
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-4-order-tracking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-4: Order tracking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-5-incident-alerts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-5: Incident alerts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-6-risk-forecasting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-6: Risk forecasting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-7-tactical-recommendations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-7: Tactical recommendations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-8-decision-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-8: Decision log
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-9-public-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-9: Public communication
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-10-consult-historical-incident-data-filtered-by-zone-period-and-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-10: Consult historical incident data filtered by zone, period and type
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-11-view-zones-and-seasons-of-highest-risk-on-a-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-11: View zones and seasons of highest risk on a map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-12-simulate-scenarios-before-major-events-or-fire-season" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-12: Simulate scenarios before major events or fire season
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-13-simulate-limit-scenarios-using-maximum-available-resource-capacity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-13: Simulate limit scenarios using maximum available resource capacity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-14-export-maps-data-and-reports-for-planning-and-resource-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-14: Export maps, data and reports for planning and resource requests
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-15-view-active-emergencies-on-a-simple-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-15: View active emergencies on a simple map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#us-16-new-occurrence-risk-forecasting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-16: New occurrence risk forecasting
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+  
+
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+  
+    <div class="ad-doc-actions">
+      
+        <a class="ad-doc-action" href="../user-stories.md" download target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>Markdown
+        </a>
+      
+      <button class="ad-doc-action ad-doc-action--icon" type="button" onclick="window.print()" title="Print" aria-label="Print">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg>
+      </button>
+    </div>
+  
+  
+                  
+
+
+  
+  
+
+
+<h1 id="user-stories">User stories</h1>
+<h2 id="us-1-real-time-operational-map">US-1: Real-time operational map</h2>
+<p><strong>As...</strong> a control room operator,<br>
+<strong>I want...</strong> to view on a single real-time map all active incidents and the location and status of resources from every agency, including aerial assets,<br>
+<strong>So that...</strong> I have a complete and up-to-date picture of the situation without switching between multiple systems.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ul>
+<li>The system must display all active incidents on the map, georeferenced and identified by type and severity.</li>
+<li>The system must display the position and status of resources, visually distinguished by agency and resource type.</li>
+<li>The system must update incidents and resources automatically.</li>
+<li>The system must show the time of the last successful update of each data source and visibly flag sources that are unavailable or outdated.</li>
+</ul>
+<h2 id="us-2-map-filtering-and-details">US-2: Map filtering and details</h2>
+<p><strong>As...</strong> a control room operator,<br>
+<strong>I want...</strong> to filter the map by data layers, geographic area and time period, and to view the details of any incident or resource,<br>
+<strong>So that...</strong> I can focus on the information relevant to the situation I'm handling.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ul>
+<li>The system must allow the user to toggle layers by agency, resource type, incident type and data source.</li>
+<li>The system should allow filtering by region and by time window.</li>
+<li>The system must show the details of an incident or resource when selected.</li>
+</ul>
+<h2 id="us-3-incident-and-resource-management">US-3: Incident and resource management</h2>
+<p><strong>As...</strong> a control room operator,<br>
+<strong>I want...</strong> to create, update and close incidents/operations, and update the status of resources,<br>
+<strong>So that...</strong> the platform reflects the real situation, including occurrences reported by phone or radio.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ul>
+<li>The system must allow the user to create an incident with location, type, severity and description.</li>
+<li>The system must allow the user to update the severity and status of an incident and to close it.</li>
+<li>The system must allow the user to assign resources to an incident and update their status.</li>
+<li>The system must record who made each change and when.</li>
+</ul>
+<h2 id="us-4-order-tracking">US-4: Order tracking</h2>
+<p><strong>As...</strong> a control room operator,<br>
+<strong>I want...</strong> to register the orders sent to field teams and track whether each one was acknowledged,<br>
+<strong>So that...</strong> I can make sure every order reached its team and follow up on those that did not.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ul>
+<li>The system must allow the user to log an order associated with an incident and a resource, with an automatic timestamp.</li>
+<li>The system must allow the user to mark an order as acknowledged, recording the time of acknowledgement.</li>
+<li>The system must highlight orders that have not been acknowledged within a configurable period.</li>
+<li>The system must show the pending (unacknowledged) orders of each incident.</li>
+</ul>
+<h2 id="us-5-incident-alerts">US-5: Incident alerts</h2>
+<p><strong>As...</strong> a control room operator,<br>
+<strong>I want...</strong> to be alerted when a new incident is detected in the external feeds or when an existing incident changes significantly,<br>
+<strong>So that...</strong> I can react quickly without having to constantly monitor the map.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ul>
+<li>The system must alert the user when a new incident is received from an external data source.</li>
+<li>The system must alert the user when an existing incident changes severity or status.</li>
+<li>The system must allow the user to acknowledge an alert and must keep unacknowledged alerts visible.</li>
+</ul>
+<h2 id="us-6-risk-forecasting">US-6: Risk forecasting</h2>
+<p><strong>As...</strong> a control room operator,<br>
+<strong>I want...</strong> to view the predicted progression of an incident and the high-risk areas, along with the confidence level of each prediction,<br>
+<strong>So that...</strong> I can anticipate how the situation will evolve and act before it worsens.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ul>
+<li>The system must display the predicted progression of a selected incident on the map for configurable time horizons.</li>
+<li>The system must display areas with high predicted risk for the coming hours.</li>
+<li>The system must show the confidence level associated with each prediction.</li>
+<li>The system must indicate when a prediction was generated and on which data it was based.</li>
+</ul>
+<h2 id="us-7-tactical-recommendations">US-7: Tactical recommendations</h2>
+<p><strong>As...</strong> a control room operator,<br>
+<strong>I want...</strong> to receive recommendations on which resources to assign to or release from an incident, and how to route them, and to be able to accept, adjust or reject them,<br>
+<strong>So that...</strong> I can respond faster without losing control over the final decision.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ul>
+<li>The system must suggest which resources to assign/release to an incident, with a short justification.</li>
+<li>The system must show the recommended route for each suggested resource and its estimated arrival time.</li>
+<li>The system must allow the user to accept, adjust or reject a recommendation before it is applied.</li>
+</ul>
+<h2 id="us-8-decision-log">US-8: Decision log</h2>
+<p><strong>As...</strong> a control room operator,<br>
+<strong>I want...</strong> to consult the log of recommendations and decisions made during an incident,<br>
+<strong>So that...</strong> I can justify the actions taken afterwards.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ul>
+<li>The system must record every recommendation generated, the decision taken, by whom and when.</li>
+<li>The system should allow the user to record an optional reason when rejecting or adjusting a recommendation.</li>
+<li>The system must display the log of each incident in chronological order.</li>
+<li>The system should allow exporting the log of an incident.</li>
+</ul>
+<h2 id="us-9-public-communication">US-9: Public communication</h2>
+<p><strong>As...</strong> a control room operator,<br>
+<strong>I want...</strong> to publish incidents and issue warnings on the public citizens' app,<br>
+<strong>So that...</strong> the population receives reliable information during a crisis.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ul>
+<li>The system must allow the user to publish or hide a validated incident on the public app.</li>
+<li>The system must never publish unvalidated incidents or sensitive operational data.</li>
+<li>The system must allow the user to issue a warning for a geographic area, with a message and severity level.</li>
+<li>The system should allow the user to update or end an active warning.</li>
+</ul>
+<h2 id="us-10-consult-historical-incident-data-filtered-by-zone-period-and-type">US-10: Consult historical incident data filtered by zone, period and type</h2>
+<p><strong>As...</strong> an analyst,<br>
+<strong>I want...</strong> to search historical incidents filtered by zone, time period and incident type,<br>
+<strong>So that...</strong> I can analyze past activity and support planning decisions.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ul>
+<li>The search supports filtering by any combination of zone, date/time range and incident type, and returns results within a reasonable time for the expected data volume.</li>
+<li>Each result shows not only the incident's own data (location, type, status, timestamps) but also all directly related information: linked entities (e.g. assigned resources, orders, alerts, logs) and other incidents that reference it (e.g. a follow-up or a duplicate/merged incident).</li>
+<li>Related incidents and entities are clearly labeled with their relationship to the queried incident (e.g. "referenced by", "caused by", "merged into"), not just listed flatly.</li>
+<li>If no incidents match the filters, the system shows an explicit "no results" state rather than an empty or ambiguous screen.</li>
+<li>Access to historical data respects the same visibility rules as other operator views (no public exposure of internal-only fields).</li>
+</ul>
+<h2 id="us-11-view-zones-and-seasons-of-highest-risk-on-a-map">US-11: View zones and seasons of highest risk on a map</h2>
+<p><strong>As...</strong> an analyst,<br>
+<strong>I want...</strong> to see on a map which zones and time periods have historically had the highest incident risk,<br>
+<strong>So that...</strong> I can anticipate where and when resources are most likely to be needed (to prevent repeated events).</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ul>
+<li>The map displays zones color-coded or ranked by historical risk level, computed from past incident data (frequency, severity, type).</li>
+<li>The user can filter or select a time period (e.g. a season, a month range) to see how risk concentration shifts accordingly.</li>
+<li>Selecting a zone shows the underlying data behind its risk rating (incident count, types, trend over time).</li>
+<li>The map indicates the date range of the underlying data and when the risk calculation was last refreshed.</li>
+</ul>
+<h2 id="us-12-simulate-scenarios-before-major-events-or-fire-season">US-12: Simulate scenarios before major events or fire season</h2>
+<p><strong>As...</strong> an analyst,<br>
+<strong>I want...</strong> to run simulations using the predictive engine and synthetic data before major events or the start of fire season,<br>
+<strong>So that...</strong> I can anticipate likely demand and prepare resource allocation in advance as well as requesting help timely.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ul>
+<li>The user can configure a simulation with parameters such as time window, zone(s), expected event type, and synthetic/historical data inputs.</li>
+<li>The predictive engine produces a projected outcome (e.g. likely incident volume, severity distribution, resource demand) based on those parameters.</li>
+<li>Simulation results are clearly marked as predictive/synthetic and are visually distinct from real operational data, so they can never be mistaken for live incidents.</li>
+<li>Optional feature: Simulations can be saved, re-run with adjusted parameters, and compared against each other.</li>
+<li>Running a simulation has no effect on live operational data or active incident records.</li>
+</ul>
+<h2 id="us-13-simulate-limit-scenarios-using-maximum-available-resource-capacity">US-13: Simulate limit scenarios using maximum available resource capacity</h2>
+<p><strong>As...</strong> an analyst,<br>
+<strong>I want...</strong> to simulate limit/worst-case scenarios that use the maximum capacity of all available resources,<br>
+<strong>So that...</strong> I can assess whether current resource levels are sufficient under extreme demand and identify breaking points.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ul>
+<li>The user can define a scenario where simulated demand is scaled up until it saturates all available resources (personnel, vehicles, equipment, etc.).</li>
+<li>The simulation reports the point at which resource capacity is exceeded, and which resource types run out first.</li>
+<li>Results clearly show gaps between demand and available capacity (e.g. unmet requests, response delays) under the simulated limit scenario.</li>
+<li>Results are clearly marked as synthetic/predictive, with no effect on live data or active incidents.</li>
+</ul>
+<h2 id="us-14-export-maps-data-and-reports-for-planning-and-resource-requests">US-14: Export maps, data and reports for planning and resource requests</h2>
+<p><strong>As...</strong> an analyst,<br>
+<strong>I want...</strong> to export maps, underlying data and reports,<br>
+<strong>So that...</strong> I can support planning decisions and formal requests for additional resources with shareable documentation.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ul>
+<li>The user can export the current map view (including active filters/layers) as an image or document format suitable for sharing or printing.</li>
+<li>The user can export underlying data (e.g. historical incidents, simulation results, risk analysis) in a structured format (e.g. CSV/PDF).</li>
+<li>Exported reports include metadata: generation date/time, applied filters, and data source/time range, so recipients know exactly what they're looking at.</li>
+<li>Export actions are logged for traceability (who exported what, and when).</li>
+</ul>
+<h2 id="us-15-view-active-emergencies-on-a-simple-map">US-15: View active emergencies on a simple map</h2>
+<p><strong>As...</strong> a citizen,<br>
+<strong>I want...</strong> to see the active emergencies of any type on a simple map,<br>
+<strong>So that...</strong> I can quickly tell whether there is an emergency near my home, my family or my route, without relying on social media or unofficial sources.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ul>
+<li>The system shows all currently active incidents of any type, each with a distinct icon and a legend.</li>
+<li>Selecting an incident shows its type, approximate location, current status and the time of the last update.</li>
+<li>The map shows when the data was last updated, and gives a clear warning if the data is stale or if the data source is unavailable/unreachable.</li>
+<li>Only incidents validated by an operator are shown, and only information intended for the public; internal operational data is never exposed.</li>
+<li>The system should allow filtering of the incident type shown to the user.</li>
+</ul>
+<h2 id="us-16-new-occurrence-risk-forecasting">US-16: New occurrence risk forecasting</h2>
+<p><strong>As...</strong> a control room operator,<br>
+<strong>I want...</strong> to view the risk of new incidents occurring in each area over the coming days, based on current and forecast environmental conditions,<br>
+<strong>So that...</strong> I can position resources and raise readiness before incidents happen.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ul>
+<li>The system must display a risk level per area for the current day and the following days.</li>
+<li>The system must base the risk on current and forecast environmental data, such as wind, humidity, temperature and precipitation.</li>
+<li>The system must show which factors contribute most to the risk level of a selected area.</li>
+<li>The system must indicate when the risk was last calculated and the date of the forecast data used.</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../personas/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Personas">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Personas
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../use-cases/" class="md-footer__link md-footer__link--next" aria-label="Next: Use cases">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Use cases
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Ad Omnia · University of Aveiro
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Ad-Omnia" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.indexes", "navigation.footer", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+        <script src="../../../javascripts/home.js"></script>
+      
+        <script src="../../../javascripts/nav.js"></script>
+      
+        <script src="../../../javascripts/deck.js"></script>
+      
+        <script src="../../../javascripts/minutes.js"></script>
+      
+        <script src="../../../javascripts/videos.js"></script>
+      
+        <script src="../../../javascripts/theme.js"></script>
+      
+    
+  </body>
+</html>
