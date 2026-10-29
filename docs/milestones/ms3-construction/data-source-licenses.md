@@ -21,17 +21,45 @@ The conclusions below depend on how Ad Omnia is used today:
 
 ## Summary
 
-| Source | Used for | License / terms | Commercial use | Proposed decision |
-| --- | --- | --- | --- | --- |
-| IPMA | Warnings, fire risk, seismic events, weather | Copyright, free use without profit-making purposes, attribution required | Not allowed as written | Use, with attribution; inform IPMA |
-| OpenSky | Aerial assets (ADS-B) | Research, education, internal testing, government use | Contact OpenSky | Use for the proof of concept |
-| Fogos.pt | Real-time incidents | Formal request, individual token, own terms | Not allowed | Blocked until the token is granted |
-| AISstream | Vessels (AIS) | API key, fair use, no SLA | Not stated | Defer; optional plugin |
-| HERE | Routing | End User Terms (checked), platform terms not checked | Needs a separate agreement | Do not rely on it for the critical path |
-| dados.gov.pt | Zone boundaries, historical records | CC BY 4.0 by default, per dataset | Allowed with attribution | Use; record each dataset |
-| Open-Meteo | Weather history and forecast for the AI | CC BY 4.0 data, free API non-commercial only | Paid plan required | Use for the proof of concept |
-| GDACS | Global disaster events | Disclaimer, no explicit reuse license found | Not stated | Defer |
-| VOST Portugal / ANEPC feed | Official occurrences | Unknown | Unknown | Ask; do not integrate yet |
+## Summary
+
+| Source | Used for | License / terms | Commercial use | AI Training / Storage | Personal Data (GDPR) | Proposed decision |
+| --- | --- | --- | --- | --- | --- | --- |
+| IPMA | Warnings, fire risk, seismic events, weather | Copyright, free use without profit-making purposes, attribution required | Not allowed as written | Yes (academic) | No | Use, with attribution; inform IPMA |
+| OpenSky | Aerial assets (ADS-B) | Research, education, internal testing, government use | Contact OpenSky | Yes (academic) | Yes (ICAO24/Callsigns) | Use for the proof of concept |
+| Fogos.pt | Real-time incidents | Authorized via specific token | Not allowed | Yes (academic) | Potentially (OSINT) | Authorized; token received |
+| AISstream | Vessels (AIS) | API key, fair use, no SLA | Not stated | Not applicable (no history) | No | Defer; optional plugin |
+| HERE | Routing | End User Terms (checked), platform terms not checked | Needs a separate agreement | Not applicable (routing) | No | Do not rely on it for the critical path |
+| dados.gov.pt | Zone boundaries, historical records | CC BY 4.0 by default, per dataset | Allowed with attribution | Allowed | No (Check per dataset) | Use; record each dataset |
+| Open-Meteo | Weather history and forecast for the AI | CC BY 4.0 data, free API non-commercial only | Paid plan required | Allowed (within limits) | No | Use for the proof of concept |
+| GDACS | Global disaster events | Disclaimer, no explicit reuse license found | Not stated | Allowed | No | Defer |
+| Map Tiles & Routing | Basemaps and routing | Various (Self-hosted, ODbL, Proprietary) | Depends on specific source | Allowed | No | Use (Self-hosted) |
+| OurAirports | Airport reference data | Public Domain | Allowed | Allowed | No | Use freely |
+| VOST Portugal / ANEPC feed | Official occurrences | Unknown | Unknown | Unknown | Unknown | Ask; do not integrate yet |
+
+## Transversal Requirements
+
+To comply with the project goals and legal requirements (such as GDPR), the following transversal aspects are applied to all external data sources:
+
+**1. Data Storage and AI Training**
+Ad Omnia stores historical data in a database and uses it to train predictive models (US-11, US-16). For the current academic and non-profit proof of concept, sources like Open-Meteo, dados.gov.pt, and OpenSky permit this storage and processing. Fogos.pt has also granted explicit authorization for our use case. 
+
+**2. Personal Data and GDPR**
+Most sources used do not provide personally identifiable information (PII). However, exceptions exist:
+- **OpenSky:** Provides aircraft ICAO24 addresses and callsigns. While typically linked to companies, private aircraft data can border on personal data. 
+- **Fogos.pt:** Relies partly on volunteer OSINT which could inadvertently include personal details in incident descriptions. 
+Since Ad Omnia does not process this data to identify individuals, no specific GDPR consent mechanism is required for these public data points at this stage.
+
+**3. Unified Attribution Table**
+The frontend (COP and public application) must display the following attributions to comply with the respective terms of use:
+
+| Source | Required Attribution Text / Logo | Display Location |
+| --- | --- | --- |
+| IPMA | IPMA logo with a hyperlink to the IPMA site | COP / Public App |
+| Fogos.pt | "Source: Fogos.pt" | COP / Incident Details |
+| OpenSky | "Source: The OpenSky Network" | COP (Assets) |
+| Open-Meteo | "Weather data by Open-Meteo.com (CC BY 4.0)" | COP (Weather widgets) |
+| Map Tiles | "Dados e mapas: Protomaps, © OpenStreetMap, © Mapterhorn, Imagery © Esri, OSRM, geoBoundaries" | COP / Public App (Map footer) |
 
 ---
 
@@ -100,10 +128,11 @@ Real-time wildfire occurrences, based on ANEPC records, operated by VOST Portuga
 - API access depends on a formal request through a form. Each request is reviewed on purpose of use, request volume, infrastructure impact and alignment with the project's goals.
 - Requests must carry an individual token in a header, an identifiable and personalized User-Agent, and the origin IP whenever possible. Requests that do not comply may be limited or blocked.
 - The public page names the header `X-API-Key`. Earlier notes mention `FOGOS-PT-AUTH`. Confirm the exact header when the token arrives.
-- The terms recorded by the team allow academic use and non-commercial use by organizations, including internal operational support tools.
+- The terms recorded by the team allow academic use and non-commercial use by organizations, including internal operational support tools, thus it forbids advertising, donations, paid services, and selling the product to third parties.
 - The same terms forbid advertising, donations, paid services, products sold to third parties, and solutions whose value depends on making the API data available.
 - Visible attribution ("Source: Fogos.pt") is required. The API must not be the only or decisive source in civil protection contexts.
 - The data is built from several sources (ANEPC, ICNF, AGIF, Copernicus, NASA, Meteosat, Mapbox, Waze and volunteer OSINT). Aerial tracking uses Flightradar24, airplanes.live and adsb.fi. Location is approximate and positions can be delayed.
+- Strict rate limits apply for authenticated users: maximum 300 requests per 60 seconds (window).
 
 **Impact on Ad Omnia**
 
@@ -112,12 +141,15 @@ Real-time wildfire occurrences, based on ANEPC records, operated by VOST Portuga
 - If the project is sold to agencies, it no longer fits the terms.
 - Components of the data (for example Flightradar24 and Waze) may carry their own conditions. Ask VOST Portugal.
 - Without the token, issue #43 ("at least one real source") stays blocked.
+- We have requested and recently received authorization (token) from VOST Portugal for this academic project.
+- The platform must respect the 300 requests/60s limit.
 
 **Decision and alternatives**
 
 - Request the token now, describing both applications in the form, including the operator validation step and the absence of ads, subscriptions and donations. Ask explicitly about public republication.
 - Keep the mock connector as the fallback for development.
 - Alternatives: fogos.icnf.pt, and the VOST API source code, which is public (see section 9). NASA FIRMS can complement it with satellite detections (see "Other sources").
+- **UPDATE**:  Authorized. The API will be actively used in the project using the granted token. 
 
 ---
 
@@ -259,7 +291,34 @@ Global Disaster Alert and Coordination System (UN and European Commission). Cons
 
 ---
 
-## 9. VOST Portugal and the ANEPC occurrences feed
+## 9. Map Tiles and Routing (Self-hosted)
+
+The COP and public application require cartography and routing. To ensure the system works offline (NFR-AVL-3), tiles and routing engines are self-hosted.
+
+**Terms that matter**
+- **OpenStreetMap (OSM):** Data is licensed under the Open Database License (ODbL). It requires attribution and has share-alike conditions if the database is adapted.
+- **Other providers (Protomaps, Mapterhorn, Esri, OSRM, geoBoundaries):** Various open and proprietary licenses apply to the specific imagery and boundary datasets used. 
+
+**Decision:**
+- Use the self-hosted solution.
+- The frontend must display the exact attribution: "Dados e mapas: Protomaps, © OpenStreetMap, © Mapterhorn, Imagery © Esri, OSRM, geoBoundaries".
+
+---
+
+## 10. OurAirports
+
+Airport reference data used by the OpenSky plugin to match flights to airports.
+
+**Terms that matter**
+- The data is explicitly placed in the Public Domain.
+- No restrictive terms for commercial use, storage, or redistribution.
+
+**Decision:**
+- Use freely. No specific attribution is legally required, though good practice dictates mentioning it in project documentation.
+
+---
+
+## 11. VOST Portugal and the ANEPC occurrences feed
 
 Fogos.pt is operated by VOST Portugal, which integrates ANEPC data under a cooperation protocol. The VOST API has public source code, and the occurrence data comes from ANEPC (via emergencias.pt). The idea is to run that code on a machine of our own and call it, which would give occurrences and emergencies beyond wildfires.
 
