@@ -12,11 +12,11 @@
 
 The meeting took place on 06/10/2026 at 11:00.
 
-## Topics of discussion
+## Agenda
 
 - Scope of the project
 
-## Decisions made
+## Discussion and Decisions
 
 ### Scope of the project
 

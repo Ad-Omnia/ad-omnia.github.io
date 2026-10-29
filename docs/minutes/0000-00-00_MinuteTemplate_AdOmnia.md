@@ -12,6 +12,6 @@
 
 The meeting took place on XX/XX/XXXX at XX:XX.
 
-## Topics of discussion
+## Agenda
 
-## Decisions made
+## Discussion and Decisions

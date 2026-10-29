@@ -12,7 +12,7 @@
 
 The meeting took place on 23/09/2026 at 15:00.
 
-## Topics of discussion
+## Agenda
 
 - Tasks for first presentation
 - Project calendar
@@ -20,7 +20,7 @@ The meeting took place on 23/09/2026 at 15:00.
 - Team rules
 - Architecture overview
 
-## Decisions made
+## Discussion and Decisions
 
 ### Tasks for first presentation
 

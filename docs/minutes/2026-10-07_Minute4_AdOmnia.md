@@ -12,12 +12,12 @@
 
 The meeting took place on 07/10/2026 at 15:00.
 
-## Topics of discussion
+## Agenda
 
 - Data Model
 - User Stories' Priorities and Size
 
-## Decisions made
+## Discussion and Decisions
 
 ### Data model
 
