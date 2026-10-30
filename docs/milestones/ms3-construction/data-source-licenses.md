@@ -36,6 +36,7 @@ The conclusions below depend on how Ad Omnia is used today:
 | Map Tiles & Routing | Basemaps and routing | Various (Self-hosted, ODbL, Proprietary) | Depends on specific source | Allowed | No | Use (Self-hosted) |
 | OurAirports | Airport reference data | Public Domain | Allowed | Allowed | No | Use freely |
 | VOST Portugal / ANEPC feed | Official occurrences | Unknown | Unknown | Unknown | Unknown | Ask; do not integrate yet |
+| Aveiro Tech City Living Lab (ATCLL) API | Urban sensing: environment, mobility, people flow | Unknown (none published on the site) | Unknown | Unknown | Likely (Wi-Fi counts, video, vehicle positions) | Ask through the advisors; do not integrate yet |
 
 ## Transversal Requirements
 
@@ -337,6 +338,39 @@ Fogos.pt is operated by VOST Portugal, which integrates ANEPC data under a coope
 
 ---
 
+## 12. Aveiro Tech City Living Lab (ATCLL)
+
+Urban testbed of the Instituto de Telecomunicações (Network Architectures and Protocols group) at the University of Aveiro, with the municipalities of Aveiro and Ílhavo, Porto Digital and many companies and universities as partners. We may get access to the API behind its data platform. Like section 11, this entry is **hypothetical**: access has not been requested or granted, and the terms of use are not known.
+
+**What is known** (public pages of the project site, read on 30 October 2026)
+
+- The site publishes no terms of use, license, API documentation or attribution rules.
+- It has 44 edge nodes in the urban area of Aveiro, so coverage is limited to the city. Sensing includes GPS, speed, temperature, humidity and pressure from buses, garbage collection vehicles and bicycles, Wi-Fi occupancy through smartphones, traffic radars, LiDARs, cameras and UAVs.
+- The platform follows standards such as NGSI-LD. Access by third parties is facilitated through OpenVPN or WireGuard, which suggests access is granted case by case.
+- Some data may belong to partners (municipalities, companies), not only to the University.
+
+**What is not known**
+
+- Whether an API key, a VPN or a signed agreement is required, and for which data.
+- Whether academic use, storage, AI training and public display are allowed, and what attribution is required. Commercial use is assumed not allowed.
+- Which datasets are anonymized, and who is the data controller.
+
+**Impact on Ad Omnia**
+
+- Our advisors are from the IT, so an academic request is a realistic path. Each use (COP, storage, training, public display) still has to be confirmed.
+- Environmental and mobility data could complement IPMA and Open-Meteo (US-6, US-16) and help travel time estimates (FR-REC-2). No user story depends on it.
+- Wi-Fi occupancy, video and vehicle tracking can relate to identifiable people, and GDPR applies. We should ask only for aggregated, anonymized data.
+- Access over VPN would run in the ingestion worker, since plugins have no internet access. As a research testbed, continuity is not guaranteed, so the source must be flagged as outdated when it stops (FR-ING-2).
+
+**Decision and alternatives**
+
+- Do not integrate yet.
+- Ask for access through the advisors, describing the academic project, the private and public applications, and asking for the terms of use and the points under "What is not known". Do not request video or raw Wi-Fi data.
+- Keep `commercial_use` and `public_display` as `None` in the manifest until the answer arrives, and record it here.
+- If access is not granted, the proof of concept is not affected: weather comes from IPMA and Open-Meteo, and the rest is synthetic.
+
+---
+
 ## Other sources
 
 These were analyzed but are not in the core set. They are listed so that every source has its status recorded.
@@ -346,7 +380,7 @@ These were analyzed but are not in the core set. They are listed so that every s
 | NASA FIRMS | Open sharing of data, with citation rules for redistribution. Needs a free `MAP_KEY`, limited to 5,000 transactions per 10 minutes. Suomi NPP deliveries end on 2 November 2026, so use NOAA-20 and NOAA-21. Latency is up to 3 hours (NRT), 30 minutes (RT) and 5 minutes (URT). The restrictions section of the FAQ was not visible in the copy reviewed. | Defer. Possible second wildfire source through Incident Source, and training data. Coverage outside the Americas needs checking. |
 | CelesTrak | No redistribution terms stated. | Discard. |
 | OpenAQ | License depends on the original source, with attribution when applicable. | Discard. No user story uses air quality. |
-| ENTSO-E, JRC REMON, EMEL, Aveiro Living Lab | Not checked, out of scope. EMEL covers only Lisbon. | Discard. |
+| ENTSO-E, JRC REMON, EMEL | Not checked, out of scope. EMEL covers only Lisbon. | Discard. |
 
 ## Open actions
 
@@ -359,4 +393,5 @@ These were analyzed but are not in the core set. They are listed so that every s
 | Read the HERE platform terms and Acceptable Use Policy, and evaluate self-hosted routing | HERE | to assign | open |
 | Record the license of each dataset before import | dados.gov.pt | to assign | open |
 | Ask VOST Portugal and ANEPC about reuse of the occurrences feed | VOST / ANEPC | to assign | open |
+| Ask for ATCLL API access for academic use, and for its terms of use, data available and data controller | ATCLL | to assign | open |
 | Fill `commercial_use`, `public_display` and attribution in each plugin manifest as answers arrive | All plugins | to assign | open |
