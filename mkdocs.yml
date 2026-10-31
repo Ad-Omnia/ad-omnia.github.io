@@ -17,6 +17,7 @@ watch:
   - hooks
 
 extra_css:
+  - stylesheets/fonts.css
   - stylesheets/extra.css
 
 extra_javascript:
@@ -26,6 +27,7 @@ extra_javascript:
   - javascripts/minutes.js
   - javascripts/videos.js
   - javascripts/theme.js
+  - javascripts/cite.js
 
 theme:
   name: material
@@ -51,8 +53,8 @@ theme:
     - navigation.footer
     - toc.follow
     - content.code.copy
-  # Geist and JetBrains Mono are loaded in overrides/main.html (Material
-  # only requests weights 300/400/700, the brand needs 400/500/600).
+  # Geist and JetBrains Mono are self-hosted in docs/assets/fonts/ and declared in
+  # stylesheets/fonts.css (no Google Fonts request: see the GDPR analysis, section 10).
   font: false
   palette:
     - scheme: default
@@ -76,9 +78,13 @@ markdown_extensions:
   - toc:
       permalink: false
   - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
 
 nav:
-  - Documentation: documentation.md
   - Journey: journey.md
   - Milestones:
       - milestones/index.md

@@ -5,7 +5,8 @@ from datetime import date
 from pathlib import Path
 
 MINUTE_FILE = re.compile(r"^minutes/(\d{4})-(\d{2})-(\d{2})_Minute(\d+)_[^/]+\.md$")
-PARTICIPANT = re.compile(r"^-\s+(.+?)\s+(\d+)\s*$")
+# "- Name" (an optional trailing number is accepted for old files but never shown).
+PARTICIPANT = re.compile(r"^-\s+(.+?)(?:\s+\d+)?\s*$")
 WHEN = re.compile(r"on\s+(\d{2}/\d{2}/\d{4})\s+at\s+(\d{1,2}:\d{2})")
 PLACEHOLDER = "<!-- minutes -->"
 DOWNLOADABLE = re.compile(r"^(milestones|minutes)/.+\.md$")
@@ -31,7 +32,7 @@ def parse(markdown):
     for line in parts.get("participants", "").splitlines():
         match = PARTICIPANT.match(line.strip())
         if match:
-            participants.append({"name": match.group(1), "id": match.group(2)})
+            participants.append({"name": match.group(1)})
     when = WHEN.search(parts.get("date and time", ""))
     return {
         "participants": participants,

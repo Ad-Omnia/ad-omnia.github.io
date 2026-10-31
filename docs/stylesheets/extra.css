@@ -212,9 +212,7 @@ svg.lucide {
 }
 
 /* data: mono, tabular figures, for things people compare. */
-.md-typeset .ad-member-id,
 .ad-minute-value,
-.ad-minute-people li span:last-child,
 .ad-deck-count,
 .ad-hub-filter-field input {
   font-family: var(--md-code-font-family);
@@ -1187,9 +1185,7 @@ svg.lucide {
 .md-typeset .ad-member-id {
   margin: 0.15rem 0 0;
   font-size: 0.66rem;
-  letter-spacing: 0.14em;
   color: var(--ad-ink-faint);
-  font-variant-numeric: tabular-nums;
 }
 
 .md-typeset .ad-member-links {
@@ -1854,14 +1850,6 @@ svg.lucide {
   box-shadow: none;
 }
 
-.md-typeset .admonition,
-.md-typeset details {
-  border-width: 1px;
-  border-color: var(--ad-border);
-  border-radius: var(--ad-radius-lg);
-  box-shadow: none;
-}
-
 .md-path {
   font-size: 0.6rem;
   letter-spacing: 0.04em;
@@ -2278,11 +2266,6 @@ body[data-md-color-scheme="slate"]:not(:has(.ad-block, .ad-timeline, .ad-hero)) 
 
 .ad-minute-people li:first-child {
   border-top: 0;
-}
-
-.ad-minute-people li span:last-child {
-  color: var(--ad-ink-faint);
-  font-variant-numeric: tabular-nums;
 }
 
 .md-typeset .ad-hub-card--file::after {
@@ -2722,4 +2705,369 @@ body[data-md-color-scheme="slate"]:not(:has(.ad-block, .ad-timeline, .ad-hero)) 
 ::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
+}
+
+/* ------------------------------------------------------------------
+   Legal analysis components (MS3 GDPR compliance analysis, privacy notice)
+   Brand rules applied: cards on surface with radius-lg and shadow-card,
+   no coloured edge bars, no tinted panels, Lucide icons without boxes,
+   status colours kept apart from the three lights, codes in mono (data).
+   ------------------------------------------------------------------ */
+
+:root {
+  /* Operational status palette: separate from teal/blue/violet, which never signal state. */
+  --ad-ok: #1e7b34;
+  --ad-warn: #8a5a00;
+  --ad-warn-bg: rgba(242, 170, 40, 0.16);
+  --ad-gap: #b42318;
+  --ad-gap-bg: rgba(240, 68, 56, 0.1);
+  --ad-na: var(--ad-ink-muted);
+  --ad-icon-scale: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>');
+  --ad-icon-check: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
+  --md-admonition-icon--info: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>');
+  --md-admonition-icon--tip: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>');
+  --md-admonition-icon--warning: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>');
+  --md-admonition-icon--abstract: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>');
+  --md-admonition-icon--note: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.38 3.62a1 1 0 0 1 3 3L7.37 18.64a2 2 0 0 1-.86.5l-2.87.84a.5.5 0 0 1-.62-.62l.84-2.87a2 2 0 0 1 .5-.86z"/></svg>');
+  --md-details-icon: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>');
+}
+
+[data-md-color-scheme="slate"] {
+  --ad-ok: #6fd28a;
+  --ad-warn: #f6c35b;
+  --ad-warn-bg: rgba(242, 170, 40, 0.14);
+  --ad-gap: #ff8a80;
+  --ad-gap-bg: rgba(240, 68, 56, 0.14);
+}
+
+.md-typeset .ad-lede {
+  max-width: 44rem;
+  margin: 0 0 1.2rem;
+  font-size: 0.9rem !important;
+  line-height: 1.55 !important;
+  color: var(--ad-ink) !important;
+}
+
+.md-typeset .ad-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.4rem;
+  margin: 0 0 0.6rem;
+  padding: 0.7rem 0 0;
+  border-top: 1px solid var(--ad-rule);
+  font-size: 0.6rem;
+  color: var(--ad-ink-muted);
+}
+
+.md-typeset .ad-meta p {
+  display: contents;
+}
+
+.md-typeset .ad-meta span {
+  font-size: 0.6rem;
+}
+
+/* Internal codes (FR-PUB-3, US-15, A1): data style, never in titles. */
+.md-typeset .ad-id {
+  font-family: var(--md-code-font-family);
+  font-size: 0.85em;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--ad-ink);
+}
+
+/* Status pill: label style, radius-sm. Only states that need attention get a fill. */
+.md-typeset .ad-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.05rem 0.45rem;
+  border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+  border-radius: var(--ad-radius-sm);
+  font-size: 0.6rem;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+  vertical-align: 0.05em;
+}
+
+.md-typeset .ad-pill::before {
+  content: "";
+  flex: none;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.md-typeset .ad-pill.is-ok { color: var(--ad-ok); }
+.md-typeset .ad-pill.is-done { color: var(--ad-ok); }
+.md-typeset .ad-pill.is-na { color: var(--ad-na); }
+.md-typeset .ad-pill.is-warn { color: var(--ad-warn); background: var(--ad-warn-bg); border-color: transparent; }
+.md-typeset .ad-pill.is-gap { color: var(--ad-gap); background: var(--ad-gap-bg); border-color: transparent; }
+
+.md-typeset .ad-pill.is-done::before {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 0;
+  -webkit-mask: var(--ad-icon-check) center / contain no-repeat;
+  mask: var(--ad-icon-check) center / contain no-repeat;
+}
+
+/* Legal citation: a quiet mono reference, blue-ink like every link. */
+.md-typeset a.ad-cite {
+  display: inline-block;
+  margin: 0 0.05rem;
+  padding: 0 0.3rem;
+  border: 1px solid var(--ad-border);
+  border-radius: var(--ad-radius-sm);
+  font-family: var(--md-code-font-family);
+  font-size: 0.78em;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--ad-blue-ink);
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.md-typeset a.ad-cite:hover,
+.md-typeset a.ad-cite:focus-visible {
+  border-color: color-mix(in srgb, var(--ad-blue-ink) 45%, transparent);
+  background: color-mix(in srgb, var(--ad-ink) 5%, transparent);
+  color: var(--ad-blue-ink);
+}
+
+/* Cards: at-a-glance tiles and legal framework */
+.md-typeset .ad-glance,
+.md-typeset .ad-law-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 0.8rem;
+  margin: 1rem 0 1.4rem;
+}
+
+.md-typeset .ad-tile,
+.md-typeset .ad-law {
+  padding: 0.8rem 0.9rem 0.9rem;
+  border: 1px solid var(--ad-border);
+  border-radius: var(--ad-radius-lg);
+  background: var(--ad-surface);
+  box-shadow: var(--ad-shadow-card);
+}
+
+.md-typeset .ad-tile p,
+.md-typeset .ad-law p {
+  margin: 0.5rem 0 0;
+}
+
+.md-typeset .ad-tile p:first-child,
+.md-typeset .ad-law p:first-child {
+  margin-top: 0;
+}
+
+/* heading-3 inside cards */
+.md-typeset .ad-tile strong {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.33;
+  color: var(--ad-ink);
+}
+
+.md-typeset .ad-law-tag,
+.md-typeset .ad-spotlight-kicker {
+  font-size: 0.6rem !important;
+  font-weight: 500;
+  line-height: 1.33;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ad-ink-muted) !important;
+}
+
+.md-typeset .ad-law strong a {
+  color: var(--ad-ink);
+}
+
+.md-typeset .ad-law strong a:hover {
+  color: var(--ad-blue-ink);
+}
+
+/* Legend row */
+.md-typeset .ad-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  margin: 0.8rem 0 0;
+  font-size: 0.6rem;
+  color: var(--ad-ink-muted);
+}
+
+.md-typeset .ad-legend p {
+  margin: 0;
+  font-size: 0.6rem !important;
+}
+
+/* Numbered steps: the only fully coloured circles, in the data order teal, blue, violet. */
+.md-typeset .ad-steps > ol {
+  counter-reset: ad-step;
+  margin: 1rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.md-typeset .ad-steps > ol > li {
+  position: relative;
+  counter-increment: ad-step;
+  margin: 0 0 0 0.7rem;
+  padding: 0 0 1rem 1.6rem;
+  border-left: 1px solid var(--ad-rule);
+}
+
+.md-typeset .ad-steps > ol > li:last-child {
+  border-left-color: transparent;
+  padding-bottom: 0.2rem;
+}
+
+.md-typeset .ad-steps > ol > li::before {
+  content: counter(ad-step);
+  position: absolute;
+  left: -0.7rem;
+  top: -0.05rem;
+  display: grid;
+  place-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: var(--ad-teal-deep);
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.md-typeset .ad-steps > ol > li:nth-child(3n + 2)::before { background: var(--ad-blue-deep); }
+.md-typeset .ad-steps > ol > li:nth-child(3n)::before { background: var(--ad-violet-deep); }
+
+.md-typeset .ad-steps > ol > li::marker {
+  content: none;
+}
+
+/* Spotlight: a card like the others, marked by an icon and a label, not by a tint. */
+.md-typeset .ad-spotlight {
+  margin: 1.6rem 0;
+  padding: 1rem 1.2rem 1.1rem;
+  border: 1px solid var(--ad-border);
+  border-radius: var(--ad-radius-lg);
+  background: var(--ad-surface);
+  box-shadow: var(--ad-shadow-card);
+}
+
+.md-typeset .ad-spotlight-kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 !important;
+}
+
+.md-typeset .ad-spotlight-kicker::before {
+  content: "";
+  width: 0.9rem;
+  height: 0.9rem;
+  background: var(--ad-ink-muted);
+  -webkit-mask: var(--ad-icon-scale) center / contain no-repeat;
+  mask: var(--ad-icon-scale) center / contain no-repeat;
+}
+
+.md-typeset .ad-spotlight h3 {
+  margin-top: 0.4rem !important;
+}
+
+/* Admonitions and collapsible blocks: no tinted fill or coloured border; a Lucide icon in ink-muted. */
+.md-typeset .admonition,
+.md-typeset details {
+  border: 1px solid var(--ad-border) !important;
+  border-radius: var(--ad-radius-lg);
+  background: transparent;
+  box-shadow: none;
+  font-size: 0.75rem;
+}
+
+.md-typeset .admonition > .admonition-title,
+.md-typeset details > summary {
+  border: 0;
+  background: transparent !important;
+  font-weight: 600;
+  color: var(--ad-ink);
+}
+
+.md-typeset .admonition > .admonition-title::before,
+.md-typeset details > summary::before {
+  background-color: var(--ad-ink-muted) !important;
+}
+
+.md-typeset details > summary::after {
+  background-color: var(--ad-ink-muted);
+}
+
+.md-typeset details > summary:hover {
+  background: color-mix(in srgb, var(--ad-ink) 4%, transparent) !important;
+}
+
+/* DPIA checklist */
+.md-typeset .ad-checks .task-list-item {
+  margin-bottom: 0.35rem;
+}
+
+/* Tables: tighter cells and wrapping citations so wide legal tables fit beside both sidebars. */
+.md-typeset .md-typeset__table td {
+  vertical-align: top;
+}
+
+.md-content__inner:has(.ad-glance) .md-typeset table:not([class]) th,
+.md-content__inner:has(.ad-glance) .md-typeset table:not([class]) td {
+  padding: 0.75em 0.8em;
+}
+
+.md-typeset td a.ad-cite {
+  display: inline;
+  padding: 0.05em 0.3rem;
+  white-space: normal;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* References */
+.md-typeset .ad-refs ol {
+  margin-top: 0.3rem;
+}
+
+.md-typeset .ad-refs li {
+  font-size: 0.6rem !important;
+}
+
+.md-typeset .ad-refs ol + p {
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 44.9375em) {
+  .md-typeset .ad-glance,
+  .md-typeset .ad-law-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Wide comparison tables scroll sideways instead of crushing columns */
+  .md-content__inner:has(.ad-glance) .md-typeset__table table:not([class]) {
+    min-width: 36rem;
+  }
+}
+
+/* Data map: where a piece of data lives, under its name (caption size, muted). */
+.md-typeset .ad-where {
+  display: inline-block;
+  margin-top: 0.2rem;
+  font-size: 0.6rem;
+  line-height: 1.4;
+  color: var(--ad-ink-muted);
 }
