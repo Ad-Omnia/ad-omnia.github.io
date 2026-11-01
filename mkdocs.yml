@@ -102,6 +102,14 @@ extra:
       meta: Brand video · 0:24
       youtube: Q_YQUXswK0s
       poster: assets/videos/a-thousand-nos.jpg
+    - title: On the Dotted Line
+      meta: Mockup presentation · 0:30
+      youtube: G2nFhBWsyhk
+      poster: assets/videos/on-the-dotted-line.png
+    - title: A New Operational Picture
+      meta: SIRESP competition · 3:36
+      youtube: oQ3eKdTL0P0
+      poster: assets/videos/a-new-operational-picture.png
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/Ad-Omnia

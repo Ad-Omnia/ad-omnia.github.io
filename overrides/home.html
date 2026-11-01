@@ -194,35 +194,37 @@
   <section class="ad-block ad-reveal" id="videos">
     <p class="ad-kicker ad-c-blue">Videos</p>
     <h2 class="ad-heading">Light, in motion.</h2>
-    <div class="ad-videos" tabindex="0" aria-label="Videos">
-      {%- for f in videos %}
-      <figure class="ad-video">
-        <div class="ad-video-frame">
-          {%- if f.youtube %}
-          <button type="button" class="ad-video-play" data-youtube="{{ f.youtube }}" aria-label="Play {{ f.title }}">
-            <img src="{{ f.poster | url if f.poster else 'https://i.ytimg.com/vi/' ~ f.youtube ~ '/hqdefault.jpg' }}" alt="" loading="lazy">
-            <span class="ad-video-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3 20 12 6 21Z"/></svg></span>
-          </button>
-          {%- else %}
-          <video playsinline preload="none" poster="{{ f.poster | url }}">
-            <source src="{{ f.src | url }}" type="video/mp4">
-          </video>
-          <button type="button" class="ad-video-play" aria-label="Play {{ f.title }}" title="Play {{ f.title }}">
-            <span class="ad-video-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3 20 12 6 21Z"/></svg></span>
-          </button>
-          {%- endif %}
-        </div>
-        <figcaption>
-          <span class="ad-video-title">{{ f.title }}</span>
-          <span class="ad-video-meta">{{ f.meta }}</span>
-        </figcaption>
-      </figure>
-      {%- endfor %}
+    <div class="ad-videos-stage">
+      <button type="button" class="ad-videos-side ad-videos-prev" aria-label="Previous video" title="Previous video" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+      <div class="ad-videos" tabindex="0" aria-label="Videos">
+        {%- for f in videos %}
+        <figure class="ad-video">
+          <div class="ad-video-frame">
+            {%- if f.youtube %}
+            <button type="button" class="ad-video-play" data-youtube="{{ f.youtube }}" aria-label="Play {{ f.title }}">
+              <img src="{{ f.poster | url if f.poster else 'https://i.ytimg.com/vi/' ~ f.youtube ~ '/hqdefault.jpg' }}" alt="" loading="lazy">
+              <span class="ad-video-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3 20 12 6 21Z"/></svg></span>
+            </button>
+            {%- else %}
+            <video playsinline preload="none" poster="{{ f.poster | url }}">
+              <source src="{{ f.src | url }}" type="video/mp4">
+            </video>
+            <button type="button" class="ad-video-play" aria-label="Play {{ f.title }}" title="Play {{ f.title }}">
+              <span class="ad-video-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3 20 12 6 21Z"/></svg></span>
+            </button>
+            {%- endif %}
+          </div>
+          <figcaption>
+            <span class="ad-video-title">{{ f.title }}</span>
+            <span class="ad-video-meta">{{ f.meta }}</span>
+          </figcaption>
+        </figure>
+        {%- endfor %}
+      </div>
+      <button type="button" class="ad-videos-side ad-videos-next" aria-label="Next video" title="Next video" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
     </div>
     <div class="ad-videos-bar" hidden>
-      <button type="button" class="ad-videos-prev" aria-label="Previous video" title="Previous video"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
-      <div class="ad-videos-dots" aria-hidden="true"></div>
-      <button type="button" class="ad-videos-next" aria-label="Next video" title="Next video"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+      <div class="ad-videos-dots"></div>
     </div>
   </section>
 {%- endif %}
