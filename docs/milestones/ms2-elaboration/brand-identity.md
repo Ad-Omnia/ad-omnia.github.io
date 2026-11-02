@@ -109,7 +109,7 @@ They are never body text, button fills, backgrounds of UI panels or status colou
 
 ## Typography
 
-Geist for everything people read, JetBrains Mono for everything people compare. Both load from Google Fonts.
+Geist for everything people read, JetBrains Mono for everything people compare. Both are under the SIL Open Font License and are self-hosted (on the microsite in `docs/assets/fonts/`); never load them from Google Fonts, which sends every visitor's IP address to Google.
 
 - `display` for covers and hero titles, `heading-1` for document titles, `heading-2` for sections, `heading-3` for cards and sub-sections.
 - `body` for reading text, `label` for overlines (uppercase, tracked), `caption` for captions and sources.

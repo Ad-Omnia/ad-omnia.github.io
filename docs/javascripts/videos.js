@@ -1,9 +1,12 @@
 (function () {
   "use strict";
 
-  function pauseAll(root, except) {
-    Array.prototype.forEach.call(root.querySelectorAll(".ad-video video"), function (v) {
-      if (v !== except && !v.paused) v.pause();
+  function stopAll(root, except) {
+    Array.prototype.forEach.call(root.querySelectorAll(".ad-video"), function (card) {
+      if (card === except) return;
+      var v = card.querySelector("video");
+      if (v && !v.paused) v.pause();
+      if (card._reset) card._reset();
     });
   }
 
@@ -14,7 +17,7 @@
     var video = card.querySelector("video");
 
     play.addEventListener("click", function () {
-      pauseAll(document, video);
+      stopAll(document, card);
       if (video) {
         video.controls = true;
         play.remove();
@@ -27,9 +30,13 @@
       frame.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
       frame.allowFullscreen = true;
       play.replaceWith(frame);
+      card._reset = function () {
+        card._reset = null;
+        frame.replaceWith(play);
+      };
     });
 
-    if (video) video.addEventListener("play", function () { pauseAll(document, video); });
+    if (video) video.addEventListener("play", function () { stopAll(document, card); });
   }
 
   function mount(section) {
@@ -40,33 +47,41 @@
     var next = section.querySelector(".ad-videos-next");
     var dotsHost = section.querySelector(".ad-videos-dots");
     var dots = [];
+    var many = cards.length > 1;
+
+    bar.hidden = !many;
+    prev.hidden = !many;
+    next.hidden = !many;
+    if (!many) return function () {};
 
     function step() {
-      return cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : track.clientWidth;
+      return cards[1].offsetLeft - cards[0].offsetLeft;
     }
 
     function current() {
-      return Math.round(track.scrollLeft / Math.max(1, step()));
+      return Math.max(0, Math.min(cards.length - 1, Math.round(track.scrollLeft / Math.max(1, step()))));
     }
 
     function go(i) {
-      track.scrollTo({ left: Math.max(0, Math.min(cards.length - 1, i)) * step(), behavior: "smooth" });
+      var n = cards.length;
+      var target = ((i % n) + n) % n;
+      stopAll(section, null);
+      track.scrollTo({ left: target * step(), behavior: "smooth" });
     }
 
     function sync() {
-      var scrollable = track.scrollWidth - track.clientWidth > 4;
-      bar.hidden = !scrollable;
-      if (!scrollable) return;
       var i = current();
-      var end = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
-      prev.disabled = track.scrollLeft <= 4;
-      next.disabled = end;
-      dots.forEach(function (d, k) { d.classList.toggle("is-active", end ? k === dots.length - 1 : k === i); });
+      dots.forEach(function (d, k) {
+        d.classList.toggle("is-active", k === i);
+        d.setAttribute("aria-current", k === i ? "true" : "false");
+      });
+      cards.forEach(function (c, k) { c.inert = k !== i; });
     }
 
     cards.forEach(function (c, i) {
       var dot = document.createElement("button");
       dot.type = "button";
+      dot.setAttribute("aria-label", "Show video " + (i + 1) + " of " + cards.length);
       dot.addEventListener("click", function () { go(i); });
       dotsHost.appendChild(dot);
       dots.push(dot);
@@ -81,21 +96,34 @@
     });
 
     var raf = 0;
+    var last = 0;
     function onScroll() {
       if (raf) return;
-      raf = requestAnimationFrame(function () { raf = 0; sync(); });
+      raf = requestAnimationFrame(function () {
+        raf = 0;
+        var i = current();
+        if (i !== last) {
+          last = i;
+          stopAll(section, cards[i]);
+        }
+        sync();
+      });
+    }
+    function onResize() {
+      track.scrollTo({ left: current() * step() });
+      onScroll();
     }
     track.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    window.addEventListener("resize", onResize);
 
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (!e.isIntersecting) pauseAll(section, null); });
+      entries.forEach(function (e) { if (!e.isIntersecting) stopAll(section, null); });
     }, { threshold: 0 });
     io.observe(section);
 
     sync();
     return function () {
-      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("resize", onResize);
       io.disconnect();
     };
   }

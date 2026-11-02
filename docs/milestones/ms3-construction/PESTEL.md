@@ -2,6 +2,9 @@
 date: 2026-10-18
 order: 1
 description: PESTEL Analysis of the project
+# Hidden for now: drafts are skipped by hooks/milestones.py (nav, hub,
+# journey and build). Delete this line to publish the page again.
+draft: true
 ---
 
 # PESTEL Analysis

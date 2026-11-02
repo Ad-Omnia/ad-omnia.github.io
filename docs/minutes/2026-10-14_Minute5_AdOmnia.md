@@ -2,23 +2,23 @@
 
 ## Participants
 
-- Bernardo Reis 126004
-- Diogo Silva 125240
-- Fernando Santos 124808
-- Guilherme Martins 125260
-- Miguel Neto 125200
+- Bernardo Reis
+- Diogo Silva
+- Fernando Santos
+- Guilherme Martins
+- Miguel Neto
 
 ## Date and Time
 
 The meeting took place on 14/10/2026 at 13:30.
 
-## Topics of Discussion
+## Agenda
 
 - Organization and priorization of IT3's work;
 - SIRESP Desafio Inovação 2026;
 - Security Measures.
 
-## Decisions Made
+## Discussion and Decisions
 
 ### Organization and Priorization of IT3's Work
 

@@ -21,17 +21,46 @@ The conclusions below depend on how Ad Omnia is used today:
 
 ## Summary
 
-| Source | Used for | License / terms | Commercial use | Proposed decision |
-| --- | --- | --- | --- | --- |
-| IPMA | Warnings, fire risk, seismic events, weather | Copyright, free use without profit-making purposes, attribution required | Not allowed as written | Use, with attribution; inform IPMA |
-| OpenSky | Aerial assets (ADS-B) | Research, education, internal testing, government use | Contact OpenSky | Use for the proof of concept |
-| Fogos.pt | Real-time incidents | Formal request, individual token, own terms | Not allowed | Blocked until the token is granted |
-| AISstream | Vessels (AIS) | API key, fair use, no SLA | Not stated | Defer; optional plugin |
-| HERE | Routing | End User Terms (checked), platform terms not checked | Needs a separate agreement | Do not rely on it for the critical path |
-| dados.gov.pt | Zone boundaries, historical records | CC BY 4.0 by default, per dataset | Allowed with attribution | Use; record each dataset |
-| Open-Meteo | Weather history and forecast for the AI | CC BY 4.0 data, free API non-commercial only | Paid plan required | Use for the proof of concept |
-| GDACS | Global disaster events | Disclaimer, no explicit reuse license found | Not stated | Defer |
-| VOST Portugal / ANEPC feed | Official occurrences | Unknown | Unknown | Ask; do not integrate yet |
+## Summary
+
+| Source | Used for | License / terms | Commercial use | AI Training / Storage | Personal Data (GDPR) | Proposed decision |
+| --- | --- | --- | --- | --- | --- | --- |
+| IPMA | Warnings, fire risk, seismic events, weather | Copyright, free use without profit-making purposes, attribution required | Not allowed as written | Yes (academic) | No | Use, with attribution; inform IPMA |
+| OpenSky | Aerial assets (ADS-B) | Research, education, internal testing, government use | Contact OpenSky | Yes (academic) | Yes (ICAO24/Callsigns) | Use for the proof of concept |
+| Fogos.pt | Real-time incidents | Authorized via specific token | Not allowed | Yes (academic) | Potentially (OSINT) | Authorized; token received |
+| AISstream | Vessels (AIS) | API key, fair use, no SLA | Not stated | Not applicable (no history) | No | Defer; optional plugin |
+| HERE | Routing | End User Terms (checked), platform terms not checked | Needs a separate agreement | Not applicable (routing) | No | Do not rely on it for the critical path |
+| dados.gov.pt | Zone boundaries, historical records | CC BY 4.0 by default, per dataset | Allowed with attribution | Allowed | No (Check per dataset) | Use; record each dataset |
+| Open-Meteo | Weather history and forecast for the AI | CC BY 4.0 data, free API non-commercial only | Paid plan required | Allowed (within limits) | No | Use for the proof of concept |
+| GDACS | Global disaster events | Disclaimer, no explicit reuse license found | Not stated | Allowed | No | Defer |
+| Map Tiles & Routing | Basemaps and routing | Various (Self-hosted, ODbL, Proprietary) | Depends on specific source | Allowed | No | Use (Self-hosted) |
+| OurAirports | Airport reference data | Public Domain | Allowed | Allowed | No | Use freely |
+| VOST Portugal / ANEPC feed | Official occurrences | Unknown | Unknown | Unknown | Unknown | Ask; do not integrate yet |
+| Aveiro Tech City Living Lab (ATCLL) API | Urban sensing: environment, mobility, people flow | Unknown (none published on the site) | Unknown | Unknown | Likely (Wi-Fi counts, video, vehicle positions) | Ask through the advisors; do not integrate yet |
+
+## Transversal Requirements
+
+To comply with the project goals and legal requirements (such as GDPR), the following transversal aspects are applied to all external data sources:
+
+**1. Data Storage and AI Training**
+Ad Omnia stores historical data in a database and uses it to train predictive models (US-11, US-16). For the current academic and non-profit proof of concept, sources like Open-Meteo, dados.gov.pt, and OpenSky permit this storage and processing. Fogos.pt has also granted explicit authorization for our use case. 
+
+**2. Personal Data and GDPR**
+Most sources used do not provide personally identifiable information (PII). However, exceptions exist:
+- **OpenSky:** Provides aircraft ICAO24 addresses and callsigns. While typically linked to companies, private aircraft data can border on personal data. 
+- **Fogos.pt:** Relies partly on volunteer OSINT which could inadvertently include personal details in incident descriptions. 
+Since Ad Omnia does not process this data to identify individuals, no specific GDPR consent mechanism is required for these public data points at this stage.
+
+**3. Unified Attribution Table**
+The frontend (COP and public application) must display the following attributions to comply with the respective terms of use:
+
+| Source | Required Attribution Text / Logo | Display Location |
+| --- | --- | --- |
+| IPMA | IPMA logo with a hyperlink to the IPMA site | COP / Public App |
+| Fogos.pt | "Source: Fogos.pt" | COP / Incident Details |
+| OpenSky | "Source: The OpenSky Network" | COP (Assets) |
+| Open-Meteo | "Weather data by Open-Meteo.com (CC BY 4.0)" | COP (Weather widgets) |
+| Map Tiles | "Dados e mapas: Protomaps, © OpenStreetMap, © Mapterhorn, Imagery © Esri, OSRM, geoBoundaries" | COP / Public App (Map footer) |
 
 ---
 
@@ -100,10 +129,11 @@ Real-time wildfire occurrences, based on ANEPC records, operated by VOST Portuga
 - API access depends on a formal request through a form. Each request is reviewed on purpose of use, request volume, infrastructure impact and alignment with the project's goals.
 - Requests must carry an individual token in a header, an identifiable and personalized User-Agent, and the origin IP whenever possible. Requests that do not comply may be limited or blocked.
 - The public page names the header `X-API-Key`. Earlier notes mention `FOGOS-PT-AUTH`. Confirm the exact header when the token arrives.
-- The terms recorded by the team allow academic use and non-commercial use by organizations, including internal operational support tools.
+- The terms recorded by the team allow academic use and non-commercial use by organizations, including internal operational support tools, thus it forbids advertising, donations, paid services, and selling the product to third parties.
 - The same terms forbid advertising, donations, paid services, products sold to third parties, and solutions whose value depends on making the API data available.
 - Visible attribution ("Source: Fogos.pt") is required. The API must not be the only or decisive source in civil protection contexts.
 - The data is built from several sources (ANEPC, ICNF, AGIF, Copernicus, NASA, Meteosat, Mapbox, Waze and volunteer OSINT). Aerial tracking uses Flightradar24, airplanes.live and adsb.fi. Location is approximate and positions can be delayed.
+- Strict rate limits apply for authenticated users: maximum 300 requests per 60 seconds (window).
 
 **Impact on Ad Omnia**
 
@@ -112,12 +142,15 @@ Real-time wildfire occurrences, based on ANEPC records, operated by VOST Portuga
 - If the project is sold to agencies, it no longer fits the terms.
 - Components of the data (for example Flightradar24 and Waze) may carry their own conditions. Ask VOST Portugal.
 - Without the token, issue #43 ("at least one real source") stays blocked.
+- We have requested and recently received authorization (token) from VOST Portugal for this academic project.
+- The platform must respect the 300 requests/60s limit.
 
 **Decision and alternatives**
 
 - Request the token now, describing both applications in the form, including the operator validation step and the absence of ads, subscriptions and donations. Ask explicitly about public republication.
 - Keep the mock connector as the fallback for development.
 - Alternatives: fogos.icnf.pt, and the VOST API source code, which is public (see section 9). NASA FIRMS can complement it with satellite detections (see "Other sources").
+- **UPDATE**:  Authorized. The API will be actively used in the project using the granted token. 
 
 ---
 
@@ -259,7 +292,34 @@ Global Disaster Alert and Coordination System (UN and European Commission). Cons
 
 ---
 
-## 9. VOST Portugal and the ANEPC occurrences feed
+## 9. Map Tiles and Routing (Self-hosted)
+
+The COP and public application require cartography and routing. To ensure the system works offline (NFR-AVL-3), tiles and routing engines are self-hosted.
+
+**Terms that matter**
+- **OpenStreetMap (OSM):** Data is licensed under the Open Database License (ODbL). It requires attribution and has share-alike conditions if the database is adapted.
+- **Other providers (Protomaps, Mapterhorn, Esri, OSRM, geoBoundaries):** Various open and proprietary licenses apply to the specific imagery and boundary datasets used. 
+
+**Decision:**
+- Use the self-hosted solution.
+- The frontend must display the exact attribution: "Dados e mapas: Protomaps, © OpenStreetMap, © Mapterhorn, Imagery © Esri, OSRM, geoBoundaries".
+
+---
+
+## 10. OurAirports
+
+Airport reference data used by the OpenSky plugin to match flights to airports.
+
+**Terms that matter**
+- The data is explicitly placed in the Public Domain.
+- No restrictive terms for commercial use, storage, or redistribution.
+
+**Decision:**
+- Use freely. No specific attribution is legally required, though good practice dictates mentioning it in project documentation.
+
+---
+
+## 11. VOST Portugal and the ANEPC occurrences feed
 
 Fogos.pt is operated by VOST Portugal, which integrates ANEPC data under a cooperation protocol. The VOST API has public source code, and the occurrence data comes from ANEPC (via emergencias.pt). The idea is to run that code on a machine of our own and call it, which would give occurrences and emergencies beyond wildfires.
 
@@ -278,6 +338,39 @@ Fogos.pt is operated by VOST Portugal, which integrates ANEPC data under a coope
 
 ---
 
+## 12. Aveiro Tech City Living Lab (ATCLL)
+
+Urban testbed of the Instituto de Telecomunicações (Network Architectures and Protocols group) at the University of Aveiro, with the municipalities of Aveiro and Ílhavo, Porto Digital and many companies and universities as partners. We may get access to the API behind its data platform. Like section 11, this entry is **hypothetical**: access has not been requested or granted, and the terms of use are not known.
+
+**What is known** (public pages of the project site, read on 30 October 2026)
+
+- The site publishes no terms of use, license, API documentation or attribution rules.
+- It has 44 edge nodes in the urban area of Aveiro, so coverage is limited to the city. Sensing includes GPS, speed, temperature, humidity and pressure from buses, garbage collection vehicles and bicycles, Wi-Fi occupancy through smartphones, traffic radars, LiDARs, cameras and UAVs.
+- The platform follows standards such as NGSI-LD. Access by third parties is facilitated through OpenVPN or WireGuard, which suggests access is granted case by case.
+- Some data may belong to partners (municipalities, companies), not only to the University.
+
+**What is not known**
+
+- Whether an API key, a VPN or a signed agreement is required, and for which data.
+- Whether academic use, storage, AI training and public display are allowed, and what attribution is required. Commercial use is assumed not allowed.
+- Which datasets are anonymized, and who is the data controller.
+
+**Impact on Ad Omnia**
+
+- Our advisors are from the IT, so an academic request is a realistic path. Each use (COP, storage, training, public display) still has to be confirmed.
+- Environmental and mobility data could complement IPMA and Open-Meteo (US-6, US-16) and help travel time estimates (FR-REC-2). No user story depends on it.
+- Wi-Fi occupancy, video and vehicle tracking can relate to identifiable people, and GDPR applies. We should ask only for aggregated, anonymized data.
+- Access over VPN would run in the ingestion worker, since plugins have no internet access. As a research testbed, continuity is not guaranteed, so the source must be flagged as outdated when it stops (FR-ING-2).
+
+**Decision and alternatives**
+
+- Do not integrate yet.
+- Ask for access through the advisors, describing the academic project, the private and public applications, and asking for the terms of use and the points under "What is not known". Do not request video or raw Wi-Fi data.
+- Keep `commercial_use` and `public_display` as `None` in the manifest until the answer arrives, and record it here.
+- If access is not granted, the proof of concept is not affected: weather comes from IPMA and Open-Meteo, and the rest is synthetic.
+
+---
+
 ## Other sources
 
 These were analyzed but are not in the core set. They are listed so that every source has its status recorded.
@@ -287,7 +380,7 @@ These were analyzed but are not in the core set. They are listed so that every s
 | NASA FIRMS | Open sharing of data, with citation rules for redistribution. Needs a free `MAP_KEY`, limited to 5,000 transactions per 10 minutes. Suomi NPP deliveries end on 2 November 2026, so use NOAA-20 and NOAA-21. Latency is up to 3 hours (NRT), 30 minutes (RT) and 5 minutes (URT). The restrictions section of the FAQ was not visible in the copy reviewed. | Defer. Possible second wildfire source through Incident Source, and training data. Coverage outside the Americas needs checking. |
 | CelesTrak | No redistribution terms stated. | Discard. |
 | OpenAQ | License depends on the original source, with attribution when applicable. | Discard. No user story uses air quality. |
-| ENTSO-E, JRC REMON, EMEL, Aveiro Living Lab | Not checked, out of scope. EMEL covers only Lisbon. | Discard. |
+| ENTSO-E, JRC REMON, EMEL | Not checked, out of scope. EMEL covers only Lisbon. | Discard. |
 
 ## Open actions
 
@@ -300,4 +393,5 @@ These were analyzed but are not in the core set. They are listed so that every s
 | Read the HERE platform terms and Acceptable Use Policy, and evaluate self-hosted routing | HERE | to assign | open |
 | Record the license of each dataset before import | dados.gov.pt | to assign | open |
 | Ask VOST Portugal and ANEPC about reuse of the occurrences feed | VOST / ANEPC | to assign | open |
+| Ask for ATCLL API access for academic use, and for its terms of use, data available and data controller | ATCLL | to assign | open |
 | Fill `commercial_use`, `public_display` and attribution in each plugin manifest as answers arrive | All plugins | to assign | open |

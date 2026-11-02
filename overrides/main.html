@@ -7,9 +7,7 @@
      modo escuro — os dois <link> coexistem, o browser escolhe consoante
      "prefers-color-scheme". #}
   <link rel="icon" href="{{ 'assets/logo-mono-white.svg' | url }}" media="(prefers-color-scheme: dark)">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,400..600;1,400..600&family=JetBrains+Mono:wght@400..500&display=swap">
+  <link rel="preload" href="{{ 'assets/fonts/geist-latin-wght-normal.woff2' | url }}" as="font" type="font/woff2" crossorigin>
   <script>document.documentElement.classList.add("ad-js");try{["ad-nav-collapsed","ad-toc-collapsed"].forEach(function(k){if(localStorage.getItem(k))document.documentElement.classList.add(k)})}catch(e){}</script>
 {% endblock %}
 {% block site_nav %}
@@ -27,7 +25,7 @@
               <p class="ad-minute-label">Attendees · {{ minute.participants | length }}</p>
               <ul class="ad-minute-people">
                 {% for person in minute.participants %}
-                  <li><span>{{ person.name }}</span><span>{{ person.id }}</span></li>
+                  <li><span>{{ person.name }}</span></li>
                 {% endfor %}
               </ul>
             {% endif %}

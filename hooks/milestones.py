@@ -9,14 +9,31 @@ PLACEHOLDER = "<!-- milestones -->"
 COLOURS = ["ad-c-teal", "ad-c-blue", "ad-c-violet", "ad-c-teal"]
 
 
+def drafts(docs_dir):
+    """Milestone pages marked `draft: true` in their front-matter.
+
+    Drafts stay in the repository but are left out of the nav, the hub,
+    the journey and the built site. Remove the flag to publish them again.
+    """
+    found = set()
+    for path in Path(docs_dir, "milestones").glob("ms*/*.md"):
+        _, meta = get_data(path.read_text(encoding="utf-8"))
+        if meta.get("draft"):
+            found.add(path.relative_to(docs_dir).as_posix())
+    return found
+
+
 def milestones(docs_dir):
     found = []
+    hidden = drafts(docs_dir)
     for folder in Path(docs_dir, "milestones").iterdir():
         match = FOLDER.match(folder.name)
         if not folder.is_dir() or not match:
             continue
         pages = []
         for path in folder.glob("*.md"):
+            if f"milestones/{folder.name}/{path.name}" in hidden:
+                continue
             body, meta = get_data(path.read_text(encoding="utf-8"))
             heading = HEADING.search(body)
             pages.append({
@@ -45,6 +62,14 @@ def on_config(config, **kwargs):
                     sections.append({f"MS{milestone['number']} - {milestone['name']}": pages})
             item["Milestones"] = ["milestones/index.md"] + sections
     return config
+
+
+def on_files(files, config, **kwargs):
+    hidden = drafts(config["docs_dir"])
+    for file in list(files):
+        if file.src_uri in hidden:
+            files.remove(file)
+    return files
 
 
 def on_page_markdown(markdown, page, config, **kwargs):

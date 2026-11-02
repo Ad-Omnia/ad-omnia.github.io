@@ -1,7 +1,9 @@
 (function () {
   "use strict";
 
-  var PDFJS = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/";
+  // pdf.js 3.11.174 is served from this site (javascripts/vendor/pdfjs/), not a CDN,
+  // so opening a deck sends no visitor IP to a third party (GDPR analysis, section 10).
+  var PDFJS = new URL("vendor/pdfjs/", (document.currentScript && document.currentScript.src) || location.href).href;
   var loader = null;
 
   function pdfjs() {

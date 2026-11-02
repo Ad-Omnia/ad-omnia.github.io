@@ -2,11 +2,11 @@
 
 ## Participants
 
-- Bernardo Reis 126004
-- Diogo Silva 125240
-- Fernando Santos 124808
-- Guilherme Martins 125260
-- Miguel Neto 125200
+- Bernardo Reis
+- Diogo Silva
+- Fernando Santos
+- Guilherme Martins
+- Miguel Neto
 
 ## Date and time
 
