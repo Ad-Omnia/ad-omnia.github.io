@@ -1,7 +1,7 @@
 ---
 date: 2026-10-11
 order: 9
-description: Elaboration slides
+description: Construction slides
 downloads:
   - label: PDF
     href: presentations/Ad-Omnia_Presentation3.pdf
