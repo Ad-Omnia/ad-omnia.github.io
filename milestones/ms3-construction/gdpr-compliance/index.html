@@ -1,0 +1,3056 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="How Ad Omnia handles personal data, the laws that apply and what each agency needs before going live">
+      
+      
+      
+        <link rel="canonical" href="https://ad-omnia.github.io/milestones/ms3-construction/gdpr-compliance/">
+      
+      
+        <link rel="prev" href="../threat_model/">
+      
+      
+        <link rel="next" href="../data-source-licenses/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/logo-mono-black.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>GDPR compliance analysis - Ad Omnia</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/fonts.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  
+  <link rel="icon" href="../../../assets/logo-mono-white.svg" media="(prefers-color-scheme: dark)">
+  <link rel="preload" href="../../../assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <script>document.documentElement.classList.add("ad-js");try{["ad-nav-collapsed","ad-toc-collapsed"].forEach(function(k){if(localStorage.getItem(k))document.documentElement.classList.add(k)})}catch(e){}</script>
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#gdpr-compliance-analysis" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Ad Omnia" class="md-header__button md-logo" aria-label="Ad Omnia" data-md-component="logo">
+      
+  <img src="../../../assets/logo-colour-black.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="M4 6h16"/><path d="M4 18h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Ad Omnia
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              GDPR compliance analysis
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Ad-Omnia/ad-omnia.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ad-Omnia/ad-omnia.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../journey/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Journey
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Milestones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../minutes/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Minutes
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../team/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Team
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+  
+    
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Ad Omnia" class="md-nav__button md-logo" aria-label="Ad Omnia" data-md-component="logo">
+      
+  <img src="../../../assets/logo-colour-black.svg" alt="logo">
+
+    </a>
+    Ad Omnia
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Ad-Omnia/ad-omnia.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ad-Omnia/ad-omnia.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../journey/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Journey
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Milestones
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Milestones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MS1 - Inception
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MS1 - Inception
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms1-inception/project-description/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project description
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms1-inception/calendar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project calendar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms1-inception/communication-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Communication plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms1-inception/presentation-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presentation 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MS2 - Elaboration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MS2 - Elaboration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms2-elaboration/personas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Personas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms2-elaboration/user-stories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User stories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms2-elaboration/use-cases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use cases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms2-elaboration/requirements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Requirements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms2-elaboration/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architeture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms2-elaboration/data-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms2-elaboration/brand-identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Brand identity guidelines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms2-elaboration/work-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ad Omnia work plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms2-elaboration/presentation-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presentation 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MS3 - Construction
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MS3 - Construction
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../threat_model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GDPR compliance analysis
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GDPR compliance analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#at-a-glance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        At a glance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#legal-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. The legal framework
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Who is responsible?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. What personal data does Ad Omnia touch?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. The seven principles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lawful-basis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Lawful basis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Rights of the people in the data
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Rights of the people in the data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#immutable-audit-log-vs-the-right-to-erasure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Immutable audit log vs. the right to erasure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Security of processing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accountability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Accountability
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Accountability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dpia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data protection impact assessment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#records" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Record of processing activities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-protection-officer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data protection officer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transfers-outside-the-eu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transfers outside the EU
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. AI and anonymisation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. AI and anonymisation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anonymised-or-only-pseudonymised" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Anonymised or only pseudonymised?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-ai-act" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The AI Act
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#go-live" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Before go-live
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-source-licenses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data source licenses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../software-licenses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software licenses and intellectual property
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../accessibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accessibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../videos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Videos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../presentation-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presentation 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MS4 - Transition
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MS4 - Transition
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms4-transition/ms4-soon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coming soon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../minutes/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minutes
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Minutes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-09-23_Minute1_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 1 · 23 Sep 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-09-30_Minute2_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 2 · 30 Sep 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-10-06_Minute3_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 3 · 6 Oct 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-10-07_Minute4_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 4 · 7 Oct 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-10-14_Minute5_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 5 · 14 Oct 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-10-29_Minute6_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 6 · 29 Oct 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-11-05_Minute7_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 7 · 5 Nov 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../team/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Team
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#at-a-glance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        At a glance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#legal-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. The legal framework
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Who is responsible?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. What personal data does Ad Omnia touch?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. The seven principles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lawful-basis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Lawful basis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Rights of the people in the data
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Rights of the people in the data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#immutable-audit-log-vs-the-right-to-erasure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Immutable audit log vs. the right to erasure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Security of processing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accountability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Accountability
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Accountability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dpia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data protection impact assessment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#records" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Record of processing activities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-protection-officer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data protection officer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transfers-outside-the-eu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transfers outside the EU
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. AI and anonymisation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. AI and anonymisation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anonymised-or-only-pseudonymised" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Anonymised or only pseudonymised?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-ai-act" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The AI Act
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#go-live" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Before go-live
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+  
+
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+  
+    <div class="ad-doc-actions">
+      
+        <a class="ad-doc-action" href="../gdpr-compliance.md" download target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>Markdown
+        </a>
+      
+      <button class="ad-doc-action ad-doc-action--icon" type="button" onclick="window.print()" title="Print" aria-label="Print">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg>
+      </button>
+    </div>
+  
+  
+                  
+
+
+  
+  
+
+
+<h1 id="gdpr-compliance-analysis">GDPR compliance analysis</h1>
+<p class="ad-lede">Ad Omnia brings together emergency data from Civil Protection, INEM and the security forces into one operational picture. Most of that data is about places, vehicles and events, but some of it is about people: the operators who use the platform, the crews of the vehicles on the map and, above all, the citizens involved in an incident. This report explains which personal data the platform processes, which laws govern it, how the platform is designed to comply, and what an agency must put in place before using it with real data.</p>
+
+<div class="ad-meta">
+<p><span><strong>Scope:</strong> private app (control room), public app (citizens), AI engine, plugins</span>
+<span><strong>Based on:</strong> <a href="../../ms2-elaboration/requirements/">requirements</a>, <a href="../../ms2-elaboration/data-model/">data model</a>, <a href="../../ms2-elaboration/architecture/">architecture</a></span>
+<span><strong>Version:</strong> 29/10/2026</span></p>
+</div>
+<h2 id="at-a-glance">At a glance</h2>
+<div class="ad-glance">
+<div class="ad-tile is-ok">
+<p><span class="ad-pill is-ok">Built in</span></p>
+<p><strong>Public app shows only what is not confidential</strong></p>
+<p>Citizens use it without an account and see only validated incidents: type, status and approximate location. Casualties, police incidents and other confidential details never reach it (<span class="ad-id">NFR-SEC-3</span>, <span class="ad-id">FR-PUB-3</span>, <span class="ad-id">FR-PUB-7</span>). <a class="ad-cite" href="https://gdpr-info.eu/art-5-gdpr/" title="GDPR Article 5 — Principles">Art. 5(1)(c) GDPR</a></p>
+</div>
+<div class="ad-tile is-ok">
+<p><span class="ad-pill is-ok">Built in</span></p>
+<p><strong>A human decides, not the AI</strong></p>
+<p>Recommendations are applied only after explicit operator confirmation (<span class="ad-id">FR-REC-3</span>), so no decision is based <em>solely</em> on automated processing. <a class="ad-cite" href="https://gdpr-info.eu/art-22-gdpr/" title="GDPR Article 22 — Automated individual decision-making">Art. 22 GDPR</a></p>
+</div>
+<div class="ad-tile is-warn">
+<p><span class="ad-pill is-warn">Before go-live</span></p>
+<p><strong>Offence data and exact locations in real feeds</strong></p>
+<p>Victim information from INEM arrives anonymised, but police feeds can include offence data and an exact incident address can identify people. A DPIA is mandatory before going live. <a class="ad-cite" href="https://gdpr-info.eu/art-10-gdpr/" title="GDPR Article 10 — Criminal convictions and offences">Art. 10</a> <a class="ad-cite" href="https://gdpr-info.eu/art-35-gdpr/" title="GDPR Article 35 — Data protection impact assessment">Art. 35 GDPR</a></p>
+</div>
+<div class="ad-tile is-warn">
+<p><span class="ad-pill is-warn">Before go-live</span></p>
+<p><strong>Immutable audit log vs. right to erasure</strong></p>
+<p>Resolved by the legal-obligation exception, as long as the log stores IDs and not personal details. <a class="ad-cite" href="https://gdpr-info.eu/art-17-gdpr/" title="GDPR Article 17 — Right to erasure">Art. 17(3)(b) GDPR</a></p>
+</div>
+<div class="ad-tile is-warn">
+<p><span class="ad-pill is-warn">Before go-live</span></p>
+<p><strong>Dispatch AI is "high-risk" under the AI Act</strong></p>
+<p>Resource dispatch recommendations fall under Annex III, point 5(d). Obligations apply from 2 December 2027. <a class="ad-cite" href="https://artificialintelligenceact.eu/annex/3/" title="AI Act Annex III — High-risk AI systems">Annex III AI Act</a></p>
+</div>
+<div class="ad-tile is-ok">
+<p><span class="ad-pill is-ok">Built in</span></p>
+<p><strong>Operational data stays in the control room</strong></p>
+<p>The private app runs on-premises, and data only flows out to the public app, never in (<span class="ad-id">NFR-SEC-2</span>). Confidential source data stays inside the plugin that brings it in and is reached only through the plugin architecture. No transfer outside the EU is needed. <a class="ad-cite" href="https://gdpr-info.eu/art-25-gdpr/" title="GDPR Article 25 — Data protection by design and by default">Art. 25 GDPR</a> <a class="ad-cite" href="https://gdpr-info.eu/art-45-gdpr/" title="GDPR Article 45 — Transfers on the basis of an adequacy decision">Art. 44 GDPR</a></p>
+</div>
+</div>
+<details class="info">
+<summary>How to read this report</summary>
+<ul>
+<li><strong>Status labels</strong> show where each topic stands: <span class="ad-pill is-ok">Built in</span> the platform's design already complies; <span class="ad-pill is-warn">Before go-live</span> must be in place before the platform processes real personal data, by the agency, by Ad Omnia as supplier, or both (see the <a href="#go-live">checklist</a>); <span class="ad-pill is-na">Not applicable</span> the rule does not apply, with the reason.</li>
+<li><strong>Citations</strong> like <a class="ad-cite" href="https://gdpr-info.eu/art-5-gdpr/" title="GDPR Article 5 — Principles">Art. 5 GDPR</a> open the legal text in a new tab. GDPR articles link to an article-by-article reader; the official texts are listed in <a href="#references">References</a>.</li>
+<li><strong>Requirement codes</strong> such as <span class="ad-id">FR-REC-3</span> or <span class="ad-id">NFR-SEC-2</span> refer to the platform's <a href="../../ms2-elaboration/requirements/">requirements</a>, so every claim can be traced to the design.</li>
+<li>This report is a technical analysis, not legal advice. Each agency should validate it with its own Data Protection Officer before deployment.</li>
+</ul>
+</details>
+<h2 id="legal-framework">1. The legal framework</h2>
+<p>Data protection is a fundamental right in the EU <a class="ad-cite" href="https://eur-lex.europa.eu/eli/treaty/char_2012/oj" title="Charter of Fundamental Rights of the EU — EUR-Lex">Art. 8 Charter</a> <a class="ad-cite" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:12012E/TXT" title="Treaty on the Functioning of the EU — EUR-Lex">Art. 16(1) TFEU</a> and in Portugal <a class="ad-cite" href="https://www.parlamento.pt/Legislacao/Paginas/ConstituicaoRepublicaPortuguesa.aspx" title="Constituição da República Portuguesa — Parlamento">Art. 35 CRP</a>. These are the instruments that apply to Ad Omnia, from most to least central:</p>
+<div class="ad-law-grid">
+<div class="ad-law">
+<p><span class="ad-law-tag">EU regulation · core</span></p>
+<p><strong><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" title="Regulation (EU) 2016/679 (GDPR) — EUR-Lex">GDPR — Regulation (EU) 2016/679</a></strong></p>
+<p>Applies directly in every Member State since 25 May 2018, without transposition. Governs all personal data processed by the private app and the public app.</p>
+</div>
+<div class="ad-law">
+<p><span class="ad-law-tag">PT law · core</span></p>
+<p><strong><a href="https://diariodarepublica.pt/dr/detalhe/lei/58-2019-123815982" title="Lei n.º 58/2019, de 8 de agosto — Diário da República">Lei n.º 58/2019</a></strong></p>
+<p>Executes the GDPR in Portugal: names the CNPD as supervisory authority and fills the GDPR's open clauses (DPOs in public bodies, retention, employment, health data, research, fines on public entities).</p>
+</div>
+<div class="ad-law">
+<p><span class="ad-law-tag">EU directive + PT law · police data</span></p>
+<p><strong><a href="https://eur-lex.europa.eu/eli/dir/2016/680/oj" title="Directive (EU) 2016/680 — EUR-Lex">Directive (EU) 2016/680</a> · <a href="https://diariodarepublica.pt/dr/detalhe/lei/59-2019-123815983" title="Lei n.º 59/2019, de 8 de agosto — Diário da República">Lei n.º 59/2019</a></strong></p>
+<p>The GDPR does not cover processing by competent authorities to prevent, investigate or prosecute crime <a class="ad-cite" href="https://gdpr-info.eu/art-2-gdpr/" title="GDPR Article 2 — Material scope">Art. 2(2)(d) GDPR</a>. If PSP/GNR use the platform for those purposes, this regime applies instead.</p>
+</div>
+<div class="ad-law">
+<p><span class="ad-law-tag">EU regulation · AI</span></p>
+<p><strong><a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj" title="Regulation (EU) 2024/1689 (AI Act) — EUR-Lex">AI Act — Regulation (EU) 2024/1689</a></strong></p>
+<p>Classifies AI used to dispatch or prioritise police, firefighters and medical aid as high-risk. Amended by the Digital Omnibus, <a href="https://www.aiacto.eu/en/blog/digital-omnibus-ai-act-report-2027" title="Digital Omnibus on AI — Regulation (EU) 2026/1744 (summary)">Regulation (EU) 2026/1744</a>, which moved the Annex III deadline to 2 December 2027.</p>
+</div>
+<div class="ad-law">
+<p><span class="ad-law-tag">EU directive + PT law · security</span></p>
+<p><strong><a href="https://eur-lex.europa.eu/eli/dir/2022/2555/oj" title="Directive (EU) 2022/2555 (NIS2) — EUR-Lex">NIS2 — Directive (EU) 2022/2555</a> · <a href="https://files.diariodarepublica.pt/1s/2025/12/23400/0000400068.pdf" title="Decreto-Lei n.º 125/2025, de 4 de dezembro — Diário da República">Decreto-Lei n.º 125/2025</a></strong></p>
+<p>Cybersecurity regime for essential and important entities, including public administration. Agencies running the platform must notify significant incidents within 24 hours, alongside any GDPR breach notification.</p>
+</div>
+<div class="ad-law">
+<p><span class="ad-law-tag">EU directive + PT law · websites</span></p>
+<p><strong><a href="https://eur-lex.europa.eu/eli/dir/2002/58/oj" title="Directive 2002/58/EC (ePrivacy) — EUR-Lex">ePrivacy Directive 2002/58/EC</a> · <a href="https://diariodarepublica.pt/dr/detalhe/lei/41-2004-480710" title="Lei n.º 41/2004, de 18 de agosto — Diário da República">Lei n.º 41/2004</a></strong></p>
+<p>Storing or reading anything on a visitor's device (cookies, localStorage) needs consent unless it is strictly necessary for a service the visitor asked for <a class="ad-cite" href="https://eur-lex.europa.eu/eli/dir/2002/58/oj" title="Directive 2002/58/EC (ePrivacy) — EUR-Lex">Art. 5(3) ePrivacy</a> <a class="ad-cite" href="https://diariodarepublica.pt/dr/detalhe/lei/41-2004-480710" title="Lei n.º 41/2004, de 18 de agosto — Diário da República">Art. 5 Lei 41/2004</a>.</p>
+</div>
+<div class="ad-law">
+<p><span class="ad-law-tag">PT law · sector</span></p>
+<p><strong><a href="https://diariodarepublica.pt/dr/detalhe/lei/27-2006-537862" title="Lei n.º 27/2006, de 3 de julho — Diário da República">Lei n.º 27/2006 — Lei de Bases da Proteção Civil</a></strong></p>
+<p>Defines civil protection as a public task. This is the national law that gives agencies their lawful basis for processing operational data <a class="ad-cite" href="https://gdpr-info.eu/art-6-gdpr/" title="GDPR Article 6 — Lawfulness of processing">Art. 6(1)(e) and 6(3) GDPR</a>.</p>
+</div>
+<div class="ad-law">
+<p><span class="ad-law-tag">CNPD regulation · DPIA list</span></p>
+<p><strong><a href="https://omcentro.com/ficheiros/docs/r_798_2018.pdf" title="CNPD Regulamento n.º 798/2018 — list of processing subject to DPIA">CNPD Regulamento n.º 798/2018</a></strong></p>
+<p>The Portuguese list of processing operations that always require a DPIA <a class="ad-cite" href="https://gdpr-info.eu/art-35-gdpr/" title="GDPR Article 35 — Data protection impact assessment">Art. 35(4) GDPR</a>. Several items match Ad Omnia (see <a href="#dpia">§ 8</a>).</p>
+</div>
+</div>
+<h2 id="roles">2. Who is responsible?</h2>
+<p>The GDPR assigns obligations by role. The <strong>controller</strong> decides why and how data is processed <a class="ad-cite" href="https://gdpr-info.eu/art-4-gdpr/" title="GDPR Article 4 — Definitions">Art. 4(7) GDPR</a>; a <strong>processor</strong> processes it on the controller's behalf <a class="ad-cite" href="https://gdpr-info.eu/art-4-gdpr/" title="GDPR Article 4 — Definitions">Art. 4(8) GDPR</a>, under a written contract <a class="ad-cite" href="https://gdpr-info.eu/art-28-gdpr/" title="GDPR Article 28 — Processor">Art. 28 GDPR</a> <a class="ad-cite" href="https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en" title="EDPB Guidelines 07/2020">EDPB Guidelines 07/2020</a>. In a deployment, the roles are:</p>
+<table>
+<thead>
+<tr>
+<th>Who</th>
+<th>Role</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Each agency (ANEPC, INEM, PSP, GNR, municipal civil protection)</td>
+<td><strong>Controller</strong> of the data it brings in and the actions of its control room</td>
+<td>It decides the purposes (emergency response) under its own legal mandate. The private app is installed on-premises in each control room.</td>
+</tr>
+<tr>
+<td>Agencies sharing one operational picture</td>
+<td>Possibly <strong>joint controllers</strong></td>
+<td>If they jointly decide what is shared and how, they need an arrangement setting out who answers data subjects <a class="ad-cite" href="https://gdpr-info.eu/art-26-gdpr/" title="GDPR Article 26 — Joint controllers">Art. 26 GDPR</a>.</td>
+</tr>
+<tr>
+<td>Ad Omnia (as supplier)</td>
+<td><strong>Processor</strong>, only when it supports, maintains or hosts</td>
+<td>It acts on documented instructions and needs an Art. 28 contract covering confidentiality, security, sub-processors, deletion at the end of the contract and audits <a class="ad-cite" href="https://gdpr-info.eu/art-28-gdpr/" title="GDPR Article 28 — Processor">Art. 28(3) GDPR</a>.</td>
+</tr>
+<tr>
+<td>Plugin and data-source providers</td>
+<td>Independent controllers of their own sources; processors only if they process agency data</td>
+<td>A public API such as Fogos.pt is a source, not a processor. A hosted plugin that receives agency data would be a sub-processor.</td>
+</tr>
+<tr>
+<td>PSP/GNR acting for crime prevention or investigation</td>
+<td>Competent authorities under <a href="https://diariodarepublica.pt/dr/detalhe/lei/59-2019-123815983" title="Lei n.º 59/2019, de 8 de agosto — Diário da República">Lei n.º 59/2019</a></td>
+<td>That processing falls outside the GDPR <a class="ad-cite" href="https://gdpr-info.eu/art-2-gdpr/" title="GDPR Article 2 — Material scope">Art. 2(2)(d) GDPR</a>; access to it must stay separated from the GDPR-governed operational data.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">The current proof of concept</p>
+<p>The 2026/27 proof of concept currently runs on public open data (such as Fogos.pt), synthetic data from the simulation module and test records. It can also work with real operational data, for example in a pilot with an agency or with a dataset an agency provides. When it does, the roles above apply and the agency and Ad Omnia agree in writing who is controller and who is processor before any data is shared <a class="ad-cite" href="https://gdpr-info.eu/art-28-gdpr/" title="GDPR Article 28 — Processor">Arts. 26 and 28 GDPR</a>.</p>
+</div>
+<h2 id="data-map">3. What personal data does Ad Omnia touch?</h2>
+<p>Personal data is any information about an identified or <em>identifiable</em> person, directly or indirectly, including location data and online identifiers <a class="ad-cite" href="https://gdpr-info.eu/art-4-gdpr/" title="GDPR Article 4 — Definitions">Art. 4(1) GDPR</a>. That is broader than it looks: a station ID that can be matched to the operator on shift, an incident address or a vehicle position can all identify someone. Data that is truly anonymous is outside the GDPR <a class="ad-cite" href="https://gdpr-info.eu/recitals/no-26/" title="GDPR Recital 26 — Not applicable to anonymous data">Recital 26 GDPR</a>.</p>
+<div class="ad-legend">
+<p><span class="ad-pill is-gap">Art. 10</span> offence data <a class="ad-cite" href="https://gdpr-info.eu/art-10-gdpr/" title="GDPR Article 10 — Criminal convictions and offences">Art. 10</a>
+<span class="ad-pill is-warn">Personal</span> identifies or can identify someone
+<span class="ad-pill is-ok">Not personal</span> aggregated, synthetic or about objects</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Data and where it lives</th>
+<th>Type</th>
+<th>Whose data</th>
+<th>Why it is processed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Station name and license hash<br><span class="ad-where"><code>users</code></span></td>
+<td><span class="ad-pill is-warn">Personal</span></td>
+<td>Control-room operators (indirectly: a station plus the shift roster identifies a person)</td>
+<td>Access control (<span class="ad-id">NFR-SEC-1</span>) and accountability (<span class="ad-id">US-3</span>, <span class="ad-id">US-8</span>)</td>
+</tr>
+<tr>
+<td>Who did what, and when<br><span class="ad-where"><code>audit_log</code> and the <code>*_by</code> / <code>decision_reason</code> columns</span></td>
+<td><span class="ad-pill is-warn">Personal</span></td>
+<td>Operators</td>
+<td>Traceability of operational decisions (<span class="ad-id">FR-AUD-1</span>, <span class="ad-id">FR-AUD-2</span>, <span class="ad-id">FR-REC-3</span>)</td>
+</tr>
+<tr>
+<td>Incident description, location and source fields<br><span class="ad-where"><code>incident</code> (description, location, source fields), <code>observation</code></span></td>
+<td><span class="ad-pill is-warn">Personal</span> possible</td>
+<td>Callers, residents of the address; victims only through anonymised INEM data</td>
+<td>The operational picture itself (<span class="ad-id">US-1</span>, <span class="ad-id">US-3</span>). Victim information comes from the INEM API already anonymised, so it is not personal data for Ad Omnia <a class="ad-cite" href="https://gdpr-info.eu/recitals/no-26/" title="GDPR Recital 26 — Not applicable to anonymous data">Recital 26 GDPR</a>. An exact address can still point to a person, so locations are treated as personal data</td>
+</tr>
+<tr>
+<td>Order content<br><span class="ad-where"><code>orders.content</code></span></td>
+<td><span class="ad-pill is-warn">Personal</span> possible</td>
+<td>People named in the instruction</td>
+<td>Instructions to field teams (<span class="ad-id">FR-INC-3</span>)</td>
+</tr>
+<tr>
+<td>Offence-related information<br><span class="ad-where">Police feed plugins: the plugin's own database, private app only</span></td>
+<td><span class="ad-pill is-gap">Art. 10</span> possible</td>
+<td>Suspects, victims</td>
+<td>Situational awareness; only under official authority <a class="ad-cite" href="https://gdpr-info.eu/art-10-gdpr/" title="GDPR Article 10 — Criminal convictions and offences">Art. 10 GDPR</a></td>
+</tr>
+<tr>
+<td>Vehicle callsign and position<br><span class="ad-where"><code>asset</code> (callsign, last position), <code>observation</code></span></td>
+<td><span class="ad-pill is-warn">Personal</span></td>
+<td>Crews of the vehicle (employees)</td>
+<td>Showing available resources (<span class="ad-id">US-1</span>, <span class="ad-id">US-7</span>)</td>
+</tr>
+<tr>
+<td>Aircraft tracks<br><span class="ad-where">ADS-B plugin (ICAO address, position)</span></td>
+<td><span class="ad-pill is-warn">Personal</span> possible</td>
+<td>Owners/pilots of non-agency aircraft</td>
+<td>Tracking aerial assets</td>
+</tr>
+<tr>
+<td>Predictions, risk ratings, simulation results<br><span class="ad-where"><code>prediction</code>, <code>risk_rating</code>, <code>simulation_*</code></span></td>
+<td><span class="ad-pill is-ok">Not personal</span></td>
+<td>—</td>
+<td>Aggregated or synthetic by design (<span class="ad-id">FR-PRD-2</span>, <span class="ad-id">FR-PRD-3</span>)</td>
+</tr>
+<tr>
+<td>Public incidents and warnings<br><span class="ad-where">Public app</span></td>
+<td><span class="ad-pill is-ok">Not personal</span></td>
+<td>—</td>
+<td>Approximate location, type and status only; no casualties, police incidents or other confidential information (<span class="ad-id">FR-PUB-3</span>, <span class="ad-id">FR-PUB-7</span>)</td>
+</tr>
+<tr>
+<td>Visitor IP addresses<br><span class="ad-where">Reverse-proxy logs of the public app</span></td>
+<td><span class="ad-pill is-warn">Personal</span></td>
+<td>Citizens</td>
+<td>Security and abuse prevention. Dynamic IPs are personal data <a class="ad-cite" href="https://curia.europa.eu/juris/liste.jsf?num=C-582/14" title="CJEU C-582/14 Breyer">CJEU C-582/14 Breyer</a> <a class="ad-cite" href="https://gdpr-info.eu/recitals/no-30/" title="GDPR Recital 30 — Online identifiers">Recital 30 GDPR</a></td>
+</tr>
+<tr>
+<td>AI training data<br><span class="ad-where">Historical incidents and observations</span></td>
+<td><span class="ad-pill is-warn">Personal</span> unless anonymised</td>
+<td>Everyone above</td>
+<td>Training the predictive engine (<span class="ad-id">US-6</span>, <span class="ad-id">US-16</span>)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">The single biggest lever: keep free text out of the core</p>
+<p>Almost every risk of identifying someone enters through three free-text or JSON fields: <code>incident.description</code>, <code>orders.content</code> and the <code>source_specific_*</code> columns. Connector plugins should map source data to structured, non-identifying fields (type, severity, location, counts) and drop names, phone numbers and clinical notes at ingestion. This is data minimisation applied at the boundary <a class="ad-cite" href="https://gdpr-info.eu/art-5-gdpr/" title="GDPR Article 5 — Principles">Art. 5(1)(c) GDPR</a> and data protection by design <a class="ad-cite" href="https://gdpr-info.eu/art-25-gdpr/" title="GDPR Article 25 — Data protection by design and by default">Art. 25(1) GDPR</a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Confidential data stays inside plugins</p>
+<p>Every external source, including INEM and police feeds, connects through a sandboxed plugin. Detailed or confidential data from a source (casualties, police incidents, source-specific fields) is kept in the plugin's own database and can only be reached through the Plugin Validation Broker, from the private app. The core and the public app receive only what the plugin exposes for the shared picture, and the public app only what is not confidential. This keeps each kind of sensitive data with the plugin, and the agency, responsible for it <a class="ad-cite" href="https://gdpr-info.eu/art-25-gdpr/" title="GDPR Article 25 — Data protection by design and by default">Art. 25 GDPR</a> <a class="ad-cite" href="https://gdpr-info.eu/art-5-gdpr/" title="GDPR Article 5 — Principles">Art. 5(1)(c) GDPR</a>.</p>
+</div>
+<h2 id="principles">4. The seven principles</h2>
+<p>Every processing operation has to respect the principles of <a class="ad-cite" href="https://gdpr-info.eu/art-5-gdpr/" title="GDPR Article 5 — Principles">Art. 5 GDPR</a>, and the controller must be able to <em>demonstrate</em> it <a class="ad-cite" href="https://gdpr-info.eu/art-5-gdpr/" title="GDPR Article 5 — Principles">Art. 5(2) GDPR</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Principle</th>
+<th>What it asks</th>
+<th>How Ad Omnia complies</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Lawfulness, fairness, transparency</strong> <a class="ad-cite" href="https://gdpr-info.eu/art-5-gdpr/" title="GDPR Article 5 — Principles">5(1)(a)</a></td>
+<td>A legal basis, and people are told what happens to their data</td>
+<td>Legal bases mapped in <a href="#lawful-basis">§ 5</a>. Each agency must publish a privacy notice for the public app and inform its operators</td>
+<td><span class="ad-pill is-warn">Before go-live</span></td>
+</tr>
+<tr>
+<td><strong>Purpose limitation</strong> <a class="ad-cite" href="https://gdpr-info.eu/art-5-gdpr/" title="GDPR Article 5 — Principles">5(1)(b)</a></td>
+<td>Collected for explicit purposes, not reused for incompatible ones</td>
+<td>Each entity in the data model records its rationale (user story). Simulations never write to live tables (<span class="ad-id">FR-PRD-2</span>). Reusing operational data to train AI is a further purpose: needs the compatibility test of <a class="ad-cite" href="https://gdpr-info.eu/art-6-gdpr/" title="GDPR Article 6 — Lawfulness of processing">Art. 6(4)</a> or the research route of <a class="ad-cite" href="https://gdpr-info.eu/art-89-gdpr/" title="GDPR Article 89 — Safeguards for research and statistics">Art. 89</a></td>
+<td><span class="ad-pill is-warn">Before go-live</span></td>
+</tr>
+<tr>
+<td><strong>Data minimisation</strong> <a class="ad-cite" href="https://gdpr-info.eu/art-5-gdpr/" title="GDPR Article 5 — Principles">5(1)(c)</a></td>
+<td>Only what is needed</td>
+<td>Public app: zero personal identifiers (<span class="ad-id">NFR-SEC-3</span>), approximate location (<span class="ad-id">FR-PUB-3</span>), no operational fields (<span class="ad-id">FR-PUB-7</span>). Confidential source data stays in plugins and is reached only through the plugin architecture. Stations, not individuals, hold licenses. Free-text fields are filtered at ingestion (<a href="#data-map">§ 3</a>)</td>
+<td><span class="ad-pill is-ok">Built in</span></td>
+</tr>
+<tr>
+<td><strong>Accuracy</strong> <a class="ad-cite" href="https://gdpr-info.eu/art-5-gdpr/" title="GDPR Article 5 — Principles">5(1)(d)</a></td>
+<td>Correct and up to date</td>
+<td>Per-source trust level and staleness threshold; outdated sources are flagged (<span class="ad-id">FR-ING-2</span>, <span class="ad-id">NFR-AVL-1</span>); duplicates are merged, not lost (Incident Relation)</td>
+<td><span class="ad-pill is-ok">Built in</span></td>
+</tr>
+<tr>
+<td><strong>Storage limitation</strong> <a class="ad-cite" href="https://gdpr-info.eu/art-5-gdpr/" title="GDPR Article 5 — Principles">5(1)(e)</a></td>
+<td>Kept no longer than needed</td>
+<td>No retention period is defined yet for incidents, observations, orders or logs. In Portugal the period is the one set by law, otherwise what the purpose requires, then data must be destroyed or anonymised <a class="ad-cite" href="https://diariodarepublica.pt/dr/detalhe/lei/58-2019-123815982" title="Lei n.º 58/2019, de 8 de agosto — Diário da República">Art. 21 Lei 58/2019</a></td>
+<td><span class="ad-pill is-warn">Before go-live</span></td>
+</tr>
+<tr>
+<td><strong>Integrity and confidentiality</strong> <a class="ad-cite" href="https://gdpr-info.eu/art-5-gdpr/" title="GDPR Article 5 — Principles">5(1)(f)</a></td>
+<td>Protected against unauthorised access, loss and damage</td>
+<td>One-way private→public flow (<span class="ad-id">NFR-SEC-2</span>), licenses stored with slow salted hashes (<span class="ad-id">NFR-SEC-4</span>), tamper-evident records (<span class="ad-id">NFR-INT-1</span>), sandboxed plugins on an internal-only network. Details in <a href="#security">§ 7</a></td>
+<td><span class="ad-pill is-ok">Built in</span></td>
+</tr>
+<tr>
+<td><strong>Accountability</strong> <a class="ad-cite" href="https://gdpr-info.eu/art-5-gdpr/" title="GDPR Article 5 — Principles">5(2)</a></td>
+<td>Prove all of the above</td>
+<td>Immutable audit log of every change and export (<span class="ad-id">FR-AUD-1</span>, <span class="ad-id">FR-AUD-2</span>); this report; a draft record of processing (<a href="#records">§ 8</a>)</td>
+<td><span class="ad-pill is-ok">Built in</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="lawful-basis">5. Lawful basis</h2>
+<p>Processing is lawful only if one of six bases applies <a class="ad-cite" href="https://gdpr-info.eu/art-6-gdpr/" title="GDPR Article 6 — Lawfulness of processing">Art. 6(1) GDPR</a>. Consent is the wrong tool here: a person in an emergency cannot give free consent, and public authorities cannot rely on legitimate interests when performing their tasks <a class="ad-cite" href="https://gdpr-info.eu/art-6-gdpr/" title="GDPR Article 6 — Lawfulness of processing">Art. 6(1), last subparagraph</a>. Instead:</p>
+<div class="ad-steps">
+<ol>
+<li><strong>Operational data in the private app: public task.</strong> Agencies process incident and resource data to perform a task in the public interest laid down by national law <a class="ad-cite" href="https://gdpr-info.eu/art-6-gdpr/" title="GDPR Article 6 — Lawfulness of processing">Art. 6(1)(e) and 6(3) GDPR</a>, e.g. civil protection under <a class="ad-cite" href="https://diariodarepublica.pt/dr/detalhe/lei/27-2006-537862" title="Lei n.º 27/2006, de 3 de julho — Diário da República">Lei n.º 27/2006</a>. Where someone's life is at stake, vital interests also apply <a class="ad-cite" href="https://gdpr-info.eu/art-6-gdpr/" title="GDPR Article 6 — Lawfulness of processing">Art. 6(1)(d) GDPR</a>; the GDPR itself mentions natural and man-made disasters as an example <a class="ad-cite" href="https://gdpr-info.eu/recitals/no-46/" title="GDPR Recital 46 — Vital interests">Recital 46 GDPR</a>.</li>
+<li><strong>Health data (INEM): anonymised at source.</strong> INEM's API provides victim information already anonymised, so it reaches Ad Omnia as non-personal data and Art. 9 does not apply <a class="ad-cite" href="https://gdpr-info.eu/recitals/no-26/" title="GDPR Recital 26 — Not applicable to anonymous data">Recital 26 GDPR</a>. If a feed ever carried identifiable health data, it would be prohibited by default <a class="ad-cite" href="https://gdpr-info.eu/art-9-gdpr/" title="GDPR Article 9 — Special categories of personal data">Art. 9(1) GDPR</a> and would need one of the exceptions: vital interests of a person unable to consent <a class="ad-cite" href="https://gdpr-info.eu/art-9-gdpr/" title="GDPR Article 9 — Special categories of personal data">9(2)(c)</a>, emergency medical care under professional secrecy <a class="ad-cite" href="https://gdpr-info.eu/art-9-gdpr/" title="GDPR Article 9 — Special categories of personal data">9(2)(h) and 9(3)</a> or public health <a class="ad-cite" href="https://gdpr-info.eu/art-9-gdpr/" title="GDPR Article 9 — Special categories of personal data">9(2)(i)</a>, with need-to-know access by bound professionals and access logs <a class="ad-cite" href="https://diariodarepublica.pt/dr/detalhe/lei/58-2019-123815982" title="Lei n.º 58/2019, de 8 de agosto — Diário da República">Art. 29 Lei 58/2019</a>.</li>
+<li><strong>Offence data (police feeds): only under official authority.</strong> Data relating to criminal offences may be processed only under the control of official authority or when authorised by law <a class="ad-cite" href="https://gdpr-info.eu/art-10-gdpr/" title="GDPR Article 10 — Criminal convictions and offences">Art. 10 GDPR</a>. Investigative use goes through <a class="ad-cite" href="https://diariodarepublica.pt/dr/detalhe/lei/59-2019-123815983" title="Lei n.º 59/2019, de 8 de agosto — Diário da República">Lei n.º 59/2019</a>.</li>
+<li><strong>Operators and crews: employment context.</strong> Data about staff is processed within labour law <a class="ad-cite" href="https://diariodarepublica.pt/dr/detalhe/lei/58-2019-123815982" title="Lei n.º 58/2019, de 8 de agosto — Diário da República">Art. 28 Lei 58/2019</a>. Vehicle positions show where resources are; they must not be used to evaluate crews, or the processing becomes employee location tracking that requires a DPIA (<a class="ad-cite" href="https://omcentro.com/ficheiros/docs/r_798_2018.pdf" title="CNPD Regulamento n.º 798/2018 — list of processing subject to DPIA">CNPD list, item 3</a>).</li>
+<li><strong>Public app logs: public task, narrowly.</strong> Short-lived IP logs to keep the service secure are part of running the public information service <a class="ad-cite" href="https://gdpr-info.eu/art-6-gdpr/" title="GDPR Article 6 — Lawfulness of processing">Art. 6(1)(e) GDPR</a>.</li>
+<li><strong>AI training: further processing with safeguards.</strong> Use synthetic data first; then pseudonymised historical data with the safeguards of <a class="ad-cite" href="https://gdpr-info.eu/art-89-gdpr/" title="GDPR Article 89 — Safeguards for research and statistics">Art. 89(1) GDPR</a> and <a class="ad-cite" href="https://diariodarepublica.pt/dr/detalhe/lei/58-2019-123815982" title="Lei n.º 58/2019, de 8 de agosto — Diário da República">Art. 31 Lei 58/2019</a> (minimisation, anonymisation or pseudonymisation where the aim allows).</li>
+</ol>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Not applicable: consent and children's consent</p>
+<p>Consent <a class="ad-cite" href="https://gdpr-info.eu/art-6-gdpr/" title="GDPR Article 6 — Lawfulness of processing">Art. 6(1)(a)</a> and the age-13 rule for information society services <a class="ad-cite" href="https://diariodarepublica.pt/dr/detalhe/lei/58-2019-123815982" title="Lei n.º 58/2019, de 8 de agosto — Diário da República">Art. 16 Lei 58/2019</a> do not apply: the public app has no accounts and processes no personal data of its users beyond security logs, and the private app runs on public-task bases. <span class="ad-pill is-na">Not applicable</span></p>
+</div>
+<h2 id="rights">6. Rights of the people in the data</h2>
+<p>Each right in <a class="ad-cite" href="https://gdpr-info.eu/art-12-gdpr/" title="GDPR Article 12 — Transparent information">Arts. 12–22 GDPR</a> either works normally, is limited by law, or does not apply to a public-task basis. The platform must support the first group and document the rest.</p>
+<table>
+<thead>
+<tr>
+<th>Right</th>
+<th>Article</th>
+<th>How it works in Ad Omnia</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Information</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-13-gdpr/" title="GDPR Article 13 — Information when data is collected from the data subject">13</a> / <a class="ad-cite" href="https://gdpr-info.eu/art-14-gdpr/" title="GDPR Article 14 — Information when data is not obtained from the data subject">14</a></td>
+<td>Operators: notice at onboarding. Incident subjects: data is collected indirectly in an emergency; individual notice is impossible or disproportionate, so a public notice per agency is used <a class="ad-cite" href="https://gdpr-info.eu/art-14-gdpr/" title="GDPR Article 14 — Information when data is not obtained from the data subject">Art. 14(5)(b) GDPR</a>. Public app: short notice about logs</td>
+<td><span class="ad-pill is-warn">Before go-live</span></td>
+</tr>
+<tr>
+<td>Access</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-15-gdpr/" title="GDPR Article 15 — Right of access">15</a></td>
+<td>Historical search by incident and the per-incident audit trail (<span class="ad-id">FR-HIST-1</span>, <span class="ad-id">FR-AUD-1</span>) let an agency find everything about a request. Limited where a legal duty of secrecy applies <a class="ad-cite" href="https://diariodarepublica.pt/dr/detalhe/lei/58-2019-123815982" title="Lei n.º 58/2019, de 8 de agosto — Diário da República">Art. 20 Lei 58/2019</a></td>
+<td><span class="ad-pill is-ok">Built in</span></td>
+</tr>
+<tr>
+<td>Rectification</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-16-gdpr/" title="GDPR Article 16 — Right to rectification">16</a></td>
+<td>Incidents and resources are editable (<span class="ad-id">FR-INC-1</span>); every correction is itself logged</td>
+<td><span class="ad-pill is-ok">Built in</span></td>
+</tr>
+<tr>
+<td>Erasure</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-17-gdpr/" title="GDPR Article 17 — Right to erasure">17</a></td>
+<td>Does not apply while processing is needed for a legal obligation or public task <a class="ad-cite" href="https://gdpr-info.eu/art-17-gdpr/" title="GDPR Article 17 — Right to erasure">17(3)(b)</a> or for legal claims <a class="ad-cite" href="https://gdpr-info.eu/art-17-gdpr/" title="GDPR Article 17 — Right to erasure">17(3)(e)</a>. Free-text personal details must be erasable once the retention period ends — see the spotlight below</td>
+<td><span class="ad-pill is-warn">Before go-live</span></td>
+</tr>
+<tr>
+<td>Restriction</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-18-gdpr/" title="GDPR Article 18 — Right to restriction of processing">18</a></td>
+<td>A "restricted" flag that hides a record from operational views without deleting it, to be added before go-live</td>
+<td><span class="ad-pill is-warn">Before go-live</span></td>
+</tr>
+<tr>
+<td>Portability</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-20-gdpr/" title="GDPR Article 20 — Right to data portability">20</a></td>
+<td>Does not apply to processing necessary for a public task <a class="ad-cite" href="https://gdpr-info.eu/art-20-gdpr/" title="GDPR Article 20 — Right to data portability">Art. 20(3) GDPR</a></td>
+<td><span class="ad-pill is-na">Not applicable</span></td>
+</tr>
+<tr>
+<td>Objection</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-21-gdpr/" title="GDPR Article 21 — Right to object">21</a></td>
+<td>Applies to public-task processing, but the agency can show compelling grounds (emergency response) <a class="ad-cite" href="https://gdpr-info.eu/art-21-gdpr/" title="GDPR Article 21 — Right to object">Art. 21(1) GDPR</a></td>
+<td><span class="ad-pill is-ok">Built in</span></td>
+</tr>
+<tr>
+<td>No solely automated decisions</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-22-gdpr/" title="GDPR Article 22 — Automated individual decision-making">22</a></td>
+<td>Predictions inform; recommendations need explicit confirmation, stored with an optional reason (<span class="ad-id">FR-REC-3</span>). Operators see a justification and a confidence level (<span class="ad-id">FR-REC-1</span>, <span class="ad-id">FR-PRD-1</span>)</td>
+<td><span class="ad-pill is-ok">Built in</span></td>
+</tr>
+</tbody>
+</table>
+<p>Member States may restrict these rights by law for public security, defence or the prevention of crime, provided the restriction is necessary and proportionate <a class="ad-cite" href="https://gdpr-info.eu/art-23-gdpr/" title="GDPR Article 23 — Restrictions">Art. 23 GDPR</a>.</p>
+<div class="ad-spotlight">
+<p class="ad-spotlight-kicker">Spotlight · design tension</p>
+<h3 id="immutable-audit-log-vs-the-right-to-erasure">Immutable audit log vs. the right to erasure</h3>
+<p><strong>The conflict.</strong> <span class="ad-id">NFR-INT-1</span> says no audit, order or decision record can ever be edited or deleted, and <code>init.sql</code> enforces it with a trigger. A person can ask for their data to be erased <a class="ad-cite" href="https://gdpr-info.eu/art-17-gdpr/" title="GDPR Article 17 — Right to erasure">Art. 17(1) GDPR</a>.</p>
+<p><strong>Why it is lawful.</strong> Erasure does not apply when keeping the data is necessary to comply with a legal obligation, to perform a public task, or to defend legal claims <a class="ad-cite" href="https://gdpr-info.eu/art-17-gdpr/" title="GDPR Article 17 — Right to erasure">Art. 17(3)(b) and (e) GDPR</a>. Emergency decision logs are exactly that kind of record.</p>
+<p><strong>What the design must still do.</strong></p>
+<ol>
+<li>Store <strong>references, not personal details</strong>, in <code>audit_log.details</code>: entity IDs and changed field <em>names</em>, never the text of a description or an order.</li>
+<li>Keep personal free text only in the operational tables, where it can be erased or anonymised when its retention period ends <a class="ad-cite" href="https://diariodarepublica.pt/dr/detalhe/lei/58-2019-123815982" title="Lei n.º 58/2019, de 8 de agosto — Diário da República">Art. 21 Lei 58/2019</a>. The audit entry stays valid; it just points to a record that is now anonymised.</li>
+<li>Identify operators by <strong>station ID</strong>, which is pseudonymous on its own <a class="ad-cite" href="https://gdpr-info.eu/art-4-gdpr/" title="GDPR Article 4 — Definitions">Art. 4(5) GDPR</a>; the station-to-person mapping (shift rosters) stays in the agency's own HR systems, outside Ad Omnia.</li>
+</ol>
+</div>
+<h2 id="security">7. Security of processing</h2>
+<p>The controller and processor must implement measures appropriate to the risk, including pseudonymisation and encryption, confidentiality, availability and resilience, and regular testing <a class="ad-cite" href="https://gdpr-info.eu/art-32-gdpr/" title="GDPR Article 32 — Security of processing">Art. 32 GDPR</a>. Data protection must be built in from the start and on by default <a class="ad-cite" href="https://gdpr-info.eu/art-25-gdpr/" title="GDPR Article 25 — Data protection by design and by default">Art. 25 GDPR</a> <a class="ad-cite" href="https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en" title="EDPB Guidelines 4/2019">EDPB Guidelines 4/2019</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Measure</th>
+<th>Where it is in the design</th>
+<th>Article</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One-way flow private → public; no inbound connection to the private app</td>
+<td><span class="ad-id">NFR-SEC-2</span></td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-32-gdpr/" title="GDPR Article 32 — Security of processing">32(1)(b)</a></td>
+<td><span class="ad-pill is-ok">Built in</span></td>
+</tr>
+<tr>
+<td>Private app on-premises, only the reverse proxy is published</td>
+<td>Architecture, <code>docker-compose.yml</code></td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-25-gdpr/" title="GDPR Article 25 — Data protection by design and by default">25(1)</a></td>
+<td><span class="ad-pill is-ok">Built in</span></td>
+</tr>
+<tr>
+<td>Licenses stored with a slow, salted hash</td>
+<td><span class="ad-id">NFR-SEC-4</span>, <code>users.license</code></td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-32-gdpr/" title="GDPR Article 32 — Security of processing">32(1)(a)</a></td>
+<td><span class="ad-pill is-ok">Built in</span></td>
+</tr>
+<tr>
+<td>Tamper-evident audit, order and decision records</td>
+<td><span class="ad-id">NFR-INT-1</span>, <code>trg_audit_log_immutable</code></td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-5-gdpr/" title="GDPR Article 5 — Principles">5(1)(f)</a></td>
+<td><span class="ad-pill is-ok">Built in</span></td>
+</tr>
+<tr>
+<td>Confidential source data held in each plugin's own database, reachable only through the Plugin Validation Broker from the private app</td>
+<td>Architecture: Plugin DB, Plugin Validation Broker</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-25-gdpr/" title="GDPR Article 25 — Data protection by design and by default">25(1)</a>, <a class="ad-cite" href="https://gdpr-info.eu/art-32-gdpr/" title="GDPR Article 32 — Security of processing">32(1)(b)</a></td>
+<td><span class="ad-pill is-ok">Built in</span></td>
+</tr>
+<tr>
+<td>Plugins sandboxed: read-only, non-root, no capabilities, internal-only network</td>
+<td>Plugin Validation Broker, <code>plugin</code> network</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-25-gdpr/" title="GDPR Article 25 — Data protection by design and by default">25(1)</a>, <a class="ad-cite" href="https://gdpr-info.eu/art-32-gdpr/" title="GDPR Article 32 — Security of processing">32(1)(b)</a></td>
+<td><span class="ad-pill is-ok">Built in</span></td>
+</tr>
+<tr>
+<td>Keeps working offline with last data</td>
+<td><span class="ad-id">NFR-AVL-3</span>, <span class="ad-id">NFR-AVL-4</span></td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-32-gdpr/" title="GDPR Article 32 — Security of processing">32(1)(b)–(c)</a></td>
+<td><span class="ad-pill is-ok">Built in</span></td>
+</tr>
+<tr>
+<td>Encryption at rest for free-text and JSON columns; TLS between services</td>
+<td>Ad Omnia, before go-live</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-32-gdpr/" title="GDPR Article 32 — Security of processing">32(1)(a)</a></td>
+<td><span class="ad-pill is-warn">Before go-live</span></td>
+</tr>
+<tr>
+<td>Differentiated access profiles and logged access to sensitive data (offence data; health data if a feed is ever not anonymised)</td>
+<td>Ad Omnia, before go-live (today all stations have the same access)</td>
+<td><a class="ad-cite" href="https://diariodarepublica.pt/dr/detalhe/lei/58-2019-123815982" title="Lei n.º 58/2019, de 8 de agosto — Diário da República">Art. 29 Lei 58/2019</a></td>
+<td><span class="ad-pill is-warn">Before go-live</span></td>
+</tr>
+<tr>
+<td>Breach response: notify CNPD within 72 h, data subjects if high risk; NIS2 early warning within 24 h</td>
+<td>Agency procedure, supported by Ad Omnia</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-33-gdpr/" title="GDPR Article 33 — Notification of a breach to the supervisory authority">33</a>, <a class="ad-cite" href="https://gdpr-info.eu/art-34-gdpr/" title="GDPR Article 34 — Communication of a breach to the data subject">34</a>, <a class="ad-cite" href="https://files.diariodarepublica.pt/1s/2025/12/23400/0000400068.pdf" title="Decreto-Lei n.º 125/2025, de 4 de dezembro — Diário da República">DL 125/2025</a></td>
+<td><span class="ad-pill is-warn">Before go-live</span></td>
+</tr>
+<tr>
+<td>Security testing (OWASP Top 10, dependency CVE audit)</td>
+<td>Ad Omnia, before go-live</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-32-gdpr/" title="GDPR Article 32 — Security of processing">32(1)(d)</a></td>
+<td><span class="ad-pill is-warn">Before go-live</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="accountability">8. Accountability</h2>
+<h3 id="dpia">Data protection impact assessment</h3>
+<p>A DPIA is required when processing is likely to result in a high risk <a class="ad-cite" href="https://gdpr-info.eu/art-35-gdpr/" title="GDPR Article 35 — Data protection impact assessment">Art. 35(1) GDPR</a>. For a real deployment of Ad Omnia it is <strong>mandatory</strong>, because several triggers match:</p>
+<div class="ad-checks">
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Offence data (Art. 10) processed with new technology (predictive AI) — <a class="ad-cite" href="https://omcentro.com/ficheiros/docs/r_798_2018.pdf" title="CNPD Regulamento n.º 798/2018 — list of processing subject to DPIA">CNPD list, item 6(a)</a></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Interconnection of personal data from several agencies into one picture — <a class="ad-cite" href="https://omcentro.com/ficheiros/docs/r_798_2018.pdf" title="CNPD Regulamento n.º 798/2018 — list of processing subject to DPIA">CNPD list, item 6(c)</a></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Large-scale processing of health data, and its electronic transmission — not triggered while INEM victim data arrives anonymised (<a class="ad-cite" href="https://gdpr-info.eu/art-35-gdpr/" title="GDPR Article 35 — Data protection impact assessment">Art. 35(3)(b) GDPR</a>, <a class="ad-cite" href="https://omcentro.com/ficheiros/docs/r_798_2018.pdf" title="CNPD Regulamento n.º 798/2018 — list of processing subject to DPIA">CNPD list, item 1</a>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Tracking employees' location to evaluate them — avoided by design, as long as vehicle positions are never used to rate crews (<a class="ad-cite" href="https://omcentro.com/ficheiros/docs/r_798_2018.pdf" title="CNPD Regulamento n.º 798/2018 — list of processing subject to DPIA">CNPD list, item 3</a>)</li>
+</ul>
+</div>
+<p>If the DPIA shows a high residual risk, the controller must consult the CNPD before starting <a class="ad-cite" href="https://gdpr-info.eu/art-36-gdpr/" title="GDPR Article 36 — Prior consultation">Art. 36 GDPR</a>. While the proof of concept runs only on open, synthetic and test data, no DPIA is required. If it is used with real personal data from an agency, including in a pilot, the DPIA comes first. This report is the prior risk analysis it can build on.</p>
+<h3 id="records">Record of processing activities</h3>
+<p>Each controller must keep a record of its processing <a class="ad-cite" href="https://gdpr-info.eu/art-30-gdpr/" title="GDPR Article 30 — Records of processing activities">Art. 30(1) GDPR</a>. Draft entries an agency can adopt:</p>
+<table>
+<thead>
+<tr>
+<th>Field (<a class="ad-cite" href="https://gdpr-info.eu/art-30-gdpr/" title="GDPR Article 30 — Records of processing activities">Art. 30(1)</a>)</th>
+<th>Private app: operational picture</th>
+<th>Public app: citizen information</th>
+<th>AI engine: model training</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Purpose</td>
+<td>Coordinate emergency response</td>
+<td>Inform citizens of active incidents and warnings</td>
+<td>Forecast incident progression and risk</td>
+</tr>
+<tr>
+<td>Data subjects</td>
+<td>Operators, crews, persons involved in incidents</td>
+<td>Visitors (IP only)</td>
+<td>Persons in historical incidents</td>
+</tr>
+<tr>
+<td>Data categories</td>
+<td>Station IDs, decisions, incident and resource data, possible offence data (health data only if not anonymised at source)</td>
+<td>IP address, timestamp, requested URL</td>
+<td>Pseudonymised incident features, locations generalised to a grid</td>
+</tr>
+<tr>
+<td>Recipients</td>
+<td>Other agencies in the shared picture; public app (validated, non-confidential incidents only)</td>
+<td>None</td>
+<td>None (models only)</td>
+</tr>
+<tr>
+<td>Transfers outside the EU</td>
+<td>None (on-premises)</td>
+<td>None if hosted in the EU</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Retention (proposal, to be fixed by each agency)</td>
+<td>Legal period for operational records; free text anonymised after incident closure + review period</td>
+<td>30 days</td>
+<td>Until model retirement; raw data deleted after feature extraction</td>
+</tr>
+<tr>
+<td>Security measures</td>
+<td><a href="#security">§ 7</a></td>
+<td><a href="#security">§ 7</a>, log rotation</td>
+<td>Pseudonymisation, access limited to the AI service</td>
+</tr>
+</tbody>
+</table>
+<h3 id="data-protection-officer">Data protection officer</h3>
+<p>Public authorities must designate a DPO <a class="ad-cite" href="https://gdpr-info.eu/art-37-gdpr/" title="GDPR Article 37 — Designation of the DPO">Art. 37(1)(a) GDPR</a> <a class="ad-cite" href="https://diariodarepublica.pt/dr/detalhe/lei/58-2019-123815982" title="Lei n.º 58/2019, de 8 de agosto — Diário da República">Art. 12 Lei 58/2019</a>. In Portugal the DPO also runs periodic and unannounced audits and raises staff awareness of security incidents <a class="ad-cite" href="https://diariodarepublica.pt/dr/detalhe/lei/58-2019-123815982" title="Lei n.º 58/2019, de 8 de agosto — Diário da República">Art. 11 Lei 58/2019</a>. Every agency already has one; the platform supports their work with exportable audit trails (<span class="ad-id">FR-AUD-1</span>) and this report.</p>
+<h3 id="transfers-outside-the-eu">Transfers outside the EU</h3>
+<p>Personal data may leave the EU only under an adequacy decision or appropriate safeguards <a class="ad-cite" href="https://gdpr-info.eu/art-45-gdpr/" title="GDPR Article 45 — Transfers on the basis of an adequacy decision">Arts. 44–46 GDPR</a>. The private app is on-premises and the public app should be hosted in the EU, so no transfer is needed. If an agency chooses a provider outside the EU, transfers to US companies certified under the EU–US Data Privacy Framework rely on the Commission's adequacy decision <a class="ad-cite" href="https://eur-lex.europa.eu/eli/dec_impl/2023/1795/oj" title="Commission Implementing Decision (EU) 2023/1795 — EUR-Lex">Decision (EU) 2023/1795</a>, upheld by the General Court in <em>Latombe v Commission</em> (T-553/23, 3 September 2025).</p>
+<h2 id="ai">9. AI and anonymisation</h2>
+<h3 id="anonymised-or-only-pseudonymised">Anonymised or only pseudonymised?</h3>
+<p>Anonymised data is outside the GDPR; pseudonymised data is still personal data <a class="ad-cite" href="https://gdpr-info.eu/art-4-gdpr/" title="GDPR Article 4 — Definitions">Art. 4(5) GDPR</a> <a class="ad-cite" href="https://gdpr-info.eu/recitals/no-26/" title="GDPR Recital 26 — Not applicable to anonymous data">Recital 26 GDPR</a>. The difference matters for training data, because re-identification is easier than it seems: postcode, date of birth and sex alone re-identify most people, and the Netflix Prize dataset was de-anonymised by matching a handful of ratings with public IMDb profiles (<a class="ad-cite" href="https://ec.europa.eu/justice/article-29/documentation/opinion-recommendation/files/2014/wp216_en.pdf" title="WP29 Opinion 05/2014 on Anonymisation Techniques">WP29 Opinion 05/2014</a>). Incident locations are the equivalent quasi-identifier here: an exact point often <em>is</em> a home address.</p>
+<div class="ad-steps">
+<ol>
+<li><strong>Prefer synthetic data.</strong> The simulation module already generates synthetic incidents (Simulated Incident), fully isolated from live data.</li>
+<li><strong>Generalise locations.</strong> Snap historical incident points to a grid or parish level before training; risk ratings are already per zone.</li>
+<li><strong>Drop free text.</strong> Train on structured features (type, severity, time, weather, zone), never on descriptions.</li>
+<li><strong>Destroy the raw extract</strong> once features are built, so the training set can be treated as anonymous; until then it is personal data.</li>
+</ol>
+</div>
+<h3 id="the-ai-act">The AI Act</h3>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+<th>Citation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Is the proof of concept covered?</td>
+<td>No. Research, testing and development before placing on the market or putting into service is excluded</td>
+<td><a class="ad-cite" href="https://artificialintelligenceact.eu/article/2/" title="AI Act Article 2 — Scope">Art. 2(8) AI Act</a></td>
+</tr>
+<tr>
+<td>Would the deployed recommendation engine be high-risk?</td>
+<td>Yes. AI used to dispatch, or set priority in the dispatch of, police, firefighters and medical aid is listed</td>
+<td><a class="ad-cite" href="https://artificialintelligenceact.eu/annex/3/" title="AI Act Annex III — High-risk AI systems">Annex III, 5(d)</a>, <a class="ad-cite" href="https://artificialintelligenceact.eu/article/6/" title="AI Act Article 6 — Classification of high-risk AI systems">Art. 6(2)</a></td>
+</tr>
+<tr>
+<td>From when?</td>
+<td>2 December 2027 for Annex III systems, after the Digital Omnibus</td>
+<td><a class="ad-cite" href="https://www.aiacto.eu/en/blog/digital-omnibus-ai-act-report-2027" title="Digital Omnibus on AI — Regulation (EU) 2026/1744 (summary)">Regulation (EU) 2026/1744</a></td>
+</tr>
+<tr>
+<td>What would the provider have to show?</td>
+<td>Risk management, data governance for training data, automatic logging, transparency to deployers, human oversight</td>
+<td><a class="ad-cite" href="https://artificialintelligenceact.eu/article/9/" title="AI Act Article 9 — Risk management system">Arts. 9</a>, <a class="ad-cite" href="https://artificialintelligenceact.eu/article/10/" title="AI Act Article 10 — Data and data governance">10</a>, <a class="ad-cite" href="https://artificialintelligenceact.eu/article/12/" title="AI Act Article 12 — Record-keeping">12</a>, <a class="ad-cite" href="https://artificialintelligenceact.eu/article/13/" title="AI Act Article 13 — Transparency to deployers">13</a>, <a class="ad-cite" href="https://artificialintelligenceact.eu/article/14/" title="AI Act Article 14 — Human oversight">14</a></td>
+</tr>
+<tr>
+<td>What would agencies have to do?</td>
+<td>Use it as instructed, assign human oversight, keep logs; public bodies run a fundamental rights impact assessment first</td>
+<td><a class="ad-cite" href="https://artificialintelligenceact.eu/article/26/" title="AI Act Article 26 — Obligations of deployers">Art. 26</a>, <a class="ad-cite" href="https://artificialintelligenceact.eu/article/27/" title="AI Act Article 27 — Fundamental rights impact assessment">Art. 27</a></td>
+</tr>
+</tbody>
+</table>
+<p>The platform's requirements already cover the core of these obligations: confirmation before action (<span class="ad-id">FR-REC-3</span>), a justification per recommendation (<span class="ad-id">FR-REC-1</span>), confidence, generation time and input data for every prediction (<span class="ad-id">FR-PRD-1</span>), and the engine failing without taking the platform down (<span class="ad-id">NFR-AVL-2</span>).</p>
+<h2 id="go-live">10. Before go-live</h2>
+<p>What has to be in place before the platform processes real personal data, and who is responsible for it.</p>
+<table>
+<thead>
+<tr>
+<th>What</th>
+<th>Who</th>
+<th>Law</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data protection impact assessment, and prior consultation of the CNPD if a high risk remains (<a href="#dpia">§ 8</a>)</td>
+<td>Agency, with Ad Omnia's technical input</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-35-gdpr/" title="GDPR Article 35 — Data protection impact assessment">Arts. 35–36 GDPR</a></td>
+</tr>
+<tr>
+<td>Written confirmation from INEM that victim data in its API is anonymised and cannot be re-identified, even when combined with incident location and time</td>
+<td>Ad Omnia, with INEM</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/recitals/no-26/" title="GDPR Recital 26 — Not applicable to anonymous data">Recital 26 GDPR</a></td>
+</tr>
+<tr>
+<td>Record of processing activities (<a href="#records">§ 8</a>)</td>
+<td>Agency</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-30-gdpr/" title="GDPR Article 30 — Records of processing activities">Art. 30 GDPR</a></td>
+</tr>
+<tr>
+<td>Privacy notices: public app, operators, and a public notice for incident subjects</td>
+<td>Agency</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-13-gdpr/" title="GDPR Article 13 — Information when data is collected from the data subject">Arts. 13–14 GDPR</a></td>
+</tr>
+<tr>
+<td>Retention periods for incidents, observations, orders and logs</td>
+<td>Agency</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-5-gdpr/" title="GDPR Article 5 — Principles">Art. 5(1)(e) GDPR</a>, <a class="ad-cite" href="https://diariodarepublica.pt/dr/detalhe/lei/58-2019-123815982" title="Lei n.º 58/2019, de 8 de agosto — Diário da República">Art. 21 Lei 58/2019</a></td>
+</tr>
+<tr>
+<td>Processor contract with Ad Omnia; joint-controller arrangement between agencies sharing one picture</td>
+<td>Agency and Ad Omnia</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-28-gdpr/" title="GDPR Article 28 — Processor">Arts. 26 and 28 GDPR</a></td>
+</tr>
+<tr>
+<td>Breach and incident procedure: CNPD within 72 h, NIS2 early warning within 24 h</td>
+<td>Agency, supported by Ad Omnia</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-33-gdpr/" title="GDPR Article 33 — Notification of a breach to the supervisory authority">Arts. 33–34 GDPR</a>, <a class="ad-cite" href="https://files.diariodarepublica.pt/1s/2025/12/23400/0000400068.pdf" title="Decreto-Lei n.º 125/2025, de 4 de dezembro — Diário da República">DL 125/2025</a></td>
+</tr>
+<tr>
+<td>Connector plugins map sources to structured fields and drop names, phone numbers and clinical notes at ingestion</td>
+<td>Ad Omnia</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-5-gdpr/" title="GDPR Article 5 — Principles">Art. 5(1)(c)</a>, <a class="ad-cite" href="https://gdpr-info.eu/art-25-gdpr/" title="GDPR Article 25 — Data protection by design and by default">Art. 25 GDPR</a></td>
+</tr>
+<tr>
+<td>Audit entries store IDs and field names only, never personal details</td>
+<td>Ad Omnia</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-17-gdpr/" title="GDPR Article 17 — Right to erasure">Art. 17(3)</a>, <a class="ad-cite" href="https://gdpr-info.eu/art-25-gdpr/" title="GDPR Article 25 — Data protection by design and by default">Art. 25 GDPR</a></td>
+</tr>
+<tr>
+<td>"Restricted" flag and anonymisation of free text in closed incidents</td>
+<td>Ad Omnia</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-18-gdpr/" title="GDPR Article 18 — Right to restriction of processing">Art. 18 GDPR</a>, <a class="ad-cite" href="https://diariodarepublica.pt/dr/detalhe/lei/58-2019-123815982" title="Lei n.º 58/2019, de 8 de agosto — Diário da República">Art. 21 Lei 58/2019</a></td>
+</tr>
+<tr>
+<td>Encryption at rest and TLS between services; separate access profiles and logged access for sensitive data</td>
+<td>Ad Omnia</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-32-gdpr/" title="GDPR Article 32 — Security of processing">Art. 32 GDPR</a>, <a class="ad-cite" href="https://diariodarepublica.pt/dr/detalhe/lei/58-2019-123815982" title="Lei n.º 58/2019, de 8 de agosto — Diário da República">Art. 29 Lei 58/2019</a></td>
+</tr>
+<tr>
+<td>Security testing (OWASP Top 10, dependency audit)</td>
+<td>Ad Omnia</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-32-gdpr/" title="GDPR Article 32 — Security of processing">Art. 32(1)(d) GDPR</a></td>
+</tr>
+<tr>
+<td>Training data policy: synthetic first, locations generalised to a grid, no free text</td>
+<td>Ad Omnia</td>
+<td><a class="ad-cite" href="https://gdpr-info.eu/art-89-gdpr/" title="GDPR Article 89 — Safeguards for research and statistics">Art. 89 GDPR</a>, <a class="ad-cite" href="https://diariodarepublica.pt/dr/detalhe/lei/58-2019-123815982" title="Lei n.º 58/2019, de 8 de agosto — Diário da República">Art. 31 Lei 58/2019</a></td>
+</tr>
+<tr>
+<td>AI Act documentation for the recommendation engine (risk management, logging, human oversight), from 2 December 2027</td>
+<td>Ad Omnia as provider</td>
+<td><a class="ad-cite" href="https://artificialintelligenceact.eu/article/14/" title="AI Act Article 14 — Human oversight">Arts. 9–14 AI Act</a></td>
+</tr>
+<tr>
+<td>Fundamental rights impact assessment before using the recommendation engine</td>
+<td>Agency as deployer</td>
+<td><a class="ad-cite" href="https://artificialintelligenceact.eu/article/27/" title="AI Act Article 27 — Fundamental rights impact assessment">Art. 27 AI Act</a></td>
+</tr>
+</tbody>
+</table>
+<details class="abstract">
+<summary>Glossary</summary>
+<p><strong>Personal data</strong> — any information about an identified or identifiable natural person <a class="ad-cite" href="https://gdpr-info.eu/art-4-gdpr/" title="GDPR Article 4 — Definitions">Art. 4(1)</a>.<br>
+<strong>Processing</strong> — anything done with personal data: collecting, storing, consulting, combining, erasing <a class="ad-cite" href="https://gdpr-info.eu/art-4-gdpr/" title="GDPR Article 4 — Definitions">Art. 4(2)</a>.<br>
+<strong>Pseudonymisation</strong> — data that can no longer be attributed to a person without extra information kept separately; still personal data <a class="ad-cite" href="https://gdpr-info.eu/art-4-gdpr/" title="GDPR Article 4 — Definitions">Art. 4(5)</a>.<br>
+<strong>Anonymisation</strong> — data that no longer relates to an identifiable person; outside the GDPR <a class="ad-cite" href="https://gdpr-info.eu/recitals/no-26/" title="GDPR Recital 26 — Not applicable to anonymous data">Recital 26</a>.<br>
+<strong>Controller / processor</strong> — who decides purposes and means / who processes on the controller's behalf <a class="ad-cite" href="https://gdpr-info.eu/art-4-gdpr/" title="GDPR Article 4 — Definitions">Art. 4(7)–(8)</a>.<br>
+<strong>Special categories</strong> — health, genetic, biometric data, racial or ethnic origin, political opinions, religious beliefs, trade-union membership, sex life or sexual orientation <a class="ad-cite" href="https://gdpr-info.eu/art-9-gdpr/" title="GDPR Article 9 — Special categories of personal data">Art. 9(1)</a>.<br>
+<strong>Personal data breach</strong> — accidental or unlawful destruction, loss, alteration, disclosure of or access to personal data <a class="ad-cite" href="https://gdpr-info.eu/art-4-gdpr/" title="GDPR Article 4 — Definitions">Art. 4(12)</a>.<br>
+<strong>DPIA</strong> — Data Protection Impact Assessment <a class="ad-cite" href="https://gdpr-info.eu/art-35-gdpr/" title="GDPR Article 35 — Data protection impact assessment">Art. 35</a>.<br>
+<strong>CNPD</strong> — Comissão Nacional de Proteção de Dados, the Portuguese supervisory authority <a class="ad-cite" href="https://diariodarepublica.pt/dr/detalhe/lei/58-2019-123815982" title="Lei n.º 58/2019, de 8 de agosto — Diário da República">Art. 3 Lei 58/2019</a>.</p>
+</details>
+<h2 id="references">References</h2>
+<div class="ad-refs">
+<p><strong>Primary law</strong></p>
+<ol>
+<li>Regulation (EU) 2016/679 (General Data Protection Regulation), OJ L 119, 4.5.2016 — <a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" title="Regulation (EU) 2016/679 (GDPR) — EUR-Lex">EUR-Lex</a> · article reader: <a href="https://gdpr-info.eu/">gdpr-info.eu</a></li>
+<li>Lei n.º 58/2019, de 8 de agosto — execução do RGPD — <a href="https://diariodarepublica.pt/dr/detalhe/lei/58-2019-123815982" title="Lei n.º 58/2019, de 8 de agosto — Diário da República">Diário da República</a></li>
+<li>Directive (EU) 2016/680 (Law Enforcement Directive) — <a href="https://eur-lex.europa.eu/eli/dir/2016/680/oj" title="Directive (EU) 2016/680 — EUR-Lex">EUR-Lex</a></li>
+<li>Lei n.º 59/2019, de 8 de agosto — tratamento de dados para prevenção, investigação e repressão de infrações penais — <a href="https://diariodarepublica.pt/dr/detalhe/lei/59-2019-123815983" title="Lei n.º 59/2019, de 8 de agosto — Diário da República">Diário da República</a></li>
+<li>Regulation (EU) 2024/1689 (Artificial Intelligence Act) — <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj" title="Regulation (EU) 2024/1689 (AI Act) — EUR-Lex">EUR-Lex</a> · article reader: <a href="https://artificialintelligenceact.eu/">artificialintelligenceact.eu</a></li>
+<li>Regulation (EU) 2026/1744 (Digital Omnibus on AI), in force 27 July 2026 — summary: <a href="https://www.aiacto.eu/en/blog/digital-omnibus-ai-act-report-2027" title="Digital Omnibus on AI — Regulation (EU) 2026/1744 (summary)">aiacto.eu</a></li>
+<li>Directive (EU) 2022/2555 (NIS2) — <a href="https://eur-lex.europa.eu/eli/dir/2022/2555/oj" title="Directive (EU) 2022/2555 (NIS2) — EUR-Lex">EUR-Lex</a></li>
+<li>Decreto-Lei n.º 125/2025, de 4 de dezembro — regime jurídico da cibersegurança — <a href="https://files.diariodarepublica.pt/1s/2025/12/23400/0000400068.pdf" title="Decreto-Lei n.º 125/2025, de 4 de dezembro — Diário da República">Diário da República (PDF)</a></li>
+<li>Directive 2002/58/EC (ePrivacy) — <a href="https://eur-lex.europa.eu/eli/dir/2002/58/oj" title="Directive 2002/58/EC (ePrivacy) — EUR-Lex">EUR-Lex</a></li>
+<li>Lei n.º 41/2004, de 18 de agosto — privacidade nas comunicações eletrónicas — <a href="https://diariodarepublica.pt/dr/detalhe/lei/41-2004-480710" title="Lei n.º 41/2004, de 18 de agosto — Diário da República">Diário da República</a></li>
+<li>Lei n.º 27/2006, de 3 de julho — Lei de Bases da Proteção Civil — <a href="https://diariodarepublica.pt/dr/detalhe/lei/27-2006-537862" title="Lei n.º 27/2006, de 3 de julho — Diário da República">Diário da República</a></li>
+<li>Charter of Fundamental Rights of the EU, Art. 8 — <a href="https://eur-lex.europa.eu/eli/treaty/char_2012/oj" title="Charter of Fundamental Rights of the EU — EUR-Lex">EUR-Lex</a></li>
+<li>Treaty on the Functioning of the EU, Art. 16 — <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:12012E/TXT" title="Treaty on the Functioning of the EU — EUR-Lex">EUR-Lex</a></li>
+<li>Constituição da República Portuguesa, Art. 35 — <a href="https://www.parlamento.pt/Legislacao/Paginas/ConstituicaoRepublicaPortuguesa.aspx" title="Constituição da República Portuguesa — Parlamento">Parlamento</a></li>
+</ol>
+<p><strong>Authorities, guidance and case law</strong></p>
+<ol>
+<li>CNPD, Regulamento n.º 798/2018 — lista de tratamentos sujeitos a AIPD, DR 2.ª série, n.º 231, 30.11.2018 — <a href="https://omcentro.com/ficheiros/docs/r_798_2018.pdf" title="CNPD Regulamento n.º 798/2018 — list of processing subject to DPIA">copy (PDF)</a></li>
+<li>Commission Implementing Decision (EU) 2023/1795 (EU–US Data Privacy Framework) — <a href="https://eur-lex.europa.eu/eli/dec_impl/2023/1795/oj" title="Commission Implementing Decision (EU) 2023/1795 — EUR-Lex">EUR-Lex</a></li>
+<li>EDPB, Guidelines 07/2020 on the concepts of controller and processor — <a href="https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en" title="EDPB Guidelines 07/2020">EDPB</a></li>
+<li>EDPB, Guidelines 4/2019 on Article 25 Data Protection by Design and by Default — <a href="https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en" title="EDPB Guidelines 4/2019">EDPB</a></li>
+<li>Article 29 Working Party, Opinion 05/2014 on Anonymisation Techniques (WP216) — <a href="https://ec.europa.eu/justice/article-29/documentation/opinion-recommendation/files/2014/wp216_en.pdf" title="WP29 Opinion 05/2014 on Anonymisation Techniques">PDF</a></li>
+<li>CJEU, C-582/14 <em>Breyer</em>, 19 October 2016 — <a href="https://curia.europa.eu/juris/liste.jsf?num=C-582/14" title="CJEU C-582/14 Breyer">CURIA</a></li>
+</ol>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../threat_model/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Threat Model">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Threat Model
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../data-source-licenses/" class="md-footer__link md-footer__link--next" aria-label="Next: Data source licenses">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Data source licenses
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Ad Omnia · University of Aveiro · <a href="../../../privacy/">Privacy</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Ad-Omnia" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.indexes", "navigation.footer", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../../javascripts/home.js"></script>
+      
+        <script src="../../../javascripts/nav.js"></script>
+      
+        <script src="../../../javascripts/deck.js"></script>
+      
+        <script src="../../../javascripts/minutes.js"></script>
+      
+        <script src="../../../javascripts/videos.js"></script>
+      
+        <script src="../../../javascripts/theme.js"></script>
+      
+        <script src="../../../javascripts/cite.js"></script>
+      
+    
+  </body>
+</html>

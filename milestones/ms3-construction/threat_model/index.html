@@ -1,0 +1,4713 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Threat model - data flows, trust boundaries, threats and residual risks">
+      
+      
+      
+        <link rel="canonical" href="https://ad-omnia.github.io/milestones/ms3-construction/threat_model/">
+      
+      
+        <link rel="prev" href="../../ms2-elaboration/presentation-2/">
+      
+      
+        <link rel="next" href="../gdpr-compliance/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/logo-mono-black.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>Threat Model - Ad Omnia</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/fonts.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  
+  <link rel="icon" href="../../../assets/logo-mono-white.svg" media="(prefers-color-scheme: dark)">
+  <link rel="preload" href="../../../assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <script>document.documentElement.classList.add("ad-js");try{["ad-nav-collapsed","ad-toc-collapsed"].forEach(function(k){if(localStorage.getItem(k))document.documentElement.classList.add(k)})}catch(e){}</script>
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#threat-model" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Ad Omnia" class="md-header__button md-logo" aria-label="Ad Omnia" data-md-component="logo">
+      
+  <img src="../../../assets/logo-colour-black.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="M4 6h16"/><path d="M4 18h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Ad Omnia
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Threat Model
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Ad-Omnia/ad-omnia.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ad-Omnia/ad-omnia.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../journey/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Journey
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Milestones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../minutes/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Minutes
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../team/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Team
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+  
+    
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Ad Omnia" class="md-nav__button md-logo" aria-label="Ad Omnia" data-md-component="logo">
+      
+  <img src="../../../assets/logo-colour-black.svg" alt="logo">
+
+    </a>
+    Ad Omnia
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Ad-Omnia/ad-omnia.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ad-Omnia/ad-omnia.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../journey/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Journey
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Milestones
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Milestones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MS1 - Inception
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MS1 - Inception
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms1-inception/project-description/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project description
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms1-inception/calendar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project calendar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms1-inception/communication-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Communication plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms1-inception/presentation-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presentation 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MS2 - Elaboration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MS2 - Elaboration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms2-elaboration/personas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Personas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms2-elaboration/user-stories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User stories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms2-elaboration/use-cases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use cases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms2-elaboration/requirements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Requirements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms2-elaboration/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architeture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms2-elaboration/data-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms2-elaboration/brand-identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Brand identity guidelines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms2-elaboration/work-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ad Omnia work plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms2-elaboration/presentation-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presentation 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MS3 - Construction
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MS3 - Construction
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Model
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assumptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assumptions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-flow-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Flow Diagram
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Flow Diagram">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diagram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Elements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trust-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trust boundaries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data flows
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data flows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flows-that-cross-a-trust-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flows that cross a trust boundary
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internal-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal flows
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#differences-from-the-architecture-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Differences from the architecture diagram
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stride-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        STRIDE Analysis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="STRIDE Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f1-citizen-public-proxy-tb1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F1: Citizen ↔ public proxy (TB1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f2-station-private-proxy-coreapi-tb2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F2: Station ↔ private proxy → CoreAPI (TB2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f3-coreapi-publish-endpoint-tb3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F3: CoreAPI → publish endpoint (TB3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f4-external-sources-ingestion-tb4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F4: External sources → ingestion (TB4)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f5-plugin-broker-plugins-tb5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F5: Plugin broker ↔ plugins (TB5)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f6-packages-sandbox-and-ai-service-tb6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F6: Packages → sandbox and AI service (TB6)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f14-license-issuance-user-table-tb2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F14: License issuance → User table (TB2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internal-flows_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal flows
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priority-threats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Priority Threats
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Priority Threats">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#method_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risk-scoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Risk scoring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priority-threats_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Priority threats
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mitigations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mitigations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mitigations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pt1-public-application-unavailable-during-a-crisis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PT1: Public application unavailable during a crisis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pt2-false-or-unauthorized-publication-to-citizens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PT2: False or unauthorized publication to citizens
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pt3-unauthorized-access-to-the-local-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PT3: Unauthorized access to the local API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pt4-script-injection-from-untrusted-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PT4: Script injection from untrusted data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pt5-plugin-escapes-its-isolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PT5: Plugin escapes its isolation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pt6-false-operational-data-from-sources-and-plugins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PT6: False operational data from sources and plugins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pt7-audit-and-decision-records-altered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PT7: Audit and decision records altered
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pt8-operational-data-published-to-citizens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PT8: Operational data published to citizens
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pt9-compromised-or-faulty-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PT9: Compromised or faulty packages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pt10-weak-license-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PT10: Weak license lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-high-risk-threats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other high-risk threats
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#residual-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Residual Risks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Residual Risks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#method_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accepted-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accepted risks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Accepted risks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rr1-fake-public-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RR1: Fake public application
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rr2-all-stations-can-perform-all-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RR2: All stations can perform all actions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rr3-plausible-false-data-from-a-legitimate-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RR3: Plausible false data from a legitimate source
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rr4-large-scale-ddos-on-the-public-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RR4: Large-scale DDoS on the public application
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rr5-compromised-public-host" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RR5: Compromised public host
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rr6-actions-attributed-to-stations-not-people" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RR6: Actions attributed to stations, not people
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rr7-leaked-instance-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RR7: Leaked instance key
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rr8-outbound-requests-reveal-the-control-room" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RR8: Outbound requests reveal the control room
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rr9-container-escape-through-the-shared-kernel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RR9: Container escape through the shared kernel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rr10-audit-chain-rewritten-with-full-database-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RR10: Audit chain rewritten with full database access
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#production-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Production deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Out of scope
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accepted-low-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accepted low risks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gdpr-compliance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GDPR compliance analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-source-licenses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data source licenses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../software-licenses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software licenses and intellectual property
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../accessibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accessibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../videos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Videos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../presentation-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presentation 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MS4 - Transition
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MS4 - Transition
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ms4-transition/ms4-soon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coming soon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../minutes/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minutes
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Minutes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-09-23_Minute1_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 1 · 23 Sep 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-09-30_Minute2_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 2 · 30 Sep 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-10-06_Minute3_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 3 · 6 Oct 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-10-07_Minute4_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 4 · 7 Oct 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-10-14_Minute5_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 5 · 14 Oct 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-10-29_Minute6_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 6 · 29 Oct 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../minutes/2026-11-05_Minute7_AdOmnia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minute 7 · 5 Nov 2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../team/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Team
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assumptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assumptions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-flow-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Flow Diagram
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Flow Diagram">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diagram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Elements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trust-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trust boundaries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data flows
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data flows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flows-that-cross-a-trust-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flows that cross a trust boundary
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internal-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal flows
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#differences-from-the-architecture-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Differences from the architecture diagram
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stride-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        STRIDE Analysis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="STRIDE Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f1-citizen-public-proxy-tb1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F1: Citizen ↔ public proxy (TB1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f2-station-private-proxy-coreapi-tb2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F2: Station ↔ private proxy → CoreAPI (TB2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f3-coreapi-publish-endpoint-tb3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F3: CoreAPI → publish endpoint (TB3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f4-external-sources-ingestion-tb4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F4: External sources → ingestion (TB4)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f5-plugin-broker-plugins-tb5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F5: Plugin broker ↔ plugins (TB5)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f6-packages-sandbox-and-ai-service-tb6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F6: Packages → sandbox and AI service (TB6)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f14-license-issuance-user-table-tb2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F14: License issuance → User table (TB2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internal-flows_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal flows
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priority-threats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Priority Threats
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Priority Threats">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#method_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risk-scoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Risk scoring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priority-threats_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Priority threats
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mitigations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mitigations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mitigations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pt1-public-application-unavailable-during-a-crisis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PT1: Public application unavailable during a crisis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pt2-false-or-unauthorized-publication-to-citizens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PT2: False or unauthorized publication to citizens
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pt3-unauthorized-access-to-the-local-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PT3: Unauthorized access to the local API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pt4-script-injection-from-untrusted-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PT4: Script injection from untrusted data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pt5-plugin-escapes-its-isolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PT5: Plugin escapes its isolation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pt6-false-operational-data-from-sources-and-plugins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PT6: False operational data from sources and plugins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pt7-audit-and-decision-records-altered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PT7: Audit and decision records altered
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pt8-operational-data-published-to-citizens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PT8: Operational data published to citizens
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pt9-compromised-or-faulty-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PT9: Compromised or faulty packages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pt10-weak-license-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PT10: Weak license lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-high-risk-threats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other high-risk threats
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#residual-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Residual Risks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Residual Risks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#method_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accepted-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accepted risks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Accepted risks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rr1-fake-public-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RR1: Fake public application
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rr2-all-stations-can-perform-all-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RR2: All stations can perform all actions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rr3-plausible-false-data-from-a-legitimate-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RR3: Plausible false data from a legitimate source
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rr4-large-scale-ddos-on-the-public-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RR4: Large-scale DDoS on the public application
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rr5-compromised-public-host" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RR5: Compromised public host
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rr6-actions-attributed-to-stations-not-people" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RR6: Actions attributed to stations, not people
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rr7-leaked-instance-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RR7: Leaked instance key
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rr8-outbound-requests-reveal-the-control-room" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RR8: Outbound requests reveal the control room
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rr9-container-escape-through-the-shared-kernel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RR9: Container escape through the shared kernel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rr10-audit-chain-rewritten-with-full-database-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RR10: Audit chain rewritten with full database access
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#production-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Production deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Out of scope
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accepted-low-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accepted low risks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+  
+
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+  
+    <div class="ad-doc-actions">
+      
+        <a class="ad-doc-action" href="../threat_model.md" download target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>Markdown
+        </a>
+      
+      <button class="ad-doc-action ad-doc-action--icon" type="button" onclick="window.print()" title="Print" aria-label="Print">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg>
+      </button>
+    </div>
+  
+  
+                  
+
+
+  
+  
+
+
+<h1 id="threat-model">Threat Model</h1>
+<h2 id="introduction">Introduction</h2>
+<p>This document is the threat model of the Ad Omnia platform. It identifies how data moves through the platform, where trust changes along the way, which threats matter most and how they are mitigated. It is built in four steps, each in its own section:</p>
+<ol>
+<li><strong>Data flow diagram:</strong> elements, flows and trust boundaries.</li>
+<li><strong>STRIDE analysis:</strong> threats for every flow that crosses a trust boundary.</li>
+<li><strong>Priority threats:</strong> the threats with the highest risk and their mitigations.</li>
+<li><strong>Residual risks:</strong> what remains after mitigation and why it is accepted.</li>
+</ol>
+<h2 id="assumptions">Assumptions</h2>
+<ul>
+<li><strong>The architecture is public.</strong> All project documentation is published, so the model assumes an attacker knows every component, flow and technology choice. No control depends on the design being secret.</li>
+<li><strong>Two deployments.</strong> The architecture diagram shows a single backend, but the platform is deployed twice: a private application and a public application on the internet. Data flows only from private to public, and the private application accepts no inbound connection from the public side.</li>
+<li><strong>Private instances are locally hosted.</strong> Every private application instance is hosted locally where it is used and accessed only locally; there is no remote access. Instances are independent of each other, and all of them push to the single public deployment.</li>
+<li><strong>Minimal public side.</strong> The public deployment has its own database, which holds only the published state (validated incidents and public warnings); operational data never reaches it. It runs two separate processes: a read-only API for citizens and a write-only publish endpoint for private instances, each with a database account limited to what it needs. Private instances never connect to the public database directly.</li>
+<li><strong>Stations authenticate by license.</strong> Each station uses a software license, stored in the User table as a slow, salted hash. In this initial phase, licenses are issued by the project team.</li>
+<li><strong>Plugins are untrusted.</strong> Plugins run in a sandbox and reach the core only through the plugin broker. Plugins only expose data; they provide no user interface or frontend code, and the web application renders their data with its own components.</li>
+<li><strong>External data enters through the ingestion worker.</strong> External sources are fetched by the ingestion worker, outside the plugin sandbox.</li>
+<li><strong>Prediction modules are internal.</strong> The AI service's specialized modules are developed by the project team and delivered with the platform; they are not installed from third parties.</li>
+<li><strong>Prototype deployment.</strong> In the academic prototype, the private and public deployments run on the same host. Docker networks reproduce the trust zones: no public container is attached to a private network, and CoreAPI publishes through the public proxy's host port, using the same path, HTTPS and API key as in a real deployment.</li>
+</ul>
+<h2 id="data-flow-diagram">Data Flow Diagram</h2>
+<h3 id="diagram">Diagram</h3>
+<p><a href="../images/threat-model-dfd.svg"><img alt="Data Flow Diagram" src="../images/threat-model-dfd.svg" /></a></p>
+<p>Flows labeled F1 to F6 cross a trust boundary and are analyzed with STRIDE in the next step, together with F14 (license issuance), which is not drawn.</p>
+<h3 id="elements">Elements</h3>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Type</th>
+<th>Zone</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Citizen</td>
+<td>External entity</td>
+<td>Internet</td>
+</tr>
+<tr>
+<td>Station</td>
+<td>External entity</td>
+<td>Control room</td>
+</tr>
+<tr>
+<td>External sources</td>
+<td>External entity</td>
+<td>Third parties</td>
+</tr>
+<tr>
+<td>Packages (plugins, AI modules)</td>
+<td>External entity</td>
+<td>Supply chain</td>
+</tr>
+<tr>
+<td>Public proxy</td>
+<td>Process</td>
+<td>Public zone</td>
+</tr>
+<tr>
+<td>Public API (read-only)</td>
+<td>Process</td>
+<td>Public zone</td>
+</tr>
+<tr>
+<td>Publish endpoint (write-only)</td>
+<td>Process</td>
+<td>Public zone</td>
+</tr>
+<tr>
+<td>Public DB</td>
+<td>Data store</td>
+<td>Public zone</td>
+</tr>
+<tr>
+<td>Private proxy</td>
+<td>Process</td>
+<td>Private instance</td>
+</tr>
+<tr>
+<td>CoreAPI (including plugin gateway and plugin manager)</td>
+<td>Process</td>
+<td>Private instance</td>
+</tr>
+<tr>
+<td>AI service (including specialized modules)</td>
+<td>Process</td>
+<td>Private instance</td>
+</tr>
+<tr>
+<td>Ingestion (worker and Kafka)</td>
+<td>Process</td>
+<td>Private instance</td>
+</tr>
+<tr>
+<td>Plugin broker</td>
+<td>Process</td>
+<td>Private instance</td>
+</tr>
+<tr>
+<td>Global DB (including audit log)</td>
+<td>Data store</td>
+<td>Private instance</td>
+</tr>
+<tr>
+<td>Real-time DB</td>
+<td>Data store</td>
+<td>Private instance</td>
+</tr>
+<tr>
+<td>Plugins</td>
+<td>Process</td>
+<td>Sandbox</td>
+</tr>
+<tr>
+<td>Plugin DB</td>
+<td>Data store</td>
+<td>Sandbox</td>
+</tr>
+</tbody>
+</table>
+<h3 id="trust-boundaries">Trust boundaries</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Boundary</th>
+<th>What it separates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TB1</td>
+<td>Internet ↔ public zone</td>
+<td>Anonymous, untrusted citizens from the public service</td>
+</tr>
+<tr>
+<td>TB2</td>
+<td>Station ↔ private instance</td>
+<td>The station's browser from the locally hosted backend; this is where the license authenticates the station</td>
+</tr>
+<tr>
+<td>TB3</td>
+<td>Private → public</td>
+<td>Each private instance from the internet-facing deployment; outbound only</td>
+</tr>
+<tr>
+<td>TB4</td>
+<td>External sources → private instance</td>
+<td>Third-party data the project does not control from the operational core</td>
+</tr>
+<tr>
+<td>TB5</td>
+<td>Core ↔ sandbox</td>
+<td>Untrusted plugin code from the core; the plugin broker is the control point</td>
+</tr>
+<tr>
+<td>TB6</td>
+<td>Supply chain → private instance</td>
+<td>Code entering the system: plugins, AI modules and dependencies</td>
+</tr>
+</tbody>
+</table>
+<h3 id="data-flows">Data flows</h3>
+<h4 id="flows-that-cross-a-trust-boundary">Flows that cross a trust boundary</h4>
+<table>
+<thead>
+<tr>
+<th>Flow</th>
+<th>From → to</th>
+<th>Content</th>
+<th>Boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1</td>
+<td>Citizen ↔ public proxy</td>
+<td>HTTPS read requests</td>
+<td>TB1</td>
+</tr>
+<tr>
+<td>F2</td>
+<td>Station ↔ private proxy → CoreAPI</td>
+<td>Operations (incidents, orders, decisions), real-time COP updates</td>
+<td>TB2</td>
+</tr>
+<tr>
+<td>F3</td>
+<td>CoreAPI → publish endpoint</td>
+<td>Validated incidents and public warnings, pushed by each private instance</td>
+<td>TB3</td>
+</tr>
+<tr>
+<td>F4</td>
+<td>External sources → ingestion</td>
+<td>Data feeds fetched over HTTPS</td>
+<td>TB4</td>
+</tr>
+<tr>
+<td>F5</td>
+<td>Plugin broker ↔ plugins</td>
+<td>Requests from the core, normalized data</td>
+<td>TB5</td>
+</tr>
+<tr>
+<td>F6</td>
+<td>Packages → sandbox and AI service</td>
+<td>Installation and updates of plugins and prediction modules</td>
+<td>TB6</td>
+</tr>
+<tr>
+<td>F14</td>
+<td>License issuance → User table</td>
+<td>Creation and revocation of station licenses</td>
+<td>TB2</td>
+</tr>
+</tbody>
+</table>
+<h4 id="internal-flows">Internal flows</h4>
+<table>
+<thead>
+<tr>
+<th>Flow</th>
+<th>From → to</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F7</td>
+<td>Plugins ↔ Plugin DB</td>
+<td>Plugin-specific data</td>
+</tr>
+<tr>
+<td>F8</td>
+<td>CoreAPI ↔ Global DB</td>
+<td>Core entities, audit log</td>
+</tr>
+<tr>
+<td>F9</td>
+<td>CoreAPI ↔ Real-time DB</td>
+<td>Latest ingested data</td>
+</tr>
+<tr>
+<td>F10</td>
+<td>Ingestion → Real-time DB</td>
+<td>Normalized observations</td>
+</tr>
+<tr>
+<td>F11</td>
+<td>CoreAPI ↔ AI service</td>
+<td>Prediction, recommendation and simulation requests</td>
+</tr>
+<tr>
+<td>F12</td>
+<td>CoreAPI ↔ plugin broker</td>
+<td>Calls from the plugin client</td>
+</tr>
+<tr>
+<td>F13</td>
+<td>Public API ↔ Public DB</td>
+<td>Published state</td>
+</tr>
+<tr>
+<td>F15</td>
+<td>Publish endpoint → Public DB</td>
+<td>Published state</td>
+</tr>
+</tbody>
+</table>
+<p>Internal flows stay inside a single trust zone. They are not analyzed separately, but their protections (for example, database permissions or service-to-service authentication) are part of the mitigations in later steps.</p>
+<h3 id="differences-from-the-architecture-diagram">Differences from the architecture diagram</h3>
+<ul>
+<li><strong>Private and public deployments are separate.</strong> The architecture diagram does not show how the public application receives data; here every private instance pushes (F3) to a write-only publish endpoint, separate from the read-only API that serves citizens. Writing directly to the public database was rejected: it would expose the database to the internet, place write credentials in every instance and leave the public side with no point at which to validate, authenticate or audit what is published.</li>
+<li><strong>Supply chain is explicit.</strong> Plugins, and the prediction modules and dependencies delivered with each release, are code that enters the running system, so their delivery is modeled as its own flow (F6).</li>
+<li><strong>Plugin data reaches the station's browser.</strong> Plugins only expose data, but that data is displayed in the station's browser through the plugin gateway, so content from the least trusted zone ends up in the most trusted one (F5 and F2).</li>
+<li><strong>License issuance is modeled.</strong> License issuance is not part of the architecture diagram. Licenses are issued by the project team, so issuance is included as F14, and its procedure is defined in PT10.</li>
+</ul>
+<h2 id="stride-analysis">STRIDE Analysis</h2>
+<h3 id="method">Method</h3>
+<p>Each flow that crosses a trust boundary (F1 to F6 and F14) is analyzed with STRIDE per interaction: the threats consider the flow itself and the two elements at its ends. Each threat has an identifier in the form <code>&lt;flow&gt;-&lt;category&gt;&lt;number&gt;</code>, which the following sections use to refer to it. Categories that do not apply to a flow are listed with the reason.</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Property violated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>S</strong>poofing</td>
+<td>Authentication</td>
+</tr>
+<tr>
+<td><strong>T</strong>ampering</td>
+<td>Integrity</td>
+</tr>
+<tr>
+<td><strong>R</strong>epudiation</td>
+<td>Non-repudiation</td>
+</tr>
+<tr>
+<td><strong>I</strong>nformation disclosure</td>
+<td>Confidentiality</td>
+</tr>
+<tr>
+<td><strong>D</strong>enial of service</td>
+<td>Availability</td>
+</tr>
+<tr>
+<td><strong>E</strong>levation of privilege</td>
+<td>Authorization</td>
+</tr>
+</tbody>
+</table>
+<h3 id="f1-citizen-public-proxy-tb1">F1: Citizen ↔ public proxy (TB1)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Category</th>
+<th>Threat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1-S1</td>
+<td>Spoofing</td>
+<td>A fake website imitates the public application and spreads false emergency information or phishing during a crisis.</td>
+</tr>
+<tr>
+<td>F1-T1</td>
+<td>Tampering</td>
+<td>Responses are modified in transit if TLS is missing or can be downgraded.</td>
+</tr>
+<tr>
+<td>F1-T2</td>
+<td>Tampering</td>
+<td>Filter and search parameters are used to inject queries into the public API or database.</td>
+</tr>
+<tr>
+<td>-</td>
+<td>Repudiation</td>
+<td>Not applicable: citizens are anonymous and only read data.</td>
+</tr>
+<tr>
+<td>F1-I1</td>
+<td>Information disclosure</td>
+<td>Public responses include internal-only fields or operationally sensitive detail, such as exact locations or resource positions.</td>
+</tr>
+<tr>
+<td>F1-I2</td>
+<td>Information disclosure</td>
+<td>Access logs, analytics or third-party scripts collect personal data from citizens, such as IP addresses or location.</td>
+</tr>
+<tr>
+<td>F1-I3</td>
+<td>Information disclosure</td>
+<td>Error messages or debug endpoints expose stack traces, versions or configuration.</td>
+</tr>
+<tr>
+<td>F1-D1</td>
+<td>Denial of service</td>
+<td>A traffic peak or a DDoS attack during a major emergency makes the application unavailable when it is most needed.</td>
+</tr>
+<tr>
+<td>F1-D2</td>
+<td>Denial of service</td>
+<td>Expensive filter combinations exhaust the public API or database.</td>
+</tr>
+<tr>
+<td>F1-E1</td>
+<td>Elevation of privilege</td>
+<td>A vulnerability in Nginx, FastAPI or a dependency gives an attacker control of the public host.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="f2-station-private-proxy-coreapi-tb2">F2: Station ↔ private proxy → CoreAPI (TB2)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Category</th>
+<th>Threat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F2-S1</td>
+<td>Spoofing</td>
+<td>A license copied from a station's configuration is used on another machine.</td>
+</tr>
+<tr>
+<td>F2-S2</td>
+<td>Spoofing</td>
+<td>Another process or user on the host calls the local API directly, bypassing the web application.</td>
+</tr>
+<tr>
+<td>F2-S3</td>
+<td>Spoofing</td>
+<td>A website open in the station's browser sends requests to the local API, through cross-site requests or DNS rebinding against <code>localhost</code>.</td>
+</tr>
+<tr>
+<td>F2-T1</td>
+<td>Tampering</td>
+<td>Script injected through ingested data or data returned by a plugin runs in the station’s browser and performs actions as the station.</td>
+</tr>
+<tr>
+<td>F2-T2</td>
+<td>Tampering</td>
+<td>Operational requests (incidents, orders, decisions) are replayed or modified between the browser and the backend.</td>
+</tr>
+<tr>
+<td>F2-T3</td>
+<td>Tampering</td>
+<td>The API allows an audit, order or decision record to be changed or deleted after it is created.</td>
+</tr>
+<tr>
+<td>F2-R1</td>
+<td>Repudiation</td>
+<td>Actions are attributed to a station, not to a person, so the audit log cannot show who in the control room made a decision.</td>
+</tr>
+<tr>
+<td>F2-R2</td>
+<td>Repudiation</td>
+<td>A station denies having issued an order or made a decision, and the audit log cannot prove otherwise because its records are incomplete or their integrity cannot be verified (see F2-T3).</td>
+</tr>
+<tr>
+<td>F2-I1</td>
+<td>Information disclosure</td>
+<td>Exported maps and data files leave the control room with operational information and are shared further than intended.</td>
+</tr>
+<tr>
+<td>F2-I2</td>
+<td>Information disclosure</td>
+<td>Permissive CORS or WebSocket origin checks let other local origins read the operational picture.</td>
+</tr>
+<tr>
+<td>F2-D1</td>
+<td>Denial of service</td>
+<td>Heavy historical searches or simulations exhaust resources and slow down the COP, alerts and orders.</td>
+</tr>
+<tr>
+<td>F2-D2</td>
+<td>Denial of service</td>
+<td>Rate limiting or lockout after failed license attempts blocks a legitimate station during an emergency.</td>
+</tr>
+<tr>
+<td>F2-E1</td>
+<td>Elevation of privilege</td>
+<td>Routes exposed through the plugin gateway are reachable without license checks.</td>
+</tr>
+<tr>
+<td>F2-E2</td>
+<td>Elevation of privilege</td>
+<td>Every station can perform every action, including publishing to the public application, so one compromised station has full control.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="f3-coreapi-publish-endpoint-tb3">F3: CoreAPI → publish endpoint (TB3)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Category</th>
+<th>Threat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F3-S1</td>
+<td>Spoofing</td>
+<td>An attacker impersonates a private instance and publishes false incidents or warnings, causing panic or misinformation.</td>
+</tr>
+<tr>
+<td>F3-S2</td>
+<td>Spoofing</td>
+<td>The private instance pushes to a fake public endpoint (DNS or certificate attack) and leaks published data or credentials.</td>
+</tr>
+<tr>
+<td>F3-T1</td>
+<td>Tampering</td>
+<td>Published messages are modified in transit.</td>
+</tr>
+<tr>
+<td>F3-T2</td>
+<td>Tampering</td>
+<td>Old messages are replayed, for example to reopen a closed incident or restore an ended warning.</td>
+</tr>
+<tr>
+<td>F3-T3</td>
+<td>Tampering</td>
+<td>A compromised private instance publishes falsified data that the public side accepts as authentic.</td>
+</tr>
+<tr>
+<td>F3-R1</td>
+<td>Repudiation</td>
+<td>The public side cannot show which instance and station published, changed or ended a warning.</td>
+</tr>
+<tr>
+<td>F3-I1</td>
+<td>Information disclosure</td>
+<td>The push serializes whole entities instead of the public schema, so operational fields cross the boundary.</td>
+</tr>
+<tr>
+<td>F3-I2</td>
+<td>Information disclosure</td>
+<td>Publisher credentials stored on the public side are stolen and reused (enables F3-S1).</td>
+</tr>
+<tr>
+<td>F3-D1</td>
+<td>Denial of service</td>
+<td>When the public side is down or slow, the private application blocks while publishing.</td>
+</tr>
+<tr>
+<td>F3-D2</td>
+<td>Denial of service</td>
+<td>When the private side is offline, citizens see outdated data without knowing it.</td>
+</tr>
+<tr>
+<td>F3-E1</td>
+<td>Elevation of privilege</td>
+<td>A compromised public side uses the response channel (replies, redirects, error bodies) to attack the private instance, or a design change introduces a pull from public to private.</td>
+</tr>
+<tr>
+<td>F3-E2</td>
+<td>Elevation of privilege</td>
+<td>An authorized instance changes or ends incidents and warnings published by another instance.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="f4-external-sources-ingestion-tb4">F4: External sources → ingestion (TB4)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Category</th>
+<th>Threat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F4-S1</td>
+<td>Spoofing</td>
+<td>A fake or compromised source delivers false incidents or resource positions.</td>
+</tr>
+<tr>
+<td>F4-T1</td>
+<td>Tampering</td>
+<td>Feed content carries injection payloads that reach the COP, the database or exports.</td>
+</tr>
+<tr>
+<td>F4-T2</td>
+<td>Tampering</td>
+<td>Manipulated historical data poisons the training data of the prediction models.</td>
+</tr>
+<tr>
+<td>F4-R1</td>
+<td>Repudiation</td>
+<td>Without the raw payload and fetch metadata, it is not possible to prove what a source actually sent.</td>
+</tr>
+<tr>
+<td>F4-I1</td>
+<td>Information disclosure</td>
+<td>Outbound requests reveal the control room's network address, location and activity patterns to source operators and observers.</td>
+</tr>
+<tr>
+<td>F4-I2</td>
+<td>Information disclosure</td>
+<td>API keys for external sources leak through logs, configuration or the public repository.</td>
+</tr>
+<tr>
+<td>F4-D1</td>
+<td>Denial of service</td>
+<td>A source stops responding or responds very slowly.</td>
+</tr>
+<tr>
+<td>F4-D2</td>
+<td>Denial of service</td>
+<td>A source sends oversized or very frequent payloads that saturate Kafka or the Real-time DB.</td>
+</tr>
+<tr>
+<td>F4-E1</td>
+<td>Elevation of privilege</td>
+<td>A parser vulnerability gives code execution in the ingestion worker, which has write access to the Real-time DB.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="f5-plugin-broker-plugins-tb5">F5: Plugin broker ↔ plugins (TB5)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Category</th>
+<th>Threat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F5-S1</td>
+<td>Spoofing</td>
+<td>A plugin impersonates another plugin, or claims to feed sources it does not own.</td>
+</tr>
+<tr>
+<td>F5-T1</td>
+<td>Tampering</td>
+<td>A plugin writes false core data, such as incidents or resource positions, and corrupts the COP.</td>
+</tr>
+<tr>
+<td>F5-T2</td>
+<td>Tampering</td>
+<td>A plugin returns data with injection payloads that run as script when the web application displays it (see F2-T1).</td>
+</tr>
+<tr>
+<td>F5-R1</td>
+<td>Repudiation</td>
+<td>Data cannot be traced to the plugin and version that produced it.</td>
+</tr>
+<tr>
+<td>F5-I1</td>
+<td>Information disclosure</td>
+<td>A plugin requests more core data than it needs and sends it out through network access.</td>
+</tr>
+<tr>
+<td>F5-I2</td>
+<td>Information disclosure</td>
+<td>A plugin reads another plugin's data in the Plugin DB.</td>
+</tr>
+<tr>
+<td>F5-D1</td>
+<td>Denial of service</td>
+<td>A plugin exhausts CPU, memory or disk, or responds slowly and blocks core calls.</td>
+</tr>
+<tr>
+<td>F5-D2</td>
+<td>Denial of service</td>
+<td>A plugin floods the broker with requests.</td>
+</tr>
+<tr>
+<td>F5-E1</td>
+<td>Elevation of privilege</td>
+<td>A plugin escapes its container. Docker containers share the host kernel, so they are not a strong isolation boundary by default.</td>
+</tr>
+<tr>
+<td>F5-E2</td>
+<td>Elevation of privilege</td>
+<td>A plugin bypasses the broker by reaching CoreAPI, the AI service, Kafka or the databases directly over the container network.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="f6-packages-sandbox-and-ai-service-tb6">F6: Packages → sandbox and AI service (TB6)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Category</th>
+<th>Threat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F6-S1</td>
+<td>Spoofing</td>
+<td>A fake plugin, or a dependency with a look-alike name, is installed in place of the intended one.</td>
+</tr>
+<tr>
+<td>F6-T1</td>
+<td>Tampering</td>
+<td>A package or update is modified at the source or during download.</td>
+</tr>
+<tr>
+<td>F6-T2</td>
+<td>Tampering</td>
+<td>A legitimate plugin is replaced by a malicious update.</td>
+</tr>
+<tr>
+<td>F6-R1</td>
+<td>Repudiation</td>
+<td>There is no record of who installed or approved a plugin or module, or which version.</td>
+</tr>
+<tr>
+<td>F6-I1</td>
+<td>Information disclosure</td>
+<td>A package contains code that collects and sends out data (see F5-I1).</td>
+</tr>
+<tr>
+<td>F6-D1</td>
+<td>Denial of service</td>
+<td>A faulty update breaks the instance, and the control room may be offline when a fix is needed.</td>
+</tr>
+<tr>
+<td>F6-E1</td>
+<td>Elevation of privilege</td>
+<td>A prediction module or model file altered during build or delivery runs code when loaded inside the AI service, outside the sandbox.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="f14-license-issuance-user-table-tb2">F14: License issuance → User table (TB2)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Category</th>
+<th>Threat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F14-S1</td>
+<td>Spoofing</td>
+<td>Licenses are guessable or derived from public information, so an attacker can create a valid one.</td>
+</tr>
+<tr>
+<td>F14-T1</td>
+<td>Tampering</td>
+<td>Anyone with write access to the database inserts their own license hash and gains access.</td>
+</tr>
+<tr>
+<td>F14-R1</td>
+<td>Repudiation</td>
+<td>There is no record of who issued or revoked a license.</td>
+</tr>
+<tr>
+<td>F14-I1</td>
+<td>Information disclosure</td>
+<td>Licenses are delivered through an insecure channel, such as plain email.</td>
+</tr>
+<tr>
+<td>F14-D1</td>
+<td>Denial of service</td>
+<td>A lost, expired or revoked license locks a station out during an emergency, with no fast recovery.</td>
+</tr>
+<tr>
+<td>-</td>
+<td>Elevation of privilege</td>
+<td>Covered by F14-S1 and F14-T1.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="internal-flows_1">Internal flows</h3>
+<p>The internal flows are not analyzed one by one, but two observations carry into the mitigations:</p>
+<ul>
+<li><strong>F11 (CoreAPI ↔ AI service)</strong> is an HTTPS API. TLS protects the traffic but does not identify the caller: if the AI service does not authenticate who calls it, any container that can reach it, including a compromised plugin (F5-E2), can run predictions or load modules.</li>
+<li><strong>F8 and F9 (CoreAPI ↔ databases)</strong> use credentials that, if shared with the ingestion worker or exposed to the plugin network, turn a compromise of those components into full database access (F4-E1, F5-E2, F14-T1).</li>
+</ul>
+<h2 id="priority-threats">Priority Threats</h2>
+<h3 id="method_1">Method</h3>
+<p>Each threat from the STRIDE analysis is scored by probability and impact, on a scale from 1 to 3. The risk score is the product of the two, from 1 to 9.</p>
+<table>
+<thead>
+<tr>
+<th>Score</th>
+<th>Probability</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 (low)</td>
+<td>Needs insider access, a rare vulnerability or several prior compromises</td>
+<td>Limited; no effect on operations or on public information</td>
+</tr>
+<tr>
+<td>2 (medium)</td>
+<td>Needs a specific weakness or a compromised component</td>
+<td>Degrades operations or exposes non-critical data; recoverable</td>
+</tr>
+<tr>
+<td>3 (high)</td>
+<td>Reachable by an external attacker with known techniques, or happens without an attacker (failure, misconfiguration)</td>
+<td>Corrupts the operational picture, leaves the control room without the system during an emergency, spreads false information to citizens or exposes operational data</td>
+</tr>
+</tbody>
+</table>
+<p>Impact is measured by its operational consequences, not by the technical severity of the flaw. Because the architecture is public, probability assumes an attacker who knows the design.</p>
+<p>Threats with a score of 6 or more are considered high risk. Related high-risk threats are grouped into priority threats (PT1 to PT10) that share the same mitigations. High-risk threats that are not part of a priority threat are listed in <a href="#other-high-risk-threats">Other high-risk threats</a>, with the reason.</p>
+<h3 id="risk-scoring">Risk scoring</h3>
+<p><strong>Treatment:</strong> PT<em>n</em> = addressed by priority threat <em>n</em> (with Residual when part of the threat remains after mitigation); Other = high risk, see <a href="#other-high-risk-threats">Other high-risk threats</a>; Residual = accepted, see Residual Risks; — = low risk, addressed by general good practice.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Probability</th>
+<th>Impact</th>
+<th>Score</th>
+<th>Treatment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1-S1</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>Residual</td>
+</tr>
+<tr>
+<td>F1-T1</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>-</td>
+</tr>
+<tr>
+<td>F1-T2</td>
+<td>2</td>
+<td>2</td>
+<td>4</td>
+<td>-</td>
+</tr>
+<tr>
+<td>F1-I1</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>PT8</td>
+</tr>
+<tr>
+<td>F1-I2</td>
+<td>2</td>
+<td>2</td>
+<td>4</td>
+<td>-</td>
+</tr>
+<tr>
+<td>F1-I3</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>-</td>
+</tr>
+<tr>
+<td>F1-D1</td>
+<td>3</td>
+<td>3</td>
+<td>9</td>
+<td>PT1, Residual</td>
+</tr>
+<tr>
+<td>F1-D2</td>
+<td>2</td>
+<td>2</td>
+<td>4</td>
+<td>PT1</td>
+</tr>
+<tr>
+<td>F1-E1</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>Other</td>
+</tr>
+<tr>
+<td>F2-S1</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>-</td>
+</tr>
+<tr>
+<td>F2-S2</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>-</td>
+</tr>
+<tr>
+<td>F2-S3</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT3</td>
+</tr>
+<tr>
+<td>F2-T1</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT4</td>
+</tr>
+<tr>
+<td>F2-T2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>-</td>
+</tr>
+<tr>
+<td>F2-T3</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT7, Residual</td>
+</tr>
+<tr>
+<td>F2-R1</td>
+<td>3</td>
+<td>2</td>
+<td>6</td>
+<td>Residual</td>
+</tr>
+<tr>
+<td>F2-R2</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT7</td>
+</tr>
+<tr>
+<td>F2-I1</td>
+<td>2</td>
+<td>2</td>
+<td>4</td>
+<td>-</td>
+</tr>
+<tr>
+<td>F2-I2</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT3</td>
+</tr>
+<tr>
+<td>F2-D1</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>Other</td>
+</tr>
+<tr>
+<td>F2-D2</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>-</td>
+</tr>
+<tr>
+<td>F2-E1</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT3</td>
+</tr>
+<tr>
+<td>F2-E2</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>Residual</td>
+</tr>
+<tr>
+<td>F3-S1</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT2, Residual</td>
+</tr>
+<tr>
+<td>F3-S2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>-</td>
+</tr>
+<tr>
+<td>F3-T1</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>PT2</td>
+</tr>
+<tr>
+<td>F3-T2</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT2</td>
+</tr>
+<tr>
+<td>F3-T3</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>PT2</td>
+</tr>
+<tr>
+<td>F3-R1</td>
+<td>2</td>
+<td>2</td>
+<td>4</td>
+<td>PT2</td>
+</tr>
+<tr>
+<td>F3-I1</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT8</td>
+</tr>
+<tr>
+<td>F3-I2</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT2</td>
+</tr>
+<tr>
+<td>F3-D1</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>Other</td>
+</tr>
+<tr>
+<td>F3-D2</td>
+<td>3</td>
+<td>2</td>
+<td>6</td>
+<td>Other</td>
+</tr>
+<tr>
+<td>F3-E1</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>-</td>
+</tr>
+<tr>
+<td>F3-E2</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT2</td>
+</tr>
+<tr>
+<td>F4-S1</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT6, Residual</td>
+</tr>
+<tr>
+<td>F4-T1</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT4</td>
+</tr>
+<tr>
+<td>F4-T2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>-</td>
+</tr>
+<tr>
+<td>F4-R1</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>PT6</td>
+</tr>
+<tr>
+<td>F4-I1</td>
+<td>3</td>
+<td>2</td>
+<td>6</td>
+<td>Residual</td>
+</tr>
+<tr>
+<td>F4-I2</td>
+<td>2</td>
+<td>2</td>
+<td>4</td>
+<td>-</td>
+</tr>
+<tr>
+<td>F4-D1</td>
+<td>3</td>
+<td>2</td>
+<td>6</td>
+<td>Other</td>
+</tr>
+<tr>
+<td>F4-D2</td>
+<td>2</td>
+<td>2</td>
+<td>4</td>
+<td>-</td>
+</tr>
+<tr>
+<td>F4-E1</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>-</td>
+</tr>
+<tr>
+<td>F5-S1</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>-</td>
+</tr>
+<tr>
+<td>F5-T1</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT6, Residual</td>
+</tr>
+<tr>
+<td>F5-T2</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT4</td>
+</tr>
+<tr>
+<td>F5-R1</td>
+<td>2</td>
+<td>2</td>
+<td>4</td>
+<td>PT6</td>
+</tr>
+<tr>
+<td>F5-I1</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT5</td>
+</tr>
+<tr>
+<td>F5-I2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>PT5</td>
+</tr>
+<tr>
+<td>F5-D1</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT5</td>
+</tr>
+<tr>
+<td>F5-D2</td>
+<td>2</td>
+<td>2</td>
+<td>4</td>
+<td>PT5</td>
+</tr>
+<tr>
+<td>F5-E1</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>PT5, Residual</td>
+</tr>
+<tr>
+<td>F5-E2</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT5</td>
+</tr>
+<tr>
+<td>F6-S1</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT9</td>
+</tr>
+<tr>
+<td>F6-T1</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>PT9</td>
+</tr>
+<tr>
+<td>F6-T2</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT9</td>
+</tr>
+<tr>
+<td>F6-R1</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>PT9</td>
+</tr>
+<tr>
+<td>F6-I1</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT5</td>
+</tr>
+<tr>
+<td>F6-D1</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT9</td>
+</tr>
+<tr>
+<td>F6-E1</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>-</td>
+</tr>
+<tr>
+<td>F14-S1</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>PT10</td>
+</tr>
+<tr>
+<td>F14-T1</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>-</td>
+</tr>
+<tr>
+<td>F14-R1</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>PT10</td>
+</tr>
+<tr>
+<td>F14-I1</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT10</td>
+</tr>
+<tr>
+<td>F14-D1</td>
+<td>2</td>
+<td>3</td>
+<td>6</td>
+<td>PT10</td>
+</tr>
+</tbody>
+</table>
+<h3 id="priority-threats_1">Priority threats</h3>
+<p>Priority threats are ordered by score. Among threats with the same score, those that reach citizens or the operational picture directly come first.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Priority threat</th>
+<th>Threats</th>
+<th>Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PT1</td>
+<td>Public application unavailable during a crisis</td>
+<td>F1-D1, F1-D2</td>
+<td>9</td>
+</tr>
+<tr>
+<td>PT2</td>
+<td>False or unauthorized publication to citizens</td>
+<td>F3-S1, F3-T1, F3-T2, F3-T3, F3-R1, F3-I2, F3-E2</td>
+<td>6</td>
+</tr>
+<tr>
+<td>PT3</td>
+<td>Unauthorized access to the local API</td>
+<td>F2-S3, F2-I2, F2-E1</td>
+<td>6</td>
+</tr>
+<tr>
+<td>PT4</td>
+<td>Script injection from untrusted data</td>
+<td>F2-T1, F4-T1, F5-T2</td>
+<td>6</td>
+</tr>
+<tr>
+<td>PT5</td>
+<td>Plugin escapes its isolation</td>
+<td>F5-I1, F5-I2, F5-D1, F5-D2, F5-E1, F5-E2, F6-I1</td>
+<td>6</td>
+</tr>
+<tr>
+<td>PT6</td>
+<td>False operational data from sources and plugins</td>
+<td>F4-S1, F4-R1, F5-T1, F5-R1</td>
+<td>6</td>
+</tr>
+<tr>
+<td>PT7</td>
+<td>Audit and decision records altered</td>
+<td>F2-T3, F2-R2</td>
+<td>6</td>
+</tr>
+<tr>
+<td>PT8</td>
+<td>Operational data published to citizens</td>
+<td>F1-I1, F3-I1</td>
+<td>6</td>
+</tr>
+<tr>
+<td>PT9</td>
+<td>Compromised or faulty packages</td>
+<td>F6-S1, F6-T1, F6-T2, F6-R1, F6-D1</td>
+<td>6</td>
+</tr>
+<tr>
+<td>PT10</td>
+<td>Weak license lifecycle</td>
+<td>F14-S1, F14-R1, F14-I1, F14-D1</td>
+<td>6</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mitigations">Mitigations</h3>
+<h4 id="pt1-public-application-unavailable-during-a-crisis">PT1: Public application unavailable during a crisis</h4>
+<p><strong>Threats:</strong> F1-D1, F1-D2. <strong>Risk:</strong> 3 × 3 = 9.</p>
+<p>Demand on the public application peaks during exactly the emergencies it exists for, and it is the most exposed component. Published data changes far less often than it is read, so most requests can be served without reaching the API.</p>
+<ul>
+<li><strong>Cached snapshots:</strong> the public API generates the published state as precomputed responses, which the proxy caches and serves directly.</li>
+<li><strong>Bounded queries:</strong> filters are limited to the indexed fields, results are paginated and queries have a maximum execution time.</li>
+<li><strong>Rate limiting:</strong> the proxy limits requests per client and connections per address.</li>
+<li><strong>Multiple workers:</strong> the read-only API runs several worker processes, so a slow request does not block the others.</li>
+<li><strong>Graceful degradation:</strong> if the API is unavailable, the proxy serves the last cached snapshot with its timestamp.</li>
+</ul>
+<p>These measures handle traffic peaks and small-scale attacks. A large-scale DDoS attack exceeds what a single academic deployment can absorb; it is discussed in Residual Risks.</p>
+<h4 id="pt2-false-or-unauthorized-publication-to-citizens">PT2: False or unauthorized publication to citizens</h4>
+<p><strong>Threats:</strong> F3-S1, F3-T1, F3-T2, F3-T3, F3-R1, F3-I2, F3-E2. <strong>Risk:</strong> 2 × 3 = 6.</p>
+<p>A false warning or incident reaches the public directly and can cause panic or put people at risk. With several independent private instances, the publish endpoint must know exactly which instance sends each message and what it is allowed to change.</p>
+<ul>
+<li><strong>Per-instance key:</strong> publishing is done automatically by CoreAPI, but the publish endpoint is reachable from the internet, so it must tell real instances apart from anyone else. Each instance's CoreAPI holds its own API key, generated by the project team and kept in the instance's configuration, never exposed to stations or the browser. The publish endpoint stores only a hash of each key and can revoke one instance without affecting the others (F3-S1, F3-I2).</li>
+<li><strong>HTTPS only:</strong> the publish endpoint accepts only HTTPS, so messages cannot be read or modified in transit (F3-T1).</li>
+<li><strong>Ownership:</strong> each published incident and warning belongs to the instance that created it; only that instance can update or end it (F3-E2), which also limits what a compromised instance can do (F3-T3).</li>
+<li><strong>Versioning:</strong> each published item has a version number that increases with every change, and the endpoint ignores messages with a version older than the one it already has (F3-T2).</li>
+<li><strong>Publication log:</strong> the endpoint records every message with the instance, the action and the time, so every change to the public state can be traced to an instance (F3-R1).</li>
+</ul>
+<p>A leaked key still allows impersonating its instance until it is revoked; this is discussed in Residual Risks.</p>
+<h4 id="pt3-unauthorized-access-to-the-local-api">PT3: Unauthorized access to the local API</h4>
+<p><strong>Threats:</strong> F2-S3, F2-I2, F2-E1. <strong>Risk:</strong> 2 × 3 = 6.</p>
+<p>Being hosted locally does not protect the API from the station's own browser: any website open on the station can send requests to a local address, and DNS rebinding can make the browser treat a local address as the attacker's site.</p>
+<ul>
+<li><strong>Deny by default:</strong> the license check is applied to every route, including the plugin gateway and WebSocket connections; routes must opt out explicitly. An automated test lists all routes and confirms that each one rejects requests without a valid session.</li>
+<li><strong>Host validation:</strong> the proxy rejects requests whose <code>Host</code> header is not the instance's expected name, which defeats DNS rebinding.</li>
+<li><strong>Origin checks:</strong> CORS allows only the application's own origin, never a wildcard, and WebSocket connections check the <code>Origin</code> header.</li>
+<li><strong>Session protection:</strong> after license authentication, the session is kept in a <code>HttpOnly</code>, <code>SameSite=Strict</code> cookie, and state-changing requests require a CSRF token.</li>
+<li><strong>Network binding:</strong> the proxy listens only on the interface the stations use, never on all interfaces.</li>
+</ul>
+<h4 id="pt4-script-injection-from-untrusted-data">PT4: Script injection from untrusted data</h4>
+<p><strong>Threats:</strong> F2-T1, F4-T1, F5-T2. <strong>Risk:</strong> 2 × 3 = 6.</p>
+<p>Text from external sources and plugins (incident descriptions, names, addresses) is displayed in the station's browser, which holds the station's session. Script that runs there can act as the station.</p>
+<ul>
+<li><strong>Output escaping:</strong> all external text is rendered as text. React escapes by default; <code>dangerouslySetInnerHTML</code> is forbidden by a lint rule, and map popups and tooltips are built from text nodes, not HTML strings.</li>
+<li><strong>Content Security Policy:</strong> a strict policy allows scripts only from the application itself, with no inline scripts.</li>
+<li><strong>Input validation:</strong> the ingestion worker and the plugin broker validate every record against a schema with types, maximum lengths and allowed formats, and reject records that do not match.</li>
+<li><strong>Safe exports:</strong> values in CSV exports that start with <code>=</code>, <code>+</code>, <code>-</code> or <code>@</code> are escaped, so exported files cannot run formulas in spreadsheet software.</li>
+</ul>
+<h4 id="pt5-plugin-escapes-its-isolation">PT5: Plugin escapes its isolation</h4>
+<p><strong>Threats:</strong> F5-I1, F5-I2, F5-D1, F5-D2, F5-E1, F5-E2, F6-I1. <strong>Risk:</strong> 2 × 3 = 6.</p>
+<p>A container on its own is not a sandbox. Plugin isolation depends on what the container can reach and what it is allowed to do.</p>
+<ul>
+<li><strong>Network isolation:</strong> plugins run on an internal Docker network where the only reachable service is the plugin broker. There is no route to CoreAPI, the AI service, Kafka, the core databases or the internet. Since external data enters through the ingestion worker, plugins never need outbound access.</li>
+<li><strong>Container hardening:</strong> plugins run as a non-root user with a read-only filesystem, all capabilities dropped, <code>no-new-privileges</code>, the default seccomp profile and no access to the Docker socket.</li>
+<li><strong>Resource limits:</strong> each plugin has CPU, memory, process and disk limits, and the broker applies per-plugin rate limits and timeouts, so a slow plugin cannot block the core.</li>
+<li><strong>Least-privilege data access:</strong> each plugin declares in its manifest the data it needs, and the broker only serves that data. Each plugin has its own schema and database user in the Plugin DB.</li>
+<li><strong>Separate service credentials:</strong> the AI service only accepts requests from CoreAPI, authenticated with a service token, and each component (CoreAPI, ingestion worker, plugin broker) has its own database user with only the permissions it needs.</li>
+</ul>
+<h4 id="pt6-false-operational-data-from-sources-and-plugins">PT6: False operational data from sources and plugins</h4>
+<p><strong>Threats:</strong> F4-S1, F4-R1, F5-T1, F5-R1. <strong>Risk:</strong> 2 × 3 = 6.</p>
+<p>The operational picture is only as reliable as its inputs. False incidents or resource positions can lead to wrong decisions, and a compromised source or plugin cannot be fully prevented from sending them.</p>
+<ul>
+<li><strong>Provenance:</strong> every observation records the source, the plugin and its version, and the ingestion time, and the ingestion worker keeps the raw payload with a hash.</li>
+<li><strong>Write scope:</strong> the broker only accepts data from a plugin for the sources that plugin is registered to feed.</li>
+<li><strong>Basic plausibility checks:</strong> positions outside the territory and impossible movement between updates are flagged instead of being applied silently.</li>
+<li><strong>Trust level on display:</strong> each source's trust level and last update are shown with its data, and incidents from external sources need operator validation before they are published.</li>
+<li><strong>Fast disabling:</strong> an operator can disable a source or plugin from the application, without a restart.</li>
+</ul>
+<h4 id="pt7-audit-and-decision-records-altered">PT7: Audit and decision records altered</h4>
+<p><strong>Threats:</strong> F2-T3, F2-R2. <strong>Risk:</strong> 2 × 3 = 6.</p>
+<p>The audit log is the record of who did what during an emergency. If records can be changed, it proves nothing.</p>
+<ul>
+<li><strong>Append-only records:</strong> the API has no update or delete operations for audit entries, issued orders or recorded decisions; corrections are new records that reference the original.</li>
+<li><strong>Database permissions:</strong> the database user of CoreAPI has only <code>INSERT</code> and <code>SELECT</code> on these tables, and a trigger rejects <code>UPDATE</code> and <code>DELETE</code>.</li>
+<li><strong>Hash chain:</strong> each audit entry includes the hash of the previous one, and the chain is verified on export, so changes made outside the API are detected.</li>
+</ul>
+<p>Someone with full access to the database on the host could still rewrite the whole chain; this is discussed in Residual Risks.</p>
+<h4 id="pt8-operational-data-published-to-citizens">PT8: Operational data published to citizens</h4>
+<p><strong>Threats:</strong> F1-I1, F3-I1. <strong>Risk:</strong> 2 × 3 = 6.</p>
+<p>The public database holds only what is published, so operational data can only reach citizens if it crosses the publish flow.</p>
+<ul>
+<li><strong>Explicit public schema:</strong> the private instance converts each incident and warning into a dedicated public model with an allowlist of fields before publishing; whole entities are never serialized.</li>
+<li><strong>Strict validation on receipt:</strong> the publish endpoint validates messages against the same schema and rejects unknown fields instead of ignoring them.</li>
+<li><strong>Location coarsening:</strong> locations are reduced to an approximate area before publishing, and resource data has no place in the public schema.</li>
+<li><strong>Contract tests:</strong> automated tests confirm that no internal field appears in the publish messages or in the public API responses.</li>
+</ul>
+<h4 id="pt9-compromised-or-faulty-packages">PT9: Compromised or faulty packages</h4>
+<p><strong>Threats:</strong> F6-S1, F6-T1, F6-T2, F6-R1, F6-D1. <strong>Risk:</strong> 2 × 3 = 6.</p>
+<p>Plugins, prediction modules and their dependencies are code that runs inside the instance. A malicious or faulty update can reach a control room that may be offline when a fix is needed.</p>
+<ul>
+<li><strong>Pinned dependencies:</strong> Python and JavaScript dependencies are pinned with hashes in lockfiles and scanned for known vulnerabilities in continuous integration.</li>
+<li><strong>Known sources:</strong> plugins are installed only from the project's own repository, and each image is referenced by its digest, so a modified image is not installed under the same name.</li>
+<li><strong>Explicit updates:</strong> nothing updates automatically. Each installation or update is an explicit action, recorded with the version, digest, date and station.</li>
+<li><strong>Rollback:</strong> the previous version is kept, so a faulty update can be reverted locally without internet access.</li>
+</ul>
+<h4 id="pt10-weak-license-lifecycle">PT10: Weak license lifecycle</h4>
+<p><strong>Threats:</strong> F14-S1, F14-R1, F14-I1, F14-D1. <strong>Risk:</strong> 2 × 3 = 6.</p>
+<p>The license is the only authentication of the private application, and its issuance, delivery and revocation are not part of the architecture, so they are defined here.</p>
+<ul>
+<li><strong>Strong licenses:</strong> licenses are random values of at least 128 bits from a cryptographically secure generator, never derived from names or other public data, and are stored with Argon2id.</li>
+<li><strong>Secure delivery:</strong> licenses are delivered in person or through a channel separate from the one that identifies the station, never by plain email.</li>
+<li><strong>Issuance register:</strong> the project team keeps a register of every license issued and revoked, with the station, the date and who did it.</li>
+<li><strong>Emergency recovery:</strong> a documented procedure, which works without internet access, issues a replacement license locally, so a lost license does not leave a station without the system during an emergency.</li>
+</ul>
+<h3 id="other-high-risk-threats">Other high-risk threats</h3>
+<p>Some threats score 6 but are not part of a priority threat, because they are already handled by the platform's design or cannot be mitigated within it:</p>
+<ul>
+<li><strong>Covered by the availability design:</strong> F2-D1 (simulations and heavy searches run in the AI service and in background jobs with their own resource limits, separate from the COP), F3-D1 (publishing is asynchronous through a local queue, so a slow public side never blocks the private instance), F3-D2 and F4-D1 (the public application and the COP show the time of the last update and flag outdated data).</li>
+<li><strong>Limited by the architecture:</strong> F1-E1. A compromised public host has no path to private instances, and the read-only API's database account cannot change the published state. The host is kept patched and minimal, but an attacker in control of it could still show false data to citizens; this is treated as a residual risk.</li>
+<li><strong>Accepted:</strong> F1-S1, F2-R1, F2-E2 and F4-I1 cannot be mitigated within the current design and are discussed in Residual Risks.</li>
+</ul>
+<h2 id="residual-risks">Residual Risks</h2>
+<h3 id="method_2">Method</h3>
+<p>A residual risk is what remains after the mitigations of the priority threats, or a threat that cannot be mitigated within the current design. Each residual risk is scored again with the same scales, taking into account the mitigations and the compensating controls, which are mostly organizational and outside the application. Some of these limits come from the academic context of the project; <a href="#production-deployment">Production deployment</a> lists what a real deployment should change.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Residual risk</th>
+<th>Threats</th>
+<th>Initial score</th>
+<th>Residual score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RR1</td>
+<td>Fake public application</td>
+<td>F1-S1</td>
+<td>6</td>
+<td>6</td>
+</tr>
+<tr>
+<td>RR2</td>
+<td>All stations can perform all actions</td>
+<td>F2-E2</td>
+<td>6</td>
+<td>4</td>
+</tr>
+<tr>
+<td>RR3</td>
+<td>Plausible false data from a legitimate source</td>
+<td>F4-S1, F5-T1</td>
+<td>6</td>
+<td>4</td>
+</tr>
+<tr>
+<td>RR4</td>
+<td>Large-scale DDoS on the public application</td>
+<td>F1-D1</td>
+<td>9</td>
+<td>3</td>
+</tr>
+<tr>
+<td>RR5</td>
+<td>Compromised public host</td>
+<td>F1-E1</td>
+<td>6</td>
+<td>3</td>
+</tr>
+<tr>
+<td>RR6</td>
+<td>Actions attributed to stations, not people</td>
+<td>F2-R1</td>
+<td>6</td>
+<td>3</td>
+</tr>
+<tr>
+<td>RR7</td>
+<td>Leaked instance key</td>
+<td>F3-S1</td>
+<td>6</td>
+<td>3</td>
+</tr>
+<tr>
+<td>RR8</td>
+<td>Outbound requests reveal the control room</td>
+<td>F4-I1</td>
+<td>6</td>
+<td>3</td>
+</tr>
+<tr>
+<td>RR9</td>
+<td>Container escape through the shared kernel</td>
+<td>F5-E1</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>RR10</td>
+<td>Audit chain rewritten with full database access</td>
+<td>F2-T3</td>
+<td>6</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="accepted-risks">Accepted risks</h3>
+<h4 id="rr1-fake-public-application">RR1: Fake public application</h4>
+<p><strong>Threats:</strong> F1-S1. <strong>Score:</strong> 6 → 6.</p>
+<p>Anyone can publish a website that imitates the public application, and nothing in the platform can prevent it. During a crisis, a convincing copy can spread false information or phishing.</p>
+<ul>
+<li><strong>Compensating controls:</strong> the application is served from a single, stable address over HTTPS, and official channels link to it.</li>
+</ul>
+<h4 id="rr2-all-stations-can-perform-all-actions">RR2: All stations can perform all actions</h4>
+<p><strong>Threats:</strong> F2-E2. <strong>Score:</strong> 6 → 4.</p>
+<p>By design, the license identifies the station and grants access to every function, including publishing to citizens. A compromised station has full control of its instance.</p>
+<ul>
+<li><strong>Compensating controls:</strong> stations are only reachable locally, each one has its own license, every action is recorded in the audit log, and publication requires an explicit validation step.</li>
+</ul>
+<h4 id="rr3-plausible-false-data-from-a-legitimate-source">RR3: Plausible false data from a legitimate source</h4>
+<p><strong>Threats:</strong> F4-S1, F5-T1. <strong>Score:</strong> 6 → 4.</p>
+<p>Plausibility checks catch impossible data, but a compromised or mistaken source can still send data that looks correct, such as an incident at a believable location.</p>
+<ul>
+<li><strong>Compensating controls:</strong> each item shows its source, trust level and last update; incidents from external sources need operator validation before they are published; and an operator can disable a source immediately.</li>
+</ul>
+<h4 id="rr4-large-scale-ddos-on-the-public-application">RR4: Large-scale DDoS on the public application</h4>
+<p><strong>Threats:</strong> F1-D1. <strong>Score:</strong> 9 → 3.</p>
+<p>Caching, rate limiting and bounded queries handle traffic peaks and small attacks, but a large-scale DDoS exceeds what a single academic deployment can absorb.</p>
+<ul>
+<li><strong>Compensating controls:</strong> the last cached snapshot is served when the API is unavailable, and private instances keep working, since they never depend on the public side.</li>
+</ul>
+<h4 id="rr5-compromised-public-host">RR5: Compromised public host</h4>
+<p><strong>Threats:</strong> F1-E1. <strong>Score:</strong> 6 → 3.</p>
+<p>A vulnerability in the proxy, FastAPI or a dependency could give an attacker control of the public host. The architecture prevents any path to private instances, and the read-only API cannot change the published state, but an attacker in control of the host could still show false data to citizens.</p>
+<ul>
+<li><strong>Compensating controls:</strong> the host runs only the public components, dependencies are pinned and scanned (PT9), and the published state can be restored from the private instances, which hold the original data.</li>
+</ul>
+<h4 id="rr6-actions-attributed-to-stations-not-people">RR6: Actions attributed to stations, not people</h4>
+<p><strong>Threats:</strong> F2-R1. <strong>Score:</strong> 6 → 3.</p>
+<p>By design, the license identifies the station, not the person using it, so the audit log cannot show who in the control room made a decision. This keeps operation simple in a room where several people share a station across shifts, and avoids storing personal data about operators.</p>
+<ul>
+<li><strong>Compensating controls:</strong> the control room's own shift records show who was at each station, so the audit log's timestamps lead to the person; physical access to the room and stations is controlled; and each station has its own license, so attribution to the station is reliable.</li>
+<li><strong>Possible improvement:</strong> an optional operator field (name or initials) on critical actions, such as decisions on recommendations and public warnings. It does not authenticate anyone, but it improves the audit trail.</li>
+</ul>
+<h4 id="rr7-leaked-instance-key">RR7: Leaked instance key</h4>
+<p><strong>Threats:</strong> F3-S1. <strong>Score:</strong> 6 → 3.</p>
+<p>If an instance's API key leaks, anyone can publish as that instance until the key is revoked.</p>
+<ul>
+<li><strong>Compensating controls:</strong> the key exists only in the instance's configuration and is never exposed to stations; ownership limits the attacker to the incidents and warnings of that instance; the publication log shows every change; and the key can be revoked without affecting other instances.</li>
+</ul>
+<h4 id="rr8-outbound-requests-reveal-the-control-room">RR8: Outbound requests reveal the control room</h4>
+<p><strong>Threats:</strong> F4-I1. <strong>Score:</strong> 6 → 3.</p>
+<p>The ingestion worker fetches data from external sources, so source operators and observers can see the control room's network address and when it is active. The data fetched is public, so the requests reveal little beyond the fact that the address belongs to a control room.</p>
+<ul>
+<li><strong>Compensating controls:</strong> requests carry no information that identifies the agency or the control room beyond the network address.</li>
+</ul>
+<h4 id="rr9-container-escape-through-the-shared-kernel">RR9: Container escape through the shared kernel</h4>
+<p><strong>Threats:</strong> F5-E1. <strong>Score:</strong> 3 → 3.</p>
+<p>Container hardening (PT5) makes escape much harder, but Docker containers share the host kernel, so a kernel vulnerability can still let a plugin reach the host.</p>
+<ul>
+<li><strong>Compensating controls:</strong> plugins come only from the project's repository (PT9), run without privileges and have no network access beyond the broker, and the host kernel is kept updated.</li>
+</ul>
+<h4 id="rr10-audit-chain-rewritten-with-full-database-access">RR10: Audit chain rewritten with full database access</h4>
+<p><strong>Threats:</strong> F2-T3. <strong>Score:</strong> 6 → 2.</p>
+<p>Someone with full access to the database on the host can change an audit entry and recompute the rest of the hash chain, which then verifies correctly.</p>
+<ul>
+<li><strong>Compensating controls:</strong> this requires administrative access to the host, which the control room controls, and the API offers no way to change or delete records.</li>
+<li><strong>Possible improvement:</strong> CoreAPI can periodically send the latest audit hash to the publish endpoint, which stores it in its publication log. A rewrite of the chain would then no longer match the stored hash. The hash reveals nothing about the audit log's contents.</li>
+</ul>
+<h3 id="production-deployment">Production deployment</h3>
+<p>Some residual risks remain because of the academic context of the project, not because of the design. A production deployment should place the public application behind a provider with DDoS protection and a CDN (RR4), on a domain owned by the operating entity (RR1); replace instance API keys with per-instance certificates and mutual TLS (RR7); run plugins under a stronger sandbox, such as gVisor or separate virtual machines (RR9); and route outbound traffic through the operating entity's network (RR8).</p>
+<h3 id="out-of-scope">Out of scope</h3>
+<p>The security of the station hosts, their operating systems and the control room's network, as well as physical security, are the responsibility of the entity that operates each control room. The model assumes these are managed according to that entity's practices.</p>
+<h3 id="accepted-low-risks">Accepted low risks</h3>
+<p>Threats with a score below 6 that are not part of a priority threat are accepted. They are addressed by general good practice (input validation, TLS, patching, least privilege) and are not tracked individually.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../ms2-elaboration/presentation-2/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Presentation 2">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Presentation 2
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../gdpr-compliance/" class="md-footer__link md-footer__link--next" aria-label="Next: GDPR compliance analysis">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                GDPR compliance analysis
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Ad Omnia · University of Aveiro · <a href="../../../privacy/">Privacy</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Ad-Omnia" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.indexes", "navigation.footer", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../../javascripts/home.js"></script>
+      
+        <script src="../../../javascripts/nav.js"></script>
+      
+        <script src="../../../javascripts/deck.js"></script>
+      
+        <script src="../../../javascripts/minutes.js"></script>
+      
+        <script src="../../../javascripts/videos.js"></script>
+      
+        <script src="../../../javascripts/theme.js"></script>
+      
+        <script src="../../../javascripts/cite.js"></script>
+      
+    
+  </body>
+</html>
