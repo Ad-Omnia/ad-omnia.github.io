@@ -204,7 +204,7 @@ Routing over the road network, to compute the routes and arrival times of recomm
 **Decision and alternatives**
 
 - Do not make HERE the only routing option. Read the platform terms and the Acceptable Use Policy before any use.
-- Preferred direction, to be evaluated: self-hosted routing over OpenStreetMap data (for example OSRM or Valhalla). It runs on-premises, has no per-call limits and no third-party liability clause. OpenStreetMap data is under the ODbL license, which requires attribution and has share-alike conditions that must be checked.
+- Chosen direction: self-hosted routing with Valhalla over OpenStreetMap data, justified in [Resource allocation and routing](../ms4-transition/resource-allocation.md). It runs on-premises, has no per-call limits and no third-party liability clause. OpenStreetMap data is under the ODbL license, which requires attribution and has share-alike conditions that must be checked.
 - If HERE is still wanted, contact HERE for a separate agreement.
 
 ---

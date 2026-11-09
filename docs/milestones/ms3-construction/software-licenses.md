@@ -67,6 +67,7 @@ An open-source license is only possible if the University decides to publish the
 | AI Service | LightGBM | MIT | Linked |
 | AI Service | gRPC | Apache-2.0 | Linked |
 | AI Service | Google OR-Tools | Apache-2.0 | Linked |
+| Routing | Valhalla | MIT | Separate program |
 | Plugin sandboxing | Docker Engine | Apache-2.0 | Separate program |
 
 **Linked** technologies are imported by our code, so their licenses apply to the combined work. **Bundled** fonts are shipped with the frontend. **Separate programs** run as their own processes and communicate over the network, so their licenses do not extend to Ad Omnia's code.
@@ -91,7 +92,7 @@ The obligations apply when the software is **distributed**: when the frontend is
 
 | Licenses | Technologies | Obligation |
 | --- | --- | --- |
-| MIT, BSD, PSF, PostgreSQL | React, Vite, MapLibre GL JS, FastAPI, LightGBM, Nginx, Python, PostgreSQL | Keep the copyright notice and license text |
+| MIT, BSD, PSF, PostgreSQL | React, Vite, MapLibre GL JS, FastAPI, LightGBM, Nginx, Python, PostgreSQL, Valhalla | Keep the copyright notice and license text |
 | Apache-2.0 | Kafka, gRPC, OR-Tools, Docker Engine, TimescaleDB (core) | Keep the copyright notice, license text and `NOTICE` file (if any), and mark modified files |
 | Timescale License | TimescaleDB (additional features) | Do not offer TimescaleDB as a service to third parties, and do not present it as open source |
 | SIL Open Font License 1.1 | Geist, JetBrains Mono | Keep the license text with the font files, and do not sell the fonts on their own |
