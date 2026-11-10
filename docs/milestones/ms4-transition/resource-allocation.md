@@ -91,7 +91,20 @@ Agencies do not respond in the same way, so the recommendation model is speciali
 | Eligibility rules | Which unit types may respond to which incidents and zones |
 | Forecasts used | General models, plus the agency's specialist models |
 
-**Information shared between agencies.** For now, sharing works per event. Operators must link every task, meaning an assignment or an order, to an event. An agency can join an event without having any task on it, to see what the other agencies are already doing. Agencies that have joined an event see each other's tasks for that event, and nothing about events they have not joined. A model uses this to see how an event is already being responded to, which units another agency has committed and when they should arrive. Units from another agency that can fill a slot reduce that slot's demand, so the same need is not covered twice. Only the tasks are visible: data held by specialist plugins is not shared.
+**Information shared between agencies.** For now, sharing works per event, and sending is manual, because agencies need formal agreements and procedures before exchanging information. Operators must link every task, meaning an assignment or an order, to an event. Nothing leaves an instance until an operator sends it.
+
+| Question | Proposed answer |
+| --- | --- |
+| Who can send to whom | Only agencies with an agreement in place. They are registered in each instance when the agreement is made, and each instance has its own key |
+| Who can join an event | Only an agency that has received it. Its operator accepts the event, with or without having tasks on it, and agencies never browse a list of events |
+| How two agencies know it is the same event | The event gets an identifier when first sent. The receiving operator links it to an existing incident or creates a new one |
+| What is sent | A fixed form with the event's type and location and, per task, the unit type, status and arrival estimate. The operator reviews it before sending. Task text and data held by specialist plugins are not included |
+| How it travels | The operator's action sends one encrypted message out to a small mailbox service, and the other instance collects it. Instances never accept inbound connections, and the mailbox cannot read the content |
+| Without a connection | Messages wait and are sent when the connection returns, and the sender sees whether each was delivered. An operator can also export a signed file and deliver it through an approved channel |
+| What happens if two agencies change something | Each agency only changes its own tasks, so the owner's latest version is always the right one |
+| How it is recorded | Each send and each acceptance is logged with who, what, to whom, when and under which agreement |
+
+A model uses this information to see how an event is already being responded to, which units another agency has committed and when they should arrive. Units from another agency that can fill a slot reduce that slot's demand, so the same need is not covered twice. Because updates are manual, the information is only as recent as the last send: each item shows its age, and past an age limit it no longer reduces demand and the recommendation warns about it.
 
 These rules are versioned configuration held per agency. Rules that need data the core does not hold are added through a plugin. Each agency's model is reviewed and evaluated separately, because good results for one agency say nothing about another.
 
@@ -424,7 +437,8 @@ The trade-offs accepted are a larger system than a single solver, a value table 
 | The routing service fails, or no route exists | Straight-line estimates are used, marked as estimates, and the reason is shown (UC-13) |
 | An external forecast source fails | The average uses the remaining sources and shows which were used |
 | An agency's rules have not been validated | Recommendations are marked as using unvalidated rules |
-| Another agency's tasks cannot be reached | The model continues with what it last received and warns that the same need could be covered twice |
+| Another agency's information is out of date or has not arrived | Past the age limit it no longer reduces demand, and the recommendation warns that the same need could be covered twice |
+| A sent event is not delivered | It stays queued, the sender sees that it was not delivered, and it can be exported as a signed file |
 | A plugin is missing, slow or failing | The engine continues with core data and says that the plugin's input was not applied. Its cause falls back to historical rates |
 | The whole engine fails | The failure is shown and the operator continues manually (NFR-AVL-2, UC-06) |
 | Not enough units | Unfilled slots are shown as unmet demand |
@@ -488,7 +502,7 @@ These changes are proposed and have not been applied yet.
 | --- | --- | --- |
 | FR-REC-1 | Extend to reassign, reposition and anticipate, not only assign and release | The model recommends all of them |
 | New requirement | Each recommendation shows the basis of its forecast, its version and its confidence | Operators must be able to weigh a forecast |
-| New requirement | Every task is linked to an event, an agency can join an event without a task, and agencies that joined see each other's tasks for that event | The agreed rule for sharing between agencies |
+| New requirement | Every task is linked to an event. Events and task updates are sent manually by an operator to agencies with an agreement, and an agency can join an event it received without having a task | The agreed rule for sharing between agencies |
 | New requirement | Recommendation latency, with the targets above once confirmed | No requirement covers it today |
 | Prediction | Add demand, escalation, duration and combined external forecast types, with uncertainty, zone, cause and the model or sources that produced it | Today it covers progression and risk areas, as output of the AI engine only |
 | Asset type | Agree the actual values, and add travel mode and speed per type | Profiles and estimates depend on them |
@@ -498,7 +512,9 @@ These changes are proposed and have not been applied yet.
 | Plugin contract (new) | Exclusions, added costs, added slots, item details, specialist forecasts and new data sources, with the plugin and reason recorded | Plugins can refine recommendations and bring in data while the core never references them |
 | Zone minimum (new) | Minimum per agency, zone and unit type | Constraint S1 |
 | Agency model settings (new, versioned) | Weights, limits, rules and shortlist size, per agency | Each decision must be reproducible |
-| Event (new) | Identifier shared between instances, linked to each agency's incident, with the agencies that have joined it | Sharing works per event, and joining does not require a task |
+| Event (new) | Identifier shared between instances, linked to each agency's incident, with who sent it, who received it and who joined | Sharing works per event, and joining does not require a task |
+| Partner agency (new) | Agencies with an agreement, with their key and the agreement reference | Only these can exchange events |
+| Exchange log (new) | Each send, delivery and acceptance | Accountability for every exchange |
 | Assignment, Order | Require a link to an event | Operators must link every task, and an accepted recommendation carries the link |
 | Recommendation | Add a "superseded" status, solver result, method used and settings version | Items are immutable, so replaced recommendations must stay in the log (US-8) |
 | Recommendation Item | Add reassign and reposition actions, the slot or destination, whether it is anticipated, whether the time was routed or estimated, and any plugin details | The operator must see what is proposed and how reliable it is |
@@ -506,8 +522,8 @@ These changes are proposed and have not been applied yet.
 ## Risks and limits
 
 - **Forecast errors.** A wrong forecast can hold a unit back or move it for nothing. The priority of confirmed demand, the delay limit, the blending with historical rates and the operator's decision all limit this, but they do not remove it.
-- **Coordination between agencies.** Each model recommends only its own agency's units, and it sees other agencies only on events its agency has joined. If an operator has not joined the event, the recommendation does not know how others are responding, and competing demand on other events stays invisible. Operators remain responsible for that coordination.
-- **Sharing between instances.** Private instances are currently independent. How tasks and the list of events travel between instances is still to be decided, and until then the shared information cannot be implemented. Who may join an event is also open, since joining gives access to other agencies' tasks. Both must be covered by the threat model. Sharing tasks between agencies also needs a legal basis, to be covered in the [GDPR compliance analysis](../ms3-construction/gdpr-compliance.md).
+- **Coordination between agencies.** Each model recommends only its own agency's units, and it knows about other agencies only through what their operators have sent. During a busy incident manual updates may lag behind reality, and competing demand on other events stays invisible. Operators remain responsible for that coordination.
+- **Sharing between instances.** The mailbox service, the keys and the agreements are a proposal and have not been built. The mailbox still sees which instances exchange messages and when. All of this must be covered by the threat model, which assumes today that instances are independent. Sending does not replace the need for a legal basis, to be covered in the [GDPR compliance analysis](../ms3-construction/gdpr-compliance.md).
 - **Local refinement.** Instances with little data gain little from refinement, and models can behave differently from one instance to another. Specialist models may have to be pre-trained on synthetic data, because the restricted data is not available for training before deployment.
 - **Equal trust in sources.** Averaging assumes that all forecast sources are equally accurate. Sources can also share the same underlying weather models, so agreement between them is not always independent confirmation.
 - **Biased history.** Past dispatches reflect past decisions and shortages, and the history available to the project depends on which connectors exist. Forecasts for incident types with little data will start weak.
