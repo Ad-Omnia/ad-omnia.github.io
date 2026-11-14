@@ -88,7 +88,7 @@ Core entities fall into six areas:
 ### Incident
 
 **Description:** Occurrence that requires a response, received from an external source or created manually by an operator.<br>
-**Key attributes:** Id, type, severity, status (active, in resolution, closed), description, location or affected area, start date, end date, validated at, published on the public app, last update, source-specific attributes.<br>
+**Key attributes:** Id, type, severity, status (active, in resolution, closed), description, location or affected area, start date, end date, validated at, published (published at, published by), public description, last update, source-specific attributes.<br>
 **Relationships:** Reported by one or more Sources through Incident Sources, or created by a User; validated by a User; aggregates Observations; linked to other Incidents through Incident Relations; has Assignments, Orders and Alerts; subject of Predictions and Recommendations; may be referenced by Public Warnings.<br>
 **Ownership:** Core. Details specific to one source live in an extensible field or in a plugin entity.<br>
 **Rationale:** The central unit of the COP (US-1). Manual creation covers occurrences reported by phone or radio (US-3). Validation and publication separate what the control room knows from what citizens see: only validated, published incidents reach the public app (US-9, US-15).
