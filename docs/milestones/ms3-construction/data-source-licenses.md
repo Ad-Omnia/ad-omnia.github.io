@@ -371,6 +371,72 @@ Urban testbed of the Instituto de Telecomunicações (Network Architectures and 
 
 ---
 
+## 13. Historical data for training
+
+The predictive model needs years of history, which the live feeds above cannot provide. These are the historical datasets found for each source, checked on 10 November 2026. The priority column says which to load first.
+
+### Incidents and fires
+
+| Dataset | What it has | Period | License | Priority |
+| --- | --- | --- | --- | --- |
+| ICNF rural fire records (SGIF web service, [fogos.icnf.pt/localizador/webserviceocorrencias.asp](https://fogos.icnf.pt/localizador/webserviceocorrencias.asp)) | Every rural fire, with alert, first intervention and extinction times, burnt area by land type, cause, municipality and parish code (INE), coordinates, and the weather and fire weather indices (FFMC, DMC, DC, ISI, BUI, FWI) at the time | 2001 to today, by day | Not stated. Public body data, to be confirmed with ICNF | 1 |
+| Fogos.pt history (`/v2/incidents/search`) | ANEPC occurrences of every kind, not only fires | From about 2018: no results in 2016, results in 2018. The exact start is to be confirmed | Paid licence held by the project | 1 |
+| ICNF statistics in RDF, Cross-Forest project ([dados.gov.pt](https://dados.gov.pt/pt/datasets/estatisticas-de-incendios-florestais-portugal-rdf-projeto-cross-forest-statistics-of-forest-fires-portugal-rdf-cross-forest-project)) | The same ICNF fires, with burnt area, parish and point, but only the year, not the date. Totals per municipality for 1980 to 1992 | 1980 to 2015 | CC BY 4.0, published by DGT | 3 |
+| ICNF burnt areas since 1975 ([dados.gov.pt](https://dados.gov.pt/pt/datasets/areas-ardidas-desde-1975), WFS service) | Burnt area polygons per year | 1975 to today, vector maps from about 1990 | Not stated on dados.gov.pt | 2 |
+| INE rural fire indicators ([dados.gov.pt](https://dados.gov.pt/pt/datasets/incendios-rurais-n-o-1)) | Number of fires and burnt area by region and cause, per year | 2001 onwards | CC BY 4.0 | 3 |
+| Urban fires in Portugal 2013 to 2022 ([Scientific Data](https://www.nature.com/articles/s41597-023-02476-6)) | 72,641 urban fire events from the ANEPC archive, 27 variables | 2013 to 2022 | To be confirmed in the article's data repository | 2 |
+| ANEPC open occurrences ([dados.gov.pt](https://dados.gov.pt/pt/datasets/prociv-ocorrencias-em-aberto)) | Occurrences open at the time of reading | Current only | CC BY 4.0 | Not useful for history |
+
+The Fogos.pt history and the ICNF records overlap for fires since 2018. ICNF is the official record of rural fires and goes back further, so it should be the reference for fires, with Fogos.pt adding the other kinds of occurrence.
+
+### Weather and fire danger
+
+| Dataset | What it has | Period | License | Priority |
+| --- | --- | --- | --- | --- |
+| Open-Meteo Historical Weather API | Daily and hourly weather from the ERA5 reanalysis | 1940 to a few days ago | CC BY 4.0 data. Free API for non-commercial use only | 1 |
+| Copernicus CEMS fire danger indices ([EWDS](https://ewds.climate.copernicus.eu/datasets/cems-fire-historical-v1)) | Daily Fire Weather Index and its components on a grid | 1940 to today | CC BY 4.0 | 1 |
+| IPMA long series ([ipma.pt](https://www.ipma.pt/pt/oclima/series.longas/)) | Homogenised daily temperature and precipitation from about 50 stations | Decades, depending on the station | Use must cite IPMA and IDL as the source | 2 |
+| NASA FIRMS archive ([firms.modaps.eosdis.nasa.gov](https://firms.modaps.eosdis.nasa.gov/download/)) | Satellite fire detections | MODIS from November 2000, VIIRS from January 2012 | NASA open data. Cite FIRMS and link to its disclaimer | 2 |
+| EFFIS burnt areas and fire database ([Copernicus EFFIS](https://forest-fire.emergency.copernicus.eu/applications/data-and-services)) | Burnt areas and fire statistics for Europe | 2000 onwards | JRC open data policy, to be confirmed for each download | 3 |
+| Mesogeos datacube | Daily 1 km cube with ERA5-Land weather, satellite indices, land cover, population and EFFIS burnt areas, ready for machine learning | 2006 to 2022 | CC BY 4.0. Coverage of Portugal to be confirmed | 2 |
+
+### Zones and context
+
+| Dataset | What it has | License | Priority |
+| --- | --- | --- | --- |
+| CAOP 2025, mainland, Madeira and Azores ([dados.gov.pt](https://dados.gov.pt/pt/datasets/carta-administrativa-oficial-de-portugal-caop2025-continente)) | Official boundaries of districts, municipalities and parishes | CC BY 4.0, DGT | 1: needed to fill the zone table |
+| INE Census 2021 (BGRI) | Population per small statistical area | CC BY 4.0, INE | 2 |
+| Land use (COS 2018, also in Cross-Forest RDF) | Land cover | CC BY 4.0, DGT | 3 |
+
+### Other sources in this document
+
+| Source | Historical data | Decision |
+| --- | --- | --- |
+| OpenSky | Full history through its database, on request, for research and non-profit use | Not needed for the fire model. Ask only if aerial means are modelled |
+| AISstream | No history. EMODnet vessel density gives monthly traffic maps from 1 km cells, CC BY 4.0, crediting EMODnet Human Activities and CLS | Not needed now |
+| GDACS | Event search by date through its API, no key | Few events in Portugal. Low priority |
+| OurAirports | Reference data, no history needed | No change |
+| HERE, map tiles | Not training data | No change |
+| ATCLL | Unknown until access is granted | No change |
+
+### Attribution for training data
+
+Every source used to train a model must be credited in the model's documentation and on the About or Licenses page of the private application:
+
+- "Source: ICNF, Instituto da Conservação da Natureza e das Florestas"
+- "Source: Fogos.pt (data from ANEPC)"
+- "Estatísticas de Incêndios Florestais (Portugal), Projeto Cross-Forest, Direção-Geral do Território and ICNF, CC BY 4.0"
+- "Weather data by Open-Meteo.com (CC BY 4.0)", with a note that the data was aggregated per day and per zone
+- "Contains modified Copernicus Emergency Management Service information [year]", for the CEMS fire danger indices, CC BY 4.0
+- "Source: IPMA and IDL" for the long series
+- "NASA FIRMS", with the citation and disclaimer link that FIRMS requires
+- "Carta Administrativa Oficial de Portugal (CAOP), Direção-Geral do Território, CC BY 4.0"
+- "Source: INE, Statistics Portugal, CC BY 4.0"
+
+CC BY 4.0 also requires saying when the data was changed. Our pipeline cleans and aggregates every source, so the model documentation must say so.
+
+---
+
 ## Other sources
 
 These were analyzed but are not in the core set. They are listed so that every source has its status recorded.
@@ -392,6 +458,9 @@ These were analyzed but are not in the core set. They are listed so that every s
 | Create an OpenSky account for the 4000 credits per day | OpenSky | to assign | open |
 | Read the HERE platform terms and Acceptable Use Policy, and evaluate self-hosted routing | HERE | to assign | open |
 | Record the license of each dataset before import | dados.gov.pt | to assign | open |
+| Ask ICNF for the license of the rural fire records web service and the burnt areas | ICNF | to assign | open |
+| Confirm how far back the Fogos.pt history goes, and the terms of the paid licence | Fogos.pt | to assign | open |
+| Confirm the license of the urban fires dataset (Scientific Data, 2013 to 2022) | ANEPC / authors | to assign | open |
 | Ask VOST Portugal and ANEPC about reuse of the occurrences feed | VOST / ANEPC | to assign | open |
 | Ask for ATCLL API access for academic use, and for its terms of use, data available and data controller | ATCLL | to assign | open |
 | Fill `commercial_use`, `public_display` and attribution in each plugin manifest as answers arrive | All plugins | to assign | open |
