@@ -78,19 +78,36 @@ Run on 15 November 2026 from the open datasets above, for 1 January 2013 to 10 N
 | Mock assignments in the database (units sent by a mock operator) | 1,365,887 |
 | Risk ratings stored | 50,596 (per municipality: each year, each month and the whole period) |
 
-**What the first models learned**, on the last fifth of the days, which the models had not seen. The models are not specific to fires: each incident type in the data gets its own model, and a type is added by adding data.
+**How the models are judged.** The days are split in three, in time order and never at random: a model learns from the first 60% of the days, the next 20% only decide when training stops, and the last 20% (the test) give the numbers below. Neither the model nor the choice of when to stop saw the test days. Each model is scored next to a simple baseline on the same test days. The baseline uses no weather: for the risk of an incident it is the share of days with one in that municipality and month, smoothed towards the national share; for arrivals, the rate of the municipality, type and month; for duration and units, the median or mean of the incident type and severity; for burnt area, the median of the month; for a large fire, the share of large fires in that municipality and month. It is fitted on every day before the test, so it has the most recent data a baseline could have.
 
-| Prediction | Real or mock | Model | Simple baseline |
-| --- | --- | --- | --- |
-| Risk of a rural fire, by municipality and day (AUC) | Real | 0.86 | 0.79 |
-| Risk of an urban fire (AUC) | Real | 0.80 | 0.79 |
-| Arrivals, real incident types (Poisson deviance, lower is better) | Real | 0.31 | 0.40 |
-| On-scene duration, real incidents (mean error, hours) | Real | 1.32 | 1.34 |
-| Burnt area of a rural fire (mean error, hectares) | Real | 20.0 | 20.0: no gain |
-| Units needed, real incidents (mean error, units) | Real | 0.92 | 0.92: no gain |
-| Risk of floods, road accidents, medical emergencies, escalation | Mock | Shows how the method behaves only | |
+Each prediction has one metric: AUC for the risks, because their use is to rank municipalities and days (higher is better); Poisson deviance for counts and mean error for durations and areas (lower is better). A model is called better than its baseline only when the gap passes 0.01 of AUC or 2% of an error. One command trains and evaluates everything again: `python -m dataset.model --dataset <snapshot>/dataset`.
 
-These are first numbers and are not final. The last fifth of the days starts in February 2024, after the urban fire archive ends, so the real rows scored for duration, units and the urban fire risk are fewer than for rural fires: the urban fire risk (0.80) is scored on its own last fifth, inside 2013 to 2022, and the real units come from rural fires up to September 2024 (2,750 fires in the scored part, so that figure is weak). The simple baseline is the share of days with an incident of each municipality and month, smoothed towards the national share. The urban fire risk barely beats it: without weather-driven causes, urban fires are close to a constant rate by month. The road accident figures are not a real result: the mock scenarios (below) are at fixed places, and the baseline already sees them at municipality level.
+The baseline and these metrics are the team's proposal and are still to be agreed with the advisors.
+
+**Results on the test days** (rural fires and the mock types: 8 February 2024 to 10 November 2026; urban fires: 6 January 2021 to 31 December 2022, where their archive ends). The models are not specific to fires: each incident type in the data gets its own model, and a type is added by adding data.
+
+| Prediction | Real or mock | Metric | Model | Baseline | Against the baseline | Quarters ahead |
+| --- | --- | --- | --- | --- | --- | --- |
+| Risk of a rural fire, by municipality and day | Real | AUC | 0.855 | 0.788 | Better | 12 of 12 |
+| Risk of an urban fire | Real | AUC | 0.800 | 0.794 | No clear difference | 8 of 8 |
+| Arrivals, real incident types | Real | Poisson deviance | 0.312 | 0.402 | Better | |
+| On-scene duration, real incidents | Real | Mean error, hours | 1.30 | 1.34 | Better, by little | |
+| Burnt area of a rural fire | Real | Mean error, hectares | 20.02 | 20.04 | No clear difference | 13 of 13 |
+| A rural fire burns 10 hectares or more | Real | AUC | 0.797 | 0.726 | Better | 13 of 13 |
+| Units needed, real incidents | Real | Poisson deviance | 0.649 | 0.679 | Better, on few fires | |
+| Risk of floods, road accidents, medical emergencies, escalation | Mock | | Shows how the method behaves only | | | |
+
+What the numbers say:
+
+- **Rural fire risk and arrivals beat the baseline**, in every quarter of the test. For rural fires the model is also better calibrated (Brier score 0.051 against 0.057).
+- **Urban fire risk is ahead in every quarter, but by too little to count** (0.006 of AUC). Without weather-driven causes, urban fires are close to a constant rate by month, which is what the baseline already is.
+- **The exact burnt area is not predictable with these data, but whether a fire becomes large is.** Predicting hectares ties with the baseline. Asking instead "will this fire burn 10 hectares or more?" (4.6% of the fires in the test do) gives a model clearly ahead of the baseline, in every quarter. The municipality, the humidity, the hour and the fire danger indices carry it.
+- **Duration improves a little** once the municipality is a feature (3% less error than the baseline on real incidents).
+- **Units needed** is better on the real rows, but those are 2,750 rural fires up to September 2024, so that figure is weak.
+- **Early stopping did not flatter the rural fire model**: it scores 0.848 on the days used to stop training and 0.855 on the test. An earlier version of this page reported 0.86, measured on the days that also stopped the training; the figure above replaces it.
+- **More training does not help.** The arrivals model stops at its limit of 500 rounds, but letting it run to 1,727 rounds improves it by 0.4% and makes each prediction three times slower. Bigger trees, a different learning rate and rolling weather averages changed the rural fire risk by 0.003 of AUC at most. The models have taken what these features hold; more accuracy needs new information (land cover, finer weather, neighbouring municipalities), not tuning.
+- **Speed.** One day of rural fire risk for all 278 municipalities takes about 5 milliseconds on one processor core.
+- The road accident, flood and medical figures are not real results: the mock scenarios (below) are at fixed places, and the baseline already sees them at municipality level.
 
 ## What the documents ask for, and what the datasets hold
 
@@ -185,7 +202,7 @@ The incident types, severities and unit types of the mock layer are placeholders
 - **No real assignments.** The open urban fire data and Fogos.pt say how many vehicles and people were sent, not which units. For rural fires before 2018 the units sent are unknown: the ICNF does not record resources.
 - **Occurrences, not all emergencies.** Medical emergencies handled only by INEM and police occurrences are not in the open data, and as specialist data they stay out of this dataset anyway.
 - **Fewer fires over time.** The number of fires fell by about two thirds between the 2000s and the 2020s. Prevention, land use and how small fires are recorded all changed, and the data cannot tell these apart. The first build starts in 2020 for this reason, and a longer period needs the trend as a feature.
-- **Most days have no fire.** In most municipalities, most days have no fire at all (92.8% of the rows). Simple accuracy will look good even for a useless model, so the models are judged by AUC and log loss against a baseline.
+- **Most days have no fire.** In most municipalities, most days have no fire at all (92.8% of the rows). Simple accuracy will look good even for a useless model, so the models are judged by AUC against a baseline, on days they have not seen.
 - **Fire danger indices run high.** They are computed from daily extremes, not noon readings, so their levels are above the official ones even though their ordering agrees (see above).
 - **Weather is modelled, not measured.** The weather comes from a reanalysis grid (about 25 km), not from stations, and each municipality uses the nearest of a few dozen points. A check against 9 IPMA stations over 90 days (autumn 2026, 601 station-days) shows that it follows the real weather but is smoother: maximum temperature correlates 0.81 and is 2.0 C cooler on average, minimum humidity correlates 0.70 and is 8 points higher, daily rain agrees on 95% of the days, and wind agrees poorly (correlation 0.5 to 0.6). Hot, dry days, which matter most for fires, are therefore somewhat understated. Real station readings exist only for the last 90 days (Fogos.pt, from IPMA), so they cannot give the 2013 to 2022 history; they are for the live feed and for refining the models locally. The archive lags by a few days, so the most recent days have no weather, and a forecast feed is still missing for predicting future days.
 - **One ring per municipality.** `zone_boundary` stores one ring per zone, so municipalities with exclaves are approximated by their largest part. Mainland only: Madeira and the Azores fall in no zone until their CAOP files are loaded.
