@@ -1,5 +1,5 @@
 ---
-date: 2026-11-01
+date: 2026-11-22
 order: 8
 description: Threat model - data flows, trust boundaries, threats and residual risks
 ---
@@ -20,12 +20,12 @@ This document is the threat model of the Ad Omnia platform. It identifies how da
 - **The architecture is public.** All project documentation is published, so the model assumes an attacker knows every component, flow and technology choice. No control depends on the design being secret.
 - **Two deployments.** The architecture diagram shows a single backend, but the platform is deployed twice: a private application and a public application on the internet. Data flows only from private to public, and the private application accepts no inbound connection from the public side.
 - **Private instances are locally hosted.** Every private application instance is hosted locally where it is used and accessed only locally; there is no remote access. Instances are independent of each other, and all of them push to the single public deployment.
-- **Minimal public side.** The public deployment has its own database, which holds only the published state (validated incidents and public warnings); operational data never reaches it. It runs two separate processes: a read-only API for citizens and a write-only publish endpoint for private instances, each with a database account limited to what it needs. Private instances never connect to the public database directly.
+- **Minimal public side.** The public deployment has its own database, which holds only the published state (validated incidents and public warnings); operational data never reaches it. It runs two separate processes from the same code, each with its own entry point: a read-only API for citizens and a write-only publish endpoint for private instances, each with a database account limited to what it needs. Private instances never connect to the public database directly.
 - **Stations authenticate by license.** Each station uses a software license, stored in the User table as a slow, salted hash. In this initial phase, licenses are issued by the project team.
 - **Plugins are untrusted.** Plugins run in a sandbox and reach the core only through the plugin broker. Plugins only expose data; they provide no user interface or frontend code, and the web application renders their data with its own components. Temporarily, web plugins also have pages that run in sandboxed iframes, each on its own origin, where the application's session cookie never reaches; their static files are the only route of the private application served without a session. This will be removed when plugins go back to only exposing data.
 - **External data enters through the ingestion worker.** External sources are fetched by the ingestion worker, outside the plugin sandbox.
 - **Prediction modules are internal.** The AI service's specialized modules are developed by the project team and delivered with the platform; they are not installed from third parties.
-- **Prototype deployment.** In the academic prototype, the private and public deployments run on the same host. Docker networks reproduce the trust zones: no public container is attached to a private network, and CoreAPI publishes through the public proxy's host port, using the same path, HTTPS and API key as in a real deployment.
+- **Prototype deployment.** In the academic prototype, the private and public deployments run on the same host. Docker networks reproduce the trust zones: no public container is attached to a private network, and CoreAPI publishes through the public proxy's host port, using the same path, HTTPS and request signature as in a real deployment.
 
 ## Data Flow Diagram
 
@@ -132,7 +132,7 @@ Each flow that crosses a trust boundary (F1 to F6 and F14) is analyzed with STRI
 | F1-I3 | Information disclosure | Error messages or debug endpoints expose stack traces, versions or configuration. |
 | F1-D1 | Denial of service | A traffic peak or a DDoS attack during a major emergency makes the application unavailable when it is most needed. |
 | F1-D2 | Denial of service | Expensive filter combinations exhaust the public API or database. |
-| F1-E1 | Elevation of privilege | A vulnerability in Nginx, FastAPI or a dependency gives an attacker control of the public host. |
+| F1-E1 | Elevation of privilege | A vulnerability in Nginx, PHP (php-fpm, Slim) or a dependency gives an attacker control of the public host. |
 
 ### F2: Station ↔ private proxy → CoreAPI (TB2)
 
@@ -357,13 +357,15 @@ These measures handle traffic peaks and small-scale attacks. A large-scale DDoS 
  
 A false warning or incident reaches the public directly and can cause panic or put people at risk. With several independent private instances, the publish endpoint must know exactly which instance sends each message and what it is allowed to change.
  
-- **Per-instance key:** publishing is done automatically by CoreAPI, but the publish endpoint is reachable from the internet, so it must tell real instances apart from anyone else. Each instance's CoreAPI holds its own API key, generated by the project team and kept in the instance's configuration, never exposed to stations or the browser. The publish endpoint stores only a hash of each key and can revoke one instance without affecting the others (F3-S1, F3-I2).
-- **HTTPS only:** the publish endpoint accepts only HTTPS, so messages cannot be read or modified in transit (F3-T1).
-- **Ownership:** each published incident and warning belongs to the instance that created it; only that instance can update or end it (F3-E2), which also limits what a compromised instance can do (F3-T3).
-- **Versioning:** each published item has a version number that increases with every change, and the endpoint ignores messages with a version older than the one it already has (F3-T2).
-- **Publication log:** the endpoint records every message with the instance, the action and the time, so every change to the public state can be traced to an instance (F3-R1).
+- **Per-instance signing key:** publishing is done automatically by CoreAPI, but the publish endpoint is reachable from the internet, so it must tell real instances apart from anyone else. Each instance has its own Ed25519 key pair, generated on the instance's own machine; the secret key never leaves that machine and is never exposed to stations or the browser. The publish endpoint stores only the public key, so nothing stored on the public side can be used to publish (F3-S1, F3-I2). A key can be revoked without affecting other instances, and key ids are never reused.
+- **Signed requests:** every request is signed over its method, path, timestamp and the hash of its body, with a fixed prefix so that a signature made for anything else is never valid. Any change in transit invalidates the signature, and the endpoint accepts only HTTPS (F3-T1). Signatures older or newer than five minutes are refused.
+- **Uniform refusal:** every request that is not authenticated, whatever the reason, gets the same answer as a path that does not exist. The reason is written only to the server log.
+- **Ownership:** each published incident and warning belongs to the instance that created it, and is identified by a reference that the instance generates. Another instance's reference is treated as unknown, so only the owner can update or end an item (F3-E2), which also limits what a compromised instance can do (F3-T3). A warning can only refer to an active incident of the same instance.
+- **Versioning:** each published item has a version number that increases with every change, and the endpoint ignores messages whose version is not newer than the one it already has. An ended item is kept with its last version, so no old or repeated message can bring it back (F3-T2).
+- **Publication log:** the endpoint records every accepted message with the instance, the action, the item, the version, the outcome and the time, together with the signed message and its signature. Database triggers reject changes and deletions, and each entry can be verified again with the instance's public key, so every change to the public state can be traced to an instance (F3-R1).
+- **Separate process and account:** the publish endpoint runs in its own process, with a database account that can change data but not the schema. The read-only API's account can only read, so a compromise of the read-only API cannot change the published state.
 
-A leaked key still allows impersonating its instance until it is revoked; this is discussed in Residual Risks.
+A secret key stolen from an instance's machine still allows impersonating that instance until the key is revoked; this is discussed in Residual Risks.
 
 #### PT3: Unauthorized access to the local API
  
@@ -465,7 +467,7 @@ The license is the only authentication of the private application, and its issua
 Some threats score 6 but are not part of a priority threat, because they are already handled by the platform's design or cannot be mitigated within it:
  
 - **Covered by the availability design:** F2-D1 (simulations and heavy searches run in the AI service and in background jobs with their own resource limits, separate from the COP), F3-D1 (publishing is asynchronous through a local queue, so a slow public side never blocks the private instance), F3-D2 and F4-D1 (the public application and the COP show the time of the last update and flag outdated data).
-- **Limited by the architecture:** F1-E1. A compromised public host has no path to private instances, and the read-only API's database account cannot change the published state. The host is kept patched and minimal, but an attacker in control of it could still show false data to citizens; this is treated as a residual risk.
+- **Limited by the architecture:** F1-E1. A compromised public host has no path to private instances, the read-only API's database account cannot change the published state, and the publish endpoint's account cannot change the schema or the publication log. The host is kept patched and minimal, but an attacker in control of it could still show false data to citizens; this is treated as a residual risk.
 - **Accepted:** F1-S1, F2-R1, F2-E2 and F4-I1 cannot be mitigated within the current design and are discussed in Residual Risks.
 
 ## Residual Risks
@@ -525,9 +527,9 @@ Caching, rate limiting and bounded queries handle traffic peaks and small attack
  
 **Threats:** F1-E1. **Score:** 6 → 3.
  
-A vulnerability in the proxy, FastAPI or a dependency could give an attacker control of the public host. The architecture prevents any path to private instances, and the read-only API cannot change the published state, but an attacker in control of the host could still show false data to citizens.
+A vulnerability in the proxy, PHP or a dependency could give an attacker control of the public host. The architecture prevents any path to private instances, and the read-only API cannot change the published state, but an attacker in control of the host could still show false data to citizens.
  
-- **Compensating controls:** the host runs only the public components, dependencies are pinned and scanned (PT9), and the published state can be restored from the private instances, which hold the original data.
+- **Compensating controls:** the host runs only the public components, dependencies are pinned and scanned (PT9), and the published state can be restored from the private instances, which hold the original data. The host holds no secret that lets anyone publish as an instance: it stores only public keys.
 
 #### RR6: Actions attributed to stations, not people
  
@@ -542,9 +544,9 @@ By design, the license identifies the station, not the person using it, so the a
  
 **Threats:** F3-S1. **Score:** 6 → 3.
  
-If an instance's API key leaks, anyone can publish as that instance until the key is revoked.
+If an instance's secret key is stolen from its machine, anyone can publish as that instance until the key is revoked.
  
-- **Compensating controls:** the key exists only in the instance's configuration and is never exposed to stations; ownership limits the attacker to the incidents and warnings of that instance; the publication log shows every change; and the key can be revoked without affecting other instances.
+- **Compensating controls:** the secret key exists only on the instance's machine, outside every repository, and is never exposed to stations; it cannot be obtained from the public side, which stores only public keys; ownership limits the attacker to the incidents and warnings of that instance; the publication log shows every change, signed; and the key can be revoked without affecting other instances, after which the instance gets a new key with a new key id.
 
 #### RR8: Outbound requests reveal the control room
  
@@ -573,7 +575,7 @@ Someone with full access to the database on the host can change an audit entry a
 
 ### Production deployment
 
-Some residual risks remain because of the academic context of the project, not because of the design. A production deployment should place the public application behind a provider with DDoS protection and a CDN (RR4), on a domain owned by the operating entity (RR1); replace instance API keys with per-instance certificates and mutual TLS (RR7); run plugins under a stronger sandbox, such as gVisor or separate virtual machines (RR9); and route outbound traffic through the operating entity's network (RR8).
+Some residual risks remain because of the academic context of the project, not because of the design. A production deployment should place the public application behind a provider with DDoS protection and a CDN (RR4), on a domain owned by the operating entity (RR1); keep each instance's secret key in hardware (a TPM or an HSM), so it cannot be copied from the machine, and add mutual TLS where the hosting allows it (RR7); run plugins under a stronger sandbox, such as gVisor or separate virtual machines (RR9); and route outbound traffic through the operating entity's network (RR8).
 
 ### Out of scope
  

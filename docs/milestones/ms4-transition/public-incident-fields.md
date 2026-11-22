@@ -1,17 +1,17 @@
 ---
 title: Public Incident Fields
 nav_title: Public incident fields
-description: Which incident and warning data citizens can see in the public app, and how an incident becomes public
+description: Which incident and warning data citizens can see in the public app, how an incident becomes public, and how a private instance publishes it
 group: Data & API
 order: 1
-date: 2026-11-15
+date: 2026-11-22
 hide:
   - navigation
 ---
 
 # Public Incident Fields
 
-<p class="ad-lede">The public app shows citizens where emergencies are and what to do about them. It never shows how the control room responds. This page lists the only incident and warning fields that leave the private side, and the rule for publishing an incident.</p>
+<p class="ad-lede">The public app shows citizens where emergencies are and what to do about them. It never shows how the control room responds. This page lists the only incident and warning fields that leave the private side, the rule for publishing an incident, and the message a private instance sends to publish it.</p>
 
 <div class="ad-meta" markdown="1">
 <span>**Based on:** [data model](../milestones/ms2-elaboration/data-model.md), [GDPR analysis](gdpr-compliance.md), [threat model](threat_model.md) (PT1, PT2, PT8)</span>
@@ -35,7 +35,7 @@ The private side sends the fields in the first table. Required fields are always
 | ------------------- | ------------------------------- | -------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | `type`              | enum                            | yes      | all                                           | `forest_fire`, `urban_fire`, `road_accident`, `flood`, `medical`, `hazmat`, `search_rescue`.                                   |
 | `severity`          | enum                            | yes      | all                                           | `critical`, `high`, `moderate`, `low`.                                                                                         |
-| `status`            | enum                            | yes      | all                                           | `active`, `controlled`, `monitoring`. Closed incidents leave the public app.                                                   |
+| `status`            | enum                            | yes      | all                                           | `active`, `controlled`, `monitoring`. Closing an incident is the `end` action of the [publication message](#publish), not a status. |
 | `location`          | GeoJSON Point                   | yes      | all                                           | Coordinates in WGS 84 (longitude, latitude), rounded to 3 decimal places (about 100 m). A line or an area is reduced to its centre. |
 | `started_at`        | date and time with zone         | yes      | all                                           | When the incident started.                                                                                                     |
 | `description`       | text                            | no       | all                                           | Written for citizens, in Portuguese. The internal description is never used.                                                   |
@@ -68,9 +68,9 @@ A public warning is issued to citizens for an area, so issuing it is publishing 
 | `area`        | GeoJSON Polygon or MultiPolygon | yes      | private | Where the warning applies.                                    |
 | `issued_at`   | date and time with zone         | yes      | private | When it was issued.                                           |
 | `last_update` | date and time with zone         | yes      | public  | When the public side last received the warning.               |
-| `incident_id` | integer                         | no       | private | The incident it refers to, only when that incident is public. |
+| `incident_id` | integer                         | no       | public  | The public incident it refers to. The private side names that incident by its `ref` (`incident_ref`, see [the publication message](#publish)); the link is set only when that incident is public and was published by the same instance. |
 
-- A warning is active while it has no end time. An ended warning leaves the public app.
+- A warning is active until the private side ends it (the `end` action). An ended warning leaves the public app.
 - A warning does not need an incident. When an incident leaves the public app, the link on its warnings is cleared and the warnings stay.
 - The operator who issued a warning is never public.
 
@@ -91,6 +91,7 @@ Ad Omnia is a Portuguese application. Every text shown to citizens (`description
 | Prediction scores, confidence, model version                    | Statistics that citizens could misread as a decision.            |
 | Incident end date                                               | Closed incidents are not public.                                 |
 | Exact location                                                  | Public locations are rounded to about 100 m.                     |
+| The `ref` of a published item and the instance that published it | They identify items between an instance and the public side only. |
 
 Details about people involved in an incident (victims, callers, reporters) are not in the data model, and are never part of a public field.
 
@@ -105,6 +106,40 @@ Three columns on the incident record support publication.
 | `public_description`           | The citizen text. Empty when there is none.               |
 
 The database enforces the rules: an incident can only be published once it is validated, and `published_by` is set exactly when `published_at` is. Unpublishing clears all three, and the audit log keeps the history. Warnings need no extra column.
+
+## The publication message { #publish }
+
+Each private instance publishes by pushing a signed message to the public side's publish endpoint: `POST /api/ingest/incidents` or `POST /api/ingest/warnings`. The endpoint is a separate process from the read-only API, with its own database account. The full contract, including the signature, is in the `backend-public` README.
+
+```json
+{
+  "action": "create",
+  "ref": "3f2b8c1e-4d5a-4b6c-9e7f-0a1b2c3d4e5f",
+  "version": 1,
+  "data": {
+    "type": "road_accident",
+    "severity": "moderate",
+    "status": "active",
+    "location": { "type": "Point", "coordinates": [-8.654, 40.641] },
+    "started_at": "2026-08-12T14:20:00+00:00"
+  }
+}
+```
+
+| Field     | Meaning |
+| --------- | ------- |
+| `action`  | `create`, `update` or `end`. `end` removes an incident from the public app, or ends a warning. |
+| `ref`     | A random UUID (version 4, lowercase) that the private side generates once for each item it publishes and keeps with the item. It identifies the item between that instance and the public side, and is never shown to citizens. The private side never knows or sends public ids. |
+| `version` | A positive integer that increases with every change to the item. |
+| `data`    | The incident or warning, with only the fields the private side sends (tables above). Required for `create` and `update`, not allowed for `end`. A warning names its incident with `incident_ref`, that incident's `ref`. |
+
+The public side applies these rules:
+
+- **Signed by an active instance.** Each instance signs every message with its own key, and the public side stores only that instance's public key. A message that is not signed, now, by a registered and not revoked instance changes nothing.
+- **Strict schema.** An unknown field, in the envelope or in `data`, or a missing required field, rejects the message.
+- **Ownership.** An instance can only update or end the items it created.
+- **Only newer versions.** A message whose version is not newer than the stored one changes nothing, so a repeated or old message is harmless. An ended item never comes back.
+- **Publication log.** Every accepted message is recorded with its instance, action, version and time, together with the signed message itself, in a log that cannot be changed or deleted.
 
 ## The public schema { #schema }
 
