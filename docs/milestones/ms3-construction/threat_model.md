@@ -22,7 +22,7 @@ This document is the threat model of the Ad Omnia platform. It identifies how da
 - **Private instances are locally hosted.** Every private application instance is hosted locally where it is used and accessed only locally; there is no remote access. Instances are independent of each other, and all of them push to the single public deployment.
 - **Minimal public side.** The public deployment has its own database, which holds only the published state (validated incidents and public warnings); operational data never reaches it. It runs two separate processes: a read-only API for citizens and a write-only publish endpoint for private instances, each with a database account limited to what it needs. Private instances never connect to the public database directly.
 - **Stations authenticate by license.** Each station uses a software license, stored in the User table as a slow, salted hash. In this initial phase, licenses are issued by the project team.
-- **Plugins are untrusted.** Plugins run in a sandbox and reach the core only through the plugin broker. Plugins only expose data; they provide no user interface or frontend code, and the web application renders their data with its own components.
+- **Plugins are untrusted.** Plugins run in a sandbox and reach the core only through the plugin broker. Plugins only expose data; they provide no user interface or frontend code, and the web application renders their data with its own components. Temporarily, web plugins also have pages that run in sandboxed iframes, each on its own origin, where the application's session cookie never reaches; their static files are the only route of the private application served without a session. This will be removed when plugins go back to only exposing data.
 - **External data enters through the ingestion worker.** External sources are fetched by the ingestion worker, outside the plugin sandbox.
 - **Prediction modules are internal.** The AI service's specialized modules are developed by the project team and delivered with the platform; they are not installed from third parties.
 - **Prototype deployment.** In the academic prototype, the private and public deployments run on the same host. Docker networks reproduce the trust zones: no public container is attached to a private network, and CoreAPI publishes through the public proxy's host port, using the same path, HTTPS and API key as in a real deployment.
@@ -271,7 +271,7 @@ Threats with a score of 6 or more are considered high risk. Related high-risk th
 | F2-I1 | 2 | 2 | 4 | - |
 | F2-I2 | 2 | 3 | 6 | PT3 |
 | F2-D1 | 2 | 3 | 6 | Other |
-| F2-D2 | 1 | 3 | 3 | - |
+| F2-D2 | 2 | 3 | 6 | PT10 |
 | F2-E1 | 2 | 3 | 6 | PT3 |
 | F2-E2 | 2 | 3 | 6 | Residual |
 | F3-S1 | 2 | 3 | 6 | PT2, Residual |
@@ -333,7 +333,7 @@ Priority threats are ordered by score. Among threats with the same score, those 
 | PT7 | Audit and decision records altered | F2-T3, F2-R2 | 6 |
 | PT8 | Operational data published to citizens | F1-I1, F3-I1 | 6 |
 | PT9 | Compromised or faulty packages | F6-S1, F6-T1, F6-T2, F6-R1, F6-D1 | 6 |
-| PT10 | Weak license lifecycle | F14-S1, F14-R1, F14-I1, F14-D1 | 6 |
+| PT10 | Weak license lifecycle | F14-S1, F14-R1, F14-I1, F14-D1, F2-D2 | 6 |
  
 ### Mitigations
  
@@ -371,11 +371,12 @@ A leaked key still allows impersonating its instance until it is revoked; this i
  
 Being hosted locally does not protect the API from the station's own browser: any website open on the station can send requests to a local address, and DNS rebinding can make the browser treat a local address as the attacker's site.
  
-- **Deny by default:** the license check is applied to every route, including the plugin gateway and WebSocket connections; routes must opt out explicitly. An automated test lists all routes and confirms that each one rejects requests without a valid session.
+- **Deny by default:** every route requires a valid session; a route answers without one only if it is explicitly marked public. An automated test walks every route, including those of the plugin gateway, confirms that each one rejects requests without a valid session and that the public routes are exactly the reviewed ones (login, logout, health check, documentation and, temporarily, plugin files). The event stream (SSE) checks the session when it opens and again every minute, and closes when the session is no longer valid.
 - **Host validation:** the proxy rejects requests whose `Host` header is not the instance's expected name, which defeats DNS rebinding.
-- **Origin checks:** CORS allows only the application's own origin, never a wildcard, and WebSocket connections check the `Origin` header.
-- **Session protection:** after license authentication, the session is kept in a `HttpOnly`, `SameSite=Strict` cookie, and state-changing requests require a CSRF token.
+- **Origin checks:** CoreAPI sends no CORS headers, so browsers block every cross-origin read, and JSON bodies are only accepted with `Content-Type: application/json`, which an HTML form on another site cannot send. An automated test confirms that no other origin gets CORS permission.
+- **Session protection:** after license authentication, the session token (256 bits, stored only as a SHA-256 hash) is kept in a `__Host-` cookie with `HttpOnly`, `Secure` and `SameSite=Strict`, and every state-changing request requires a CSRF token, compared in constant time. Sessions expire after 7 days without use and 30 days in total, never after the license, and revoking or renewing a license ends its sessions at once.
 - **Network binding:** the proxy listens only on the interface the stations use, never on all interfaces.
+- **Client address:** the proxy forwards only the address of the connection (`X-Forwarded-For` set to `$remote_addr`), so a client cannot choose the address CoreAPI sees. An automated test sends a forged address through every proxied location.
 
 #### PT4: Script injection from untrusted data
  
@@ -448,14 +449,16 @@ Plugins, prediction modules and their dependencies are code that runs inside the
 
 #### PT10: Weak license lifecycle
  
-**Threats:** F14-S1, F14-R1, F14-I1, F14-D1. **Risk:** 2 × 3 = 6.
+**Threats:** F14-S1, F14-R1, F14-I1, F14-D1, F2-D2. **Risk:** 2 × 3 = 6.
  
-The license is the only authentication of the private application, and its issuance, delivery and revocation are not part of the architecture, so they are defined here.
+The license is the only authentication of the private application, and its issuance, delivery and revocation are not part of the architecture, so they are defined here. The lockout after failed logins (F2-D2) belongs here too: it protects the license, and it is also what could lock a legitimate station out.
  
-- **Strong licenses:** licenses are random values of at least 128 bits from a cryptographically secure generator, never derived from names or other public data, and are stored with Argon2id.
+- **Strong licenses:** each license has the form `ADO-<selector>-<secret>`: an 8-character selector, which is not secret and only finds the station, and a 130-bit secret from a cryptographically secure generator, stored only as an Argon2id hash. Licenses are never derived from names or other public data, are valid for one year and are renewed yearly.
+- **Uniform failures:** every failed login gets the same answer, whatever failed, and an unknown selector still costs an Argon2id verification, so neither the answer nor the response time reveals which part was wrong.
+- **Failed-attempt lockout:** after 3 failed logins from the same address within 15 minutes, the address is refused for the rest of that period without checking the license. The lockout is per address, never per license, so knowing a station's selector does not let anyone lock that station out; attempts during the lockout do not extend it, the login screen shows how long is left, and both limits are configurable. Attempts are recorded with the address, outcome and time, never the license. Stations that reach the instance through the same address share the lockout; in a control room, each station has its own address on the local network.
 - **Secure delivery:** licenses are delivered in person or through a channel separate from the one that identifies the station, never by plain email.
-- **Issuance register:** the project team keeps a register of every license issued and revoked, with the station, the date and who did it.
-- **Emergency recovery:** a documented procedure, which works without internet access, issues a replacement license locally, so a lost license does not leave a station without the system during an emergency.
+- **Issuance register:** licenses are issued, renewed and revoked with a command-line tool inside the CoreAPI container, which requires the name of the team member and records every operation in an append-only table, protected by a trigger against changes and deletion.
+- **Emergency recovery:** the same tool works without internet access, so a replacement license can be issued locally, and the application warns the station in the last 30 days of its license, so a renewal is asked for before the license expires.
 
 ### Other high-risk threats
  
@@ -579,4 +582,3 @@ The security of the station hosts, their operating systems and the control room'
 ### Accepted low risks
  
 Threats with a score below 6 that are not part of a priority threat are accepted. They are addressed by general good practice (input validation, TLS, patching, least privilege) and are not tracked individually.
-

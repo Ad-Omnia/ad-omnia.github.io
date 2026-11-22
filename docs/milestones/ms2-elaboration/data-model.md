@@ -24,11 +24,12 @@ There is a single dependency rule: **plugins may reference the core, but the cor
 
 The Plugin entity is the exception that confirms the rule: it is a core registry of installed plugins, not part of any plugin's own data.
 
-Core entities fall into six areas:
+Core entities fall into seven areas:
 
 | Area | Entities | Role |
 | --- | --- | --- |
 | Organizational | Agency, User, Source, Plugin | Who operates the platform and where data comes from |
+| Access | Session, License Event, Login Attempt | How stations sign in, and who issued their licenses |
 | Geographic | Zone | Reference areas for filtering, risk analysis and simulation |
 | Operational | Incident, Incident Source, Incident Relation, Asset, Observation, Assignment, Order, Alert | The situation on the ground and how it is managed |
 | Decision support | Prediction, Recommendation, Recommendation Item, Risk Rating, Simulation, Simulation Result, Simulated Incident | What the AI projects, suggests and simulates |
@@ -52,8 +53,8 @@ Core entities fall into six areas:
 ### User
 
 **Description:** Station authenticated in the private application through a software license.<br>
-**Key attributes:** Id, name, license (hash).<br>
-**Relationships:** Creates and validates Incidents; makes Assignments; issues and acknowledges Orders; acknowledges Alerts; decides on Recommendations; issues Public Warnings; creates Simulations; generates Audit Log entries.<br>
+**Key attributes:** Id, name, license selector, license (hash), license expiry, revocation date.<br>
+**Relationships:** Creates and validates Incidents; makes Assignments; issues and acknowledges Orders; acknowledges Alerts; decides on Recommendations; issues Public Warnings; creates Simulations; generates Audit Log entries; has Sessions and License Events.<br>
 **Ownership:** Core.<br>
 **Rationale:** The private application runs locally in each control room, so the license identifies the station rather than an individual. The operator and analyst personas describe use cases, not access roles: any station can use the operational and predictive parts of the application. US-3, US-4 and US-8 require recording which station performed each action. Citizens use the public application without an account, so they are not Users.
 
@@ -72,6 +73,32 @@ Core entities fall into six areas:
 **Relationships:** Fed by a Plugin; produces Observations; reports Incidents through Incident Sources; supports Predictions.<br>
 **Ownership:** Core.<br>
 **Rationale:** US-1 and US-15 require showing each source's last update and flagging outdated or unavailable sources; US-2 requires filtering by source. The staleness threshold is set per source because update frequencies differ widely.
+
+## Access entities
+
+### Session
+
+**Description:** Authenticated session of a station in the private application.<br>
+**Key attributes:** Token (hash), CSRF token, creation date, last use, idle expiry, absolute expiry.<br>
+**Relationships:** Belongs to a User.<br>
+**Ownership:** Core.<br>
+**Rationale:** The license is typed once per session, not on every request. Only a hash of the token is stored, so a database leak gives no usable session. A session ends after 7 days without use or 30 days in total, never after the license, and revoking or renewing the license deletes it.
+
+### License Event
+
+**Description:** Issuance, renewal or revocation of a station's license.<br>
+**Key attributes:** Id, action (issued, renewed, revoked), actor (team member), date, new expiry.<br>
+**Relationships:** Refers to a User.<br>
+**Ownership:** Core.<br>
+**Rationale:** The issuance register of the threat model (PT10, F14-R1). Append-only: a trigger rejects changes and deletion. The actor is a member of the project team, never an operator.
+
+### Login Attempt
+
+**Description:** A login attempt on the private application.<br>
+**Key attributes:** Id, address, outcome (succeeded, failed, blocked), date.<br>
+**Relationships:** None.<br>
+**Ownership:** Core.<br>
+**Rationale:** Supports the lockout after repeated failed logins (PT10, F2-D2) and logs every attempt to access without a valid license (NFR-SEC-1). The license is never stored.
 
 ## Geographic entities
 

@@ -80,10 +80,11 @@ description: Functional and non-functional requirements
 | NFR-AVL-3 | Availability | The control room loses internet access | The private app keeps working with the last data received and the local operations | Incident, order and audit functions fully usable offline |
 | NFR-AVL-4 | Availability | The private application or the private-to-public link becomes unavailable | The public app keeps serving the last published state and shows that the data is outdated | Warning shown within 30 s; public app stays available |
 | NFR-INT-1 | Integrity | Someone tries to edit or delete an audit, order or decision record | The operation is refused and any tampering is detectable | 0 records modified or removed |
-| NFR-SEC-1 | Security | A station without a valid license tries to access the private application | Access is denied and the attempt is logged | 100% of attempts denied and logged |
+| NFR-SEC-1 | Security | A station without a valid license tries to access the private application | Access is denied and the attempt is logged | 100% of attempts denied and logged; every route requires a valid session unless explicitly made public |
 | NFR-SEC-2 | Security | The public application is compromised | The attacker has no path to the private application or its data | Data flows only from private to public; no inbound connection to the private app |
 | NFR-SEC-3 | Security | A citizen uses the public application | No personal data is collected or stored, and no internal-only field is exposed | 0 personal identifiers collected; 0 internal-only fields in public responses |
 | NFR-SEC-4 | Security | An attacker obtains a copy of the private application's database | Stored licenses cannot be used to access the application | 0 licenses stored in plain text; licenses stored with a slow, salted hash |
+| NFR-SEC-5 | Security | Someone tries licenses repeatedly from one address | The address is refused for a while, without locking out the station whose license is being guessed | Blocked after 3 failures within 15 minutes, for the rest of that period; limits configurable |
 | NFR-SCA-1 | Scalability | A crisis causes a traffic peak on the public app | The public app keeps serving incidents and warnings | 5000 concurrent users without degradation |
 | NFR-USA-1 | Usability | An operator registers a phone-reported incident | The incident is created without assistance | Under 30 seconds |
 | NFR-USA-2 | Usability | A citizen opens the public app on a smartphone | It is usable in the browser without installing anything | Responsive layout |
@@ -109,4 +110,4 @@ description: Functional and non-functional requirements
 | US-15: Public emergency map | FR-PUB-1, FR-PUB-2, FR-PUB-3, FR-PUB-4, FR-PUB-5, FR-PUB-6, FR-PUB-7, FR-ING-2, NFR-PERF-1, NFR-AVL-4, NFR-SEC-2, NFR-SEC-3, NFR-SCA-1, NFR-USA-2 |
 | US-16: Occurrence risk forecasting | FR-ING-1, FR-PRD-4, NFR-AVL-2 |
 
-NFR-SEC-1 and NFR-SEC-4 apply to all user stories of the private application.
+NFR-SEC-1, NFR-SEC-4 and NFR-SEC-5 apply to all user stories of the private application.

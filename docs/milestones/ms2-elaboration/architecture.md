@@ -4,7 +4,7 @@ order: 5
 description: Architecture and tech stack diagrams, and architecture components
 ---
 
-# Architeture
+# Architecture
 
 ## Diagram
 
@@ -20,19 +20,19 @@ description: Architecture and tech stack diagrams, and architecture components
 
 ### Frontend
 
-- **Web App:** the web application, which is the interface through which the user interacts with the system.
-- **Reverse Proxy:** provides intermediary routing, sitting in between the frontend and backend.
+- **Web App:** the web application, which is the interface through which the user interacts with the system. It only opens after the station signs in with its software license.
+- **Reverse Proxy:** provides intermediary routing, sitting in between the frontend and backend. It is the only entry point to CoreAPI, and it forwards only the address of the connection, so a client cannot choose the address CoreAPI sees.
 
 ### Backend
 
 - **CoreAPI:**
 
   - **Presentation Layer:**
-    - **API Routers:** responsible for routing external API data into the application
+    - **API Routers:** responsible for routing external API data into the application. Every route requires a station session by default, and requests that change state also require a CSRF token; only a reviewed list of routes (login, logout, health check, documentation) answers without a session.
     - **Plugin Gateway:** serves as a connection point for the main application to integrate plugins.
 
   - **Business Layer:**
-    - **Domain Services:** contains the core business logic, application rules, and workflows driving the main system.
+    - **Domain Services:** contains the core business logic, application rules, and workflows driving the main system, including station authentication: license login, sessions and the lockout after repeated failed logins.
     - **Plugin Manager:** manages the plugins integrated into the application.
     - **Event Dispatch:** manages the creation and forwarding of events inside the application.
 
@@ -40,6 +40,8 @@ description: Architecture and tech stack diagrams, and architecture components
     - **AI Client:** handles the predictive features of the application.
     - **Plugin Client:** the internal integration component that interfaces directly with the Plugin Validation Broker/Gateway.
     - **Repositories:** handles the interfacing and between the application backend and the global database.
+
+  - **License tool:** a command-line tool inside the CoreAPI container, with which the project team issues, renews and revokes station licenses. It works without internet access.
 
 - **AI Service:**
   - **Optimization System:** handles the optimization of the AI Client, ensuring it performs its predictive work as fast and as efficient as possible.
