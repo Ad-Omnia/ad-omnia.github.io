@@ -226,7 +226,7 @@ Each flow that crosses a trust boundary (F1 to F6 and F14) is analyzed with STRI
 
 The internal flows are not analyzed one by one, but two observations carry into the mitigations:
  
-- **F11 (CoreAPI ↔ AI service)** is an HTTPS API. TLS protects the traffic but does not identify the caller: if the AI service does not authenticate who calls it, any container that can reach it, including a compromised plugin (F5-E2), can run predictions or load modules.
+- **F11 (CoreAPI ↔ AI service)** is a plain HTTP API inside the private instance. Nothing in the connection identifies the caller: if the AI service did not authenticate who calls it, any container that can reach it, including a compromised ingestion worker (F4-E1) or plugin (F5-E2), could run predictions, send training data or load modules. The AI service therefore sits on an internal network shared only with CoreAPI, with no route to the internet, and requires a shared service token on every request except its health check (PT5). The token proves who calls but does not encrypt the traffic: mutual TLS between services is required before go-live (see [Production deployment](#production-deployment)).
 - **F8 and F9 (CoreAPI ↔ databases)** use credentials that, if shared with the ingestion worker or exposed to the plugin network, turn a compromise of those components into full database access (F4-E1, F5-E2, F14-T1).
 
 ## Priority Threats
@@ -401,7 +401,7 @@ A container on its own is not a sandbox. Plugin isolation depends on what the co
 - **Container hardening:** plugins run as a non-root user with a read-only filesystem, all capabilities dropped, `no-new-privileges`, the default seccomp profile and no access to the Docker socket.
 - **Resource limits:** each plugin has CPU, memory, process and disk limits, and the broker applies per-plugin rate limits and timeouts, so a slow plugin cannot block the core.
 - **Least-privilege data access:** each plugin declares in its manifest the data it needs, and the broker only serves that data. Each plugin has its own schema and database user in the Plugin DB.
-- **Separate service credentials:** the AI service only accepts requests from CoreAPI, authenticated with a service token, and each component (CoreAPI, ingestion worker, plugin broker) has its own database user with only the permissions it needs.
+- **Separate service credentials:** the AI service only accepts requests from CoreAPI. It sits on an internal Docker network shared only with CoreAPI, out of reach of the ingestion worker, the plugin broker and the plugins, and with no route to the internet, so external data only enters through the ingestion worker. Every request except its health check must carry a shared service token, compared in constant time; without it, or with a wrong one, the answer is the same 404 as a route that does not exist. The AI service refuses to start with a missing or weak token. Each component (CoreAPI, ingestion worker, plugin broker) has its own database user with only the permissions it needs.
 
 #### PT6: False operational data from sources and plugins
  
@@ -576,6 +576,8 @@ Someone with full access to the database on the host can change an audit entry a
 ### Production deployment
 
 Some residual risks remain because of the academic context of the project, not because of the design. A production deployment should place the public application behind a provider with DDoS protection and a CDN (RR4), on a domain owned by the operating entity (RR1); keep each instance's secret key in hardware (a TPM or an HSM), so it cannot be copied from the machine, and add mutual TLS where the hosting allows it (RR7); run plugins under a stronger sandbox, such as gVisor or separate virtual machines (RR9); and route outbound traffic through the operating entity's network (RR8).
+
+One change is required before go-live, not only recommended: **mutual TLS between the services of each instance** (F11 and the other internal flows). Today the services talk plain HTTP on internal Docker networks, and the AI service identifies CoreAPI by a shared token. With mutual TLS, each service proves its identity with its own certificate, issued by a CA internal to the instance, and the traffic is encrypted even inside the host, so a stolen token alone is no longer enough to call the AI service.
 
 ### Out of scope
  

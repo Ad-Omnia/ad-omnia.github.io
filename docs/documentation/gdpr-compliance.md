@@ -281,8 +281,9 @@ The controller and processor must implement measures appropriate to the risk, in
 | Licenses stored with a slow, salted hash | NFR-SEC-4, `users.license` | [32(1)(a)][gdpr-32]{ .ad-cite } | <span class="ad-pill is-ok">Covered by design</span> |
 | Tamper-evident audit, order and decision records | NFR-INT-1, `trg_audit_log_immutable` | [5(1)(f)][gdpr-5]{ .ad-cite } | <span class="ad-pill is-ok">Covered by design</span> |
 | Plugins sandboxed: read-only, non-root, no capabilities, internal-only network | Plugin Validation Broker, `plugin` network | [25(1)][gdpr-25]{ .ad-cite }, [32(1)(b)][gdpr-32]{ .ad-cite } | <span class="ad-pill is-ok">Covered by design</span> |
+| AI service, which holds the training data, reachable only from CoreAPI: own internal network, no internet access, service token on every request | `private_ai` network, `AI_SERVICE_TOKEN` (threat model, F11) | [25(1)][gdpr-25]{ .ad-cite }, [32(1)(b)][gdpr-32]{ .ad-cite } | <span class="ad-pill is-ok">Covered by design</span> |
 | Keeps working offline with last data | NFR-AVL-3, NFR-AVL-4 | [32(1)(b)–(c)][gdpr-32]{ .ad-cite } | <span class="ad-pill is-ok">Covered by design</span> |
-| Encryption at rest for free-text and JSON columns; TLS between services | Not specified yet | [32(1)(a)][gdpr-32]{ .ad-cite } | <span class="ad-pill is-warn">Before deployment</span> |
+| Encryption at rest for free-text and JSON columns; mutual TLS between services | Encryption at rest not specified yet; mutual TLS required by the threat model (F11) | [32(1)(a)][gdpr-32]{ .ad-cite } | <span class="ad-pill is-warn">Before deployment</span> |
 | Separate health data from administrative data; differentiated access profiles; logged access to sensitive data | Not specified yet (all stations have the same access) | [Art. 29 Lei 58/2019][lei58]{ .ad-cite } | <span class="ad-pill is-warn">Before deployment</span> |
 | Breach response: notify CNPD within 72 h, data subjects if high risk; NIS2 early warning within 24 h | Runbook not written yet | [33][gdpr-33]{ .ad-cite }, [34][gdpr-34]{ .ad-cite }, [DL 125/2025][dl125]{ .ad-cite } | <span class="ad-pill is-warn">Before deployment</span> |
 | Security testing (OWASP Top 10, dependency CVE audit) | Planned for MS4 | [32(1)(d)][gdpr-32]{ .ad-cite } | <span class="ad-pill is-warn">Before deployment</span> |
@@ -379,7 +380,7 @@ The microsite is the one part of the project that processes real personal data t
 | A4 | Keep personal details out of `audit_log.details`; IDs and field names only | [Art. 17(3)][gdpr-17]{ .ad-cite }, [Art. 25 GDPR][gdpr-25]{ .ad-cite } | MS3 | Backend |
 | A5 | Add a "restricted" flag and an anonymisation job for closed incidents | [Art. 18 GDPR][gdpr-18]{ .ad-cite }, [Art. 21 Lei 58/2019][lei58]{ .ad-cite } | MS4 | Backend |
 | A6 | Training-data policy: synthetic first, grid-generalised locations, no free text | [Art. 89 GDPR][gdpr-89]{ .ad-cite }, [Art. 31 Lei 58/2019][lei58]{ .ad-cite } | MS4 | ML Engineer |
-| A7 | Encryption at rest and TLS between services; access profiles and logged access for health data | [Art. 32 GDPR][gdpr-32]{ .ad-cite }, [Art. 29 Lei 58/2019][lei58]{ .ad-cite } | MS4 | DevOps |
+| A7 | Encryption at rest and mutual TLS between services; access profiles and logged access for health data | [Art. 32 GDPR][gdpr-32]{ .ad-cite }, [Art. 29 Lei 58/2019][lei58]{ .ad-cite } | MS4 | DevOps |
 | A8 | Breach and incident runbook (72 h GDPR, 24 h NIS2) | [Arts. 33–34 GDPR][gdpr-33]{ .ad-cite }, [DL 125/2025][dl125]{ .ad-cite } | MS4 | Scrum Master |
 | A9 | DPIA template pre-filled for agencies, plus an Art. 28 processor contract outline | [Art. 35][gdpr-35]{ .ad-cite }, [Art. 28 GDPR][gdpr-28]{ .ad-cite } | MS5 | Scrum Master |
 | A10 | AI Act readiness note for the recommendation engine (risk management, logging, human oversight) | [Arts. 9–14 AI Act][aia-14]{ .ad-cite } | MS5 | ML Engineer |
