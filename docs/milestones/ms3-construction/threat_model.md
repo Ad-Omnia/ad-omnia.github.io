@@ -311,7 +311,7 @@ Threats with a score of 6 or more are considered high risk. Related high-risk th
 | F6-R1 | 2 | 1 | 2 | PT9 |
 | F6-I1 | 2 | 3 | 6 | PT5 |
 | F6-D1 | 2 | 3 | 6 | PT9 |
-| F6-E1 | 1 | 3 | 3 | - |
+| F6-E1 | 1 | 3 | 3 | PT9, Residual |
 | F14-S1 | 1 | 3 | 3 | PT10 |
 | F14-T1 | 1 | 3 | 3 | - |
 | F14-R1 | 2 | 1 | 2 | PT10 |
@@ -332,7 +332,7 @@ Priority threats are ordered by score. Among threats with the same score, those 
 | PT6 | False operational data from sources and plugins | F4-S1, F4-R1, F5-T1, F5-R1 | 6 |
 | PT7 | Audit and decision records altered | F2-T3, F2-R2 | 6 |
 | PT8 | Operational data published to citizens | F1-I1, F3-I1 | 6 |
-| PT9 | Compromised or faulty packages | F6-S1, F6-T1, F6-T2, F6-R1, F6-D1 | 6 |
+| PT9 | Compromised or faulty packages | F6-S1, F6-T1, F6-T2, F6-R1, F6-D1, F6-E1 | 6 |
 | PT10 | Weak license lifecycle | F14-S1, F14-R1, F14-I1, F14-D1, F2-D2 | 6 |
  
 ### Mitigations
@@ -440,7 +440,7 @@ The public database holds only what is published, so operational data can only r
 
 #### PT9: Compromised or faulty packages
  
-**Threats:** F6-S1, F6-T1, F6-T2, F6-R1, F6-D1. **Risk:** 2 × 3 = 6.
+**Threats:** F6-S1, F6-T1, F6-T2, F6-R1, F6-D1, F6-E1. **Risk:** 2 × 3 = 6.
  
 Plugins, prediction modules and their dependencies are code that runs inside the instance. A malicious or faulty update can reach a control room that may be offline when a fix is needed.
  
@@ -448,6 +448,7 @@ Plugins, prediction modules and their dependencies are code that runs inside the
 - **Known sources:** plugins are installed only from the project's own repository, and each image is referenced by its digest, so a modified image is not installed under the same name.
 - **Explicit updates:** nothing updates automatically. Each installation or update is an explicit action, recorded with the version, digest, date and station.
 - **Rollback:** the previous version is kept, so a faulty update can be reverted locally without internet access.
+- **Safe loading of models and modules:** prediction models are stored only in formats that cannot run code when loaded (LightGBM text, JSON and CSV), and an automated test rejects loaders that can, such as pickle. A trained model reaches production only when a team member promotes it with a separate tool, which copies it and records the hash of every file, the snapshot, the person and the date in a registry (F6-R1). The AI service mounts the promoted models read-only and, before it starts, checks its code against the hashes taken when its image was built and the models against the registry; any mismatch stops it (F6-E1). Its container is read-only, with all capabilities dropped and `no-new-privileges`, so it can only write to its working data.
 
 #### PT10: Weak license lifecycle
  
@@ -488,6 +489,7 @@ A residual risk is what remains after the mitigations of the priority threats, o
 | RR8 | Outbound requests reveal the control room | F4-I1 | 6 | 3 |
 | RR9 | Container escape through the shared kernel | F5-E1 | 3 | 3 |
 | RR10 | Audit chain rewritten with full database access | F2-T3 | 6 | 2 |
+| RR11 | Models and registry rewritten with host access | F6-E1 | 3 | 2 |
  
 ### Accepted risks
  
@@ -572,6 +574,15 @@ Someone with full access to the database on the host can change an audit entry a
  
 - **Compensating controls:** this requires administrative access to the host, which the control room controls, and the API offers no way to change or delete records.
 - **Possible improvement:** CoreAPI can periodically send the latest audit hash to the publish endpoint, which stores it in its publication log. A rewrite of the chain would then no longer match the stored hash. The hash reveals nothing about the audit log's contents.
+
+#### RR11: Models and registry rewritten with host access
+
+**Threats:** F6-E1. **Score:** 3 → 2.
+
+The AI service checks its models against a registry kept on the same host, and runs the checks with its own code. Someone with administrative access to the host can replace a model together with its registry, or change the image before it starts.
+
+- **Compensating controls:** this requires administrative access to the host, which the control room controls; the AI service cannot write to its models or its code; and models are only loaded in formats that cannot run code, so a replaced model can skew forecasts but needs a flaw in the loader to run code.
+- **Possible improvement:** sign the registry with a key kept outside the instance, so a rewritten registry no longer verifies.
 
 ### Production deployment
 
