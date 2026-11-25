@@ -302,7 +302,7 @@ Each controller must keep a record of its processing [Art. 30(1) GDPR][gdpr-30]{
 | --- | --- | --- | --- |
 | Purpose | Coordinate emergency response | Inform citizens of active incidents and warnings | Forecast incident progression and risk |
 | Data subjects | Operators, crews, persons involved in incidents | Visitors (IP only) | Persons in historical incidents |
-| Data categories | Station IDs, decisions, incident and resource data, possible offence data (health data only if not anonymised at source) | IP address, timestamp, requested URL | Pseudonymised incident features, locations generalised to a grid |
+| Data categories | Station IDs, decisions, incident and resource data, possible offence data (health data only if not anonymised at source) | IP address, timestamp, requested URL | Pseudonymised incident features; exact locations in the proof of concept, generalised to a 1 km cell with an agency's data |
 | Recipients | Other agencies in the shared picture; public app (validated, non-confidential incidents only) | None | None (models only) |
 | Transfers outside the EU | None (on-premises) | None if hosted in the EU | None |
 | Retention (proposal, to be fixed by each agency) | Legal period for operational records; free text anonymised after incident closure + review period | 30 days | Until model retirement; raw data deleted after feature extraction |
@@ -325,9 +325,9 @@ Anonymised data is outside the GDPR; pseudonymised data is still personal data [
 <div class="ad-steps" markdown="1">
 
 1. **Prefer synthetic data.** The simulation module already generates synthetic incidents (Simulated Incident), fully isolated from live data.
-2. **Generalise locations.** Snap historical incident points to a grid or parish level before training; risk ratings are already per zone.
+2. **Generalise locations.** The AI service can store each historical incident as the centre of a 1 km cell before training; risk ratings are already per zone. The proof of concept, which trains on open data, keeps exact locations, because the weather and terrain of the place make the forecasts better, so its training set is personal data and is protected like the database. With an agency's data, the setting is turned on unless the DPIA justifies exact points.
 3. **Drop free text.** Train on structured features (type, severity, time, weather, zone), never on descriptions.
-4. **Destroy the raw extract** once features are built, so the training set can be treated as anonymous; until then it is personal data.
+4. **Destroy the raw extract** once features are built. With locations generalised, the training set can then be treated as anonymous; with exact locations it stays personal data, even without the raw extract.
 
 </div>
 
@@ -361,7 +361,7 @@ What has to be in place before the platform processes real personal data, and wh
 | "Restricted" flag and anonymisation of free text in closed incidents | Ad Omnia | [Art. 18 GDPR][gdpr-18]{ .ad-cite }, [Art. 21 Lei 58/2019][lei58]{ .ad-cite } |
 | Encryption at rest and mutual TLS between services; separate access profiles and logged access for sensitive data | Ad Omnia | [Art. 32 GDPR][gdpr-32]{ .ad-cite }, [Art. 29 Lei 58/2019][lei58]{ .ad-cite } |
 | Security testing (OWASP Top 10, dependency audit) | Ad Omnia | [Art. 32(1)(d) GDPR][gdpr-32]{ .ad-cite } |
-| Training data policy: synthetic first, locations generalised to a grid, no free text | Ad Omnia | [Art. 89 GDPR][gdpr-89]{ .ad-cite }, [Art. 31 Lei 58/2019][lei58]{ .ad-cite } |
+| Training data policy: synthetic first, locations generalised to a 1 km cell, no free text | Ad Omnia | [Art. 89 GDPR][gdpr-89]{ .ad-cite }, [Art. 31 Lei 58/2019][lei58]{ .ad-cite } |
 | AI Act documentation for the recommendation engine (risk management, logging, human oversight), from 2 December 2027 | Ad Omnia as provider | [Arts. 9–14 AI Act][aia-14]{ .ad-cite } |
 | Fundamental rights impact assessment before using the recommendation engine | Agency as deployer | [Art. 27 AI Act][aia-27]{ .ad-cite } |
 

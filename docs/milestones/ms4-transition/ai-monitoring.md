@@ -128,17 +128,25 @@ The page suggests a retrain when there is an accuracy or a drift alert. The team
 1. **Take a new snapshot from the Global DB and train on it.** From the private backend repository:
 
     ```bash
+    export AI_SERVICE_TOKEN=...   # the same token the CoreAPI uses; never passed as an option
     python tools/send_snapshot_from_db.py --dsn postgresql://user:pass@host/globaldb \
         --service http://ai_service:8000 --start 2013-01-01 --end <yesterday> --train
     ```
 
-    The CoreAPI repositories read the tables, the AI Client sends them, and the AI service builds the dataset and trains the models. The models are evaluated on their test days as part of the training (`model_metrics` in the snapshot status).
+    The CoreAPI repositories read the tables, the AI Client sends them, and the AI service builds the dataset and trains the models. The models are evaluated on their test days as part of the training (`model_metrics` in the snapshot status). A trained model stays in its snapshot and is not used yet.
 2. **Check the results before relying on them.** The new model has to beat the baseline on its test days by the margins of the [model evaluation](training-dataset.md) (0.01 of AUC, or 2% of an error), and must not do worse than the model it replaces on the same test. Both can be scored again with one command each: `python -m dataset.model --dataset <snapshot>/dataset` and `python -m dataset.fire_progression --dataset <snapshot>/dataset`.
-3. **Keep or step back.** The AI service serves the newest snapshot as soon as it exists: its dataset for the risk score, and its trained models for the area and the large-fire chance. If the new model fails step 2, rename its snapshot folder (on the `ai_models` volume) so it no longer matches a snapshot id. The service goes back to the previous snapshot at the next forecast.
+3. **Promote it, or leave it out.** Only a promoted model answers forecasts. If it passed step 2, promote it with the `ai_model_admin` tool (no network, no token) and restart the AI service:
+
+    ```bash
+    docker compose run --build --rm ai_model_admin promote <snapshot> --by "<name>"
+    docker compose restart ai_service
+    ```
+
+    The promotion copies the snapshot's models from `ai_data` to `ai_promoted`, which the AI service mounts read-only, and records the SHA-256 of every file, the snapshot, who promoted it and when. Only data formats are accepted (LightGBM text models, JSON, CSV), never a file that could run code when loaded. If the promotion fails, the model in production stays as it was. A model that fails step 2 is simply not promoted: the service keeps the one it has.
 4. **Watch the new model.** It appears in the monitoring as its own row, `version @ snapshot`, next to the old one. Compare them over the next 30 days.
 5. **Record the decision**: who decided, why, the snapshot, and the test results, in the meeting minutes.
 
-There is no approval step inside the AI service yet: training a snapshot puts it in use. Until there is one, step 3 is how a model is held back.
+The AI service checks the promoted files against their recorded hashes before it starts and again before it loads them, and refuses to start if one differs, is missing or is not recorded. With nothing promoted, it starts and takes the projected area and the large-fire chance from the history of past fires. The risk score still comes from the latest dataset built, which a new snapshot replaces as soon as it is built.
 
 ## Limits
 
@@ -163,3 +171,4 @@ There is no approval step inside the AI service yet: training a snapshot puts it
 | Drift against the training data | `POST /monitoring/drift`, `ai_service/app/monitoring.py` |
 | Dashboard | `frontend-private/src/sections/aiMonitoring/` |
 | Retraining from the database | `tools/send_snapshot_from_db.py` |
+| Promotion and the hash registry | `ai_service/app/model_promotion.py`, `ai_service/app/model_registry.py` |
