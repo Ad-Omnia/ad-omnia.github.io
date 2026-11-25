@@ -14,7 +14,7 @@ hide:
 <p class="ad-lede">The public app shows citizens where emergencies are and what to do about them. It never shows how the control room responds. This page lists the only incident and warning fields that leave the private side, the rule for publishing an incident, and the message a private instance sends to publish it.</p>
 
 <div class="ad-meta" markdown="1">
-<span>**Based on:** [data model](../milestones/ms2-elaboration/data-model.md), [GDPR analysis](gdpr-compliance.md), [threat model](threat_model.md) (PT1, PT2, PT8)</span>
+<span>**Based on:** [data model](../ms2-elaboration/data-model.md), [GDPR analysis](../ms3-construction/gdpr-compliance.md), [threat model](../ms3-construction/threat_model.md) (PT1, PT2, PT8)</span>
 </div>
 
 ## When an incident is public { #rule }
