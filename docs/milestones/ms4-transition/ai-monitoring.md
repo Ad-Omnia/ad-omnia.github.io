@@ -50,7 +50,7 @@ At most one forecast per incident, model and horizon is stored per hour, so an i
 
 **Occurrence risk forecasts are stored the same way**, one row per municipality and day of each daily issue, with the municipality in `zone`, the days ahead in `time_horizon`, and the level, the factors and the weather in `details`. Every issue is kept; see [Occurrence risk](occurrence-risk.md).
 
-**Every call to the AI service is logged** (`ai_call_log`): endpoint, response time, and the error when it failed. The pages of a training upload are not, as they are not requests to monitor.
+**Every call to the AI service is logged** (`ai_call_log`): endpoint, response time, and the error when it failed. The pages of a training upload are not, as they are not requests to monitor. A call the AI service answered with "nothing to answer from yet" (no dataset built: a 503 without `Retry-After`; or no incidents of the type asked: a 404 with its reason) is logged as **not ready**: it says the models have not been trained, not that the service fails, so it counts neither as an error nor in the response times. A busy AI service (503 with `Retry-After`) and a missing token (a bare 404) are errors.
 
 ## How a forecast is judged
 
@@ -110,8 +110,8 @@ The flags look at the last 30 days. Fewer than 30 compared forecasts, or 30 requ
 | Input drift | A weather variable has a PSI of 0.25 or more | Alert | `MONITORING_DRIFT_PSI` = 0.25 |
 | Input drift | The hour or the month has a PSI of 0.25 or more | Warning (it follows the season) | |
 | Input drift | A variable has a PSI from 0.1 to 0.25 | Warning | |
-| AI service, errors | More than 10% of the requests failed | Alert | `MONITORING_MAX_ERROR_RATE` = 0.10 |
-| AI service, speed | 95% of the requests to an endpoint take longer than 5 seconds | Warning | `MONITORING_MAX_P95_MS` = 5000 |
+| AI service, errors | More than 10% of the requests it worked on failed (not ready ones left out) | Alert | `MONITORING_MAX_ERROR_RATE` = 0.10 |
+| AI service, speed | 95% of the requests to an endpoint an operator waits for (the incident forecast) take longer than 5 seconds. Background calls (the daily occurrence forecast, the drift check) are not held to it | Warning | `MONITORING_MAX_P95_MS` = 5000 |
 
 Every monitor is checked with the same thresholds, and each flag names its monitor. The period is `MONITORING_WINDOW_DAYS` (30), the minimum sample `MONITORING_MIN_SAMPLE` (30) and the wait after a horizon `MONITORING_GRACE_SECONDS` (10 800). The page shows the limits in force.
 
