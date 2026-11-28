@@ -63,7 +63,7 @@ A positive value raises the risk against the average forecast; a negative one lo
 
 `GET /api/risk/occurrence?incident_type=forest_fire` returns the stored forecast of the day, grouped by municipality, with the days in order. If none has been issued yet, the CoreAPI issues it on the spot.
 
-A background task issues it each day for the types in `RISK_FORECAST_TYPES` (default `forest_fire`), for `RISK_FORECAST_DAYS` days (default 4). Each issue is stored in `prediction`: one row per municipality and day, with the municipality in `zone`.
+A background task issues it each day for the types in `RISK_FORECAST_TYPES` (default `forest_fire,fire,structure_fire`: forest fires, agricultural fires and urban fires, the types with real history), for `RISK_FORECAST_DAYS` days (default 4). Each issue is stored in `prediction`: one row per municipality and day, with the municipality in `zone`.
 
 | Situation | Answer |
 | --- | --- |
@@ -79,7 +79,7 @@ The COP colours each municipality by its level for the selected day. Choosing a 
 
 - **The days ahead use today's history.** The recent-incident inputs are those of the day the forecast is issued: tomorrow's history does not exist yet.
 - **The weather point is the nearest to the municipality's centre.** Training used the point nearest to the municipality's incidents, so in large municipalities the two can differ.
-- **Rural fires only, for now.** The other types have no real event history (see [training dataset](training-dataset.md)). A type is added by listing it in `RISK_FORECAST_TYPES` once its model is trained on real data.
+- **Fires only, for now.** Forest, agricultural and urban fires have real history; the other types have mock history only (see [training dataset](training-dataset.md)), and a forecast is never made from mock data: asked for one of them, the AI service answers it is not ready. In the COP the panel lists the incident types of the risk history and says so for those. A type is added by listing it in `RISK_FORECAST_TYPES` once its model is trained on real data.
 - **The levels are relative.** They rank a municipality-day against the forecasts of the validation period. They are not the IPMA's official fire danger thresholds.
 - **The level cut-offs and the percentiles are the team's proposal**, still to be agreed with the advisors.
 

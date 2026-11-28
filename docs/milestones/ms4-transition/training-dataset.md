@@ -11,7 +11,8 @@ description: How the training datasets for the predictive models are built from 
 
 ## Summary
 
-- **Real data first, mock only for what no dataset has.** Rural fires, urban fires (with the vehicles and people sent), the municipality boundaries, the weather and the population are real, from open datasets. Road accidents, medical emergencies, floods, the fleet, escalation and travel times have no open event-level dataset, so only those are mock. Every row says which it is (`data_origin`).
+- **Real data first, mock only for what no dataset has.** Rural fires (forest fires and agricultural fires, as separate types), urban fires (with the vehicles and people sent), floods with victims or damage, the municipality boundaries, the weather and the population are real, from open datasets. The occurrences and the resources sent that the Fogos.pt connector plugin collects are real too. Road accidents, medical emergencies and most floods, the fleet, escalation and travel times have no open event-level history, so only those are mock. Every row says which it is (`data_origin`).
+- **A forecast is never made from mock data.** Mock rows show how a method behaves and are evaluated, but the AI service serves no forecast from them: a type whose history is mock (medical emergencies, road accidents, floods for the occurrence risk) is answered "not ready", and an incident forecast uses the real incidents of its type only.
 - **Not only fires.** The platform covers emergencies in general. The datasets and models are built per incident type from whatever types the data holds, so a new type needs data, not new code. Fires happen to be where open data exists.
 - **Several datasets, one per prediction.** The recommendation engine needs [six predictions](resource-allocation.md#predictions): arrivals, joint scenarios, escalation, on-scene duration, units needed and travel-time correction. The build writes one table for each, next to the original fire-risk panel (one row per municipality and day).
 - **Rebuilt by one script.** `ai_service/dataset` in the private backend repository rebuilds everything from a saved snapshot. Every cleaning step is documented there, with how many rows it changed.
@@ -21,13 +22,15 @@ description: How the training datasets for the predictive models are built from 
 
 | Data | Source | Real or mock | Reaches the AI service through |
 | --- | --- | --- | --- |
-| Rural fires | ICNF record of every rural fire since 2001 | Real | Snapshot (see below) |
+| Rural fires | ICNF record of every rural fire since 2001. Its type (`TIPO`) separates forest fires (`forest_fire`) from agricultural fires and burns (`fire`), as the platform types them live | Real | Snapshot (see below) |
 | Urban fires 2013 to 2022, with duration, severity, vehicles and people sent | ANEPC archive, published in [Scientific Data](https://www.nature.com/articles/s41597-023-02476-6) (CC0) | Real | Snapshot |
 | Municipalities | CAOP 2025, DGT | Real | `zone`, `zone_boundary` |
 | Daily weather | Open-Meteo, ERA5 reanalysis | Real | `observation` |
 | Resident population per municipality | INE Census 2021 | Real, used only to place the mock | Context file beside the snapshot |
 | Vehicles and people sent to rural fires | Fogos.pt history from 2018, under the project's API key (see Licenses below) | Real | Global database |
-| Road accidents, medical emergencies, floods | No open event-level dataset | Mock, in proportion to the population, the weather and the season | |
+| Floods with victims or damage, 2013 to 2019 | [DISASTER database](https://doi.org/10.5281/zenodo.7117037), University of Lisbon (CC BY 4.0) | Real, 39 floods | Global database |
+| Occurrences of every type and the resources sent to them (people, vehicles, aircraft), since November 2026 | Fogos.pt connector plugin | Real, 491 occurrences and 1,012 resource reports | Global database |
+| Road accidents, medical emergencies, most floods | No open event-level history | Mock, in proportion to the population, the weather and the season | |
 | Fleet, assignments, travel times, escalation | No open dataset | Mock | |
 
 The historical datasets, their licenses and the attribution each requires are in [Data source licenses](../ms3-construction/data-source-licenses.md#13-historical-data-for-training).
@@ -36,6 +39,8 @@ The historical datasets, their licenses and the attribution each requires are in
 
 - `tools/load_global_db.py` writes the open datasets, and the mock layer, straight into the global database, with the table and column names of the schema. The mock records belong to their own source, "Ad Omnia mock data", and are marked in the record, so they are never mistaken for real ones. It also stores the zone risk ratings in `risk_rating`, which the AI service computes.
 - `tools/send_snapshot_from_db.py` then takes the snapshot from the database through the repositories and the AI Client, which is the route the platform will use. `tools/open_data_snapshot.py` does the same without a database, sending the open datasets to the AI service directly.
+
+- `tools/extend_global_db.py` completes a database loaded this way (or restored from the shared dump): the ICNF types of the rural fires, the occurrences and resource reports a stack's Fogos.pt plugin has collected (read from that stack's database, never from the API), the DISASTER floods and the latest days of weather. Every step can be run again and changes nothing the second time.
 
 The Open-Meteo connector plugin (`ingestion_worker`) fills the daily weather through the normal route.
 
@@ -61,22 +66,20 @@ Only incidents reported by external sources are used. Incidents created by opera
 
 ## Build on real data
 
-Run on 15 November 2026 from the open datasets above, for 1 January 2013 to 10 November 2026, through the platform's own route: the data was loaded into the global database, read through the repositories and the AI Client, and built by the AI service.
+Run on 28 November 2026, for 1 January 2013 to 28 November 2026, through the platform's own route: the 15 November database completed by `tools/extend_global_db.py`, read through the repositories and the AI Client, and built and trained by an AI service started for it (never by the one serving the platform).
 
 | Measure | Value |
 | --- | --- |
-| Rural fires after cleaning | 171,949, up to 10 November 2026 |
-| Urban fires after cleaning | 72,099, up to 31 December 2022 (where the archive ends) |
-| Rural fires with real vehicles and people sent (from Fogos.pt, January 2018 to 9 September 2024) | 42,831 (25%), 1.9 units on average |
+| Forest fires after cleaning (ICNF, and Fogos.pt on the days the ICNF does not cover) | 135,621 |
+| Agricultural fires and burns after cleaning | 36,351 |
+| Urban fires after cleaning | 72,109, up to 31 December 2022 (where the archive ends), and the plugin's since November 2026 |
+| Real floods | 283 (39 from the DISASTER database, 244 from the plugin) |
+| Real incidents with the resources sent reported | 115,045 (71,747 urban fires, 34,142 forest fires, 8,762 agricultural fires, 394 of other types). Aircraft were sent to 634 of them |
 | Municipalities (mainland) | 278 |
-| Days | 5,062 |
-| Fire-risk rows (municipality and day) | 1,407,236 |
-| Rows with at least one rural fire | 8.9% in the first 80% of the days (to February 2024), 6.5% in the last 20% |
-| Incidents removed because they fall in no mainland municipality | 1,658 |
-| Mock incidents (floods, road accidents, medical emergencies) | 957,895, none outside a municipality |
-| Incidents in the database | 1,297,295 (339,400 real, 957,895 mock) |
-| Mock assignments in the database (units sent by a mock operator) | 1,365,887 |
-| Risk ratings stored | 50,596 (per municipality: each year, each month and the whole period) |
+| Days | 5,081 |
+| Fire-risk rows (municipality and day) | 1,412,518 |
+| Incidents in the dataset | 1,202,470 (244,575 real, 957,895 mock) |
+| Arrivals rows (municipality, day and type) | 8,143,454 |
 
 **How the models are judged.** The days are split in three, in time order and never at random: a model learns from the first 60% of the days, the next 20% only decide when training stops, and the last 20% (the test) give the numbers below. Neither the model nor the choice of when to stop saw the test days. Each model is scored next to a simple baseline on the same test days. The baseline uses no weather: for the risk of an incident it is the share of days with one in that municipality and month, smoothed towards the national share; for arrivals, the rate of the municipality, type and month; for duration and units, the median or mean of the incident type and severity; for burnt area, the median of the month; for a large fire, the share of large fires in that municipality and month. It is fitted on every day before the test, so it has the most recent data a baseline could have.
 
@@ -84,30 +87,31 @@ Each prediction has one metric: AUC for the risks, because their use is to rank 
 
 The baseline and these metrics are the team's proposal and are still to be agreed with the advisors.
 
-**Results on the test days** (rural fires and the mock types: 8 February 2024 to 10 November 2026; urban fires: 6 January 2021 to 31 December 2022, where their archive ends). The split counts the days a table has rows for: the tables of single fires (burnt area, 10 hectares or more) only have days with a fire, so their test starts on 23 December 2023, and duration and units needed on 2 February 2024. The models are not specific to fires: each incident type in the data gets its own model, and a type is added by adding data.
+**Results on the test days** (8 February 2024 to 10 November 2026 for the occurrence risks; urban fires: 6 January 2021 to 31 December 2022, the last years of their archive). The occurrence risks learn up to 10 November 2026 (`--occurrence-until`), where the mock layer ends: past that day the mock types would look like a sudden drop of incidents. The tables of single fires (burnt area, large fire) only have days with a fire, so their test starts on 23 December 2023.
 
 | Prediction | Real or mock | Metric | Model | Baseline | Against the baseline | Quarters ahead |
 | --- | --- | --- | --- | --- | --- | --- |
-| Risk of a rural fire, by municipality and day | Real | AUC | 0.855 | 0.788 | Better | 12 of 12 |
+| Risk of a forest fire, by municipality and day | Real | AUC | 0.867 | 0.801 | Better | 12 of 12 |
+| Risk of an agricultural fire | Real | AUC | 0.845 | 0.794 | Better | 12 of 12 |
 | Risk of an urban fire | Real | AUC | 0.800 | 0.794 | No clear difference | 8 of 8 |
-| Arrivals, real incident types | Real | Poisson deviance | 0.312 | 0.402 | Better | |
-| On-scene duration, real incidents | Real | Mean error, hours | 1.30 | 1.34 | Better, by little | |
+| Arrivals, real incident types | Real | Poisson deviance | 0.174 | 0.243 | Better | |
+| On-scene duration, real incidents | Real | Mean error, hours | 1.29 | 1.32 | Better, by little | |
 | Burnt area of a rural fire | Real | Mean error, hectares | 20.02 | 20.04 | No clear difference | 13 of 13 |
-| A rural fire burns 10 hectares or more | Real | AUC | 0.797 | 0.726 | Better | 13 of 13 |
-| Units needed, real incidents | Real | Poisson deviance | 0.649 | 0.679 | Better, on few fires | |
-| Risk of floods, road accidents, medical emergencies, escalation | Mock | | Shows how the method behaves only | | | |
+| A rural fire burns 10 hectares or more | Real | AUC | 0.799 | 0.726 | Better | 13 of 13 |
+| Units needed, real incidents | Real | Poisson deviance | 0.767 | 0.759 | No clear difference | |
+| People needed, 90th percentile (the number to plan for) | Real | Pinball loss | 1.094 | 1.139 | Better | |
+| Ground vehicles needed, median and 90th percentile | Real | Pinball loss | 0.501 / 0.353 | 0.512 / 0.363 | Better | |
+| An aircraft is sent | Real | AUC | 0.541 | 0.547 | No clear difference | |
+| Risk of floods, road accidents, medical emergencies, escalation | Mock | | Shows how the method behaves only. Never served | | | |
 
 What the numbers say:
 
-- **Rural fire risk and arrivals beat the baseline**, in every quarter of the test. For rural fires the model is also better calibrated (Brier score 0.051 against 0.057).
-- **Urban fire risk is ahead in every quarter, but by too little to count** (0.006 of AUC). Without weather-driven causes, urban fires are close to a constant rate by month, which is what the baseline already is.
-- **The exact burnt area is not predictable with these data, but whether a fire becomes large is.** Predicting hectares ties with the baseline. Asking instead "will this fire burn 10 hectares or more?" (4.6% of the fires in the test do; this daily model uses 10 hectares, while the incident forecasts of the [Prediction API](prediction-api.md) use the ICNF definition of a large fire, 100 hectares) gives a model clearly ahead of the baseline, in every quarter. The municipality, the humidity, the hour and the fire danger indices carry it.
-- **Duration improves a little** once the municipality is a feature (3% less error than the baseline on real incidents).
-- **Units needed** is better on the real rows, but those are 2,750 rural fires up to September 2024, so that figure is weak.
-- **Early stopping did not flatter the rural fire model**: it scores 0.848 on the days used to stop training and 0.855 on the test. An earlier version of this page reported 0.86, measured on the days that also stopped the training; the figure above replaces it.
-- **More training does not help.** The arrivals model stops at its limit of 500 rounds, but letting it run to 1,727 rounds improves it by 0.4% and makes each prediction three times slower. Bigger trees, a different learning rate and rolling weather averages changed the rural fire risk by 0.003 of AUC at most. The models have taken what these features hold; more accuracy needs new information (land cover, finer weather, neighbouring municipalities), not tuning.
-- **Speed.** One day of rural fire risk for all 278 municipalities takes about 5 milliseconds on one processor core.
-- The road accident, flood and medical figures are not real results: the mock scenarios (below) are at fixed places, and the baseline already sees them at municipality level.
+- **Forest and agricultural fire risk and arrivals beat the baseline**, in every quarter of the test. The forest fire model is also better calibrated (Brier score 0.038 against 0.043). Agricultural fires, a type of their own since this build, behave like forest fires: weather and recent activity carry them.
+- **Urban fire risk is no better than the baseline.** Without weather-driven causes, urban fires are close to a constant rate by month, which is what the baseline already is.
+- **The exact burnt area is not predictable with these data, but whether a fire becomes large is.** Predicting hectares ties with the baseline; "will this fire burn 10 hectares or more?" gives a model clearly ahead, in every quarter (the incident forecasts of the [Prediction API](prediction-api.md) use the ICNF definition of a large fire, 100 hectares).
+- **The resources an incident needs** (people, ground vehicles, aircraft) are learned from 66,215 real reports of rural and urban fires. People and vehicles beat the median of the type and severity, the plan-for number most of all. Aircraft do not: they went to 0.55% of the incidents of the test days, and nothing known when an incident starts says which ones. Floods, road accidents and the other types the plugin reports have too few reports for the model: the forecast gives what was sent to their real incidents, and says so.
+- **Units needed** in all ties with the baseline now that the real rows include the urban fires.
+- The road accident, flood and medical figures are not real results, and those models are never served.
 
 ## What the documents ask for, and what the datasets hold
 
@@ -143,9 +147,9 @@ The platform is not only for fires, so open data for other kinds was searched (1
 | Kind | What exists | Used |
 | --- | --- | --- |
 | Urban fires | ANEPC archive 2013 to 2022, published in Scientific Data (CC0) | Yes |
-| Road accidents | ANSR publishes totals and indices by region and year, not events | Totals set the size of the mock |
+| Road accidents | ANSR publishes totals and indices by region and year, not events. Lisbon's open data portal answers automated requests with a bot check (28 November 2026) | Totals set the size of the mock. The plugin's road accidents since November 2026 are real |
 | Medical emergencies | INEM publishes yearly totals, about 1.5 million occurrences in 2025, not events by municipality | Totals set the size of the mock |
-| Floods and landslides | DISASTER database of the University of Lisbon, 1865 to 2020, only events with victims or damage | Not loaded yet. It is sparse, so it complements the mock |
+| Floods and landslides | DISASTER database of the University of Lisbon, 1865 to 2020, only events with victims or damage (CC BY 4.0) | Floods from 2013 (39), since 28 November 2026. Sparse, so they complement the mock. Landslides have no platform type |
 | Other ANEPC occurrences | The Scientific Data paper states there is no open history, only the daily occurrences online | No |
 | Maritime rescue | Search-and-rescue regions only. Accident records are on request | No |
 | Earthquakes, weather warnings, Madeira occurrences | Available through the Fogos.pt API | Candidates, not loaded yet |
@@ -233,3 +237,8 @@ The AI service applies the steps of [GDPR section 9](../ms3-construction/gdpr-co
 | Open-Meteo | Data under CC BY 4.0, "Weather data by Open-Meteo.com". The free API is for non-commercial use only |
 
 See [Data source licenses](../ms3-construction/data-source-licenses.md) for each source's terms.
+
+## A trained model from the first start
+
+A new stack does not train: training takes several GB of memory and minutes of processor, and the AI service has 3 GB and 2 processors for answering forecasts. The base dataset and the models trained on it ship in a private image, `ai-seed`, built by `tools/build_ai_seed.sh` from a trained snapshot, with the models promoted exactly as in production (only data formats, the SHA-256 of every file in `registry.json`). In `docker-compose.yml`, `ai_seed` runs once before the AI service and fills its volumes where they are empty, so the platform forecasts with trained models from its first request. A model promoted later is never replaced. The image holds exact locations, so it is kept in the private registry only.
+

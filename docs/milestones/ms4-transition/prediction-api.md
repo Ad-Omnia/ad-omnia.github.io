@@ -46,6 +46,7 @@ The answer holds one [Prediction](../ms2-elaboration/data-model.md) of type inci
 | `input_data_timestamp` | The moment of the data it started from (`as_of`) |
 | `input_data` | What it was based on (below) |
 | `predictions` | One entry per requested horizon, in time order (below) |
+| `resources_needed` | The resources the incident is expected to need in all (below). `null` without a promoted resources model, or for a type with fewer than 200 reports of resources sent |
 
 `input_data`:
 
@@ -83,6 +84,16 @@ Each entry of `predictions`, and the `prediction` column it fills:
 | `projected_area_if_large` | | The median large fire (100 hectares or more) of that age, as a circle: the worst case to plan for, since the range above never reaches a large fire early |
 
 The AI service does not say which units an escalation needs: the history records how many were sent, not their type.
+
+`resources_needed` (one estimate for the whole incident, from what is known when it starts):
+
+| Field | Meaning |
+| --- | --- |
+| `personnel`, `ground_vehicles`, `aircraft` | Each with `median` (half of similar incidents needed this many or fewer), `p90` (9 in 10 needed this many or fewer: the number to plan for) and `beats_baseline` (on the test days the model did at least as well as the median of the incident type and severity) |
+| `aircraft_probability`, `aircraft_beats_baseline` | Chance at least one aircraft is sent, and whether the model ranked incidents better than the share of the type and severity |
+| `model`, `weather_used` | Which model and dataset, and the weather fields it had |
+
+It is learned from real incidents whose resources were reported (Fogos.pt fires since 2018, ANEPC urban fires 2013-2022, and the Fogos.pt plugin's reports of any type), never from mock rows. Next to the positions of the aircraft (OpenSky and Fogos.pt), it lets the COP compare what an incident is expected to need with what is in the air. The CoreAPI stores it with each automatic forecast, so it comes with the incident.
 
 ### Example
 
@@ -231,7 +242,7 @@ The CoreAPI sends the service token with every call, and refuses to start withou
 
 ## History of resources for the next models
 
-The 3 and 6 hour forecasts will improve most from what is happening at the fire, so the platform now keeps it. On every Fogos.pt poll, when the resources sent to an incident, its status or the reading of its nearest weather station change, the Fogos.pt plugin appends one observation of type `incident_resources` linked to the incident: people, vehicles, aircraft, helicopters and planes, status code and the station weather. The state table `fogos_incident_detail` only keeps the latest values, which cannot show how the resources grew. The training intake sends these observations to the AI service (numbers only, no free text). After a fire season they give the models the resources committed at 1, 3 and 6 hours as inputs.
+The 3 and 6 hour forecasts will improve most from what is happening at the fire, so the platform now keeps it. On every Fogos.pt poll, when the resources sent to an incident, its status or the reading of its nearest weather station change, the Fogos.pt plugin appends one observation of type `incident_resources` linked to the incident: people, vehicles, aircraft, helicopters and planes, status code and the station weather. The state table `fogos_incident_detail` only keeps the latest values, which cannot show how the resources grew. The training intake sends these observations to the AI service (numbers only, no free text). Since 2026-11-28 the peak of each kind per incident is a label of the resources model (`resources_needed` above); after a fire season they will also give the models the resources committed at 1, 3 and 6 hours as inputs.
 
 ## Limits
 
